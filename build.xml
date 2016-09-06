@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gpupo-component" default="composer-rebuild">
+  <property file="build.properties"/>
+ <target name="composer-rebuild" depends="clean,composer,libraries"/>
+ <target name="clean" description="Cleanup build artifacts">
+  <delete dir="${basedir}/vendor"/>
+  <delete file="${basedir}/composer.lock"/>
+  <delete file="${basedir}/var/logs/*"/>
+ </target>
+ <target name="composer" depends="clean" description="Install dependencies with Composer">
+  <tstamp>
+   <format property="thirty.days.ago" pattern="MM/dd/yyyy hh:mm aa" offset="-30" unit="day"/>
+  </tstamp>
+  <delete>
+   <fileset dir="${basedir}">
+    <include name="composer.phar" />
+    <date datetime="${thirty.days.ago}" when="before"/>
+   </fileset>
+  </delete>
+  <get src="https://getcomposer.org/composer.phar" dest="${basedir}/composer.phar" skipexisting="true"/>
+  <exec executable="php">
+   <arg value="composer.phar"/>
+   <arg value="install"/>
+  </exec>
+ </target>
+ <target name="travis" description="Run tests" depends="composer-rebuild, phpunit,codeclimate"/>
+ <target name="test" description="Run tests" depends="phpunit"/>
+ <target name="phpunit" description="Generate Reports">
+  <mkdir dir="${basedir}/var/logs"/>
+  <touch file="${basedir}/var/logs/test.log"/>
+  <exec executable="${basedir}/vendor/bin/phpunit" outputproperty="log">
+   </exec>
+  <echo message="${log}"/>
+  <condition property="onSuccess">
+    <matches pattern="OK" string="${log}"/>
+  </condition>
+  <fail message="Tests fail!" unless="onSuccess"/>
+ </target>
+ <target name="codeclimate" description="Upload Clover Report">
+  <exec executable="${basedir}/vendor/bin/test-reporter">
+   <env key="CODECLIMATE_REPO_TOKEN" value="${codeclimate.token}"/>
+  </exec>
+  <delete dir="${basedir}/build"/>
+ </target>
+ <target name="rev" description="Build documentation">
+  <exec executable="${basedir}/vendor/gpupo/common-sdk/bin/build-documentation.sh">
+    <arg value="${project.name}"/>
+  </exec>
+ </target>
+ <target name="libraries" description="List dependencies">
+   <echo output="Resources/doc/libraries-list.md" append="false"><!--libraries-list-->
+## Lista de dependências (libraries)
+
+Name | Version | Description
+-----|---------|------------------------------------------------------
+</echo>
+   <exec executable="php">
+    <redirector output="Resources/doc/libraries-list.md" alwayslog="true" append="true"/>
+     <arg value="composer.phar"/>
+     <arg value="show"/>
+     <arg value="--no-ansi"/>
+   </exec>
+   <echo output="Resources/doc/libraries-list.md" append="true">
+<!--libraries-list-->
+</echo>
+   <echo output="Resources/doc/libraries-tree.md" append="false">## Árvore de dependências (libraries)
+```
+</echo>
+   <exec executable="php">
+    <redirector output="Resources/doc/libraries-tree.md" alwayslog="false" append="true"/>
+     <arg value="composer.phar"/>
+     <arg value="show"/>
+     <arg value="-t"/>
+   </exec>
+   <echo output="Resources/doc/libraries-tree.md" append="true">
+```
+---
+</echo>
+ </target>
+ <target name="box.phar" depends="box.check" unless="box.file.exists">
+   <get src="https://github.com/box-project/box2/releases/download/2.5.2/box-2.5.2.phar" dest="${basedir}/box.phar" skipexisting="false"/>
+ </target>
+ <target name="box.check">
+   <condition property="box.file.exists">
+     <available file="${basedir}/box.phar" type="file" />
+   </condition>
+ </target>
+ <target name="box.build" depends="box.phar" description="Build Phar">
+     <exec executable="php">
+         <arg value="${basedir}/box.phar"/>
+         <arg value="build"/>
+     </exec>
+ </target>
+</project>
