@@ -1,0 +1,21 @@
+sudo: false
+language: php
+os:
+  - linux
+php:
+  - 5.6
+  - 7.0
+  - nightly
+  - hhvm
+matrix:
+  allow_failures:
+    - php: nightly
+    - php: hhvm
+branches:
+  except:
+    - /^psr.*$/
+    - /^dev.*$/
+    - /^topic.*$/
+script: ant travis
+notifications:
+  email: false

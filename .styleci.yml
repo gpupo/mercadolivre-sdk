@@ -1,0 +1,24 @@
+preset: symfony
+
+risky: false
+
+linting: true
+
+enabled:
+  - short_array_syntax
+  - align_double_arrow
+disabled:
+  - unalign_double_arrow
+
+
+finder:
+  exclude:
+    - "tests"
+    - "Resources"
+    - "bin"
+    - "var"
+    - "vendor"
+  name:
+    - "*.php"
+  not-name:
+    - "*Stub.php"
