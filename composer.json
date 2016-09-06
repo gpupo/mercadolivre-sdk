@@ -1,0 +1,37 @@
+{
+    "name": "gpupo/mercadolivre-sdk",
+    "description": "SDK Não Oficial para integração a partir de aplicações PHP com APIs Mercadolivre",
+    "homepage": "http://www.g1mr.com/mercadolivre-sdk/",
+    "authors": [
+        {
+            "name": "Gilmar Pupo",
+            "email": "g@g1mr.com"
+        }
+    ],
+    "keywords": ["mercadolivre", "marketplace", "sdk", "api"],
+    "license": "MIT",
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "ext-curl" : "*",
+        "gpupo/common-sdk": "^2.2.4",
+        "gpupo/common-schema": "^1.1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gpupo\\MercadolivreSdk\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gpupo\\Tests\\MercadolivreSdk\\": "tests"
+        }
+    },
+    "bin": ["bin/mercadolivre-sdk"],
+    "scripts": {
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
