@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * This file is part of gpupo/mercadolivre-sdk
+ * Created by Gilmar Pupo <g@g1mr.com>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ * For more information, see <http://www.g1mr.com/>.
+ */
+
+namespace Gpupo\MercadolivreSdk\Console\Command;
+
+require 'vendor/autoload.php';
+
+use Gpupo\MercadolivreSdk\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Output\OutputInterface;
+
+$app = new Application("mercadolivre-sdk");
+$app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
+
+foreach ([] as $className) {
+    $n =  __NAMESPACE__.'\\'.$className . 'Command';
+    $o = new $n;
+    $app = $o->append($app);
+}
+
+$app->run();
