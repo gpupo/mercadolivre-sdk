@@ -1,0 +1,8 @@
+{
+    "client_id": "foo",
+    "access_token": "bar",
+    "env": "sandbox",
+    "protocol": "http",
+    "sslVersion": "SecureTransport",
+    "registerPath": "var/logs/"
+}
