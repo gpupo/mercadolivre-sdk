@@ -17,7 +17,7 @@
               "name": "mercadolibre/php-sdk",
               "version":"master",
               "source": {
-                  "url": "https://github.com/mercadolibre/php-sdk.git",
+                  "url": "https://github.com/P3PO/mercadolibre-php-sdk.git",
                   "type": "git",
                   "reference":"master"
                 }
@@ -34,7 +34,10 @@
     "autoload": {
         "psr-4": {
             "Gpupo\\MercadolivreSdk\\": "src"
-        }
+        },
+        "classmap": [
+                "vendor/mercadolibre/php-sdk/Meli/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
