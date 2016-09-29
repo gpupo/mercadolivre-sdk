@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 $app = new Application("mercadolivre-sdk");
 $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
 
-foreach ([] as $className) {
+foreach (['Auth'] as $className) {
     $n =  __NAMESPACE__.'\\'.$className . 'Command';
     $o = new $n;
     $app = $o->append($app);
