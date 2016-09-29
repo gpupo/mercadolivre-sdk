@@ -55,3 +55,6 @@ http://developers.mercadolibre.com/manage-sales/
 
 Feedback
 http://developers.mercadolibre.com/manage-feedback/
+
+Test notification URL
+http://developers.mercadolibre.com/test-notification/
