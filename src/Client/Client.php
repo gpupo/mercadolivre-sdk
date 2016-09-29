@@ -29,8 +29,8 @@ final class Client extends ClientAbstract implements ClientInterface
         return [
             'app_id'        => false,
             'secret_key'    => false,
-            'access_token'    => false,
-            'refresh_token'    => false,
+            'access_token'  => false,
+            'refresh_token' => false,
             'base_url'      => 'https://api.mercadolibre.com',
             'verbose'       => true,
             'sslVersion'    => 'SecureTransport',

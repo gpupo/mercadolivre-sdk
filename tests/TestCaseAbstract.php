@@ -34,11 +34,11 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
     protected function getOptions()
     {
         return [
-            'app_id'        => $this->getConstant('APP_ID'),
-            'secret_key'    => $this->getConstant('SECRET_KEY'),
-            'verbose'       => $this->getConstant('VERBOSE'),
-            'dryrun'        => $this->getConstant('DRYRUN'),
-            'registerPath'  => $this->getConstant('REGISTER_PATH'),
+            'app_id'       => $this->getConstant('APP_ID'),
+            'secret_key'   => $this->getConstant('SECRET_KEY'),
+            'verbose'      => $this->getConstant('VERBOSE'),
+            'dryrun'       => $this->getConstant('DRYRUN'),
+            'registerPath' => $this->getConstant('REGISTER_PATH'),
         ];
     }
 

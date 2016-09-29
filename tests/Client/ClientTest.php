@@ -15,7 +15,6 @@
 namespace Gpupo\Tests\MercadolivreSdk\Client;
 
 use Gpupo\CommonSdk\Client\ClientInterface;
-use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 class ClientTest extends TestCaseAbstract

@@ -14,10 +14,10 @@
 
 namespace Gpupo\Tests\MercadolivreSdk;
 
-use Gpupo\MercadolivreSdk\Factory;
-use Gpupo\Tests\CommonSdk\FactoryTestAbstract;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Client\Ml;
+use Gpupo\MercadolivreSdk\Factory;
+use Gpupo\Tests\CommonSdk\FactoryTestAbstract;
 
 class FactoryTest extends FactoryTestAbstract
 {
