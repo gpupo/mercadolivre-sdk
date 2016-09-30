@@ -10,33 +10,18 @@
     ],
     "keywords": ["mercadolivre", "marketplace", "sdk", "api"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type":"package",
-            "package": {
-              "name": "mercadolibre/php-sdk",
-              "version":"master",
-              "source": {
-                  "url": "https://github.com/P3PO/mercadolibre-php-sdk.git",
-                  "type": "git",
-                  "reference":"master"
-                }
-            }
-        }
-    ],
     "require": {
         "php": "^5.6 || ^7.0",
         "ext-curl" : "*",
         "gpupo/common-sdk": "^2.2.4",
-        "gpupo/common-schema": "^1.1.8",
-        "mercadolibre/php-sdk": "master"
+        "gpupo/common-schema": "^1.1.8"
     },
     "autoload": {
         "psr-4": {
             "Gpupo\\MercadolivreSdk\\": "src"
         },
         "classmap": [
-                "vendor/mercadolibre/php-sdk/Meli/"
+            "Resources/3rd/mercadolibre/"
         ]
     },
     "autoload-dev": {
