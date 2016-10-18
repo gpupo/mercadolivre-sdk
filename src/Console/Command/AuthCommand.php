@@ -30,10 +30,8 @@ final class AuthCommand extends AbstractCommand
                 $list = $app->processInputParameters([], $input, $output);
                 $client = $app->factorySdk($list)->getClient();
 
-                $tokenFile = 'var/mercadolivre-token.json';
-
                 try {
-                    $data = $app->jsonLoadFromFile($tokenFile);
+                    $data = $app->getTokenContainer();
                     $config = [
                         'grant_type'    => 'refresh_token',
                         'refresh_token' => $data['refresh_token'],
@@ -45,7 +43,7 @@ final class AuthCommand extends AbstractCommand
                     $response = $client->post($uri, '');
                     $data = $response->getData();
                     $data->set('created_at', date('c'));
-                    $app->jsonSaveToFile($data->toArray(), $tokenFile, $output);
+                    $app->jsonSaveToFile($data->toArray(), $app->getTokenFilePath(), $output);
                     $output->writeln($data['created_at']);
                     $output->writeln('New access token: '.$data['access_token']);
                     $output->writeln('New refresh token: '.$data['refresh_token']);
