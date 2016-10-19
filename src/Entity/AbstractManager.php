@@ -11,6 +11,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     protected function fetchDefaultParameters()
     {
         return [
+            'access_token' => $this->getClient()->getOptions()->get('access_token'),
         ];
     }
 
