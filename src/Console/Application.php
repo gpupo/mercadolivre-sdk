@@ -72,7 +72,7 @@ final class Application extends AbstractApplication
     public function getTokenContainer()
     {
         $data = $this->jsonLoadFromFile($this->getTokenFilePath());
-        
+
         return $data;
     }
 }
