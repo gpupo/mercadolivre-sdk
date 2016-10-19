@@ -15,11 +15,11 @@
 namespace Gpupo\Tests\MercadolivreSdk\Console;
 
 use Gpupo\MercadolivreSdk\Console\Application;
+use Gpupo\MercadolivreSdk\Factory;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
-use Gpupo\MercadolivreSdk\Factory;
 
 class ApplicationTest extends TestCaseAbstract
 {

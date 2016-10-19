@@ -27,7 +27,7 @@ final class ChecklistCommand extends AbstractCommand
         $this->getApp()->appendCommand('auth:checklist', 'Check files')
             ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
 
-                $output->writeln('token:'. $app->getTokenContainer()['access_token']);
+                $output->writeln('token:'.$app->getTokenContainer()['access_token']);
 
             });
     }
