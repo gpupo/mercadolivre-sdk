@@ -21,7 +21,7 @@ final class Manager extends AbstractManager
      * @codeCoverageIgnore
      */
     protected $maps = [
-        'save'       => ['POST', '/items'],
+        'save'       => ['POST', '/items?access_token={access_token}'],
         //'findById'   => ['GET', '/products/{itemId}'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         //'update'     => ['PUT', '/products/{itemId}'],
