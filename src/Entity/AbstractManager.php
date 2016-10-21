@@ -67,7 +67,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
             return false;
         }
 
-        return $this->factoryEntity($data);
+        return $this->factoryEntity($data->toArray());
     }
 
     /**

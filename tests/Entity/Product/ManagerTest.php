@@ -61,7 +61,8 @@ class ManagerTest extends TestCaseAbstract
         }
 
         $manager = $this->getFactory()->factoryManager('product');
-        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Product/'.$filename, $code));
+        $response = $this->factoryResponseFromFixture('fixture/Product/'.$filename, $code);
+        $manager->setDryRun($response);
 
         return $manager;
     }
@@ -76,9 +77,8 @@ class ManagerTest extends TestCaseAbstract
      */
     public function testFindBy()
     {
-        $manager = $this->getManager('item.json');
+        $manager = $this->getManager();
         $product = $manager->findById("MLB803848501");
-        var_dump($product);exit;
         $this->assertInstanceOf(Product::class, $product);
         $this->assertSame("MLB803848501", $product->getId());
     }
