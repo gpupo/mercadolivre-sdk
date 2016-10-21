@@ -16,6 +16,7 @@ namespace Entity\Product;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use Gpupo\MercadolivreSdk\Entity\Product\Product;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Manager
@@ -51,5 +52,34 @@ class ManagerTest extends TestCaseAbstract
     public function translatorInsertProduct(Manager $manager)
     {
         $this->markTestIncomplete('translatorInsertProduct() incomplete!');
+    }
+
+    protected function getManager($filename = null, $code = 200)
+    {
+        if (empty($filename)) {
+            $filename = 'item.json';
+        }
+
+        $manager = $this->getFactory()->factoryManager('product');
+        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Product/'.$filename, $code));
+
+        return $manager;
+    }
+
+    /**
+     * @testdox Recupera informações de um produto especifico a partir de Id
+     * @covers ::findById
+     * @covers ::execute
+     * @covers ::factoryMap
+     * @covers \Gpupo\NetshoesSdk\Client\Client::getDefaultOptions
+     * @covers \Gpupo\NetshoesSdk\Client\Client::renderAuthorization
+     */
+    public function testFindBy()
+    {
+        $manager = $this->getManager('item.json');
+        $product = $manager->findById("MLB803848501");
+        var_dump($product);exit;
+        $this->assertInstanceOf(Product::class, $product);
+        $this->assertSame("MLB803848501", $product->getId());
     }
 }
