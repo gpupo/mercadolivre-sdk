@@ -33,7 +33,7 @@ final class Manager extends AbstractManager
      */
     protected $maps = [
         'save' => ['POST', '/items?access_token={access_token}'],
-        //'findById'   => ['GET', '/products/{itemId}'],
+        'findById'   => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         //'update'     => ['PUT', '/products/{itemId}'],
         //'fetch'      => ['GET', '/products?page={offset}&size={limit}'],
@@ -54,6 +54,18 @@ final class Manager extends AbstractManager
         $native = $this->factoryTranslatorByForeign($data)->translateFrom();
 
         return $this->save($native);
+    }
+
+    public function translatorInsertVariation(TranslatorDataCollection $data, $idExterno, array $combinations = [])
+    {
+        var_dump($idExterno, $combinations);
+
+        #TODO faz get
+        $result = $this->findById($idExterno);
+
+        #TODO prepara fotos e variations
+
+        #TODO manda nova variation
     }
 
     public function factoryTranslator(array $data = [])
