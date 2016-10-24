@@ -19,8 +19,6 @@ use Gpupo\CommonSdk\Entity\EntityInterface;
 
 final class Product extends EntityAbstract implements EntityInterface
 {
-    protected $primaryKey = 'id';
-
     /**
      * @codeCoverageIgnore
      */
