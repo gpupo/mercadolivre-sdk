@@ -16,7 +16,9 @@ namespace Entity\Product;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
-use Gpupo\MercadolivreSdk\Entity\Product\Product;
+use Gpupo\MercadolivreSdk\Entity\Product\Pictures;
+use Gpupo\MercadolivreSdk\Entity\Product\Response;
+use Gpupo\CommonSdk\Response as CommonResponse;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Manager
@@ -72,14 +74,24 @@ class ManagerTest extends TestCaseAbstract
      * @covers ::findById
      * @covers ::execute
      * @covers ::factoryMap
-     * @covers \Gpupo\NetshoesSdk\Client\Client::getDefaultOptions
-     * @covers \Gpupo\NetshoesSdk\Client\Client::renderAuthorization
+     * @covers \Gpupo\MercadolivreSdk\Client\Client::getDefaultOptions
+     * @covers \Gpupo\MercadolivreSdk\Client\Client::renderAuthorization
      */
     public function testFindBy()
     {
         $manager = $this->getManager();
         $product = $manager->findById("MLB803848501");
-        $this->assertInstanceOf(Product::class, $product);
+        $this->assertInstanceOf(Response::class, $product);
         $this->assertSame("MLB803848501", $product->getId());
+    }
+
+    public function testUpdatePictures()
+    {
+        $pictures = json_decode(file_get_contents('Resources/fixture/Product/pictures.json'), true);
+        $entity = new Pictures($pictures);
+
+        $manager = $this->getManager();
+        $product = $manager->update($entity);
+        $this->assertInstanceOf(CommonResponse::class, $product);
     }
 }
