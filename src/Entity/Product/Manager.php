@@ -17,12 +17,14 @@ namespace Gpupo\MercadolivreSdk\Entity\Product;
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\MercadolivreSdk\Entity\Product\Pictures;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 
 final class Manager extends AbstractManager
 {
     use TranslatorManagerTrait;
 
-    protected $entity = 'Product';
+    protected $entity = 'Response';
 
     protected $strategy = [
         'info' => false,
@@ -35,7 +37,7 @@ final class Manager extends AbstractManager
         'save' => ['POST', '/items?access_token={access_token}'],
         'findById'   => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
-        //'update'     => ['PUT', '/products/{itemId}'],
+        'update'     => ['PUT', '/items/{itemId}?access_token={access_token}'],
         //'fetch'      => ['GET', '/products?page={offset}&size={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
@@ -61,11 +63,27 @@ final class Manager extends AbstractManager
         var_dump($idExterno, $combinations);
 
         #TODO faz get
-        $result = $this->findById($idExterno);
+        $product = $this->findById($idExterno);
 
-        #TODO prepara fotos e variations
+        $imageList = [];
+        foreach ($product['pictures'] as $picture) {
+            $imageList[] = ['id' => $picture['id']];
+        }
 
-        #TODO manda nova variation
+        foreach ($data['skus'][0]['images'] as $images) {
+            $imageList[] = ['source' => $images['url']];
+        }
+        //var_dump($imageList);
+
+        #TODO envia fotos pro produto
+        $entity = new Pictures(['pictures' => $imageList]);
+        $result = $this->update($entity);
+        var_dump($result);
+        exit;
+
+        #TODO pega id das novas fotos
+
+        #TODO manda nova variation com ids das fotos
     }
 
     public function factoryTranslator(array $data = [])
@@ -73,5 +91,12 @@ final class Manager extends AbstractManager
         $translator = new Translator($data);
 
         return $translator;
+    }
+
+    public function update(EntityInterface $entity, EntityInterface $existent = null)
+    {
+        $route = 'update';
+
+        return $this->execute($this->factoryMap($route), json_decode($entity, true));
     }
 }

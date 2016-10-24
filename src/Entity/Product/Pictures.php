@@ -17,25 +17,15 @@ namespace Gpupo\MercadolivreSdk\Entity\Product;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-final class Product extends EntityAbstract implements EntityInterface
+final class Pictures extends EntityAbstract implements EntityInterface
 {
-    protected $primaryKey = 'id';
-
     /**
      * @codeCoverageIgnore
      */
     public function getSchema()
     {
         return [
-            'title'           => 'string',
-            'category_id'     => 'string',
-            'price'           => 'number',
-            'currency_id'     => 'string',
-            'buying_mode'     => 'string',
-            'listing_type_id' => 'string',
-            'condition'       => 'string',
-            'description'     => 'string',
-            'variations'      => 'object',
+            'pictures'        => 'array',
         ];
     }
 }
