@@ -19,7 +19,7 @@ foreach ($sku['images'] as $image) {
 }
 
 $array = [
-     'title'              => $sku['name'],
+     'title'              => substr($sku['name'], 0, 60),
      'available_quantity' => $sku['stock'],
      'category_id'        => $extras['category'],
      'price'              => $sku['sellPrice'],
