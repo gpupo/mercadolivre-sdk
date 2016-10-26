@@ -16,8 +16,8 @@ namespace Entity\Product;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
-use Gpupo\MercadolivreSdk\Entity\Product\Pictures;
 use Gpupo\MercadolivreSdk\Entity\Product\Response;
+use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\CommonSdk\Response as CommonResponse;
 
 /**
@@ -85,10 +85,10 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame("MLB803848501", $product->getId());
     }
 
-    public function testUpdatePictures()
+    public function testUpdate()
     {
-        $pictures = json_decode(file_get_contents('Resources/fixture/Product/pictures.json'), true);
-        $entity = new Pictures($pictures);
+        $product = json_decode(file_get_contents('Resources/fixture/Product/item.json'), true);
+        $entity = new Product($product);
 
         $manager = $this->getManager();
         $product = $manager->update($entity);

@@ -17,8 +17,7 @@ namespace Gpupo\MercadolivreSdk\Entity\Product;
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
-use Gpupo\MercadolivreSdk\Entity\Product\Pictures;
-use Gpupo\MercadolivreSdk\Entity\Product\Variation\Item;
+use Gpupo\MercadolivreSdk\Entity\Product\Update;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
 final class Manager extends AbstractManager
@@ -36,7 +35,6 @@ final class Manager extends AbstractManager
      */
     protected $maps = [
         'save'          => ['POST', '/items?access_token={access_token}'],
-        'saveVariation' => ['POST', '/items/{itemId}/variations?access_token={access_token}'],
         'findById'      => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update'        => ['PUT', '/items/{itemId}?access_token={access_token}'],
@@ -44,11 +42,10 @@ final class Manager extends AbstractManager
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
 
-    public function translatorInsertProduct(TranslatorDataCollection $data, $mlCategory, array $combinations = [])
+    public function translatorInsert(TranslatorDataCollection $data, $mlCategory)
     {
         $data->set('extras', [
             'category'        => $mlCategory,
-            'combinations'    => $combinations,
             'currency_id'     => 'BRL',
             'buying_mode'     => 'buy_it_now',
             'listing_type_id' => 'bronze',
@@ -60,34 +57,11 @@ final class Manager extends AbstractManager
         return $this->save($native);
     }
 
-    public function translatorInsertVariation(TranslatorDataCollection $data, $idExterno, array $combinations = [])
+    public function translatorUpdate(TranslatorDataCollection $data, $idExterno)
     {
-        // faz get
-        $product = $this->findById($idExterno);
+        $native = $this->factoryTranslatorByForeign($data)->translateFrom();
 
-        $imageList = $newImages = [];
-        foreach ($product['pictures'] as $picture) {
-            $imageList[] = ['id' => $picture['id']];
-        }
-
-        foreach ($data['skus'][0]['images'] as $images) {
-            $imageList[] = ['source' => $images['url']];
-            $newImages[] = $images['url'];
-        }
-
-        // envia fotos pro produto
-        $entity = new Pictures(['pictures' => $imageList]);
-        $result = $this->update($entity, null, ['itemId' => $idExterno]);
-
-        // manda nova variation com ids das fotos
-        $variation = [
-            'attribute_combinations' => $combinations,
-            'picture_ids'            => $newImages,
-            'price'                  => $data['skus'][0]['sellPrice'],
-            'available_quantity'     => $data['skus'][0]['stock'],
-        ];
-
-        return $this->saveVariation(new Item($variation), ['itemId' => $idExterno]);
+        return $this->update($native, null, ['itemId' => $idExterno]);
     }
 
     public function factoryTranslator(array $data = [])
@@ -97,13 +71,19 @@ final class Manager extends AbstractManager
         return $translator;
     }
 
-    public function saveVariation(EntityInterface $entity, $params = null)
-    {
-        return $this->execute($this->factoryMap('saveVariation', $params), json_encode($entity->toArray()));
-    }
-
     public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null)
     {
-        return $this->execute($this->factoryMap('update', $params), json_encode($entity->toArray()));
+        $update = [];
+        $update['price'] = $entity['price'];
+
+        $stock = $entity['available_quantity'];
+        if ($stock > 0) {
+            $update['status'] = 'active';
+            $update['available_quantity'] = $stock;
+        } else {
+            $update['status'] = 'paused';
+        }
+
+        return $this->execute($this->factoryMap('update', $params), json_encode($update));
     }
 }

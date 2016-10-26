@@ -31,8 +31,6 @@ use Gpupo\MercadolivreSdk\Entity\Product\Product;
  * @method setCondition(string $condition)    Define condition
  * @method string getDescription()    Acesso a description
  * @method setDescription(string $description)    Define description
- * @method Gpupo\MercadolivreSdk\Entity\Product\Variations getVariations()    Acesso a variations
- * @method setVariations(Gpupo\MercadolivreSdk\Entity\Product\Variations $variations)    Define variations
  *
  */
 class ProductTest extends TestCaseAbstract
@@ -268,32 +266,4 @@ class ProductTest extends TestCaseAbstract
     {
         $this->assertSchemaSetter('description', 'string', $product);
     }
-
-    /**
-     * @testdox Possui método ``getVariations()`` para acessar Variations
-     * @dataProvider dataProviderProduct
-     * @cover ::get
-     * @cover ::getSchema
-     * @small
-     * @test
-     */
-    public function getVariations(Product $product, $expected = null)
-    {
-        $this->assertSchemaGetter('variations', 'object', $product, $expected);
-    }
-
-    /**
-     * @testdox Possui método ``setVariations()`` que define Variations
-     * @dataProvider dataProviderProduct
-     * @cover ::set
-     * @cover ::getSchema
-     * @small
-     * @test
-     */
-    public function setVariations(Product $product, $expected = null)
-    {
-        $this->assertSchemaSetter('variations', 'object', $product);
-    }
-
-
 }

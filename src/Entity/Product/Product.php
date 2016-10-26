@@ -33,7 +33,8 @@ final class Product extends EntityAbstract implements EntityInterface
             'listing_type_id' => 'string',
             'condition'       => 'string',
             'description'     => 'string',
-            'variations'      => 'object',
+            'pictures'        => 'array',
+            'available_quantity' => 'number',
         ];
     }
 }
