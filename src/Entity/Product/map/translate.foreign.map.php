@@ -14,8 +14,10 @@
 
 $extras = $foreign->get('extras');
 $sku = $foreign->get('skus')[0];
+
+$imgList = [];
 foreach ($sku['images'] as $image) {
-    (array) $imgList[] = ['source' => $image['url']];
+    $imgList[] = ['source' => $image['url']];
 }
 
 $array = [
