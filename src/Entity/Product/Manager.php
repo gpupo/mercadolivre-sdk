@@ -50,6 +50,14 @@ final class Manager extends AbstractManager
             'buying_mode'     => 'buy_it_now',
             'listing_type_id' => 'bronze',
             'condition'       => 'new',
+            'shipping'        =>  [
+                'mode'          => 'me1',
+                "local_pick_up" => false,
+                "free_shipping" => false,
+                "methods"       => [],
+                "dimensions"    => null,
+                "tags"          => [],
+            ],
         ]);
 
         $native = $this->factoryTranslatorByForeign($data)->translateFrom();
