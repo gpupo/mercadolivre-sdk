@@ -23,14 +23,15 @@ foreach ($sku['images'] as $image) {
 $array = [
      'title'              => substr($sku['name'], 0, 60),
      'available_quantity' => $sku['stock'],
-     'category_id'        => $extras['category'],
      'price'              => $sku['sellPrice'],
+     'description'        => $sku['description'],
+     'pictures'           => $imgList,
+     'category_id'        => $extras['category'],
      'currency_id'        => $extras['currency_id'],
      'buying_mode'        => $extras['buying_mode'],
      'listing_type_id'    => $extras['listing_type_id'],
      'condition'          => $extras['condition'],
-     'description'        => $sku['description'],
-     'pictures'           => $imgList,
+     'shipping'           => $extras['shipping'],
  ];
 
 return $array;
