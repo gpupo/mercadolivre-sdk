@@ -36,6 +36,7 @@ final class Response extends EntityAbstract implements EntityInterface
             'description'     => 'string',
             'variations'      => 'collection',
             'pictures'        => 'collection',
+            'status'          => 'string',
         ];
     }
 }
