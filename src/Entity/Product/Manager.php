@@ -51,7 +51,7 @@ final class Manager extends AbstractManager
             'listing_type_id' => 'bronze',
             'condition'       => 'new',
             'shipping'        =>  [
-                'mode'          => 'me1',
+                'mode'          => 'me2',
                 "local_pick_up" => false,
                 "free_shipping" => false,
                 "methods"       => [],
@@ -81,13 +81,17 @@ final class Manager extends AbstractManager
 
     public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null)
     {
+        $item = $this->findById($params['itemId']);
+
         $update = [];
         $update['price'] = $entity['price'];
 
         $stock = $entity['available_quantity'];
         if ($stock > 0) {
-            $update['status'] = 'active';
             $update['available_quantity'] = $stock;
+            if ('paused' === $item['status']) {
+                $update['status'] = 'active';
+            }
         } else {
             $update['status'] = 'paused';
         }
