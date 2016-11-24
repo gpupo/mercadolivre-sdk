@@ -36,9 +36,8 @@ class ManagerTest extends TestCaseAbstract
 
     protected function commonAsserts(Order $order)
     {
-        $this->assertSame('111111', $order->getOrderNumber());
-        $this->assertSame('111111', $order->getId());
-        $this->assertSame(1, $order->getShipping()->getShippingCode());
+        $this->assertSame((int)'768570754', (int)$order->getId());
+        $this->assertSame('handling', $order->getShipping()->getStatus());
     }
     /**
      * @testdox Administra operações de SKUs
@@ -73,6 +72,7 @@ class ManagerTest extends TestCaseAbstract
     public function fetch(Manager $manager)
     {
         $list = $manager->fetch();
+
         $this->assertInstanceOf(OrderCollection::class, $list);
 
         $this->assertSame(1, $list->count());
@@ -106,7 +106,7 @@ class ManagerTest extends TestCaseAbstract
      */
     public function translatorFetch(Manager $manager)
     {
-        $list = $manager->translatorFetch(0, 50, ['orderStatus' => 'approved']);
+        $list = $manager->translatorFetch(0, 50, []);
         $this->assertInstanceOf(TranslatorDataCollection::class, $list);
 
         $this->assertSame(1, $list->count());
