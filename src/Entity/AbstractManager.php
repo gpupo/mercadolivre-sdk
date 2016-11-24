@@ -63,7 +63,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     {
         $data = parent::findById($itemId);
 
-        if (empty($data)) {
+        if (empty($data) || $data->get('status') === 404) {
             return false;
         }
 

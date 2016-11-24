@@ -10,13 +10,12 @@
       	"id": "MLB12345678",
     	  "title": "Samsung Galaxy",
       	"variation_id": null,
-      	"variation_attributes": [
-      	],
+      	"variation_attributes": []
     	},
     	"quantity": 1,
     	"unit_price": 499,
-    	"currency_id": "BRL",
-  	},
+    	"currency_id": "BRL"
+  	}
   ],
   "total_amount": 499,
   "currency_id": "BRL",
@@ -27,14 +26,14 @@
   	"phone": {
     	"area_code": "11",
     	"number": "12345678",
-    	"extension": null,
+    	"extension": null
   	},
   	"first_name": "Comprador de testes",
   	"last_name": "da Silva",
   	"billing_info": {
     	"doc_type": "CPF",
-    	"doc_number": "12345678910",
-  	},
+    	"doc_number": "12345678910"
+  	}
   },
   "seller": {
   	"id": "123456789",
@@ -43,10 +42,10 @@
   	"phone": {
     	"area_code": null,
     	"number": "11 12345678",
-    	"extension": "11",
+    	"extension": "11"
   	},
   	"first_name": "Vendedor de Testes",
-  	"last_name": "testes de documentacao",
+  	"last_name": "testes de documentacao"
   },
   "payments": [
   	{
@@ -55,43 +54,43 @@
     	"currency_id": "BRL",
     	"status": "approved",
     	"date_created": null,
-    	"date_last_modified": null,
-  	},
+    	"date_last_modified": null
+  	}
   ],
   "feedback": {
   	"purchase": null,
-  	"sale": null,
+  	"sale": null
   },
   "shipping": {
   	"id": 20676482441,
   	"shipment_type": "shipping",
   	"status": "handling",
-      "date_created": "2013-05-27T10:03:28.000-04:00",
+    "date_created": "2013-05-27T10:03:28.000-04:00",
   	"receiver_address": {
     	"id": 12345678,
     	"address_line": "Rua dos testes 123  ",
     	"zip_code": "01001000",
     	"city": {
       	"id": "BR-SP-44",
-      	"name": "São Paulo",
+      	"name": "São Paulo"
     	},
     	"state": {
       	"id": "BR-SP",
-      	"name": "São Paulo",
+      	"name": "São Paulo"
     	},
     	"country": {
       	"id": "BR",
-      	"name": "Brasil",
+      	"name": "Brasil"
     	},
     	"latitude": null,
     	"longitude": null,
-    	"comment": null,
+    	"comment": null
   	},
   	"currency_id": "BRL",
-  	"cost": 0,
+  	"cost": 0
   },
   "tags": [
   	"paid",
-  	"not_delivered",
-  ],
+  	"not_delivered"
+  ]
 }

@@ -30,7 +30,7 @@ return [
     ],
     'findById' => [
         'GET',
-        '/orders/{itemId}?expand=items,shippings,devolutionItems',
+        '/orders/{itemId}?access_token={ACCESS_TOKEN}',
     ],
     'toApproved'  => $put('approved'),
     'toCanceled'  => $put('canceled'),

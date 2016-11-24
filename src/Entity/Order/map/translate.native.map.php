@@ -11,23 +11,28 @@
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <http://www.g1mr.com/>.
  */
+$quantity = 0;
+$items = $native['order_items'];
+foreach ($items as $item) {
+    $quantity += $item['quantity'];
+}
 
 return [
      'merchant' => [
-         'name'         => $native->getOriginSite(),
-         'marketplace'  => 'NETSHOES',
-         'originNumber' => $native->getOriginNumber(),
+         'name'         => 'MERCADOLIVRE',
+         'marketplace'  => '',
+         'originNumber' => '',
      ],
      'orderNumber'    => $native->getId(),
-     'acceptedOffer'  => $native->getItems()->toSchema(),
-     'orderStatus'    => $native->getOrderStatus(),
-     'orderDate'      => $native->getOrderDate(),
-     'customer'       => $native->getShipping()->getCustomer()->toSchema(),
-     'billingAddress' => $native->getShipping()->getCustomer()->getAddress()->toSchema(),
+     'acceptedOffer'  => $native['order_items'],
+     'orderStatus'    => $native->getStatus(),
+     'orderDate'      => $native['date_created'],
+     'customer'       => $native->getBuyer(),
+     'billingAddress' => $native->getShipping()['receiver_address'],
      'currency'       => 'BRL',
-     'price'          => $native->getTotalNet(),
-     'discount'       => $native->getTotalDiscount(),
-     'quantity'       => $native->getTotalQuantity(),
-     'freight'        => $native->getTotalFreight(),
-     'total'          => $native->getTotalGross(),
+     'price'          => $native['total_amount'],
+     'discount'       => 0,
+     'quantity'       => $quantity,
+     'freight'        => '',
+     'total'          => $native['total_amount'],
  ];
