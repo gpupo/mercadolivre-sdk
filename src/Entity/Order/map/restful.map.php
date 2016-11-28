@@ -32,9 +32,9 @@ return [
         'GET',
         '/orders/{itemId}?access_token={ACCESS_TOKEN}',
     ],
-    'toApproved'  => $put(),
-    'toCanceled'  => $put(),
-    'toDelivered' => $put(),
+    'toTracked'   => $put(),
     'toHandling'  => $put(),
     'toShipped'   => $put(),
+    'toDelivered' => $put(),
+    'toCanceled'  => $put(),
 ];

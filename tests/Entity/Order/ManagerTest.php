@@ -154,7 +154,7 @@ class ManagerTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox Update the shipping status to Handling - Require ``Transport Info``
+     * @testdox Update the shipping status to Handling
      * @test
      * @dataProvider dataProviderOrders
      * @covers ::fetch
@@ -166,6 +166,61 @@ class ManagerTest extends TestCaseAbstract
     {
         $manager = $this->getManager();
         $order->setOrderStatus('handling');
+        $order->getShipping()->setShipmentId('123456');
+
+        $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
+    }
+
+    /**
+     * @testdox add tracking number
+     * @test
+     * @dataProvider dataProviderOrders
+     * @covers ::fetch
+     * @covers ::execute
+     * @covers ::update
+     * @covers ::factoryMap
+     */
+    public function saveStatusToTracked(Order $order)
+    {
+        $manager = $this->getManager();
+        $order->setOrderStatus('tracked');
+        $order->getShipping()->setShippingCode('TR1234567891');
+        $order->getShipping()->setShipmentId('123456');
+
+        $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
+    }
+
+    /**
+     * @testdox Update the shipping status to shipped
+     * @test
+     * @dataProvider dataProviderOrders
+     * @covers ::fetch
+     * @covers ::execute
+     * @covers ::update
+     * @covers ::factoryMap
+     */
+    public function saveStatusToShipped(Order $order)
+    {
+        $manager = $this->getManager();
+        $order->setOrderStatus('shipped');
+        $order->getShipping()->setShipmentId('123456');
+
+        $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
+    }
+
+    /**
+     * @testdox Update the shipping status to delivered
+     * @test
+     * @dataProvider dataProviderOrders
+     * @covers ::fetch
+     * @covers ::execute
+     * @covers ::update
+     * @covers ::factoryMap
+     */
+    public function saveStatusToDelivered(Order $order)
+    {
+        $manager = $this->getManager();
+        $order->setOrderStatus('delivered');
         $order->getShipping()->setShipmentId('123456');
 
         $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
