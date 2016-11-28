@@ -36,13 +36,66 @@ final class Manager extends AbstractManager
     {
         $this->maps = $this->loadArrayFromFile(__DIR__.'/map/restful.map.php');
     }
-    
+
+    public function factoryDecorator(Order $order, $decoratorName)
+    {
+        $className = __NAMESPACE__.'\\Decorator\\'.$decoratorName;
+        $instance = new $className();
+        $instance->setOrder($order);
+
+        return $instance;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function update(EntityInterface $entity, EntityInterface $existent = null)
     {
+        parent::update($entity, $existent);
 
+        $factory204 = function ($message) {
+            return new Response([
+                'raw'            => '{"message":"'.$message.'"}',
+                'httpStatusCode' => 204,
+            ]);
+        };
+
+        #TODO
+        /*if (empty($existent)) {
+            $existent = $this->resolvePrevious($entity);
+        }
+
+        if ($entity->getOrderStatus() === $existent->getOrderStatus()) {
+            $this->log('info', 'Order sem atualização');
+
+            return $factory204('Order status not changed!');
+        }
+
+        if ('processing' === $entity->getOrderStatus()) {
+            return $factory204('Order status not used!');
+        }
+
+        $entity = $this->normalizeShipping($entity, $existent);
+        */
+
+        #TODO busca shipimentId se não tiver
+
+        if (in_array($entity->getOrderStatus(), ['handling', 'canceled',
+            'delivered', 'shipped', ], true)) {
+            $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($entity->getOrderStatus()));
+            $json = $decorator->toJson();
+
+            $mapKey = 'to'.ucfirst($entity->getOrderStatus());
+            $shipping = $entity->getShipping();
+
+            $map = $this->factoryMap($mapKey, [
+                'shipmentId' => $entity->getShipping()->getShipmentId(),
+            ]);
+
+            return $this->execute($map, $json);
+        }
+
+        throw new \InvalidArgumentException('Order Status ['.$entity->getOrderStatus().'] não suportado', 1);
     }
 
     public function factoryTranslator(array $data = [])

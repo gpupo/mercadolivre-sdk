@@ -37,7 +37,7 @@ class ManagerTest extends TestCaseAbstract
     protected function commonAsserts(Order $order)
     {
         $this->assertSame((int)'768570754', (int)$order->getId());
-        $this->assertSame('handling', $order->getShipping()->getStatus());
+        $this->assertSame('pending', $order->getShipping()->getStatus());
     }
     /**
      * @testdox Administra operações de SKUs
@@ -135,5 +135,39 @@ class ManagerTest extends TestCaseAbstract
         }
 
         return $list;
+    }
+
+    /**
+     * @testdox Get a order based on order number
+     * @covers ::findById
+     * @covers ::execute
+     * @covers ::factoryMap
+     * @covers \Gpupo\MercadolivreSdk\Client\Client::getDefaultOptions
+     * @covers \Gpupo\MercadolivreSdk\Client\Client::renderAuthorization
+     */
+    public function testFindBy()
+    {
+        $manager = $this->getManager('item.json');
+        $order = $manager->findById(768570754);
+        $this->assertInstanceOf(Order::class, $order);
+        $this->commonAsserts($order);
+    }
+
+    /**
+     * @testdox Update the shipping status to Handling - Require ``Transport Info``
+     * @test
+     * @dataProvider dataProviderOrders
+     * @covers ::fetch
+     * @covers ::execute
+     * @covers ::update
+     * @covers ::factoryMap
+     */
+    public function saveStatusToHandling(Order $order)
+    {
+        $manager = $this->getManager();
+        $order->setOrderStatus('handling');
+        $order->getShipping()->setShipmentId('123456');
+
+        $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
     }
 }
