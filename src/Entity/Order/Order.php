@@ -32,4 +32,11 @@ final class Order extends EntityAbstract implements EntityInterface, CollectionI
     {
         return $this->loadArrayFromFile(__DIR__.'/map/schema.map.php');
     }
+
+    public function check()
+    {
+        $this->setRequiredSchema(['id']);
+
+        return $this->isValid();
+    }
 }

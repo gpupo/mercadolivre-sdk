@@ -12,12 +12,12 @@
  * For more information, see <http://www.g1mr.com/>.
  */
 
-$put = function ($name) {
-    return [
-        'PUT',
-        '/orders/{itemId}/shippings/{shippingCode}/status/'.$name,
-    ];
-};
+ $put = function () {
+     return [
+         'PUT',
+         '/shipments/{shipmentId}',
+     ];
+ };
 
 return [
     'save' => [
@@ -32,9 +32,9 @@ return [
         'GET',
         '/orders/{itemId}?access_token={ACCESS_TOKEN}',
     ],
-    'toApproved'  => $put('approved'),
-    'toCanceled'  => $put('canceled'),
-    'toDelivered' => $put('delivered'),
-    'toInvoiced'  => $put('invoiced'),
-    'toShipped'   => $put('shipped'),
+    'toApproved'  => $put(),
+    'toCanceled'  => $put(),
+    'toDelivered' => $put(),
+    'toHandling'  => $put(),
+    'toShipped'   => $put(),
 ];
