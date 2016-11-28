@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:     
-  2016-11-28 16:37:20     
+  2016-11-28 18:01:03     
                           
  Summary:                 
-  Classes: 20.00% (3/15)  
-  Methods: 18.92% (7/37)  
-  Lines:   10.63% (32/301)
+  Classes: 16.67% (3/18)  
+  Methods: 17.50% (7/40)  
+  Lines:   10.71% (33/308)
 
 \Gpupo\MercadolivreSdk::Factory
   Methods:  66.67% ( 2/ 3)   Lines:  71.43% (  5/  7)
