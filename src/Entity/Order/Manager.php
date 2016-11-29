@@ -78,11 +78,8 @@ final class Manager extends AbstractManager
         $entity = $this->normalizeShipping($entity, $existent);
         */
 
-
-        $shipmentId = $entity->getShipping()['shipmentId'];
-        if (!$shipmentId) {
-            #TODO busca shipimentId se não tiver
-        }
+        $shipmentId = $entity->getShipping()['shipmentId'] ?:
+            $this->findById($entity->getId())->getShipping()->getId();
 
         if (in_array($entity->getOrderStatus(), ['handling', 'canceled',
             'delivered', 'shipped', 'tracked'], true)) {

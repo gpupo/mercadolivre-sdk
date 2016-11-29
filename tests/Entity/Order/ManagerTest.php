@@ -38,6 +38,7 @@ class ManagerTest extends TestCaseAbstract
     {
         $this->assertSame((int)'768570754', (int)$order->getId());
         $this->assertSame('pending', $order->getShipping()->getStatus());
+        $this->assertSame(20676482441, $order->getShipping()->getId());
     }
     /**
      * @testdox Administra operações de SKUs
