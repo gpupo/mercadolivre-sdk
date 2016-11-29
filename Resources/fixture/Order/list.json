@@ -67,6 +67,7 @@
       	"id": 20676482441,
       	"shipment_type": "shipping",
       	"status": "pending",
+        "shippingCode": "TR1234567891",
         "date_created": "2013-05-27T10:03:28.000-04:00",
       	"receiver_address": {
         	"id": 12345678,
