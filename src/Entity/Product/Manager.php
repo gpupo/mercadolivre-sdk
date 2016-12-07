@@ -45,18 +45,19 @@ final class Manager extends AbstractManager
     public function translatorInsert(TranslatorDataCollection $data, $mlCategory)
     {
         $data->set('extras', [
-            'category'        => $mlCategory,
-            'currency_id'     => 'BRL',
-            'buying_mode'     => 'buy_it_now',
-            'listing_type_id' => 'bronze',
-            'condition'       => 'new',
-            'shipping'        =>  [
-                'mode'          => 'me2',
-                "local_pick_up" => false,
-                "free_shipping" => false,
-                "methods"       => [],
-                "dimensions"    => null,
-                "tags"          => [],
+            'category'          => $mlCategory,
+            'currency_id'       => 'BRL',
+            'buying_mode'       => 'buy_it_now',
+            'listing_type_id'   => 'bronze',
+            'condition'         => 'new',
+            'official_store_id' => 955,
+            'shipping'          =>  [
+                'mode'            => 'me1',
+                "local_pick_up"   => false,
+                "free_shipping"   => false,
+                "methods"         => [],
+                "dimensions"      => null,
+                "tags"            => [],
             ],
         ]);
 
