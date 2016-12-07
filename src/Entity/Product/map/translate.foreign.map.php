@@ -32,6 +32,7 @@ $array = [
      'listing_type_id'    => $extras['listing_type_id'],
      'condition'          => $extras['condition'],
      'shipping'           => $extras['shipping'],
+     'official_store_id'  => $extras['official_store_id'],
  ];
 
 return $array;
