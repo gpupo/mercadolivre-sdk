@@ -26,11 +26,11 @@ return [
     ],
     'fetch' => [
         'GET',
-        '/orders/search/recent?seller=231401236&access_token={ACCESS_TOKEN}'
+        '/orders/search/recent?seller=227595621&access_token={access_token}'
     ],
     'findById' => [
         'GET',
-        '/orders/{itemId}?access_token={ACCESS_TOKEN}',
+        '/orders/{itemId}?access_token={access_token}',
     ],
     'toTracked'   => $put(),
     'toHandling'  => $put(),
