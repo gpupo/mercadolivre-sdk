@@ -16,6 +16,7 @@ $items = $native['order_items'];
 foreach ($items as $item) {
     $quantity += $item['quantity'];
 }
+$dateTime = new DateTime($native['date_created']);
 
 return [
      'merchant' => [
@@ -26,7 +27,7 @@ return [
      'orderNumber'    => $native->getId(),
      'acceptedOffer'  => $native['order_items'],
      'orderStatus'    => $native->getStatus(),
-     'orderDate'      => $native['date_created'],
+     'orderDate'      => $dateTime->format('Y-m-d H:i:s'),
      'customer'       => $native->getBuyer(),
      'billingAddress' => $native->getShipping()['receiver_address'],
      'currency'       => 'BRL',
