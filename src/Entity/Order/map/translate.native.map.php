@@ -13,23 +13,52 @@
  */
 $quantity = 0;
 $items = $native['order_items'];
+$acceptedOffer = [];
 foreach ($items as $item) {
     $quantity += $item['quantity'];
+    $acceptedOffer[] = [
+        'itemOffered' => [
+            'sku' => $item['item']['id'],
+        ],
+        'quantity' => $item['quantity'],
+        'price' => $item['unit_price'],
+    ];
 }
 $dateTime = new DateTime($native['date_created']);
+
+$translateStatus = function ($status) {
+    $string = strtoupper($status);
+    $list = include __DIR__.'/status.map.php';
+    $find = array_search($string, $list, true);
+
+    return empty($find) ? $string : $find;
+};
 
 return [
      'merchant' => [
          'name'         => 'MERCADOLIVRE',
-         'marketplace'  => '',
+         'marketplace'  => 'MERCADOLIVRE',
          'originNumber' => '',
      ],
      'orderNumber'    => $native->getId(),
-     'acceptedOffer'  => $native['order_items'],
-     'orderStatus'    => $native->getStatus(),
+     'acceptedOffer'  => $acceptedOffer,
+     'orderStatus'    => $translateStatus($native->getStatus()),
      'orderDate'      => $dateTime->format('Y-m-d H:i:s'),
-     'customer'       => $native->getBuyer(),
-     'billingAddress' => $native->getShipping()['receiver_address'],
+     'customer'       => [
+         'document'   => $native['buyer']['billing_info']['doc_number'],
+         'name' => $native['buyer']['first_name'].' '.$native['buyer']['last_name'],
+         'telephone'  => $native['buyer']['phone']['area_code'].' '.$native['buyer']['phone']['number'],
+     ],
+     'billingAddress' => [
+         'streetAddress'       => $native->getShipping()['receiver_address']['address_line'],
+         'addressComplement'   => $native->getShipping()['receiver_address']['comment'],
+         'addressReference'    => '',
+         'addressNumber'       => '',
+         'addressLocality'     => $native->getShipping()['receiver_address']['city']['name'],
+         'addressRegion'       => str_replace('BR-', '', $native->getShipping()['receiver_address']['state']['id']),
+         'addressNeighborhood' => '',
+         'postalCode'          => $native->getShipping()['receiver_address']['zip_code'],
+     ],
      'currency'       => 'BRL',
      'price'          => $native['total_amount'],
      'discount'       => 0,
