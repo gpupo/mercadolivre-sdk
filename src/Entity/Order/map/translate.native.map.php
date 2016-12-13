@@ -47,13 +47,13 @@ return [
      'customer'       => [
          'document'   => $native['buyer']['billing_info']['doc_number'],
          'name' => $native['buyer']['first_name'].' '.$native['buyer']['last_name'],
-         'telephone'  => $native['buyer']['phone']['area_code'].' '.$native['buyer']['phone']['number'],
+         'telephone'  => '('.$native['buyer']['phone']['area_code'].') '.$native['buyer']['phone']['number'],
      ],
      'billingAddress' => [
-         'streetAddress'       => $native->getShipping()['receiver_address']['address_line'],
+         'streetAddress'       => $native->getShipping()['receiver_address']['street_name'],
          'addressComplement'   => $native->getShipping()['receiver_address']['comment'],
          'addressReference'    => '',
-         'addressNumber'       => '',
+         'addressNumber'       => $native->getShipping()['receiver_address']['street_number'],
          'addressLocality'     => $native->getShipping()['receiver_address']['city']['name'],
          'addressRegion'       => str_replace('BR-', '', $native->getShipping()['receiver_address']['state']['id']),
          'addressNeighborhood' => '',
