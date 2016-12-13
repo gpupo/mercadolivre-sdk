@@ -17,7 +17,7 @@
 
 return [
   'APPROVED'    => 'PAID',
-  'PROCESSING' => 'PROCESSING',
+  'PROCESSING' => 'HANDLING',
   'INVOICED'    => 'INVOICED',
   'SHIPPED'     => 'SHIPPED',
   'DELIVERED'    => 'DELIVERED',

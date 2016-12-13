@@ -81,12 +81,13 @@ final class Manager extends AbstractManager
         $shipmentId = $entity->getShipping()['shipmentId'] ?:
             $this->findById($entity->getId())->getShipping()->getId();
 
-        if (in_array($entity->getOrderStatus(), ['handling', 'canceled',
+        $status = strtolower($entity->getStatus());
+        if (in_array($status, ['processing', 'canceled',
             'delivered', 'shipped', 'tracked'], true)) {
-            $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($entity->getOrderStatus()));
+            $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($status));
             $json = $decorator->toJson();
 
-            $mapKey = 'to'.ucfirst($entity->getOrderStatus());
+            $mapKey = 'to'.ucfirst($status);
             $map = $this->factoryMap($mapKey, [
                 'shipmentId' => $shipmentId,
             ]);
@@ -94,7 +95,7 @@ final class Manager extends AbstractManager
             return $this->execute($map, $json);
         }
 
-        throw new \InvalidArgumentException('Order Status ['.$entity->getOrderStatus().'] não suportado', 1);
+        throw new \InvalidArgumentException('Order Status ['.$status.'] não suportado', 1);
     }
 
     public function factoryTranslator(array $data = [])

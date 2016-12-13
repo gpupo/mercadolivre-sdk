@@ -12,4 +12,19 @@
  * For more information, see <http://www.g1mr.com/>.
  */
 
-return [];
+return [
+    "id"            => $foreign->get('orderNumber'),
+    "status"        => $foreign->get('orderStatus'),
+    "status_detail" => '',
+    "date_created"  => '',
+    "date_closed"   => '',
+    "order_items"   => '',
+    "total_amount"  => '',
+    "currency_id"   => '',
+    "buyer"         => '',
+    "seller"        => '',
+    "payments"      => '',
+    "feedback"      => '',
+    "shipping"      => '',
+    "tags"          => '',
+];

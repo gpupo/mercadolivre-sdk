@@ -17,9 +17,9 @@ namespace Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status;
 use Gpupo\MercadolivreSdk\Entity\Order\Decorator\AbstractDecorator;
 use Gpupo\MercadolivreSdk\Entity\Order\Decorator\DecoratorInterface;
 
-class Handling extends AbstractDecorator implements DecoratorInterface
+class Processing extends AbstractDecorator implements DecoratorInterface
 {
-    protected $name = 'Handling';
+    protected $name = 'Processing';
 
     protected function factoryArray()
     {

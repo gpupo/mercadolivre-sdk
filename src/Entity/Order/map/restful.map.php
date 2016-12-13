@@ -15,7 +15,7 @@
  $put = function () {
      return [
          'PUT',
-         '/shipments/{shipmentId}',
+         '/shipments/{shipmentId}?access_token={access_token}',
      ];
  };
 
@@ -33,7 +33,7 @@ return [
         '/orders/{itemId}?access_token={access_token}',
     ],
     'toTracked'   => $put(),
-    'toHandling'  => $put(),
+    'toProcessing'  => $put(),
     'toShipped'   => $put(),
     'toDelivered' => $put(),
     'toCanceled'  => $put(),
