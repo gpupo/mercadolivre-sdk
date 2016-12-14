@@ -12,6 +12,13 @@
  * For more information, see <http://www.g1mr.com/>.
  */
 
+$shipping = '';
+ if ($foreign->get('tracking')) {
+     $shipping = [
+         'shippingCode' => $foreign->get('tracking')['trackingNumber'],
+     ];
+ }
+
 return [
     "id"            => $foreign->get('orderNumber'),
     "status"        => $foreign->get('orderStatus'),
@@ -25,6 +32,6 @@ return [
     "seller"        => '',
     "payments"      => '',
     "feedback"      => '',
-    "shipping"      => '',
+    "shipping"      => $shipping,
     "tags"          => '',
 ];
