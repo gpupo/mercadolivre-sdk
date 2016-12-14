@@ -48,6 +48,7 @@ return [
          'document'   => $native['buyer']['billing_info']['doc_number'],
          'name' => $native['buyer']['first_name'].' '.$native['buyer']['last_name'],
          'telephone'  => '('.$native['buyer']['phone']['area_code'].') '.$native['buyer']['phone']['number'],
+         'email' => $native['buyer']['email'],
      ],
      'billingAddress' => [
          'streetAddress'       => $native->getShipping()['receiver_address']['street_name'],
