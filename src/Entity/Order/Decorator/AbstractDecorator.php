@@ -58,7 +58,7 @@ abstract class AbstractDecorator extends Collection
     {
         return $this->get('order');
     }
-
+    
     public function validate()
     {
         $order = $this->getOrder();

@@ -24,7 +24,8 @@ class Shipped extends AbstractDecorator implements DecoratorInterface
     protected function factoryArray()
     {
         return [
-            'status'    => 'shipped',
+            "tracking_number" => $this->getOrder()->getShipping()->getShippingCode(),
+            "service_id"      => 21,
         ];
     }
 }
