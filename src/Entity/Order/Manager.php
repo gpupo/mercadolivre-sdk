@@ -77,19 +77,16 @@ final class Manager extends AbstractManager
 
         $entity = $this->normalizeShipping($entity, $existent);
         */
-
-        $shipmentId = $entity->getShipping()['shipmentId'] ?:
-            $this->findById($entity->getId())->getShipping()->getId();
+        $order = $this->findById($entity->getId());
 
         $status = strtolower($entity->getStatus());
-        if (in_array($status, ['processing', 'canceled',
-            'delivered', 'shipped', 'tracked'], true)) {
+        if (in_array($status, ['processing', 'canceled', 'shipped'], true)) {
             $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($status));
             $json = $decorator->toJson();
 
             $mapKey = 'to'.ucfirst($status);
             $map = $this->factoryMap($mapKey, [
-                'shipmentId' => $shipmentId,
+                'shipmentId' => $order->getShipping()->getId(),
             ]);
 
             return $this->execute($map, $json);
