@@ -19,7 +19,7 @@ use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\Tests\MercadolivreSdk\Entity\Order\Decorator\AbstractDecoratorTestCase;
 
 /**
- * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Invoiced
+ * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Shipped
  */
 class ShippedTest extends AbstractDecoratorTestCase
 {
