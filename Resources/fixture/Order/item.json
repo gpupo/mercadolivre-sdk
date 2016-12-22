@@ -69,6 +69,8 @@
     "date_created": "2013-05-27T10:03:28.000-04:00",
   	"receiver_address": {
     	"id": 12345678,
+      "street_number": "2055",
+      "street_name": "Rua Lauro Linhares",
     	"address_line": "Rua dos testes 123  ",
     	"zip_code": "01001000",
     	"city": {
@@ -88,7 +90,23 @@
     	"comment": null
   	},
   	"currency_id": "BRL",
-  	"cost": 0
+  	"cost": 0,
+    "shipping_option": {
+      "id": 2000880360030001,
+      "shipping_method_id": 182,
+      "name": "Expresso",
+      "currency_id": "BRL",
+      "cost": 14.9,
+      "speed": {
+        "shipping": null,
+        "handling": null
+      },
+      "estimated_delivery": {
+        "date": null,
+        "time_from": null,
+        "time_to": null
+      }
+    }
   },
   "tags": [
   	"paid",

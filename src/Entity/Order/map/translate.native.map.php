@@ -65,5 +65,6 @@ return [
      'discount'       => 0,
      'quantity'       => $quantity,
      'freight'        => '',
+     'freightType'    => ((int)$native->getShipping()['shipping_option']['shipping_method_id'] === 182) ? 'EXPRESS' : 'NORMAL',
      'total'          => $native['total_amount'],
  ];

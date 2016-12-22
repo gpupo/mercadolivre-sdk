@@ -14,19 +14,19 @@
 
 namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\Decorator\Status;
 
-use Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Tracked;
+use Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Processing;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\Tests\MercadolivreSdk\Entity\Order\Decorator\AbstractDecoratorTestCase;
 
 /**
- * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Invoiced
+ * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Processing
  */
-class TrackedTest extends AbstractDecoratorTestCase
+class ProcessingTest extends AbstractDecoratorTestCase
 {
-    protected $target = 'Tracked';
+    protected $target = 'Processing';
 
     protected function factory($data = [])
     {
-        return new Tracked($data);
+        return new Processing($data);
     }
 }
