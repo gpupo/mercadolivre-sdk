@@ -58,7 +58,19 @@ abstract class AbstractDecorator extends Collection
     {
         return $this->get('order');
     }
-    
+
+    public function setOriginalOrder($order)
+    {
+        $this->set('originalOrder', $order);
+
+        return $this;
+    }
+
+    public function getOriginalOrder()
+    {
+        return $this->get('originalOrder');
+    }
+
     public function validate()
     {
         $order = $this->getOrder();
