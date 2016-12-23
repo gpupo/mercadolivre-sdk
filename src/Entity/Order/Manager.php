@@ -82,6 +82,8 @@ final class Manager extends AbstractManager
         $status = strtolower($entity->getOrderStatus());
         if (in_array($status, ['processing', 'canceled', 'shipped'], true)) {
             $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($status));
+            $decorator->setOriginalOrder($order);
+
             $json = $decorator->toJson();
 
             $mapKey = 'to'.ucfirst($status);

@@ -39,7 +39,10 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
 
     protected function factoryDecorator(Order $order, $data = [])
     {
-        return $this->getDecorator($data)->setOrder($order);
+        $decorator = $this->getDecorator($data);
+        $decorator->setOriginalOrder($order);
+        
+        return $decorator->setOrder($order);
     }
 
     /**

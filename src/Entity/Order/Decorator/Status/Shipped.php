@@ -25,7 +25,7 @@ class Shipped extends AbstractDecorator implements DecoratorInterface
     {
         return [
             "tracking_number" => $this->getOrder()->getShipping()->getShippingCode(),
-            "service_id"      => 21,
+            "service_id"      => $this->getOriginalOrder()['shipping']['shipping_option']['shipping_method_id'],
         ];
     }
 }
