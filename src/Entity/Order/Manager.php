@@ -60,26 +60,13 @@ final class Manager extends AbstractManager
             ]);
         };
 
-        #TODO
-        /*if (empty($existent)) {
-            $existent = $this->resolvePrevious($entity);
-        }
+        $order = $this->findById($entity->getId());
+        $status = strtolower($entity->getStatus());
 
-        if ($entity->getOrderStatus() === $existent->getOrderStatus()) {
-            $this->log('info', 'Order sem atualização');
-
+        if ('handling' === $order['shipping']['status'] && 'processing' === $status) {
             return $factory204('Order status not changed!');
         }
 
-        if ('processing' === $entity->getOrderStatus()) {
-            return $factory204('Order status not used!');
-        }
-
-        $entity = $this->normalizeShipping($entity, $existent);
-        */
-        $order = $this->findById($entity->getId());
-
-        $status = strtolower($entity->getStatus());
         if (in_array($status, ['processing', 'canceled', 'shipped'], true)) {
             $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($status));
             $decorator->setOriginalOrder($order);
