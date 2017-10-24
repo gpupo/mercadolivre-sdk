@@ -1,11 +1,11 @@
 {
     "name": "gpupo/mercadolivre-sdk",
     "description": "SDK Não Oficial para integração a partir de aplicações PHP com APIs Mercadolivre",
-    "homepage": "http://www.g1mr.com/mercadolivre-sdk/",
+    "homepage": "https://opensource.gpupo.com/mercadolivre-sdk/",
     "authors": [
         {
             "name": "Gilmar Pupo",
-            "email": "g@g1mr.com"
+            "email": "contact@gpupo.com"
         }
     ],
     "keywords": ["mercadolivre", "marketplace", "sdk", "api"],
