@@ -7,11 +7,12 @@ engines:
   fixme:
     enabled: true
   phpmd:
+    # @see https://docs.codeclimate.com/docs/phpmd
     enabled: true
     config:
       file_extensions:
           - php
-      rulesets: "cleancode, codesize, controversial, design, naming, unusedcode"
+      rulesets: "design, naming, unusedcode"
   phpcodesniffer:
     enabled: true
     config:
