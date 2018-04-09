@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Entity\Product;
@@ -25,18 +28,18 @@ final class Response extends EntityAbstract implements EntityInterface
     public function getSchema()
     {
         return [
-            'id'              => 'string',
-            'title'           => 'string',
-            'category_id'     => 'string',
-            'price'           => 'number',
-            'currency_id'     => 'string',
-            'buying_mode'     => 'string',
+            'id' => 'string',
+            'title' => 'string',
+            'category_id' => 'string',
+            'price' => 'number',
+            'currency_id' => 'string',
+            'buying_mode' => 'string',
             'listing_type_id' => 'string',
-            'condition'       => 'string',
-            'description'     => 'string',
-            'variations'      => 'collection',
-            'pictures'        => 'collection',
-            'status'          => 'string',
+            'condition' => 'string',
+            'description' => 'string',
+            'variations' => 'collection',
+            'pictures' => 'collection',
+            'status' => 'string',
         ];
     }
 }

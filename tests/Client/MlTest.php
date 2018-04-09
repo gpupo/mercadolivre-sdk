@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\Tests\MercadolivreSdk\Client;
@@ -18,6 +21,9 @@ use Gpupo\MercadolivreSdk\Client\Ml;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 use Meli;
 
+/**
+ * @coversNothing
+ */
 class MlTest extends TestCaseAbstract
 {
     public function testLoad()

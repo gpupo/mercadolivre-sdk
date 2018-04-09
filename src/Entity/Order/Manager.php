@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,12 +12,11 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Entity\Order;
 
-use DateInterval;
-use DateTime;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
@@ -55,13 +56,13 @@ final class Manager extends AbstractManager
 
         $factory204 = function ($message) {
             return new Response([
-                'raw'            => '{"message":"'.$message.'"}',
+                'raw' => '{"message":"'.$message.'"}',
                 'httpStatusCode' => 204,
             ]);
         };
 
         $order = $this->findById($entity->getId());
-        $status = strtolower($entity->getStatus());
+        $status = strtolower($entity->getOrderStatus());
 
         if ('handling' === $order['shipping']['status'] && 'processing' === $status) {
             return $factory204('Order status not changed!');

@@ -3,6 +3,7 @@
 /var/
 app.json
 Resources/logs/*
+Resources/qualityAssurance/*
 *.phar
 *.lock
 *.cache

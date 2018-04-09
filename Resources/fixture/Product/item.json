@@ -6,8 +6,8 @@
   "seller_id": 231401236,
   "category_id": "MLB5399",
   "official_store_id": null,
-  "price": 369,
-  "base_price": 369,
+  "price": 369.55,
+  "base_price": 369.55,
   "original_price": null,
   "currency_id": "BRL",
   "initial_quantity": 181,
@@ -137,7 +137,7 @@
           "value_name": "100 ml"
         }
       ],
-      "price": 369,
+      "price": 369.55,
       "available_quantity": 13,
       "sold_quantity": 0,
       "picture_ids": [

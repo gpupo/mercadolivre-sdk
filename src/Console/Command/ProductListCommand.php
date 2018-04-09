@@ -23,13 +23,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @codeCoverageIgnore
  */
-final class ChecklistCommand extends AbstractCommand
+final class ProductListCommand extends AbstractCommand
 {
     public function main($app)
     {
-        $this->getApp()->appendCommand('auth:checklist', 'Check files')
+        $this->getApp()->appendCommand('catalog:product:list', 'Get the product list')
             ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-                $output->writeln('token:'.$app->getTokenContainer()['access_token']);
+                $list = $app->processInputParameters([], $input, $output);
+                $pm = $app->factorySdk($list)->factoryManager('product');
+
+                try {
+                    $request = $pm->fetch();
+                    dump($request);
+                } catch (\Exception $e) {
+                    $app->showException($e, $output);
+                }
             });
     }
 }

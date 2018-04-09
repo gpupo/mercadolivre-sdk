@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\Tests\MercadolivreSdk\Console;
@@ -21,18 +24,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * @coversNothing
+ */
 class ApplicationTest extends TestCaseAbstract
 {
     /**
-     * @test Dá acesso a ``Factory``
-     * @test
+     * Dá acesso a ``Factory``.
      */
-    public function factorySdk()
+    public function testFactorySdk()
     {
         $app = new Application();
 
         $sdk = $app->factorySdk([
-            'client_id'    => 'x882ja',
+            'client_id' => 'x882ja',
             'access_token' => '8998329jejd',
         ]);
 
@@ -40,10 +45,9 @@ class ApplicationTest extends TestCaseAbstract
     }
 
     /**
-     * @test Recebe novas funções
-     * @test
+     * Recebe novas funções.
      */
-    public function appendCommand()
+    public function testAppendCommand()
     {
         $app = new Application();
 

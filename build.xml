@@ -91,4 +91,22 @@ Name | Version | Description
          <arg value="build"/>
      </exec>
  </target>
+  <target name="lint" description="Perform syntax check">
+     <apply executable="php" failonerror="true">
+         <arg value="-l" />
+         <fileset dir="${basedir}">
+             <include name="**/*.php" />
+             <exclude name="vendor/**" />
+             <exclude name="var/**" />
+             <exclude name="bin/**" />
+         </fileset>
+     </apply>
+  </target>
+
+  <target name="phpcs" description="Find coding standard violations using PHP Code Sniffer">
+     <exec executable="phpcs" failonerror="false">
+         <arg value="--report-summary=Resources/qualityAssurance/phpcs.summary.txt" />
+         <arg value="--report-full=Resources/qualityAssurance/phpcs.full.txt" />
+     </exec>
+  </target>
 </project>

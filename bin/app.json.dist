@@ -1,8 +1,10 @@
 {
     "client_id": "foo",
+    "secret_key": "king",
     "access_token": "bar",
     "env": "sandbox",
     "protocol": "http",
     "sslVersion": "SecureTransport",
-    "registerPath": "var/logs/"
+    "registerPath": "var/logs/",
+    "app_url": "http://localhost:8000/"
 }

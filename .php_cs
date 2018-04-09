@@ -1,41 +1,79 @@
 <?php
 
-use Symfony\CS\Config\Config;
-use Symfony\CS\FixerInterface;
-use Symfony\CS\Finder\DefaultFinder;
-use Symfony\CS\Fixer\Contrib\HeaderCommentFixer;
+$header = <<<'EOF'
+This file is part of gpupo/mercadolivre-sdk
+Created by Gilmar Pupo <contact@gpupo.com>
+For the information of copyright and license you should read the file
+LICENSE which is distributed with this source code.
+Para a informação dos direitos autorais e de licença você deve ler o arquivo
+LICENSE que é distribuído com este código-fonte.
+Para obtener la información de los derechos de autor y la licencia debe leer
+el archivo LICENSE que se distribuye con el código fuente.
+For more information, see <https://opensource.gpupo.com/>.
 
-HeaderCommentFixer::setHeader(file_get_contents ('Resources/doc/file-header.md'));
+EOF;
 
-$finder = DefaultFinder::create()
-    ->notName('LICENSE')
-    ->notName('README.md')
-    ->notName('phpunit.xml*')
-    ->notName('*.phar')
-    ->exclude('vendor')
-    ->exclude('var')
-    ->exclude('Resources')
-    ->in(__DIR__);
-
-return Config::create()
-    ->fixers([
-        'yoda_conditions',
-        'align_double_arrow',
-        'header_comment',
-        'multiline_spaces_before_semicolon',
-        'ordered_use',
-        'phpdoc_order',
-        'phpdoc_var_to_type',
-        'strict',
-        'strict_param',
-        'short_array_syntax',
-        'php_unit_strict',
-        'php_unit_construct',
-        'newline_after_open_tag',
-        'ereg_to_preg',
-        'short_echo_tag',
-        'pre_increment',
+$config = PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@PHP56Migration' => true,
+        '@PHPUnit60Migration:risky' => true,
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        'align_multiline_comment' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'blank_line_before_statement' => true,
+        'combine_consecutive_issets' => true,
+        'combine_consecutive_unsets' => true,
+        'compact_nullable_typehint' => true,
+        'escape_implicit_backslashes' => true,
+        'explicit_indirect_variable' => true,
+        'explicit_string_variable' => true,
+        'declare_strict_types'  => true,
+        'final_internal_class' => true,
+        'header_comment' => ['header' => $header],
+        'heredoc_to_nowdoc' => true,
+        'list_syntax' => ['syntax' => 'long'],
+        'method_chaining_indentation' => true,
+        'method_argument_space' => ['ensure_fully_multiline' => true],
+        'multiline_comment_opening_closing' => true,
+        'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
+        'no_null_property_initialization' => true,
+        'no_short_echo_tag' => true,
+        'no_superfluous_elseif' => true,
+        'no_unneeded_curly_braces' => true,
+        'no_unneeded_final_method' => true,
+        'no_unreachable_default_argument_value' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'ordered_class_elements' => true,
+        'ordered_imports' => true,
+        'php_unit_strict' => true,
+        'php_unit_test_annotation' => true,
+        'php_unit_test_class_requires_covers' => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_order' => true,
+        'phpdoc_types_order' => true,
+        'semicolon_after_instruction' => true,
+        'single_line_comment_style' => true,
+        'strict_comparison' => true,
+        'strict_param' => true,
+        'yoda_style' => true,
     ])
-    ->level(FixerInterface::SYMFONY_LEVEL)
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->notName('LICENSE')
+            ->notName('README.md')
+            ->notName('phpunit.xml*')
+            ->notName('*.phar')
+            ->exclude('vendor')
+            ->exclude('var')
+            ->exclude('config')
+            ->exclude('Resources')
+            ->exclude('tests/Fixtures')
+            ->in(__DIR__)
+    )
     ->setUsingCache(true)
-    ->finder($finder);
+;
+
+return $config;

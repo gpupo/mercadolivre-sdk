@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,15 +12,15 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Entity\Product;
 
 use Gpupo\CommonSchema\TranslatorDataCollection;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
-use Gpupo\MercadolivreSdk\Entity\Product\Update;
-use Gpupo\CommonSdk\Entity\EntityInterface;
 
 final class Manager extends AbstractManager
 {
@@ -34,30 +36,30 @@ final class Manager extends AbstractManager
      * @codeCoverageIgnore
      */
     protected $maps = [
-        'save'          => ['POST', '/items?access_token={access_token}'],
-        'findById'      => ['GET', '/items/{itemId}/'],
+        'save' => ['POST', '/items?access_token={access_token}'],
+        'findById' => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
-        'update'        => ['PUT', '/items/{itemId}?access_token={access_token}'],
-        //'fetch'      => ['GET', '/products?page={offset}&size={limit}'],
+        'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
+        'fetch' => ['GET', '/users/254289619/items/search?access_token={access_token}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
 
     public function translatorInsert(TranslatorDataCollection $data, $mlCategory)
     {
         $data->set('extras', [
-            'category'          => $mlCategory,
-            'currency_id'       => 'BRL',
-            'buying_mode'       => 'buy_it_now',
-            'listing_type_id'   => 'bronze',
-            'condition'         => 'new',
+            'category' => $mlCategory,
+            'currency_id' => 'BRL',
+            'buying_mode' => 'buy_it_now',
+            'listing_type_id' => 'bronze',
+            'condition' => 'new',
             'official_store_id' => 955,
-            'shipping'          =>  [
-                'mode'            => 'me1',
-                "local_pick_up"   => false,
-                "free_shipping"   => false,
-                "methods"         => [],
-                "dimensions"      => null,
-                "tags"            => [],
+            'shipping' => [
+                'mode' => 'me1',
+                'local_pick_up' => false,
+                'free_shipping' => false,
+                'methods' => [],
+                'dimensions' => null,
+                'tags' => [],
             ],
         ]);
 

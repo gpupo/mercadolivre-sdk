@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Client;
@@ -27,30 +30,23 @@ final class Client extends ClientAbstract implements ClientInterface
     public function getDefaultOptions()
     {
         return [
-            'app_id'        => false,
-            'secret_key'    => false,
-            'access_token'  => false,
+            'app_id' => false,
+            'secret_key' => false,
+            'access_token' => false,
             'refresh_token' => false,
-            'base_url'      => 'https://api.mercadolibre.com',
-            'verbose'       => true,
-            'sslVersion'    => 'SecureTransport',
-            'cacheTTL'      => 3600,
+            'base_url' => 'https://api.mercadolibre.com',
+            'verbose' => true,
+            'sslVersion' => 'SecureTransport',
+            'cacheTTL' => 3600,
             'sslVerifyPeer' => true,
         ];
-    }
-
-    protected function renderAuthorization()
-    {
-        $list = [];
-
-        return $list;
     }
 
     public function accessMl()
     {
         if (empty($this->ml)) {
             $this->ml = new Ml(
-                $this->getOptions()->get('app_id'),
+                $this->getOptions()->get('client_id'),
                 $this->getOptions()->get('secret_key'),
                 $this->getOptions()->get('access_token'),
                 $this->getOptions()->get('refresh_token')
@@ -58,5 +54,12 @@ final class Client extends ClientAbstract implements ClientInterface
         }
 
         return $this->ml;
+    }
+
+    protected function renderAuthorization()
+    {
+        $list = [];
+
+        return $list;
     }
 }

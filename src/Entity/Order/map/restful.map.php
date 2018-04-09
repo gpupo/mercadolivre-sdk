@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,14 +12,15 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
- $put = function () {
-     return [
+$put = function () {
+    return [
          'PUT',
          '/shipments/{shipmentId}?access_token={access_token}',
      ];
- };
+};
 
 return [
     'save' => [
@@ -26,15 +29,15 @@ return [
     ],
     'fetch' => [
         'GET',
-        '/orders/search/recent?seller=227595621&access_token={access_token}'
+        '/orders/search/recent?seller=227595621&access_token={access_token}',
     ],
     'findById' => [
         'GET',
         '/orders/{itemId}?access_token={access_token}',
     ],
-    'toTracked'   => $put(),
-    'toProcessing'  => $put(),
-    'toShipped'   => $put(),
+    'toTracked' => $put(),
+    'toProcessing' => $put(),
+    'toShipped' => $put(),
     'toDelivered' => $put(),
-    'toCanceled'  => $put(),
+    'toCanceled' => $put(),
 ];

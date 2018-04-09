@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,21 +12,22 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 return [
-    "id"            => "number",
-    "status"        => "string",
-    "status_detail" => "boolean",
-    "date_created"  => "string",
-    "date_closed"   => "string",
-    "order_items"   => "collection",
-    "total_amount"  => "number",
-    "currency_id"   => "string",
-    "buyer"         => "collection",
-    "seller"        => "collection",
-    "payments"      => "collection",
-    "feedback"      => "collection",
-    "shipping"      => "collection",
-    "tags"          => "array",
+    'id' => 'integer',
+    'status' => 'string',
+    'status_detail' => 'boolean',
+    'date_created' => 'string',
+    'date_closed' => 'string',
+    'order_items' => 'collection',
+    'total_amount' => 'number',
+    'currency_id' => 'string',
+    'buyer' => 'collection',
+    'seller' => 'collection',
+    'payments' => 'collection',
+    'feedback' => 'collection',
+    'shipping' => 'collection',
+    'tags' => 'array',
 ];

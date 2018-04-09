@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk;
@@ -36,11 +39,11 @@ class Factory extends FactoryAbstract
     {
         return [
             'product' => [
-                'class'   => $namespace.'Product\Product',
+                'class' => $namespace.'Product\Product',
                 'manager' => $namespace.'Product\Manager',
             ],
             'order' => [
-                'class'   => $namespace.'Order\Order',
+                'class' => $namespace.'Order\Order',
                 'manager' => $namespace.'Order\Manager',
             ],
         ];

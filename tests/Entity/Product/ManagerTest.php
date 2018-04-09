@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,15 +12,16 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Entity\Product;
 
-use Gpupo\MercadolivreSdk\Entity\Product\Manager;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
-use Gpupo\MercadolivreSdk\Entity\Product\Response;
-use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\CommonSdk\Response as CommonResponse;
+use Gpupo\MercadolivreSdk\Entity\Product\Manager;
+use Gpupo\MercadolivreSdk\Entity\Product\Product;
+use Gpupo\MercadolivreSdk\Entity\Product\Response;
+use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Manager
@@ -36,9 +39,8 @@ class ManagerTest extends TestCaseAbstract
     /**
      * @testdox rotas possuem access_token como parâmetro GET
      * @cover ::factoryMap
-     * @test
      */
-    public function accessToken()
+    public function testAccessToken()
     {
         $manager = $this->getFactory()->factoryManager('product');
         $route = $manager->factoryMap('save');
@@ -49,24 +51,10 @@ class ManagerTest extends TestCaseAbstract
      * @testdox ``translatorInsertProduct()``
      * @cover ::translatorInsertProduct
      * @dataProvider dataProviderManager
-     * @test
      */
-    public function translatorInsertProduct(Manager $manager)
+    public function testTranslatorInsertProduct(Manager $manager)
     {
         $this->markTestIncomplete('translatorInsertProduct() incomplete!');
-    }
-
-    protected function getManager($filename = null, $code = 200)
-    {
-        if (empty($filename)) {
-            $filename = 'item.json';
-        }
-
-        $manager = $this->getFactory()->factoryManager('product');
-        $response = $this->factoryResponseFromFixture('fixture/Product/'.$filename, $code);
-        $manager->setDryRun($response);
-
-        return $manager;
     }
 
     /**
@@ -80,9 +68,9 @@ class ManagerTest extends TestCaseAbstract
     public function testFindBy()
     {
         $manager = $this->getManager();
-        $product = $manager->findById("MLB803848501");
+        $product = $manager->findById('MLB803848501');
         $this->assertInstanceOf(Response::class, $product);
-        $this->assertSame("MLB803848501", $product->getId());
+        $this->assertSame('MLB803848501', $product->getId());
     }
 
     public function testUpdate()
@@ -93,5 +81,18 @@ class ManagerTest extends TestCaseAbstract
         $manager = $this->getManager();
         $product = $manager->update($entity);
         $this->assertInstanceOf(CommonResponse::class, $product);
+    }
+
+    protected function getManager($filename = null, $code = 200)
+    {
+        if (empty($filename)) {
+            $filename = 'item.json';
+        }
+
+        $manager = $this->getFactory()->factoryManager('product');
+        $response = $this->factoryResponseFromFixture('fixture/Product/'.$filename, $code);
+        $manager->setDryRun($response);
+
+        return $manager;
     }
 }

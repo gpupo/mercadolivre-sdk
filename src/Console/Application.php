@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Console;
@@ -24,40 +27,44 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class Application extends AbstractApplication
 {
-    public function doRun(InputInterface $input, OutputInterface $output)
-    {
-        $output->writeln('<bg=green;options=bold>gpupo/mercadolivre-sdk</>');
-        $output->writeln('<options=bold>Atenção! Esta aplicação é apenas uma '
-        .'ferramenta de apoio ao desenvolvedor e não deve ser usada no ambiente de produção!'
-        .'</>');
-
-        return parent::doRun($input, $output);
-    }
-
     protected $commonParameters = [
         [
             'key' => 'client_id',
         ],
         [
+            'key' => 'secret_key',
+        ],
+        [
             'key' => 'access_token',
         ],
         [
-            'key'     => 'env',
+            'key' => 'env',
             'options' => ['sandbox', 'api'],
             'default' => 'sandbox',
-            'name'    => 'Version',
+            'name' => 'Version',
         ],
         [
-            'key'     => 'sslVersion',
+            'key' => 'sslVersion',
             'options' => ['SecureTransport', 'TLS'],
             'default' => 'SecureTransport',
-            'name'    => 'SSL Version',
+            'name' => 'SSL Version',
         ],
         [
-            'key'     => 'registerPath',
+            'key' => 'registerPath',
             'default' => false,
         ],
+        [
+            'key' => 'app_url',
+        ],
     ];
+
+    public function doRun(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('<bg=green;options=bold>gpupo/mercadolivre-sdk</>');
+        $output->writeln('<options=bold>Atenção! Esta aplicação é apenas uma '.'ferramenta de apoio ao desenvolvedor e não deve ser usada no ambiente de produção!'.'</>');
+
+        return parent::doRun($input, $output);
+    }
 
     public function factorySdk(array $options, $loggerChannel = 'bin', $verbose = false)
     {

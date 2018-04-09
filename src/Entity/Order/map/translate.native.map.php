@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,7 +12,9 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
+
 $quantity = 0;
 $items = $native['order_items'];
 $acceptedOffer = [];
@@ -36,35 +40,35 @@ $translateStatus = function ($status) {
 
 return [
      'merchant' => [
-         'name'         => 'MERCADOLIVRE',
-         'marketplace'  => 'MERCADOLIVRE',
+         'name' => 'MERCADOLIVRE',
+         'marketplace' => 'MERCADOLIVRE',
          'originNumber' => '',
      ],
-     'orderNumber'    => $native->getId(),
-     'acceptedOffer'  => $acceptedOffer,
-     'orderStatus'    => $translateStatus($native->getStatus()),
-     'orderDate'      => $dateTime->format('Y-m-d H:i:s'),
-     'customer'       => [
-         'document'   => $native['buyer']['billing_info']['doc_number'],
+     'orderNumber' => $native->getId(),
+     'acceptedOffer' => $acceptedOffer,
+     'orderStatus' => $translateStatus($native->getStatus()),
+     'orderDate' => $dateTime->format('Y-m-d H:i:s'),
+     'customer' => [
+         'document' => $native['buyer']['billing_info']['doc_number'],
          'name' => $native['buyer']['first_name'].' '.$native['buyer']['last_name'],
-         'telephone'  => '('.$native['buyer']['phone']['area_code'].') '.$native['buyer']['phone']['number'],
+         'telephone' => '('.$native['buyer']['phone']['area_code'].') '.$native['buyer']['phone']['number'],
          'email' => $native['buyer']['email'],
      ],
      'billingAddress' => [
-         'streetAddress'       => $native->getShipping()['receiver_address']['street_name'],
-         'addressComplement'   => $native->getShipping()['receiver_address']['comment'],
-         'addressReference'    => '',
-         'addressNumber'       => $native->getShipping()['receiver_address']['street_number'],
-         'addressLocality'     => $native->getShipping()['receiver_address']['city']['name'],
-         'addressRegion'       => str_replace('BR-', '', $native->getShipping()['receiver_address']['state']['id']),
+         'streetAddress' => $native->getShipping()['receiver_address']['street_name'],
+         'addressComplement' => $native->getShipping()['receiver_address']['comment'],
+         'addressReference' => '',
+         'addressNumber' => $native->getShipping()['receiver_address']['street_number'],
+         'addressLocality' => $native->getShipping()['receiver_address']['city']['name'],
+         'addressRegion' => str_replace('BR-', '', $native->getShipping()['receiver_address']['state']['id']),
          'addressNeighborhood' => '',
-         'postalCode'          => $native->getShipping()['receiver_address']['zip_code'],
+         'postalCode' => $native->getShipping()['receiver_address']['zip_code'],
      ],
-     'currency'       => 'BRL',
-     'price'          => $native['total_amount'],
-     'discount'       => 0,
-     'quantity'       => $quantity,
-     'freight'        => '',
-     'freightType'    => ((int)$native->getShipping()['shipping_option']['shipping_method_id'] === 182) ? 'EXPRESS' : 'NORMAL',
-     'total'          => $native['total_amount'],
+     'currency' => 'BRL',
+     'price' => $native['total_amount'],
+     'discount' => 0,
+     'quantity' => $quantity,
+     'freight' => '',
+     'freightType' => (182 === (int) $native->getShipping()['shipping_option']['shipping_method_id']) ? 'EXPRESS' : 'NORMAL',
+     'total' => $native['total_amount'],
  ];

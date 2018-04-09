@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of gpupo/netshoes-sdk
+ * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
  * For the information of copyright and license you should read the file
  * LICENSE which is distributed with this source code.
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
@@ -18,31 +21,16 @@ use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Entity\Order\Manager;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
+use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Manager
  */
 class ManagerTest extends TestCaseAbstract
 {
-    protected function getManager($filename = 'item.json')
-    {
-        $manager = $this->getFactory()->factoryManager('order');
-        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Order/'.$filename));
-
-        return $manager;
-    }
-
-    protected function commonAsserts(Order $order)
-    {
-        $this->assertSame((int)'768570754', (int)$order->getId());
-        $this->assertSame('pending', $order->getShipping()->getStatus());
-        $this->assertSame(20676482441, $order->getShipping()->getId());
-    }
     /**
      * @testdox Administra operações de SKUs
-     * @test
      */
     public function testManager()
     {
@@ -56,6 +44,8 @@ class ManagerTest extends TestCaseAbstract
     /**
      * @depends testManager
      * @covers ::getClient
+     *
+     * @param mixed $manager
      */
     public function testPossuiObjetoClient($manager)
     {
@@ -64,13 +54,13 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Get a list of Orders
-     * @test
+     *
      * @depends testManager
      * @covers ::fetch
      * @covers ::execute
      * @covers ::factoryMap
      */
-    public function fetch(Manager $manager)
+    public function testFetch(Manager $manager)
     {
         $list = $manager->fetch();
 
@@ -87,12 +77,12 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Get a empty list of Orders
-     * @test
+     *
      * @covers \Gpupo\MercadolivreSdk\Entity\AbstractManager::findById
      * @covers ::execute
      * @covers ::factoryMap
      */
-    public function fetchNotFound()
+    public function testFetchNotFound()
     {
         $manager = $this->getManager('notfound.json');
         $this->assertFalse($manager->findById(1001));
@@ -100,12 +90,12 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Get a list of Common Schema Orders
-     * @test
+     *
      * @depends testManager
      * @covers ::translatorFetch
      * @covers \Gpupo\MercadolivreSdk\Entity\Order\Translator::translateTo
      */
-    public function translatorFetch(Manager $manager)
+    public function testTranslatorFetch(Manager $manager)
     {
         $list = $manager->translatorFetch(0, 50, []);
         $this->assertInstanceOf(TranslatorDataCollection::class, $list);
@@ -121,12 +111,12 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Get a list of most recent Common Schema Orders
-     * @test
+     *
      * @depends testManager
      * @covers ::fetchQueue
      * @covers \Gpupo\MercadolivreSdk\Entity\Order\Translator::translateTo
      */
-    public function fetchQueue(Manager $manager)
+    public function testFetchQueue(Manager $manager)
     {
         $list = $manager->fetchQueue();
         $this->assertInstanceOf(TranslatorDataCollection::class, $list);
@@ -156,14 +146,14 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Update the shipping status to Processing
-     * @test
+     *
      * @dataProvider dataProviderOrders
      * @covers ::fetch
      * @covers ::execute
      * @covers ::update
      * @covers ::factoryMap
      */
-    public function saveStatusToProcessing(Order $order)
+    public function testSaveStatusToProcessing(Order $order)
     {
         $manager = $this->getManager();
         $order->setOrderStatus('processing');
@@ -174,14 +164,14 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Update the shipping status to shipped
-     * @test
+     *
      * @dataProvider dataProviderOrders
      * @covers ::fetch
      * @covers ::execute
      * @covers ::update
      * @covers ::factoryMap
      */
-    public function saveStatusToShipped(Order $order)
+    public function testSaveStatusToShipped(Order $order)
     {
         $manager = $this->getManager();
         $order->setOrderStatus('shipped');
@@ -189,5 +179,20 @@ class ManagerTest extends TestCaseAbstract
         $order->getShipping()->setShipmentId('123456');
 
         $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
+    }
+
+    protected function getManager($filename = 'item.json')
+    {
+        $manager = $this->getFactory()->factoryManager('order');
+        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Order/'.$filename));
+
+        return $manager;
+    }
+
+    protected function commonAsserts(Order $order)
+    {
+        $this->assertSame((int) '768570754', (int) $order->getId());
+        $this->assertSame('pending', $order->getShipping()->getStatus());
+        $this->assertSame(20676482441, $order->getShipping()->getId());
     }
 }

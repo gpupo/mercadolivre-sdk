@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Console\Command;
@@ -26,20 +29,20 @@ final class AuthCommand extends AbstractCommand
     {
         $this->getApp()->appendCommand('auth:refresh', 'Refresh token change')
             ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-
                 $list = $app->processInputParameters([], $input, $output);
                 $client = $app->factorySdk($list)->getClient();
 
                 try {
                     $data = $app->getTokenContainer();
                     $config = [
-                        'grant_type'    => 'refresh_token',
+                        'grant_type' => 'refresh_token',
                         'refresh_token' => $data['refresh_token'],
-                        'client_id'     => $client->getOptions()->get('client_id'),
+                        'client_id' => $client->getOptions()->get('client_id'),
                         'client_secret' => $client->getOptions()->get('access_token'),
                     ];
-
+                    $output->writeln('Old access token: '.$data['refresh_token']);
                     $uri = 'https://api.mercadolibre.com/oauth/token?'.http_build_query($config);
+                    $output->writeln('Request: '.$uri);
                     $response = $client->post($uri, '');
                     $data = $response->getData();
                     $data->set('created_at', date('c'));

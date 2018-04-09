@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\Tests\MercadolivreSdk;
@@ -19,6 +22,9 @@ use Gpupo\MercadolivreSdk\Client\Ml;
 use Gpupo\MercadolivreSdk\Factory;
 use Gpupo\Tests\CommonSdk\FactoryTestAbstract;
 
+/**
+ * @coversNothing
+ */
 class FactoryTest extends FactoryTestAbstract
 {
     public $namespace = '\Gpupo\MercadolivreSdk\\';
@@ -29,10 +35,9 @@ class FactoryTest extends FactoryTestAbstract
     }
 
     /**
-     * @test Dá acesso a ``Factory``
-     * @test
+     * Dá acesso a ``Factory``.
      */
-    public function setClient()
+    public function testSetClient()
     {
         $factory = new Factory();
 
@@ -43,10 +48,9 @@ class FactoryTest extends FactoryTestAbstract
     }
 
     /**
-     * @test Dá acesso a Sdk Oficial
-     * @test
+     * Dá acesso a Sdk Oficial.
      */
-    public function accessMl()
+    public function testAccessMl()
     {
         $factory = new Factory();
 
@@ -57,6 +61,9 @@ class FactoryTest extends FactoryTestAbstract
 
     /**
      * @dataProvider dataProviderManager
+     *
+     * @param mixed $objectExpected
+     * @param mixed $target
      */
     public function testCentralizaAcessoAManagers($objectExpected, $target)
     {

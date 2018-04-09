@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of gpupo/netshoes-sdk
+ * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
  * For the information of copyright and license you should read the file
  * LICENSE which is distributed with this source code.
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Entity\Order\Decorator;
@@ -23,28 +26,6 @@ abstract class AbstractDecorator extends Collection
     use LoggerTrait;
 
     protected $name = '';
-
-    protected function factoryArray()
-    {
-        throw new \InvalidArgumentException('factoryArray() deve ser sobrecarregado!');
-    }
-
-    protected function fail($string = '')
-    {
-        $message = 'Order incomplete for status ['.$string.']';
-        $this->log('error', $message, [
-            'order' => $this->getOrder(),
-        ]);
-
-        throw new \InvalidArgumentException($message);
-    }
-
-    protected function invalid($string = '')
-    {
-        $message = 'Attribute invalid: '.$string.' ';
-
-        throw new \InvalidArgumentException($message);
-    }
 
     public function setOrder(Order $order)
     {
@@ -94,5 +75,27 @@ abstract class AbstractDecorator extends Collection
         }
 
         return $array;
+    }
+
+    protected function factoryArray()
+    {
+        throw new \InvalidArgumentException('factoryArray() deve ser sobrecarregado!');
+    }
+
+    protected function fail($string = '')
+    {
+        $message = 'Order incomplete for status ['.$string.']';
+        $this->log('error', $message, [
+            'order' => $this->getOrder(),
+        ]);
+
+        throw new \InvalidArgumentException($message);
+    }
+
+    protected function invalid($string = '')
+    {
+        $message = 'Attribute invalid: '.$string.' ';
+
+        throw new \InvalidArgumentException($message);
     }
 }

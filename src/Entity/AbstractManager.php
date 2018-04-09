@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\MercadolivreSdk\Entity;
@@ -20,35 +23,9 @@ use Gpupo\CommonSdk\Entity\ManagerInterface;
 
 abstract class AbstractManager extends ManagerAbstract implements ManagerInterface
 {
-    protected function fetchDefaultParameters()
-    {
-        return [
-            'access_token' => $this->getClient()->getOptions()->get('access_token'),
-        ];
-    }
-
     public function factoryMap($operation, array $parameters = null)
     {
         return parent::factoryMap($operation, array_merge($this->fetchDefaultParameters(), (array) $parameters));
-    }
-
-    /**
-     * @codeCoverageIgnore
-     *
-     * @return Gpupo\Common\Entity\CollectionAbstract|null|false
-     */
-    protected function fetchPrepare($data)
-    {
-        if (empty($data)) {
-            return false;
-        }
-
-        return $this->factoryEntityCollection($data);
-    }
-
-    protected function factoryEntityCollection($data)
-    {
-        return $this->factoryNeighborObject($this->getEntityName().'Collection', $data);
     }
 
     public function save(EntityInterface $entity, $route = 'save')
@@ -57,13 +34,15 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     }
 
     /**
-     * @return Gpupo\Common\Entity\CollectionAbstract|false
+     * @param mixed $itemId
+     *
+     * @return false|Gpupo\Common\Entity\CollectionAbstract
      */
     public function findById($itemId)
     {
         $data = parent::findById($itemId);
 
-        if (empty($data) || $data->get('status') === 404) {
+        if (empty($data) || 404 === $data->get('status')) {
             return false;
         }
 
@@ -80,8 +59,36 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
         $text = 'Chamada a Atualização de entity '.$this->entity;
 
         return $this->log('debug', $text, [
-            'entity'   => $entity,
+            'entity' => $entity,
             'existent' => $existent,
         ]);
+    }
+
+    protected function fetchDefaultParameters()
+    {
+        return [
+            'access_token' => $this->getClient()->getOptions()->get('access_token'),
+        ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     *
+     * @param mixed $data
+     *
+     * @return null|false|Gpupo\Common\Entity\CollectionAbstract
+     */
+    protected function fetchPrepare($data)
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        return $this->factoryEntityCollection($data);
+    }
+
+    protected function factoryEntityCollection($data)
+    {
+        return $this->factoryNeighborObject($this->getEntityName().'Collection', $data);
     }
 }

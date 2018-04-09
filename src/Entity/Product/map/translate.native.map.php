@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,41 +12,39 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 $skusList = [];
+if ($native) {
+    foreach ($native as $sku) {
 
-if ($native->getSkus()) {
-    foreach ($native->getSkus() as $sku) {
-        $sellPrice = null;
-        if ($sku->getPriceSchedule()) {
-            $sellPrice = $sku->getPriceSchedule()->getPriceTo();
-        }
+        $sellPrice = $sku->getPrice();
         $skusList[] = [
-            'skuId'       => $sku->getId(),
-            'gtin'        => $sku->getEanIsbn(),
-            'name'        => $sku->getName(),
+            'skuId' => $sku->getId(),
+            'gtin' => $sku->getEanIsbn(),
+            'name' => $sku->getName(),
             'description' => $sku->getDescription(),
-            'color'       => $sku->getColor(),
-            'size'        => $sku->getSize(),
-            'gender'      => $sku->getGender(),
-            'height'      => $sku->getHeight(),
-            'width'       => $sku->getWidth(),
-            'depth'       => $sku->getDepth(),
-            'weight'      => $sku->getWeight(),
-            'listPrice'   => $sku->getPrice()->getPrice(),
-            'sellPrice'   => $sellPrice,
-            'stock'       => $sku->getStock()->getAvailable(),
-            'status'      => $sku->getStatus()->getActive(),
+            'color' => $sku->getColor(),
+            'size' => $sku->getSize(),
+            'gender' => $sku->getGender(),
+            'height' => $sku->getHeight(),
+            'width' => $sku->getWidth(),
+            'depth' => $sku->getDepth(),
+            'weight' => $sku->getWeight(),
+            'listPrice' => $sellPrice,
+            'sellPrice' => $sellPrice,
+            'stock' => $sku->getStock()->getAvailable(),
+            'status' => $sku->getStatus()->getActive(),
         ];
     }
 }
 
 return [
-     'productId'   => $native->getId(),
+     'productId' => $native->getId(),
      'productType' => $native->getProductType(),
-     'department'  => $native->getDepartment(),
-     'category'    => '',
-     'brand'       => $native->getBrand(),
-     'skus'        => $skusList,
+     'department' => $native->getCategoryId(),
+     'category' => '',
+     'brand' => $native->getBrand(),
+     'skus' => $skusList,
  ];

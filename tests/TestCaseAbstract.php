@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of gpupo/mercadolivre-sdk
  * Created by Gilmar Pupo <contact@gpupo.com>
@@ -10,6 +12,7 @@
  * Para obtener la información de los derechos de autor y la licencia debe leer
  * el archivo LICENSE que se distribuye con el código fuente.
  * For more information, see <https://opensource.gpupo.com/>.
+ *
  */
 
 namespace Gpupo\Tests\MercadolivreSdk;
@@ -23,48 +26,12 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
 
     public static function getResourcesPath()
     {
-        return dirname(dirname(__FILE__)).'/Resources/';
+        return dirname(__DIR__).'/Resources/';
     }
 
     public function factoryClient()
     {
         return $this->getFactory()->getClient();
-    }
-
-    protected function getOptions()
-    {
-        return [
-            'app_id'       => $this->getConstant('APP_ID'),
-            'secret_key'   => $this->getConstant('SECRET_KEY'),
-            'access_token' => $this->getConstant('ACCESS_TOKEN'),
-            'verbose'      => $this->getConstant('VERBOSE'),
-            'dryrun'       => $this->getConstant('DRYRUN'),
-            'registerPath' => $this->getConstant('REGISTER_PATH'),
-        ];
-    }
-
-    protected function getFactory()
-    {
-        if (!$this->factory) {
-            $this->factory = Factory::getInstance()->setup($this->getOptions(), $this->getLogger());
-        }
-
-        return $this->factory;
-    }
-
-    /**
-     * Requer Implementação mas não será abstrato para não impedir testes que não o usam.
-     */
-    protected function getManager($filename = null)
-    {
-        unset($filename);
-
-        return;
-    }
-
-    protected function hasToken()
-    {
-        return $this->hasConstant('SECRET_KEY');
     }
 
     public function providerProducts()
@@ -103,5 +70,41 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
         }
 
         return $list;
+    }
+
+    protected function getOptions()
+    {
+        return [
+            'app_id' => $this->getConstant('APP_ID'),
+            'secret_key' => $this->getConstant('SECRET_KEY'),
+            'access_token' => $this->getConstant('ACCESS_TOKEN'),
+            'verbose' => $this->getConstant('VERBOSE'),
+            'dryrun' => $this->getConstant('DRYRUN'),
+            'registerPath' => $this->getConstant('REGISTER_PATH'),
+        ];
+    }
+
+    protected function getFactory()
+    {
+        if (!$this->factory) {
+            $this->factory = Factory::getInstance()->setup($this->getOptions(), $this->getLogger());
+        }
+
+        return $this->factory;
+    }
+
+    /**
+     * Requer Implementação mas não será abstrato para não impedir testes que não o usam.
+     *
+     * @param null|mixed $filename
+     */
+    protected function getManager($filename = null)
+    {
+        unset($filename);
+    }
+
+    protected function hasToken()
+    {
+        return $this->hasConstant('SECRET_KEY');
     }
 }
