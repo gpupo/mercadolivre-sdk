@@ -18,7 +18,6 @@ declare(strict_types=1);
 $skusList = [];
 if ($native) {
     foreach ($native as $sku) {
-
         $sellPrice = $sku->getPrice();
         $skusList[] = [
             'skuId' => $sku->getId(),

@@ -122,7 +122,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetId(Order $order, $expected = null)
     {
-        $this->assertSame($order['id'], intval($expected['id']));
+        $this->assertSame($order['id'], (int) ($expected['id']));
     }
 
     /**

@@ -1,16 +1,20 @@
 build:
-    environment:
-        php: 7.0.6
-    tests:
-        override:
-            -
-                command: 'ant test'
-                coverage:
-                    file: 'build/logs/clover.xml'
-                    format: 'clover'
+  nodes:
+    analysis:
+        environment:
+            php: 7.2.3
+        tests:
+            override:
+                - php-scrutinizer-run --enable-security-analysis
+                -
+                    command: 'ant test'
+                    coverage:
+                        file: 'build/logs/clover.xml'
+                        format: 'clover'
 filter:
-    paths: [src/*]
-    excluded_paths: [README.md, tests/*, vendor/*, build/*, Resources/*]
+  paths: [src/*]
+  dependency_paths: [vendor/]
+  excluded_paths: [README.md, tests/*, build/*, Resources/*]
 checks:
   php:
     code_rating: true
