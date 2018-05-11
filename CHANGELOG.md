@@ -2,6 +2,9 @@
 VERSION 2  REQUIRE PHP 7.2 OR ABOVE
 ===================================
 
+   Version 2.1 - Update common schema
+      11/05/2018 14:25  2.1.0  initial release
+
    Version 2.0 - Require PHP 7.2 or above
       11/05/2018 13:49  2.0.0  initial release
          9842641 Update build files
