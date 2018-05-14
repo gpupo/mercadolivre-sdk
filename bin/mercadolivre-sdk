@@ -14,13 +14,17 @@ namespace Gpupo\MercadolivreSdk\Console\Command;
 require 'vendor/autoload.php';
 
 use Gpupo\MercadolivreSdk\Console\Application;
-use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 $app = new Application("mercadolivre-sdk");
 $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
+
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+$factory = $app->factorySdk($app->getConfig('mercadolivre'));
 
 foreach ([
     'Auth',
@@ -29,7 +33,7 @@ foreach ([
     // 'ProductList',
     ] as $className) {
     $n =  __NAMESPACE__.'\\'.$className . 'Command';
-    $app->add(new $n());
+    $app->add(new $n($factory));
 }
 
 $app->run();
