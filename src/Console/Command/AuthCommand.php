@@ -19,40 +19,51 @@ namespace Gpupo\MercadolivreSdk\Console\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @codeCoverageIgnore
  */
 final class AuthCommand extends AbstractCommand
 {
-    public function main($app)
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
     {
-        $this->getApp()->appendCommand('auth:refresh', 'Refresh token change')
-            ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-                $list = $app->processInputParameters([], $input, $output);
-                $client = $app->factorySdk($list)->getClient();
+        $this
+            ->setName(self::prefix.'auth:refresh')
+            ->setDescription('Refresh Mercado Livre token');
+    }
 
-                try {
-                    $data = $app->getTokenContainer();
-                    $config = [
-                        'grant_type' => 'refresh_token',
-                        'refresh_token' => $data['refresh_token'],
-                        'client_id' => $client->getOptions()->get('client_id'),
-                        'client_secret' => $client->getOptions()->get('access_token'),
-                    ];
-                    $output->writeln('Old access token: '.$data['refresh_token']);
-                    $uri = 'https://api.mercadolibre.com/oauth/token?'.http_build_query($config);
-                    $output->writeln('Request: '.$uri);
-                    $response = $client->post($uri, '');
-                    $data = $response->getData();
-                    $data->set('created_at', date('c'));
-                    $app->jsonSaveToFile($data->toArray(), $app->getTokenFilePath(), $output);
-                    $output->writeln($data['created_at']);
-                    $output->writeln('New access token: '.$data['access_token']);
-                    $output->writeln('New refresh token: '.$data['refresh_token']);
-                } catch (\Exception $e) {
-                    $app->showException($e, $output);
-                }
-            });
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $file = 'var/mercadolivre.yaml';
+        $data = Yaml::parseFile($file);
+        $output->writeln(sprintf('Old access token: <bg=black>%s</>', $data['refresh_token']));
+        $client = $this->getFactory()->getClient();
+
+        $config = [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $data['refresh_token'],
+            'client_id' => $client->getOptions()->get('client_id'),
+            'client_secret' => $client->getOptions()->get('access_token'),
+        ];
+
+        $uri = $client->getResourceUri('/oauth/token?'.http_build_query($config));
+        $output->writeln('Request: '.$uri);
+
+        $response = $client->post($uri, '');
+        $data = $response->getData();
+        $data->set('created_at', date('c'));
+        $content = Yaml::dump($data);
+        file_put_contents($file, $content);
+
+        $output->writeln($data['created_at']);
+        $output->writeln('New access token: '.$data['access_token']);
+        $output->writeln('New refresh token: '.$data['refresh_token']);
     }
 }

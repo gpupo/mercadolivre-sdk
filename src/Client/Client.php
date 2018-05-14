@@ -19,6 +19,8 @@ namespace Gpupo\MercadolivreSdk\Client;
 
 use Gpupo\CommonSdk\Client\ClientAbstract;
 use Gpupo\CommonSdk\Client\ClientInterface;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
 
 final class Client extends ClientAbstract implements ClientInterface
 {

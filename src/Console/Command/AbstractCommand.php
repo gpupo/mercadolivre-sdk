@@ -17,30 +17,27 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command;
 
-use Gpupo\MercadolivreSdk\Console\Application;
+use Gpupo\MercadolivreSdk\Factory;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * @codeCoverageIgnore
  */
-abstract class AbstractCommand
+abstract class AbstractCommand extends Command
 {
-    protected $list = ['main'];
+    const prefix = 'gpupo:mercadolivre:';
 
-    protected $app;
+    protected $factory;
 
-    public function append(Application $app)
+    public function __construct(Factory $factory)
     {
-        $this->app = $app;
+        $this->factory = $factory;
 
-        foreach ($this->list as $i) {
-            $this->{$i}($this->getApp());
-        }
-
-        return $this->getApp();
+        parent::__construct();
     }
 
-    protected function getApp()
+    public function getFactory(): Factory
     {
-        return $this->app;
+        return $this->factory;
     }
 }

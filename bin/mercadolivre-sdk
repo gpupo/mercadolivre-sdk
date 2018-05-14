@@ -24,13 +24,12 @@ $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
 
 foreach ([
     'Auth',
-    'Checklist',
-    'Token',
-    'ProductList',
+    // 'Checklist',
+    // 'Token',
+    // 'ProductList',
     ] as $className) {
     $n =  __NAMESPACE__.'\\'.$className . 'Command';
-    $o = new $n;
-    $app = $o->append($app);
+    $app->add(new $n());
 }
 
 $app->run();
