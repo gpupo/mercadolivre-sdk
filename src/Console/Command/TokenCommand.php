@@ -26,26 +26,41 @@ use Symfony\Component\Console\Question\Question;
  */
 final class TokenCommand extends AbstractCommand
 {
-    public function main($app)
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
     {
-        $this->getApp()->appendCommand('auth:token', 'Get the token')
-            ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-                $list = $app->processInputParameters([], $input, $output);
-                $client = $app->factorySdk($list)->getClient();
-                $meli = $client->accessMl();
-                $url = $list['app_url'];
+        $this
+            ->setName(self::prefix.'auth:token')
+            ->setDescription('Get Mercado Livre token');
+    }
 
-                try {
-                    $redirectUrl = $meli->getAuthUrl($url, $meli::$AUTH_URL['MLB']);
-                    $output->writeln('Open this url in your browser:'.$redirectUrl);
-                    $question = new Question('code: ');
-                    $code = $this->getApp()->getHelperSet()->get('question')->ask($input, $output, $question);
-                    $output->writeln($code);
-                    $user = $meli->authorize($code, $url);
-                    dump($user);
-                } catch (\Exception $e) {
-                    $app->showException($e, $output);
-                }
-            });
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $url = $this->getApplication()->getConfig('mercadolivre')['app_url'];
+        $client = $this->getFactory()->getClient();
+        $meli = $client->accessMl();
+
+        try {
+            $redirectUrl = $meli->getAuthUrl($url, $meli::$AUTH_URL['MLB']);
+            $output->writeln(sprintf('Open this url in your browser: <bg=black>%s</>', $redirectUrl));
+            $question = new Question('code: ');
+            $code = $this->getApplication()->getHelperSet()->get('question')->ask($input, $output, $question);
+            $response = $meli->authorize($code, $url);
+            $data = (array) $response['body'];
+
+            if (!array_key_exists('access_token', $data)) {
+                throw new \Exception($data['message']);
+            }
+
+            $this->writeProjectData($data);
+            $output->writeln('New access token: '.$data['access_token']);
+        } catch (\Exception $exception){
+            $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
+        }
     }
 }

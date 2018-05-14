@@ -19,6 +19,7 @@ namespace Gpupo\MercadolivreSdk\Console\Command;
 
 use Gpupo\MercadolivreSdk\Factory;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @codeCoverageIgnore
@@ -26,6 +27,8 @@ use Symfony\Component\Console\Command\Command;
 abstract class AbstractCommand extends Command
 {
     const prefix = 'gpupo:mercadolivre:';
+
+    public $file = 'var/mercadolivre.yaml';
 
     protected $factory;
 
@@ -40,4 +43,20 @@ abstract class AbstractCommand extends Command
     {
         return $this->factory;
     }
+
+    protected function getProjectData(): array
+    {
+        $data = Yaml::parseFile($this->file);
+
+        return $data;
+    }
+
+
+    protected function writeProjectData(array $data)
+    {
+        $data['created_at'] = date('c');
+        $content = Yaml::dump($data);
+        return file_put_contents($this->file, $content);
+    }
+
 }

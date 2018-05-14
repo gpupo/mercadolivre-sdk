@@ -28,8 +28,8 @@ $factory = $app->factorySdk($app->getConfig('mercadolivre'));
 
 foreach ([
     'Auth',
-    // 'Checklist',
-    // 'Token',
+    'Checklist',
+    'Token',
     // 'ProductList',
     ] as $className) {
     $n =  __NAMESPACE__.'\\'.$className . 'Command';

@@ -41,8 +41,7 @@ final class AuthCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $file = 'var/mercadolivre.yaml';
-        $data = Yaml::parseFile($file);
+        $data = $this->getProjectData();
         $output->writeln(sprintf('Old access token: <bg=black>%s</>', $data['refresh_token']));
         $client = $this->getFactory()->getClient();
 
@@ -57,13 +56,11 @@ final class AuthCommand extends AbstractCommand
         $output->writeln('Request: '.$uri);
 
         $response = $client->post($uri, '');
-        $data = $response->getData();
-        $data->set('created_at', date('c'));
-        $content = Yaml::dump($data);
-        file_put_contents($file, $content);
-
+        $this->writeProjectData((array) $data);
         $output->writeln($data['created_at']);
         $output->writeln('New access token: '.$data['access_token']);
-        $output->writeln('New refresh token: '.$data['refresh_token']);
+        if (array_key_exists('refresh_token', $data)) {
+            $output->writeln('New refresh token: '.$data['refresh_token']);
+        }
     }
 }

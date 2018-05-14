@@ -25,11 +25,21 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class ChecklistCommand extends AbstractCommand
 {
-    public function main($app)
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
     {
-        $this->getApp()->appendCommand('auth:checklist', 'Check files')
-            ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-                $output->writeln('token:'.$app->getTokenContainer()['access_token']);
-            });
+        $this
+            ->setName(self::prefix.'auth:checklist')
+            ->setDescription('Check Mercado Livre files');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('token:'.$this->getApplication()->getTokenContainer()['access_token']);
     }
 }
