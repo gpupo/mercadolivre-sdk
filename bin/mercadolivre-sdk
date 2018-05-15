@@ -26,14 +26,13 @@ $input = new ArgvInput();
 $output = new ConsoleOutput();
 $factory = $app->factorySdk($app->getConfig('mercadolivre'));
 
-foreach ([
-    'Auth',
-    'Checklist',
-    'Token',
-    'ProductList',
-    ] as $className) {
-    $n =  __NAMESPACE__.'\\'.$className . 'Command';
-    $app->add(new $n($factory));
-}
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\RefreshCommand($factory));
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\ChecklistCommand($factory));
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\TokenCommand($factory));
+
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\User\MeCommand($factory));
+
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\Catalog\ProductListCommand($factory));
+
 
 $app->doRun($input, $output);

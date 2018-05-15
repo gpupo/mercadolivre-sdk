@@ -15,15 +15,18 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command;
+namespace Gpupo\MercadolivreSdk\Console\Command\User;
 
+use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+//use Gpupo\MercadolivreSdk\Entity\GenericManager;
+
 
 /**
  * @codeCoverageIgnore
  */
-final class ProductListCommand extends AbstractCommand
+final class MeCommand extends AbstractCommand
 {
     /**
      * {@inheritdoc}
@@ -31,8 +34,8 @@ final class ProductListCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'catalog:product:list')
-            ->setDescription('Get the product list on Mercado Livre');
+            ->setName(self::prefix.'user:me')
+            ->setDescription('Mercado Livre user info');
     }
 
     /**
@@ -40,13 +43,9 @@ final class ProductListCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pm = $this->getFactory()->factoryManager('product');
+        $manager = $this->getFactory()->factoryManager('generic');
 
-        try {
-            $request = $pm->fetch();
-            dump($request);
-        } catch (\Exception $exception) {
-            $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
-        }
+        dump($manager);
+        $output->writeln('token:');
     }
 }

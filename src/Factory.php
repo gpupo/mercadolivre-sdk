@@ -39,12 +39,15 @@ class Factory extends FactoryAbstract
     {
         return [
             'product' => [
-                'class' => $namespace.'Product\Product',
-                'manager' => $namespace.'Product\Manager',
+                'class' => sprintf('%sProduct\Product', $namespace),
+                'manager' => sprintf('%sProduct\Manager', $namespace),
             ],
             'order' => [
-                'class' => $namespace.'Order\Order',
-                'manager' => $namespace.'Order\Manager',
+                'class' => sprintf('%sOrder\Order', $namespace),
+                'manager' => sprintf('%sOrder\Manager', $namespace),
+            ],
+            'generic' => [
+                'manager' => sprintf('%sGenericManager', $namespace),
             ],
         ];
     }

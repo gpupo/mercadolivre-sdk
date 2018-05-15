@@ -63,7 +63,11 @@ final class Application extends AbstractApplication
         $output->writeln('<bg=green;options=bold>gpupo/mercadolivre-sdk</>');
         $output->writeln('<options=bold>Atenção! Esta aplicação é apenas uma '.'ferramenta de apoio ao desenvolvedor e não deve ser usada no ambiente de produção!'.'</>');
 
-        return parent::doRun($input, $output);
+        try {
+            return parent::doRun($input, $output);
+        } catch (\Exception $exception) {
+            $output->writeln($exception->getmessage());
+        }
     }
 
     public function factorySdk(array $options, $loggerChannel = 'bin', $verbose = false)

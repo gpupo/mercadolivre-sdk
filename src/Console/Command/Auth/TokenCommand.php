@@ -15,8 +15,9 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command;
+namespace Gpupo\MercadolivreSdk\Console\Command\Auth;
 
+use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -52,6 +53,8 @@ final class TokenCommand extends AbstractCommand
             $code = $this->getApplication()->getHelperSet()->get('question')->ask($input, $output, $question);
             $response = $meli->authorize($code, $url);
             $data = (array) $response['body'];
+
+            dump($data);
 
             if (!array_key_exists('access_token', $data)) {
                 throw new \Exception($data['message']);

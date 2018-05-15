@@ -15,8 +15,9 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command;
+namespace Gpupo\MercadolivreSdk\Console\Command\Auth;
 
+use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
