@@ -25,19 +25,28 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class ProductListCommand extends AbstractCommand
 {
-    public function main($app)
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
     {
-        $this->getApp()->appendCommand('catalog:product:list', 'Get the product list')
-            ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-                $list = $app->processInputParameters([], $input, $output);
-                $pm = $app->factorySdk($list)->factoryManager('product');
+        $this
+            ->setName(self::prefix.'catalog:product:list')
+            ->setDescription('Get the product list on Mercado Livre');
+    }
 
-                try {
-                    $request = $pm->fetch();
-                    dump($request);
-                } catch (\Exception $e) {
-                    $app->showException($e, $output);
-                }
-            });
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $pm = $this->getFactory()->factoryManager('product');
+
+        try {
+            $request = $pm->fetch();
+            dump($request);
+        } catch (\Exception $exception){
+            $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
+        }
     }
 }

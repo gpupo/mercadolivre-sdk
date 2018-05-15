@@ -30,7 +30,7 @@ foreach ([
     'Auth',
     'Checklist',
     'Token',
-    // 'ProductList',
+    'ProductList',
     ] as $className) {
     $n =  __NAMESPACE__.'\\'.$className . 'Command';
     $app->add(new $n($factory));
