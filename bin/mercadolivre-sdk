@@ -18,13 +18,19 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 $app = new Application("mercadolivre-sdk");
 $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
 
 $input = new ArgvInput();
 $output = new ConsoleOutput();
-$factory = $app->factorySdk($app->getConfig('mercadolivre'));
+
+$logger = new Logger('console');
+$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+
+$factory = $app->factorySdk($app->getConfig('mercadolivre'), $logger);
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\RefreshCommand($factory));
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\ChecklistCommand($factory));

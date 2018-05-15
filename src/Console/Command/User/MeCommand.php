@@ -22,6 +22,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 //use Gpupo\MercadolivreSdk\Entity\GenericManager;
 
+use Gpupo\CommonSdk\Map;
 
 /**
  * @codeCoverageIgnore
@@ -43,9 +44,29 @@ final class MeCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $manager = $this->getFactory()->factoryManager('generic');
+        $projectData = $this->getProjectData();
 
-        dump($manager);
-        $output->writeln('token:');
+        if (!array_key_exists('user_id', $projectData)) {
+            throw new \Exception('User Id required!');
+        }
+
+        $this->getFactory()->getLogger()->addInfo('Project Data', $projectData);
+        $manager = $this->getFactory()->factoryManager('generic');
+        $data = $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData);
+
+        $this->writeInfo($output, $data);
+    }
+
+    protected function writeInfo(OutputInterface $output, $info, $tabs = '')
+    {
+        $tabs = $tabs . "\t";
+        foreach ($info as $key => $value) {
+            if (is_array($value)) {
+                $output->writeln(sprintf($tabs."<bg=green;fg=black> %s </>", $key));
+                $this->writeInfo($output, $value, $tabs);
+            } else {
+                $output->writeln(sprintf($tabs."%s: <bg=black> %s </>", $key, $value));
+            }
+        }
     }
 }

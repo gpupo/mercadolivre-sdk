@@ -17,7 +17,24 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity;
 
+use Gpupo\CommonSdk\Map;
+
 final class GenericManager extends AbstractManager
 {
+    public function factorySimpleMap(array $route, array $parameters = null)
+    {
+        $pars = array_merge($this->fetchDefaultParameters(), (array) $parameters);
+        $map = new Map($route, $pars);
 
+        return $map;
+
+    }
+
+    public function getFromRoute(array $route, array $parameters = null)
+    {
+        $map = $this->factorySimpleMap($route, $parameters);
+        $perform = $this->perform($map);
+
+        return $perform->getData();
+    }
 }
