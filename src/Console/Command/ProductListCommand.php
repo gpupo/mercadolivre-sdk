@@ -45,7 +45,7 @@ final class ProductListCommand extends AbstractCommand
         try {
             $request = $pm->fetch();
             dump($request);
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
     }

@@ -36,4 +36,4 @@ foreach ([
     $app->add(new $n($factory));
 }
 
-$app->run();
+$app->doRun($input, $output);

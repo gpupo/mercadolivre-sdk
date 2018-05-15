@@ -70,16 +70,4 @@ final class Application extends AbstractApplication
     {
         return  Factory::getInstance()->setup($options, $this->factoryLogger($loggerChannel, $verbose));
     }
-
-    public function getTokenFilePath()
-    {
-        return 'var/mercadolivre-token.json';
-    }
-
-    public function getTokenContainer()
-    {
-        $data = $this->jsonLoadFromFile($this->getTokenFilePath());
-
-        return $data;
-    }
 }

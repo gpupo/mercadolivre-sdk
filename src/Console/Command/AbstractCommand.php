@@ -51,12 +51,11 @@ abstract class AbstractCommand extends Command
         return $data;
     }
 
-
     protected function writeProjectData(array $data)
     {
         $data['created_at'] = date('c');
         $content = Yaml::dump($data);
+
         return file_put_contents($this->file, $content);
     }
-
 }

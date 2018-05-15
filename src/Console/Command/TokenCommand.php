@@ -59,7 +59,7 @@ final class TokenCommand extends AbstractCommand
 
             $this->writeProjectData($data);
             $output->writeln('New access token: '.$data['access_token']);
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
     }
