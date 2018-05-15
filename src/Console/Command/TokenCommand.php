@@ -41,7 +41,7 @@ final class TokenCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $url = $this->getApplication()->getConfig('mercadolivre')['app_url'];
+        $url = $this->getFactory()->getOptions()->get('app_url');
         $client = $this->getFactory()->getClient();
         $meli = $client->accessMl();
 
