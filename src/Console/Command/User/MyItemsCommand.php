@@ -17,11 +17,10 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command\User;
 
+use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Gpupo\Common\Traits\TableTrait;
-use Gpupo\CommonSdk\Map;
 
 /**
  * @codeCoverageIgnore

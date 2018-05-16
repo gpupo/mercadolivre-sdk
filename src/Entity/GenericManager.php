@@ -27,7 +27,6 @@ final class GenericManager extends AbstractManager
         $map = new Map($route, $pars);
 
         return $map;
-
     }
 
     public function getFromRoute(array $route, array $parameters = null)

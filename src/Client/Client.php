@@ -39,7 +39,7 @@ final class Client extends ClientAbstract implements ClientInterface
             'sslVersion' => 'SecureTransport',
             'cacheTTL' => 3600,
             'sslVerifyPeer' => true,
-            'user_id'   => 12345678,
+            'user_id' => 12345678,
         ];
     }
 

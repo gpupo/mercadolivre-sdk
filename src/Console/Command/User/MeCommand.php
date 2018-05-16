@@ -22,8 +22,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 //use Gpupo\MercadolivreSdk\Entity\GenericManager;
 
-use Gpupo\CommonSdk\Map;
-
 /**
  * @codeCoverageIgnore
  */
