@@ -48,10 +48,15 @@ final class MeCommand extends AbstractCommand
             throw new \Exception('User Id required!');
         }
 
+
         $this->getFactory()->getLogger()->addInfo('Project Data', $projectData);
         $manager = $this->getFactory()->factoryManager('generic');
-        $data = $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData);
 
-        $this->writeInfo($output, $data);
+        // $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/me?access_token={access_token}'], $projectData));
+        $output->writeln('---- <bg=blue> APP INFO </> -------');
+        $this->writeInfo($output, $manager->getFromRoute(['GET', '/applications/{client_id}?access_token={access_token}'], $projectData));
+return;
+        $output->writeln('-----------');
+        $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData));
     }
 }
