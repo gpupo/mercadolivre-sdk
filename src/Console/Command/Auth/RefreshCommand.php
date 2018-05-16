@@ -52,27 +52,31 @@ final class RefreshCommand extends AbstractCommand
             throw new \Exception('Refresh Token required!');
         }
 
-        $output->writeln(sprintf('Old access token: <bg=black>%s</>', $data['refresh_token']));
-        $client = $this->getFactory()->getClient();
-
         $config = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $data['refresh_token'],
-            'client_id' => $client->getOptions()->get('client_id'),
-            'client_secret' => $client->getOptions()->get('access_token'),
+            'grant_type' => 'refresh_token', // It indicates that the intended operation is to refresh a token.
+            'refresh_token' => $data['refresh_token'], // The refresh token from the approval step.
+            'client_id' => $this->getFactory()->getOptions()->get('client_id'), //The client ID of your application.
+            'client_secret' => $this->getFactory()->getOptions()->get('secret_key'), //The Secret Key generated for your app when created.
         ];
 
-        $uri = $client->getResourceUri('/oauth/token?'.http_build_query($config));
-        $output->writeln('Request: '.$uri);
+        foreach ($config as $key => $value) {
+            if (empty($value)) {
+                throw new \Exception(sprintf('<bg=red>%s</> is required!', $key));
+            }
+        }
+
+        $this->writeInfo($output, $config);
+        $uri = $this->getFactory()->getClient()->getResourceUri('/oauth/token?'.http_build_query($config));
+        $output->writeln(sprintf('Request URL to perform is <bg=black>%s</>', $uri));
 
         try {
-            $response = $client->post($uri, '');
-            $this->writeProjectData((array) $data);
-            $output->writeln($data['created_at']);
-            $output->writeln('New access token: '.$data['access_token']);
-            if (array_key_exists('refresh_token', $data)) {
-                $output->writeln('New refresh token: '.$data['refresh_token']);
-            }
+            $response = $this->getFactory()->getClient()->post($uri, '');
+
+            dump($response);
+
+            $data = (array) $response['body'];
+
+            return $this->saveCredentials($data, $output);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

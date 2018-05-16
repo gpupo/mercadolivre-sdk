@@ -68,33 +68,4 @@ final class TokenCommand extends AbstractCommand
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
     }
-
-    /**
-     * Content of $data:
-     * access_token
-     * token_type
-     * expires_in
-     * scope
-     * user_id.
-     */
-    protected function saveCredentials(array $data, OutputInterface $output)
-    {
-        $output->writeln('An access key to private resources valid for 6 hours');
-
-        $this->writeInfo($output, $data);
-
-        if (!array_key_exists('access_token', $data)) {
-            throw new \Exception($data['message']);
-        }
-
-        if (!array_key_exists('refresh_token', $data)) {
-            $output->writeln([
-                'Warning: <bg=red>Offline App</>',
-                '- If your App has the option offline_access selected, you will receive a refresh_token along with the access_token',
-                '- refresh_token is <bg=red>not present</>',
-            ]);
-        }
-
-        $this->writeProjectData($data);
-    }
 }
