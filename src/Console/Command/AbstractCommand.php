@@ -29,7 +29,10 @@ abstract class AbstractCommand extends Command
 {
     const prefix = 'markethub:mercadolivre:';
 
-    public $file = 'var/mercadolivre.yaml';
+    public function getProjectDataFilename()
+    {
+        return sprintf('var/mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
+    }
 
     protected $factory;
 
@@ -47,7 +50,7 @@ abstract class AbstractCommand extends Command
 
     protected function getProjectData(): array
     {
-        $data = Yaml::parseFile($this->file);
+        $data = Yaml::parseFile($this->getProjectDataFilename());
 
         return $data;
     }
@@ -57,7 +60,7 @@ abstract class AbstractCommand extends Command
         $data['created_at'] = date('c');
         $content = Yaml::dump($data);
 
-        return file_put_contents($this->file, $content);
+        return file_put_contents($this->getProjectDataFilename(), $content);
     }
 
     protected function writeInfo(OutputInterface $output, $info, $tabs = '')
