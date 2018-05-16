@@ -47,10 +47,9 @@ final class TokenCommand extends AbstractCommand
     {
         $url = $this->getFactory()->getOptions()->get('app_url');
         $client = $this->getFactory()->getClient();
-        $meli = $client->accessMl();
 
         try {
-            $redirectUrl = $meli->getAuthUrl($url, $meli::$AUTH_URL['MLB']);
+            $redirectUrl = $client->accessMl()->getAuthRedirectUrl($url);
             $question = new ConfirmationQuestion(sprintf('Open url <bg=black>%s</> in your browser? (y/n)', $redirectUrl), false);
 
             if ($this->getApplication()->getHelperSet()->get('question')->ask($input, $output, $question)) {
@@ -60,7 +59,7 @@ final class TokenCommand extends AbstractCommand
             $output->writeln('The authorization code is used to exchange it for the access_token.');
             $question = new Question('code (starts with <bg=blue>TG-</>): ');
             $code = $this->getApplication()->getHelperSet()->get('question')->ask($input, $output, $question);
-            $response = $meli->authorize($code, $url);
+            $response = $client->accessMl()->authorize($code, $url);
             $data = (array) $response['body'];
 
             return $this->saveCredentials($data, $output);

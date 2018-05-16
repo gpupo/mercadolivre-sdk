@@ -20,6 +20,7 @@ namespace Gpupo\MercadolivreSdk\Console\Command\User;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
 //use Gpupo\MercadolivreSdk\Entity\GenericManager;
 
 /**
@@ -48,15 +49,13 @@ final class MeCommand extends AbstractCommand
             throw new \Exception('User Id required!');
         }
 
-
         $this->getFactory()->getLogger()->addInfo('Project Data', $projectData);
         $manager = $this->getFactory()->factoryManager('generic');
 
-        // $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/me?access_token={access_token}'], $projectData));
         $output->writeln('---- <bg=blue> APP INFO </> -------');
         $this->writeInfo($output, $manager->getFromRoute(['GET', '/applications/{client_id}?access_token={access_token}'], $projectData));
-return;
-        $output->writeln('-----------');
+
+        $output->writeln('---- <bg=blue> User INFO </> -------');
         $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData));
     }
 }

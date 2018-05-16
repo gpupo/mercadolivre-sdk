@@ -29,11 +29,6 @@ abstract class AbstractCommand extends Command
 {
     const prefix = 'markethub:mercadolivre:';
 
-    public function getProjectDataFilename()
-    {
-        return sprintf('var/mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
-    }
-
     protected $factory;
 
     public function __construct(Factory $factory)
@@ -41,6 +36,11 @@ abstract class AbstractCommand extends Command
         $this->factory = $factory;
 
         parent::__construct();
+    }
+
+    public function getProjectDataFilename()
+    {
+        return sprintf('var/mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
     }
 
     public function getFactory(): Factory

@@ -44,8 +44,8 @@ final class ProductListCommand extends AbstractCommand
         $pm = $this->getFactory()->factoryManager('product');
 
         try {
-            $request = $pm->fetch();
-            dump($request);
+            $reponse = $pm->fetch();
+            dump($reponse);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

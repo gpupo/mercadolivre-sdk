@@ -54,9 +54,9 @@ final class RefreshCommand extends AbstractCommand
 
         $config = [
             'grant_type' => 'refresh_token', // It indicates that the intended operation is to refresh a token.
-            'refresh_token' => $data['refresh_token'], // The refresh token from the approval step.
             'client_id' => $this->getFactory()->getOptions()->get('client_id'), //The client ID of your application.
             'client_secret' => $this->getFactory()->getOptions()->get('secret_key'), //The Secret Key generated for your app when created.
+            'refresh_token' => $data['refresh_token'], // The refresh token from the approval step.
         ];
 
         foreach ($config as $key => $value) {
@@ -71,9 +71,6 @@ final class RefreshCommand extends AbstractCommand
 
         try {
             $response = $this->getFactory()->getClient()->post($uri, '');
-
-            dump($response);
-
             $data = (array) $response['body'];
 
             return $this->saveCredentials($data, $output);

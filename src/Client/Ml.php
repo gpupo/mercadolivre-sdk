@@ -21,4 +21,13 @@ use Meli;
 
 class Ml extends Meli
 {
+    public function setRefreshToken($refresh_token)
+    {
+        $this->refresh_token = $refresh_token;
+    }
+
+    public function getAuthRedirectUrl($url)
+    {
+        return $this->getAuthUrl($url, self::$AUTH_URL['MLB']);
+    }
 }
