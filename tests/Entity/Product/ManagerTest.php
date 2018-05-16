@@ -20,7 +20,7 @@ namespace Entity\Product;
 use Gpupo\CommonSdk\Response as CommonResponse;
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
-use Gpupo\MercadolivreSdk\Entity\Product\Response;
+use Gpupo\MercadolivreSdk\Entity\Product\ProductCollection;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
@@ -69,7 +69,7 @@ class ManagerTest extends TestCaseAbstract
     {
         $manager = $this->getManager();
         $product = $manager->findById('MLB803848501');
-        $this->assertInstanceOf(Response::class, $product);
+        $this->assertInstanceOf(Product::class, $product);
         $this->assertSame('MLB803848501', $product->getId());
     }
 

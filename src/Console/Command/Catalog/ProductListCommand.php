@@ -20,12 +20,15 @@ namespace Gpupo\MercadolivreSdk\Console\Command\Catalog;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Gpupo\Common\Traits\TableTrait;
 
 /**
  * @codeCoverageIgnore
  */
 final class ProductListCommand extends AbstractCommand
 {
+    use TableTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -44,8 +47,8 @@ final class ProductListCommand extends AbstractCommand
         $pm = $this->getFactory()->factoryManager('product');
 
         try {
-            $reponse = $pm->fetch();
-            dump($reponse);
+            $response = $pm->fetch();
+            $this->displayTableResults($output, $response);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

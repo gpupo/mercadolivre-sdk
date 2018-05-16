@@ -27,8 +27,6 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     {
         $all = array_merge($this->fetchDefaultParameters(), (array) $parameters);
 
-        dump($all);
-
         return parent::factoryMap($operation, $all);
     }
 
@@ -86,6 +84,8 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
             return false;
         }
 
+        dump($data);
+        
         return $this->factoryEntityCollection($data);
     }
 

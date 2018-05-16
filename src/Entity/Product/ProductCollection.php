@@ -17,29 +17,21 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity\Product;
 
-use Gpupo\CommonSdk\Entity\EntityAbstract;
-use Gpupo\CommonSdk\Entity\EntityInterface;
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\MercadolivreSdk\Entity\AbstractMetadata;
 
-final class Response extends EntityAbstract implements EntityInterface
+final class ProductCollection extends AbstractMetadata implements CollectionInterface
 {
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    protected function getKey()
     {
-        return [
-            'id' => 'string',
-            'title' => 'string',
-            'category_id' => 'string',
-            'price' => 'number',
-            'currency_id' => 'string',
-            'buying_mode' => 'string',
-            'listing_type_id' => 'string',
-            'condition' => 'string',
-            'description' => 'string',
-            'variations' => 'collection',
-            'pictures' => 'collection',
-            'status' => 'string',
-        ];
+        return 'results';
+    }
+
+    protected function factoryEntity($id)
+    {
+        return new Product(['id' => $id]);
     }
 }

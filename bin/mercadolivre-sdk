@@ -20,6 +20,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Symfony\Component\Yaml\Yaml;
 
 $app = new Application("mercadolivre-sdk");
 $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
@@ -28,16 +29,20 @@ $input = new ArgvInput();
 $output = new ConsoleOutput();
 
 $logger = new Logger('console');
-$logger->pushHandler(new StreamHandler('php://output', Logger::DEBUG));
+$config = $app->getConfig('mercadolivre');
+$localFilename = sprintf('var/mercadolivre-%d.yaml', $config['client_id']);
+if (file_exists($localFilename)) {
+    $data = Yaml::parseFile($localFilename);
+    $config = array_merge($config, $data);
+}
 
-$factory = $app->factorySdk($app->getConfig('mercadolivre'), $logger);
+$factory = $app->factorySdk($config, $logger);
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\RefreshCommand($factory));
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\ChecklistCommand($factory));
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\TokenCommand($factory));
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\User\MeCommand($factory));
-$app->add(new \Gpupo\MercadolivreSdk\Console\Command\User\MyItemsCommand($factory));
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Catalog\ProductListCommand($factory));
 
