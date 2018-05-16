@@ -20,23 +20,24 @@ namespace Gpupo\MercadolivreSdk\Console\Command\User;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-//use Gpupo\MercadolivreSdk\Entity\GenericManager;
-
+use Gpupo\Common\Traits\TableTrait;
 use Gpupo\CommonSdk\Map;
 
 /**
  * @codeCoverageIgnore
  */
-final class MeCommand extends AbstractCommand
+final class MyItemsCommand extends AbstractCommand
 {
+    use TableTrait;
+
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'user:me')
-            ->setDescription('Mercado Livre user info');
+            ->setName(self::prefix.'user:items')
+            ->setDescription('Mercado Livre user items');
     }
 
     /**
@@ -52,8 +53,10 @@ final class MeCommand extends AbstractCommand
 
         $this->getFactory()->getLogger()->addInfo('Project Data', $projectData);
         $manager = $this->getFactory()->factoryManager('generic');
-        $data = $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData);
+        $data = $manager->getFromRoute(['GET', '/users/{user_id}/items/search?access_token={access_token}&limit=10'], $projectData);
 
-        $this->writeInfo($output, $data);
+        $this->displayTableResults($output, $data);
+
+        //$this->writeInfo($output, $data);
     }
 }

@@ -20,6 +20,7 @@ namespace Gpupo\MercadolivreSdk\Console\Command;
 use Gpupo\MercadolivreSdk\Factory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @codeCoverageIgnore
@@ -57,5 +58,18 @@ abstract class AbstractCommand extends Command
         $content = Yaml::dump($data);
 
         return file_put_contents($this->file, $content);
+    }
+
+    protected function writeInfo(OutputInterface $output, $info, $tabs = '')
+    {
+        $tabs = $tabs . "\t";
+        foreach ($info as $key => $value) {
+            if (is_array($value)) {
+                $output->writeln(sprintf($tabs."<bg=green;fg=black> %s </>", $key));
+                $this->writeInfo($output, $value, $tabs);
+            } else {
+                $output->writeln(sprintf($tabs."%s: <bg=black> %s </>", $key, $value));
+            }
+        }
     }
 }

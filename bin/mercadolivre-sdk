@@ -37,6 +37,7 @@ $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\ChecklistCommand($fact
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Auth\TokenCommand($factory));
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\User\MeCommand($factory));
+$app->add(new \Gpupo\MercadolivreSdk\Console\Command\User\MyItemsCommand($factory));
 
 $app->add(new \Gpupo\MercadolivreSdk\Console\Command\Catalog\ProductListCommand($factory));
 

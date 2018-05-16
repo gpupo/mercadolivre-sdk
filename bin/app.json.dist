@@ -1,6 +1,7 @@
 {
     "mercadolivre":{
         "client_id": "foo",
+        "user_id": "30303030",
         "secret_key": "king",
         "access_token": "bar",
         "env": "sandbox",

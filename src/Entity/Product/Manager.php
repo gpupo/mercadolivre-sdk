@@ -40,7 +40,7 @@ final class Manager extends AbstractManager
         'findById' => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
-        'fetch' => ['GET', '/users/254289619/items/search?access_token={access_token}'],
+        'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
 

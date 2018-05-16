@@ -25,7 +25,11 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
 {
     public function factoryMap($operation, array $parameters = null)
     {
-        return parent::factoryMap($operation, array_merge($this->fetchDefaultParameters(), (array) $parameters));
+        $all = array_merge($this->fetchDefaultParameters(), (array) $parameters);
+
+        dump($all);
+
+        return parent::factoryMap($operation, $all);
     }
 
     public function save(EntityInterface $entity, $route = 'save')
@@ -68,6 +72,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     {
         return [
             'access_token' => $this->getClient()->getOptions()->get('access_token'),
+            'user_id' => $this->getClient()->getOptions()->get('user_id'),
         ];
     }
 
