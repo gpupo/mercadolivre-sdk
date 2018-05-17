@@ -88,7 +88,6 @@ class TranslatorTest extends TestCaseAbstract
      */
     public function testTranslateFrom(Translator $translator)
     {
-        return $this->markTestIncomplete('Translator incomplete!');
         $foreign = $translator->translateTo();
         $this->assertInstanceOf(TranslatorDataCollection::class, $foreign);
         $translator->setForeign($foreign);

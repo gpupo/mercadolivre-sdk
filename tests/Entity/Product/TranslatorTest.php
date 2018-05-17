@@ -34,8 +34,6 @@ class TranslatorTest extends TestCaseAbstract
     {
         $list = [];
 
-        $this->markTestIncomplete('dataProviderTranslator() incomplete!');
-
         foreach ($this->providerProducts() as $product) {
             $translator = new Translator(['native' => $product]);
 

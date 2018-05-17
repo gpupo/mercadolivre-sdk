@@ -25,34 +25,6 @@ use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Order
  *
- * @method string     getId()                                 Acesso a id
- * @method            setId(string $id)                       Define id
- * @method string     getStatus()                             Acesso a status
- * @method            setStatus(string $status)               Define status
- * @method bool       getStatusDetail()                       Acesso a status_detail
- * @method            setStatusDetail(boolean $status_detail) Define status_detail
- * @method string     getDateCreated()                        Acesso a date_created
- * @method            setDateCreated(string $date_created)    Define date_created
- * @method string     getDateClosed()                         Acesso a date_closed
- * @method            setDateClosed(string $date_closed)      Define date_closed
- * @method collection getOrderItems()                         Acesso a order_items
- * @method            setOrderItems(collection $order_items)  Define order_items
- * @method float      getTotalAmount()                        Acesso a total_amount
- * @method            setTotalAmount(float $total_amount)     Define total_amount
- * @method string     getCurrencyId()                         Acesso a currency_id
- * @method            setCurrencyId(string $currency_id)      Define currency_id
- * @method collection getBuyer()                              Acesso a buyer
- * @method            setBuyer(collection $buyer)             Define buyer
- * @method collection getSeller()                             Acesso a seller
- * @method            setSeller(collection $seller)           Define seller
- * @method collection getPayments()                           Acesso a payments
- * @method            setPayments(collection $payments)       Define payments
- * @method collection getFeedback()                           Acesso a feedback
- * @method            setFeedback(collection $feedback)       Define feedback
- * @method collection getShipping()                           Acesso a shipping
- * @method            setShipping(collection $shipping)       Define shipping
- * @method array      getTags()                               Acesso a tags
- * @method            setTags(array $tags)                    Define tags
  */
 class OrderTest extends TestCaseAbstract
 {
@@ -98,18 +70,10 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetSchema(Order $order)
     {
-        $this->markTestIncomplete('getSchema() incomplete!');
+        $this->assertSame('string', $order->getSchema()['status']);
+        $this->assertSame('integer', $order->getSchema()['id']);
     }
 
-    /**
-     * @testdox ``loadArrayFromFile()``
-     * @cover ::loadArrayFromFile
-     * @dataProvider dataProviderOrder
-     */
-    public function testLoadArrayFromFile(Order $order)
-    {
-        $this->markTestIncomplete('loadArrayFromFile() incomplete!');
-    }
 
     /**
      * @testdox Possui método ``getId()`` para acessar Id
