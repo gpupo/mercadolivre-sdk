@@ -22,12 +22,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @codeCoverageIgnore
  *
  * @see http://developers.mercadolibre.com/server-side/
- * What happens if I need to work with an access_token for more than 6 hours?
- * If your app has the option offline_access selected, you will receive a refresh_token along with the access_token as
- * shown before; you should save the refresh_token to be later exchanged for a new access_token upon expiration.
+ *
  */
 final class RefreshCommand extends AbstractCommand
 {
@@ -38,7 +35,10 @@ final class RefreshCommand extends AbstractCommand
     {
         $this
             ->setName(self::prefix.'auth:refresh')
-            ->setDescription('Refresh Mercado Livre token');
+            ->setDescription('Refresh Mercado Livre token')
+            ->setHelp("What happens if I need to work with an access_token for more than 6 hours?\n".
+            "If your app has the option offline_access selected, you will receive a refresh_token along with the access_token as shown before;\n".
+            "you should save the refresh_token to be later exchanged for a new access_token upon expiration.");
     }
 
     /**

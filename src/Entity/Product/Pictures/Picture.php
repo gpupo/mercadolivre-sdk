@@ -15,24 +15,25 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Product;
+namespace Gpupo\MercadolivreSdk\Entity\Product\Pictures;
 
-use Gpupo\Common\Entity\CollectionInterface;
-use Gpupo\MercadolivreSdk\Entity\AbstractMetadata;
-use Gpupo\Common\Entity\CollectionAbstract;
+use Gpupo\CommonSdk\Entity\EntityAbstract;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 
-final class ProductCollection extends CollectionAbstract implements CollectionInterface
+class Picture extends EntityAbstract implements EntityInterface
 {
     /**
      * @codeCoverageIgnore
      */
-    protected function getKey()
+    public function getSchema()
     {
-        return 'results';
-    }
-
-    protected function factoryEntity($id)
-    {
-        return new Product(['id' => $id]);
+        return [
+            'id' => 'string',
+            'url' => 'string',
+            'secure_url' => 'string',
+            'size' => 'string',
+            'max_size' => 'string',
+            'quality' => 'string',
+        ];
     }
 }

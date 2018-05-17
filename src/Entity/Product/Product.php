@@ -36,7 +36,7 @@ final class Product extends EntityAbstract implements EntityInterface
             'listing_type_id' => 'string',
             'condition' => 'string',
             'description' => 'string',
-            'pictures' => 'array',
+            'pictures' => 'object',
             'available_quantity' => 'number',
             'shipping' => 'array',
             'official_store_id' => 'number',

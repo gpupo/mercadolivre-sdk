@@ -84,8 +84,6 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
             return false;
         }
 
-        dump($data);
-        
         return $this->factoryEntityCollection($data);
     }
 

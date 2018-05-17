@@ -15,17 +15,15 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command\Catalog;
+namespace Gpupo\MercadolivreSdk\Console\Command\Catalog\Product;
 
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 use Gpupo\Common\Traits\TableTrait;
 
-/**
- * @codeCoverageIgnore
- */
-final class ProductListCommand extends AbstractCommand
+class ViewCommand extends AbstractCommand
 {
     use TableTrait;
 
@@ -35,8 +33,9 @@ final class ProductListCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'catalog:product:list')
-            ->setDescription('Get the product list on Mercado Livre');
+            ->setName(self::prefix.'catalog:product:view')
+            ->setDescription('Get the description of product on Mercado Livre')
+            ->addArgument('id', InputArgument::REQUIRED, 'Mercado Livre Product Id');
     }
 
     /**
@@ -44,11 +43,13 @@ final class ProductListCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pm = $this->getFactory()->factoryManager('product');
+        $id = $input->getArgument('id');
 
+        $productManager = $this->getFactory()->factoryManager('product');
         try {
-            $response = $pm->fetch();
-            $this->displayTableResults($output, $response);
+            $product = $productManager->findById('MLB1030089129');
+
+            $this->writeInfo($output, $product->toArray());
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

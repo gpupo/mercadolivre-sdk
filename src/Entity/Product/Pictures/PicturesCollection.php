@@ -15,24 +15,16 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Product;
+namespace Gpupo\MercadolivreSdk\Entity\Product\Pictures;
 
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\MercadolivreSdk\Entity\AbstractMetadata;
-use Gpupo\Common\Entity\CollectionAbstract;
+use Gpupo\CommonSdk\Entity\CollectionAbstract;
 
-final class ProductCollection extends CollectionAbstract implements CollectionInterface
+final class PicturesCollection extends CollectionAbstract implements CollectionInterface
 {
-    /**
-     * @codeCoverageIgnore
-     */
-    protected function getKey()
+    public function factoryElement($data)
     {
-        return 'results';
-    }
-
-    protected function factoryEntity($id)
-    {
-        return new Product(['id' => $id]);
+        return new Picture($data);
     }
 }

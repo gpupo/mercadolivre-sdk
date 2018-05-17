@@ -40,7 +40,7 @@ final class Manager extends AbstractManager
         'findById' => ['GET', '/items/{itemId}/'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
-        'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&limit={limit}'],
+        'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
 
@@ -100,25 +100,5 @@ final class Manager extends AbstractManager
         }
 
         return $this->execute($this->factoryMap('update', $params), json_encode($update));
-    }
-
-
-    /**
-     * @param mixed $offset
-     * @param mixed $limit
-     * @param mixed $route
-     *
-     * @return null|Gpupo\Common\Entity\Collection
-     */
-    public function fetch($offset = 0, $limit = 50, array $parameters = [], $route = 'fetch')
-    {
-        $pars = array_merge($this->fetchDefaultParameters(), $parameters, ['offset' => $offset, 'limit' => $limit]);
-
-        $response = $this->perform($this->factoryMap($route, $pars));
-        $process = $this->processResponse($response);
-        dump($process);
-
-
-        return $this->fetchPrepare($process);
     }
 }
