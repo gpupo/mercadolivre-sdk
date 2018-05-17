@@ -90,7 +90,6 @@ class ManagerTest extends TestCaseAbstract
         }
 
         $path = sprintf('fixture/Product/%s', $filename);
-        //$this->getOutput()->writeln(sprintf('Load Filename <fg=green>%s</>', $path));
         $manager = $this->getFactory()->factoryManager('product');
         $response = $this->factoryResponseFromFixture($path, $code);
         $manager->setDryRun($response);

@@ -59,7 +59,6 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Attribute invalid: Order');
-
         $o = $this->proxy($this->getDecorator());
         $o->set('order', '');
         $o->toArray();

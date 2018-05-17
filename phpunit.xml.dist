@@ -2,12 +2,15 @@
 
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         colors="true"
+         colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
+         stopOnWarning="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
          syntaxCheck="false"
          bootstrap="vendor/autoload.php"
          mapTestClassNameToCoveredClassName="true"
@@ -18,6 +21,9 @@
         </testsuite>
         <testsuite name="Product">
             <directory>tests/Entity/Product/</directory>
+        </testsuite>
+        <testsuite name="Order">
+            <directory>tests/Entity/Order</directory>
         </testsuite>
     </testsuites>
 
@@ -37,8 +43,8 @@
     <php>
         <const name="CLIENT_ID" value=""/>
         <const name="ACCESS_TOKEN" value="fooToken"/>
-        <const name="VERBOSE" value=""/>
         <const name="REGISTER_PATH" value=""/>
+        <const name="VERBOSE" value=""/>
     </php>
     <logging>
       <log type="coverage-clover" target="build/logs/clover.xml"/>
