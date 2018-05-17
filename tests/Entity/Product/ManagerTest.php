@@ -20,7 +20,6 @@ namespace Entity\Product;
 use Gpupo\CommonSdk\Response as CommonResponse;
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
-use Gpupo\MercadolivreSdk\Entity\Product\ProductCollection;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
@@ -67,16 +66,17 @@ class ManagerTest extends TestCaseAbstract
      */
     public function testFindBy()
     {
-        $manager = $this->getManager();
-        $product = $manager->findById('MLB803848501');
-        $this->assertInstanceOf(Product::class, $product);
-        $this->assertSame('MLB803848501', $product->getId());
+        $id = 'MLB803848501';
+        $manager = $this->getManager($id.'.json');
+        $product = $manager->findById($id);
+        $this->assertInstanceOf(Product::class, $product, 'Test instance');
+        $this->assertSame($id, $product->getId(), 'Test $id');
     }
 
     public function testUpdate()
     {
-        $product = json_decode(file_get_contents('Resources/fixture/Product/item.json'), true);
-        $entity = new Product($product);
+        $data = $this->getResourceJson('fixture/Product/item.json');
+        $entity = new Product($data);
 
         $manager = $this->getManager();
         $product = $manager->update($entity);
@@ -89,8 +89,10 @@ class ManagerTest extends TestCaseAbstract
             $filename = 'item.json';
         }
 
+        $path = sprintf('fixture/Product/%s', $filename);
+        //$this->getOutput()->writeln(sprintf('Load Filename <fg=green>%s</>', $path));
         $manager = $this->getFactory()->factoryManager('product');
-        $response = $this->factoryResponseFromFixture('fixture/Product/'.$filename, $code);
+        $response = $this->factoryResponseFromFixture($path, $code);
         $manager->setDryRun($response);
 
         return $manager;

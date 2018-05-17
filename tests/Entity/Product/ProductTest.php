@@ -23,23 +23,6 @@ use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Product
- *
- * @method string getTitle()                                Acesso a title
- * @method        setTitle(string $title)                   Define title
- * @method string getCategoryId()                           Acesso a category_id
- * @method        setCategoryId(string $category_id)        Define category_id
- * @method float  getPrice()                                Acesso a price
- * @method        setPrice(float $price)                    Define price
- * @method string getCurrencyId()                           Acesso a currency_id
- * @method        setCurrencyId(string $currency_id)        Define currency_id
- * @method string getBuyingMode()                           Acesso a buying_mode
- * @method        setBuyingMode(string $buying_mode)        Define buying_mode
- * @method string getListingTypeId()                        Acesso a listing_type_id
- * @method        setListingTypeId(string $listing_type_id) Define listing_type_id
- * @method string getCondition()                            Acesso a condition
- * @method        setCondition(string $condition)           Define condition
- * @method string getDescription()                          Acesso a description
- * @method        setDescription(string $description)       Define description
  */
 class ProductTest extends TestCaseAbstract
 {
@@ -50,8 +33,8 @@ class ProductTest extends TestCaseAbstract
      */
     public function dataProviderProduct()
     {
-        $data = json_decode(file_get_contents('Resources/fixture/Product/item.json'), true);
-
+        $data = $this->getResourceJson('fixture/Product/item.json');
+        
         return $this->dataProviderEntitySchema(Product::class, $data);
     }
 

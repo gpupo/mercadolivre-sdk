@@ -31,7 +31,7 @@ abstract class AbstractCommand extends Command
 
     protected $factory;
 
-    public function __construct(Factory $factory)
+    public function __construct(Factory $factory = null)
     {
         $this->factory = $factory;
 

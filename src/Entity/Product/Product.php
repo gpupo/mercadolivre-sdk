@@ -20,7 +20,7 @@ namespace Gpupo\MercadolivreSdk\Entity\Product;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-final class Product extends EntityAbstract implements EntityInterface
+class Product extends EntityAbstract implements EntityInterface
 {
     /**
      * @codeCoverageIgnore
@@ -28,7 +28,9 @@ final class Product extends EntityAbstract implements EntityInterface
     public function getSchema()
     {
         return [
+            'id'    => 'string',
             'title' => 'string',
+            'description' => 'string',
             'category_id' => 'string',
             'price' => 'number',
             'currency_id' => 'string',

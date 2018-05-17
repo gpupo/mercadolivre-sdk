@@ -17,11 +17,11 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command\Catalog\Product;
 
+use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use Gpupo\Common\Traits\TableTrait;
 
 class ViewCommand extends AbstractCommand
 {
@@ -46,6 +46,7 @@ class ViewCommand extends AbstractCommand
         $id = $input->getArgument('id');
 
         $productManager = $this->getFactory()->factoryManager('product');
+
         try {
             $product = $productManager->findById('MLB1030089129');
 

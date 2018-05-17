@@ -17,13 +17,11 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command\Catalog\Product;
 
+use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Gpupo\Common\Traits\TableTrait;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ListCommand extends AbstractCommand
 {
@@ -65,8 +63,9 @@ class ListCommand extends AbstractCommand
         $max = $input->getOption('max');
 
         $items = [];
+
         try {
-            $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset+$this->limit)));
+            $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
             $response = $productManager->rawFetch($offset, $this->limit);
             $paging = $response->get('paging');
             $total = $paging['total'];
@@ -74,14 +73,14 @@ class ListCommand extends AbstractCommand
             $items = array_merge($items, $response->get('results'));
             while ($offset < ($total - $this->limit) && $offset < ($max - $this->limit)) {
                 $offset += $this->limit;
-                $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset+$this->limit)));
+                $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
                 $response = $productManager->rawFetch($offset, $this->limit);
                 $items = array_merge($items, $response->get('results'));
             }
 
             $collection = [];
 
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 $collection[] = [
                     'id' => $item,
                 ];

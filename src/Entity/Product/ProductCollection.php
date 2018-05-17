@@ -17,9 +17,8 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity\Product;
 
-use Gpupo\Common\Entity\CollectionInterface;
-use Gpupo\MercadolivreSdk\Entity\AbstractMetadata;
 use Gpupo\Common\Entity\CollectionAbstract;
+use Gpupo\Common\Entity\CollectionInterface;
 
 final class ProductCollection extends CollectionAbstract implements CollectionInterface
 {

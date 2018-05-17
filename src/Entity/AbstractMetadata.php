@@ -44,6 +44,5 @@ abstract class AbstractMetadata extends MetadataContainerAbstract
 
     protected function normalizeMetas($metas)
     {
-        
     }
 }

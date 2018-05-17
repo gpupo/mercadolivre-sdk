@@ -18,7 +18,6 @@ declare(strict_types=1);
 namespace Gpupo\MercadolivreSdk\Entity\Product\Pictures;
 
 use Gpupo\Common\Entity\CollectionInterface;
-use Gpupo\MercadolivreSdk\Entity\AbstractMetadata;
 use Gpupo\CommonSdk\Entity\CollectionAbstract;
 
 final class PicturesCollection extends CollectionAbstract implements CollectionInterface

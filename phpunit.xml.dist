@@ -16,6 +16,9 @@
         <testsuite name="Main Test Suite">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="Product">
+            <directory>tests/Entity/Product/</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
