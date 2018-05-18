@@ -8,3 +8,4 @@ Resources/qualityAssurance/*
 *.lock
 *.cache
 phpunit.xml
+Resources/mockup/*/*-private.json

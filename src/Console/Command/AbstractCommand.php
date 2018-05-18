@@ -41,7 +41,7 @@ abstract class AbstractCommand extends Command
 
     public function getProjectDataFilename()
     {
-        return sprintf('var/markethub-mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
+        return sprintf('var/data/markethub-mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
     }
 
     public function getFactory(): Factory
