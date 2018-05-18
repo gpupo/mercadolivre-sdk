@@ -45,7 +45,7 @@ abstract class AbstractCommand extends Command
 
     public function getFactory(): Factory
     {
-        if (!$this->factory instanceof Factory::class) {
+        if (!$this->factory instanceof Factory) {
             throw new \InvalidArgumentException("Factory must be defined!");
         }
 

@@ -184,7 +184,7 @@ class ManagerTest extends TestCaseAbstract
     protected function getManager($filename = 'item.json')
     {
         $manager = $this->getFactory()->factoryManager('order');
-        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Order/'.$filename));
+        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Order/'.$filename));
 
         return $manager;
     }

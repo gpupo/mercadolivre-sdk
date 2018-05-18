@@ -37,7 +37,7 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
     public function providerProducts()
     {
         $manager = $this->getFactory()->factoryManager('product');
-        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Product/list.json'));
+        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Product/list.json'));
 
         return $manager->fetch();
     }
@@ -56,7 +56,7 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
     public function providerOrders()
     {
         $manager = $this->getFactory()->factoryManager('order');
-        $manager->setDryRun($this->factoryResponseFromFixture('fixture/Order/list.json'));
+        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Order/list.json'));
 
         return $manager->fetch();
     }

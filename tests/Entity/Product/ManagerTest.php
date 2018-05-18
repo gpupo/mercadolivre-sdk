@@ -75,7 +75,7 @@ class ManagerTest extends TestCaseAbstract
 
     public function testUpdate()
     {
-        $data = $this->getResourceJson('fixture/Product/item.json');
+        $data = $this->getResourceJson('mockup/Product/item.json');
         $entity = new Product($data);
 
         $manager = $this->getManager();
@@ -89,7 +89,7 @@ class ManagerTest extends TestCaseAbstract
             $filename = 'item.json';
         }
 
-        $path = sprintf('fixture/Product/%s', $filename);
+        $path = sprintf('mockup/Product/%s', $filename);
         $manager = $this->getFactory()->factoryManager('product');
         $response = $this->factoryResponseFromFixture($path, $code);
         $manager->setDryRun($response);

@@ -33,7 +33,7 @@ class ProductTest extends TestCaseAbstract
      */
     public function dataProviderProduct()
     {
-        $data = $this->getResourceJson('fixture/Product/item.json');
+        $data = $this->getResourceJson('mockup/Product/item.json');
         
         return $this->dataProviderEntitySchema(Product::class, $data);
     }

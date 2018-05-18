@@ -148,12 +148,12 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
 
     protected function getExpectedArray()
     {
-        return $this->getResourceJson('fixture/Order/Status/'.$this->target.'.json');
+        return $this->getResourceJson('mockup/Order/Status/'.$this->target.'.json');
     }
 
     protected function getExpectedJson()
     {
-        return trim($this->getResourceContent('fixture/Order/Status/'.$this->target.'.json'));
+        return trim($this->getResourceContent('mockup/Order/Status/'.$this->target.'.json'));
     }
 
     protected function getDecorator($data = [])
