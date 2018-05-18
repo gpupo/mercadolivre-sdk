@@ -29,7 +29,7 @@ return [
     ],
     'fetch' => [
         'GET',
-        '/orders/search/recent?seller=227595621&access_token={access_token}',
+        '/orders/search/recent?seller={user_id}&access_token={access_token}',
     ],
     'findById' => [
         'GET',

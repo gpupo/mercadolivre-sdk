@@ -45,7 +45,7 @@ class ListCommand extends AbstractCommand
         $productManager = $this->getFactory()->factoryManager('product');
         $offset = $input->getOption('offset');
         $max = $input->getOption('max');
-
+        $output->writeln(sprintf('Max items from this fetch is <fg=blue> %d </>', $max));
         $items = [];
 
         try {
