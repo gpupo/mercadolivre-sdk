@@ -62,17 +62,16 @@ class ManagerTest extends TestCaseAbstract
      */
     public function testFetch(Manager $manager)
     {
-        $list = $manager->fetch();
+        $orderCollection = $manager->fetch();
+        $this->assertInstanceOf(OrderCollection::class, $orderCollection);
+        $this->assertGreaterThan(5, $orderCollection->getMetadata()->count());
+        $this->assertSame(1, $orderCollection->count());
 
-        $this->assertInstanceOf(OrderCollection::class, $list);
-
-        $this->assertSame(1, $list->count());
-
-        foreach ($list as $order) {
+        foreach ($orderCollection as $order) {
             $this->commonAsserts($order);
         }
 
-        return $list;
+        return $orderCollection;
     }
 
     /**
