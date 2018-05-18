@@ -1,118 +1,756 @@
 {
+  "query": "",
+  "display": "complete",
+  "paging": {
+    "total": 1,
+    "offset": 0,
+    "limit": 50
+  },
   "results": [
     {
-      "id": 768570754,
+      "id": 1068825849,
+      "comments": null,
       "status": "paid",
-      "status_detail": null,
-      "date_created": "2013-05-27T10:01:50.000-04:00",
-      "date_closed": "2013-05-27T10:04:07.000-04:00",
+      "status_detail": {
+        "description": null,
+        "code": null
+      },
+      "date_created": "2016-02-25T15:53:38.000-04:00",
+      "date_closed": "2016-02-25T15:53:37.000-04:00",
+      "expiration_date": "2016-03-17T15:53:38.000-04:00",
+      "date_last_updated": "2016-02-25T15:55:44.973Z",
+      "hidden_for_seller": false,
+      "currency_id": "ARS",
       "order_items": [
-      	{
-        	"item": {
-          	"id": "MLB12345678",
-        	  "title": "Samsung Galaxy",
-          	"variation_id": null,
-          	"variation_attributes": []
-        	},
-        	"quantity": 1,
-        	"unit_price": 499,
-        	"currency_id": "BRL"
-      	}
-      ],
-      "total_amount": 499,
-      "currency_id": "BRL",
-      "buyer": {
-      	"id": "123456789",
-      	"nickname": "COMPRADORTESTE",
-      	"email": "b@b.com",
-      	"phone": {
-        	"area_code": "11",
-        	"number": "12345678",
-        	"extension": null
-      	},
-      	"first_name": "Comprador de testes",
-      	"last_name": "da Silva",
-      	"billing_info": {
-        	"doc_type": "CPF",
-        	"doc_number": "12345678910"
-      	}
-      },
-      "seller": {
-      	"id": "123456789",
-      	"nickname": "VENDEDORTESTES",
-      	"email": "a@a.com",
-      	"phone": {
-        	"area_code": null,
-        	"number": "11 12345678",
-        	"extension": "11"
-      	},
-      	"first_name": "Vendedor de Testes",
-      	"last_name": "testes de documentacao"
-      },
-      "payments": [
-      	{
-        	"id": "596707837",
-        	"transaction_amount": 499,
-        	"currency_id": "BRL",
-        	"status": "approved",
-        	"date_created": null,
-        	"date_last_modified": null
-      	}
-      ],
-      "feedback": {
-      	"purchase": null,
-      	"sale": null
-      },
-      "shipping": {
-      	"id": 20676482441,
-      	"shipment_type": "shipping",
-      	"status": "pending",
-        "shippingCode": "TR1234567891",
-        "date_created": "2013-05-27T10:03:28.000-04:00",
-      	"receiver_address": {
-        	"id": 12345678,
-          "street_number": "2055",
-          "street_name": "Rua Lauro Linhares",
-        	"address_line": "Rua dos testes 123  ",
-        	"zip_code": "01001000",
-        	"city": {
-          	"id": "BR-SP-44",
-          	"name": "São Paulo"
-        	},
-        	"state": {
-          	"id": "BR-SP",
-          	"name": "São Paulo"
-        	},
-        	"country": {
-          	"id": "BR",
-          	"name": "Brasil"
-        	},
-        	"latitude": null,
-        	"longitude": null,
-        	"comment": null
-      	},
-      	"currency_id": "BRL",
-      	"cost": 0,
-        "shipping_option": {
-          "id": 2000880360030001,
-          "shipping_method_id": 182,
-          "name": "Expresso",
-          "currency_id": "BRL",
-          "cost": 14.9,
-          "speed": {
-            "shipping": null,
-            "handling": null
+        {
+          "currency_id": "ARS",
+          "item": {
+            "id": "MLA607850752",
+            "title": "Item De Testeo, Por Favor No Ofertar --kc:off",
+            "seller_custom_field": null,
+            "variation_attributes": [
+            ],
+            "category_id": "MLA3530",
+            "variation_id": null
           },
-          "estimated_delivery": {
-            "date": null,
-            "time_from": null,
-            "time_to": null
-          }
+          "sale_fee": 1.05,
+          "quantity": 1,
+          "unit_price": 10
+        }
+      ],
+      "total_amount": 10,
+      "mediations": [
+      ],
+      "payments": [
+        {
+          "id": 1833868697,
+          "order_id": 1068825849,
+          "payer_id": 207040551,
+          "collector": {
+            "id": 207035636
+          },
+          "currency_id": "ARS",
+          "status": "approved",
+          "status_code": "0",
+          "status_detail": "accredited",
+          "transaction_amount": 10,
+          "shipping_cost": 0,
+          "overpaid_amount": 0,
+          "total_paid_amount": 10,
+          "marketplace_fee": null,
+          "coupon_amount": 0,
+          "date_created": "2016-02-25T15:55:42.000-04:00",
+          "date_last_modified": "2016-02-25T15:55:42.000-04:00",
+          "card_id": null,
+          "reason": "Item De Testeo, Por Favor No Ofertar --kc:off",
+          "activation_uri": null,
+          "payment_method_id": "diners",
+          "installments": 9,
+          "issuer_id": "1028",
+          "atm_transfer_reference": {
+            "company_id": null,
+            "transaction_id": null
+          },
+          "coupon_id": null,
+          "operation_type": "regular_payment",
+          "payment_type": "credit_card",
+          "available_actions": [
+          ],
+          "installment_amount": 1.11,
+          "deferred_period": null,
+          "date_approved": "2016-02-25T15:55:42.000-04:00",
+          "authorization_code": "1234567",
+          "transaction_order_id": "1234567"
+        }
+      ],
+      "shipping": {
+        "substatus": null,
+        "status": "to_be_agreed",
+        "id": null,
+        "service_id": null,
+        "currency_id": null,
+        "shipping_mode": null,
+        "shipment_type": null,
+        "sender_id": null,
+        "picking_type": null,
+        "date_created": null,
+        "cost": null,
+        "date_first_printed": null
+      },
+      "buyer": {
+        "id": 207040551,
+        "nickname": "TETE5029382",
+        "email": "test_user_97424966@testuser.com",
+        "phone": {
+          "area_code": "01",
+          "number": "1111-1111",
+          "extension": "",
+          "verified": false
+        },
+        "alternative_phone": {
+          "area_code": "",
+          "number": "",
+          "extension": ""
+        },
+        "first_name": "Test",
+        "last_name": "Test",
+        "billing_info": {
+          "doc_type": null,
+          "doc_number": null
         }
       },
+      "seller": {
+        "id": 207035636,
+        "nickname": "TETE9544096",
+        "email": "test_user_50828007@testuser.com",
+        "phone": {
+          "area_code": "01",
+          "number": "1111-1111",
+          "extension": "",
+          "verified": false
+        },
+        "alternative_phone": {
+          "area_code": "",
+          "number": "",
+          "extension": ""
+        },
+        "first_name": "Test",
+        "last_name": "Test"
+      },
+      "feedback": {
+        "sale": null,
+        "purchase": null
+      },
       "tags": [
-      	"paid",
-      	"not_delivered"
+        "not_delivered",
+        "paid"
       ]
     }
-]}
+  ],
+  "sort": {
+    "id": "date_asc",
+    "name": "Date ascending"
+  },
+  "available_sorts": [
+    {
+      "id": "date_desc",
+      "name": "Date descending"
+    }
+  ],
+  "filters": [
+  ],
+  "available_filters": [
+    {
+      "id": "order.status",
+      "name": "Order Status",
+      "type": "text",
+      "values": [
+        {
+          "id": "paid",
+          "name": "Order Paid",
+          "results": 1
+        },
+        {
+          "id": "confirmed",
+          "name": "Order Confirmed",
+          "results": 0
+        },
+        {
+          "id": "payment_in_process",
+          "name": "Payment in Process",
+          "results": 0
+        },
+        {
+          "id": "payment_required",
+          "name": "Payment Required",
+          "results": 0
+        },
+        {
+          "id": "cancelled",
+          "name": "Order Cancelled",
+          "results": 0
+        },
+        {
+          "id": "invalid",
+          "name": "Invalid",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "shipping.status",
+      "name": "Shipping Status",
+      "type": "text",
+      "values": [
+        {
+          "id": "to_be_agreed",
+          "name": "To be agreed",
+          "results": 1
+        },
+        {
+          "id": "pending",
+          "name": "Pending",
+          "results": 0
+        },
+        {
+          "id": "handling",
+          "name": "Handling",
+          "results": 0
+        },
+        {
+          "id": "ready_to_ship",
+          "name": "Ready to ship",
+          "results": 0
+        },
+        {
+          "id": "shipped",
+          "name": "Shipped",
+          "results": 0
+        },
+        {
+          "id": "delivered",
+          "name": "Delivered",
+          "results": 0
+        },
+        {
+          "id": "not_delivered",
+          "name": "Not delivered",
+          "results": 0
+        },
+        {
+          "id": "not_verified",
+          "name": "Not verified",
+          "results": 0
+        },
+        {
+          "id": "cancelled",
+          "name": "Cancelled",
+          "results": 0
+        },
+        {
+          "id": "closed",
+          "name": "Closed",
+          "results": 0
+        },
+        {
+          "id": "error",
+          "name": "Error",
+          "results": 0
+        },
+        {
+          "id": "active",
+          "name": "Active",
+          "results": 0
+        },
+        {
+          "id": "not_specified",
+          "name": "Not specified",
+          "results": 0
+        },
+        {
+          "id": "stale_ready_to_ship",
+          "name": "Stale ready to ship",
+          "results": 0
+        },
+        {
+          "id": "stale_shipped",
+          "name": "Stale shipped",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "feedback.sale.rating",
+      "name": "Feedback rating",
+      "type": "text",
+      "values": [
+        {
+          "id": "negative",
+          "name": "Negative",
+          "results": 0
+        },
+        {
+          "id": "neutral",
+          "name": "Neutral",
+          "results": 0
+        },
+        {
+          "id": "positive",
+          "name": "Positive",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "feedback.purchase.rating",
+      "name": "Feedback rating",
+      "type": "text",
+      "values": [
+        {
+          "id": "negative",
+          "name": "Negative",
+          "results": 0
+        },
+        {
+          "id": "neutral",
+          "name": "Neutral",
+          "results": 0
+        },
+        {
+          "id": "positive",
+          "name": "Positive",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "feedback.sale.fulfilled",
+      "name": "Feedback sale fulfilled",
+      "type": "boolean",
+      "values": [
+        {
+          "id": "F",
+          "name": "Transaction was aborted",
+          "results": 0
+        },
+        {
+          "id": "T",
+          "name": "Transaction actually happened",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "feedback.purchase.fulfilled",
+      "name": "Feedback purchase fulfilled",
+      "type": "boolean",
+      "values": [
+        {
+          "id": "F",
+          "name": "Transaction was aborted",
+          "results": 0
+        },
+        {
+          "id": "T",
+          "name": "Transaction actually happened",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "shipping.service_id",
+      "name": "Shipping Service",
+      "type": "long",
+      "values": [
+        {
+          "id": "61",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "64",
+          "name": "Prioritario",
+          "results": 0
+        },
+        {
+          "id": "151",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "154",
+          "name": "Prioritario",
+          "results": 0
+        },
+        {
+          "id": "321",
+          "name": "Colecta Retiro Sucursal",
+          "results": 0
+        },
+        {
+          "id": "341",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "251",
+          "name": "Otros",
+          "results": 0
+        },
+        {
+          "id": "63",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "153",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "351",
+          "name": "Prioritario",
+          "results": 0
+        },
+        {
+          "id": "311",
+          "name": "Colecta Normal",
+          "results": 0
+        },
+        {
+          "id": "381",
+          "name": "Prioritario",
+          "results": 0
+        },
+        {
+          "id": "62",
+          "name": "Prioritario",
+          "results": 0
+        },
+        {
+          "id": "312",
+          "name": "Colecta Express",
+          "results": 0
+        },
+        {
+          "id": "152",
+          "name": "Estándar",
+          "results": 0
+        },
+        {
+          "id": "81",
+          "name": "Moto Express",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "shipping.substatus",
+      "name": "Shipping Substatus",
+      "type": "text",
+      "values": [
+        {
+          "id": "cost_exceeded",
+          "name": "Cost exceeded",
+          "results": 0
+        },
+        {
+          "id": "regenerating",
+          "name": "Regenerating",
+          "results": 0
+        },
+        {
+          "id": "waiting_for_label_generation",
+          "name": "Waiting for label generation",
+          "results": 0
+        },
+        {
+          "id": "ready_to_print",
+          "name": "Ready to print",
+          "results": 0
+        },
+        {
+          "id": "invoice_pending",
+          "name": "Invoice pending",
+          "results": 0
+        },
+        {
+          "id": "printed",
+          "name": "Printed",
+          "results": 0
+        },
+        {
+          "id": "in_pickup_list",
+          "name": "In pikcup list",
+          "results": 0
+        },
+        {
+          "id": "ready_for_pkl_creation",
+          "name": "Ready for pkl creation",
+          "results": 0
+        },
+        {
+          "id": "ready_for_pickup",
+          "name": "Ready for pickup",
+          "results": 0
+        },
+        {
+          "id": "picked_up",
+          "name": "Picked up",
+          "results": 0
+        },
+        {
+          "id": "stale",
+          "name": "Stale shipped",
+          "results": 0
+        },
+        {
+          "id": "in_hub",
+          "name": "In hub",
+          "results": 0
+        },
+        {
+          "id": "measures_ready",
+          "name": "Measures and weight ready",
+          "results": 0
+        },
+        {
+          "id": "waiting_for_carrier_authorization",
+          "name": "Waiting for carrier authorization",
+          "results": 0
+        },
+        {
+          "id": "authorized_by_carrier",
+          "name": "Authorized by carrier",
+          "results": 0
+        },
+        {
+          "id": "in_plp",
+          "name": "In PLP",
+          "results": 0
+        },
+        {
+          "id": "delayed",
+          "name": "Delayed",
+          "results": 0
+        },
+        {
+          "id": "waiting_for_withdrawal",
+          "name": "Waiting for withdrawal",
+          "results": 0
+        },
+        {
+          "id": "contact_with_carrier_required",
+          "name": "Contact with carrier required",
+          "results": 0
+        },
+        {
+          "id": "receiver_absent",
+          "name": "Receiver absent",
+          "results": 0
+        },
+        {
+          "id": "reclaimed",
+          "name": "Reclaimed",
+          "results": 0
+        },
+        {
+          "id": "not_localized",
+          "name": "Not localized",
+          "results": 0
+        },
+        {
+          "id": "forwarded_to_third",
+          "name": "Forwarded to third party",
+          "results": 0
+        },
+        {
+          "id": "soon_deliver",
+          "name": "Soon deliver",
+          "results": 0
+        },
+        {
+          "id": "refused_delivery",
+          "name": "Delivery refused",
+          "results": 0
+        },
+        {
+          "id": "bad_address",
+          "name": "Bad address",
+          "results": 0
+        },
+        {
+          "id": "negative_feedback",
+          "name": "Stale shipped forced to not delivered due to negative feedback by buyer",
+          "results": 0
+        },
+        {
+          "id": "need_review",
+          "name": "Need to review carrier status to understand what happened",
+          "results": 0
+        },
+        {
+          "id": "damaged",
+          "name": "damaged",
+          "results": 0
+        },
+        {
+          "id": "fulfilled_feedback",
+          "name": "Fulfilled by buyer feedback",
+          "results": 0
+        },
+        {
+          "id": "no_action_taken",
+          "name": "No action taken by buyer",
+          "results": 0
+        },
+        {
+          "id": "double_refund",
+          "name": "Double Refund",
+          "results": 0
+        },
+        {
+          "id": "returning_to_sender",
+          "name": "Returning to sender",
+          "results": 0
+        },
+        {
+          "id": "retained",
+          "name": "Retained",
+          "results": 0
+        },
+        {
+          "id": "stolen",
+          "name": "Stolen",
+          "results": 0
+        },
+        {
+          "id": "returned",
+          "name": "Returned",
+          "results": 0
+        },
+        {
+          "id": "confiscated",
+          "name": "confiscated",
+          "results": 0
+        },
+        {
+          "id": "to_review",
+          "name": "Closed shipment",
+          "results": 0
+        },
+        {
+          "id": "destroyed",
+          "name": "Destroyed",
+          "results": 0
+        },
+        {
+          "id": "claimed_me",
+          "name": "Stale shipped with claim that was forced to not delivered",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "feedback.status",
+      "name": "Feedback Status",
+      "type": "text",
+      "values": [
+        {
+          "id": "pending",
+          "name": "Waiting for your feedback",
+          "results": 1
+        },
+        {
+          "id": "waiting_buyer",
+          "name": "Waiting for Buyer's feedback",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "name": "Tags",
+      "type": "text",
+      "values": [
+        {
+          "id": "paid",
+          "name": "Order Paid",
+          "results": 1
+        },
+        {
+          "id": "not_delivered",
+          "name": "Not Delivered",
+          "results": 1
+        },
+        {
+          "id": "delivered",
+          "name": "Delivered",
+          "results": 0
+        },
+        {
+          "id": "not_paid",
+          "name": "Order Not Paid",
+          "results": 0
+        },
+        {
+          "id": "claim_closed",
+          "name": "Claim Closed",
+          "results": 0
+        },
+        {
+          "id": "claim_opened",
+          "name": "Claim Opened",
+          "results": 0
+        },
+        {
+          "id": "not_processed",
+          "name": "Not processed order",
+          "results": 0
+        },
+        {
+          "id": "processed",
+          "name": "Processed order",
+          "results": 0
+        }
+      ]
+    },
+    {
+      "id": "mediations.status",
+      "name": "Mediation Status",
+      "type": "text",
+      "values": [
+        {
+          "id": "claim_opened",
+          "name": "Claim opened",
+          "results": 0
+        },
+        {
+          "id": "claim_closed",
+          "name": "Claim closed",
+          "results": 0
+        },
+        {
+          "id": "dispute_opened",
+          "name": "Dispute opened",
+          "results": 0
+        },
+        {
+          "id": "dispute_closed",
+          "name": "Dispute closed",
+          "results": 0
+        },
+        {
+          "id": "seller_dispute_opened",
+          "name": "Seller dispute opened",
+          "results": 0
+        },
+        {
+          "id": "seller_dispute_closed",
+          "name": "Seller dispute closed",
+          "results": 0
+        }
+      ]
+    }
+  ]
+}

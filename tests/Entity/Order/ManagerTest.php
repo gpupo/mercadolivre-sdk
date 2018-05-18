@@ -139,7 +139,7 @@ class ManagerTest extends TestCaseAbstract
     public function testFindBy()
     {
         $manager = $this->getManager('item.json');
-        $order = $manager->findById(768570754);
+        $order = $manager->findById(1068825849);
         $this->assertInstanceOf(Order::class, $order);
         $this->commonAsserts($order);
     }
@@ -191,7 +191,7 @@ class ManagerTest extends TestCaseAbstract
 
     protected function commonAsserts(Order $order)
     {
-        $this->assertSame((int) '768570754', (int) $order->getId());
+        $this->assertSame((int) '1068825849', (int) $order->getId());
         $this->assertSame('pending', $order->getShipping()->getStatus());
         $this->assertSame(20676482441, $order->getShipping()->getId());
     }
