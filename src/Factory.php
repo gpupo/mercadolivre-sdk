@@ -27,7 +27,7 @@ class Factory extends FactoryAbstract
 {
     public function setClient(array $clientOptions = [])
     {
-        $this->client = new Client($clientOptions, $this->logger);
+        $this->client = new Client($clientOptions, $this->getLogger(), $this->getSimpleCache());
     }
 
     public function getNamespace()

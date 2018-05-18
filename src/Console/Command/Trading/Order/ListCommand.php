@@ -51,25 +51,27 @@ class ListCommand extends AbstractCommand
         try {
             $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
             $response = $orderManager->rawFetch($offset, $this->limit);
+
+
             $paging = $response->get('paging');
             $total = $paging['total'];
             $output->writeln(sprintf('Total: <bg=green;fg=black> %d </>', $total));
-            $items = array_merge($items, $response->get('results'));
-            while ($offset < ($total - $this->limit) && $offset < ($max - $this->limit)) {
-                $offset += $this->limit;
-                $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
-                $response = $orderManager->rawFetch($offset, $this->limit);
-                $items = array_merge($items, $response->get('results'));
-            }
-
-            $collection = [];
-
-            foreach ($items as $item) {
-                $collection[] = [
-                    'id' => $item,
-                ];
-            }
-            $this->displayTableResults($output, $collection);
+            // $items = array_merge($items, $response->get('results'));
+            // while ($offset < ($total - $this->limit) && $offset < ($max - $this->limit)) {
+            //     $offset += $this->limit;
+            //     $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
+            //     $response = $orderManager->rawFetch($offset, $this->limit);
+            //     $items = array_merge($items, $response->get('results'));
+            // }
+            //
+            // $collection = [];
+            //
+            // foreach ($items as $item) {
+            //     $collection[] = [
+            //         'id' => $item,
+            //     ];
+            // }
+            $this->displayTableResults($output, $response->get('results'));
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

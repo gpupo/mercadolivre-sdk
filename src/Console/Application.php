@@ -21,7 +21,7 @@ use Gpupo\CommonSdk\Console\AbstractApplication;
 use Gpupo\MercadolivreSdk\Factory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Psr\SimpleCache\CacheInterface;
 /**
  * @codeCoverageIgnore
  */
@@ -70,8 +70,8 @@ final class Application extends AbstractApplication
         }
     }
 
-    public function factorySdk(array $options, $loggerChannel = 'bin', $verbose = false)
+    public function factorySdk(array $options, $loggerChannel = 'bin', $verbose = false, CacheInterface $cache = null)
     {
-        return  Factory::getInstance()->setup($options, $this->factoryLogger($loggerChannel, $verbose));
+        return  new Factory($options, $this->factoryLogger($loggerChannel, $verbose), $cache);
     }
 }

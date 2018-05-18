@@ -22,6 +22,9 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Cache\Simple\FilesystemCache;
+
+$cache = new FilesystemCache();
 
 $app = new Application("mercadolivre-sdk");
 $app->findConfig(['./', 'bin/'], "mercadolivre-sdk");
@@ -37,7 +40,7 @@ if (file_exists($localFilename)) {
     $config = array_merge($config, $data);
 }
 
-$factory = $app->factorySdk($config, $logger);
+$factory = $app->factorySdk($config, $logger, true, $cache);
 
 $finder = new Finder();
 $finder->files()->name("*Command.php")->notName('*Abstract*')->in('./src/Console/Command');
