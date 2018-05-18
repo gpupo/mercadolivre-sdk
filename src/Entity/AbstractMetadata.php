@@ -19,6 +19,7 @@ namespace Gpupo\MercadolivreSdk\Entity;
 
 use Gpupo\CommonSdk\Entity\Metadata\MetadataContainerAbstract;
 use Gpupo\CommonSdk\Traits\FinderTrait;
+use Gpupo\Common\Entity\ArrayCollection;
 
 abstract class AbstractMetadata extends MetadataContainerAbstract
 {
@@ -30,19 +31,20 @@ abstract class AbstractMetadata extends MetadataContainerAbstract
             return [[]];
         }
 
-        if (array_key_exists('_links', $raw)) {
-            foreach ($raw['_links'] as $k => $v) {
-                $raw['links'][] = [
-                    'rel' => $k,
-                    'href' => current($v),
-                ];
-            }
-        }
+        unset($raw['results']);
 
-        return  $this->dataPiece('links', $raw);
+        return $raw;
     }
 
     protected function normalizeMetas($metas)
     {
+        foreach($metas as $key => $value) {
+            if (is_array($value)) {
+                $metas[$key] = new ArrayCollection($value);
+            }
+        }
+
+
+        return $metas;
     }
 }

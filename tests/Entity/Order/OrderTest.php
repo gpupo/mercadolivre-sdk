@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Entity\Order;
+namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
 
 use Gpupo\Common\Entity\Collection;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
