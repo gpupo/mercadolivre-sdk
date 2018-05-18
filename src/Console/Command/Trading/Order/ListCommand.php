@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command\Catalog\Product;
+namespace Gpupo\MercadolivreSdk\Console\Command\Trading\Order;
 
 use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
@@ -33,7 +33,7 @@ class ListCommand extends AbstractCommand
      */
     protected function configure()
     {
-        $this->setName(self::prefix.'catalog:product:list')->setDescription('Get the product list on Mercado Livre');
+        $this->setName(self::prefix.'trading:order:list')->setDescription('Get the Order list on Mercado Livre');
         $this->addOptionsForList();
     }
 
@@ -42,7 +42,7 @@ class ListCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $productManager = $this->getFactory()->factoryManager('product');
+        $orderManager = $this->getFactory()->factoryManager('order');
         $offset = $input->getOption('offset');
         $max = $input->getOption('max');
 
@@ -50,7 +50,7 @@ class ListCommand extends AbstractCommand
 
         try {
             $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
-            $response = $productManager->rawFetch($offset, $this->limit);
+            $response = $orderManager->rawFetch($offset, $this->limit);
             $paging = $response->get('paging');
             $total = $paging['total'];
             $output->writeln(sprintf('Total: <bg=green;fg=black> %d </>', $total));
@@ -58,7 +58,7 @@ class ListCommand extends AbstractCommand
             while ($offset < ($total - $this->limit) && $offset < ($max - $this->limit)) {
                 $offset += $this->limit;
                 $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
-                $response = $productManager->rawFetch($offset, $this->limit);
+                $response = $orderManager->rawFetch($offset, $this->limit);
                 $items = array_merge($items, $response->get('results'));
             }
 

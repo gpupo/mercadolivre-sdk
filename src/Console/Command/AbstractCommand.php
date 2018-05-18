@@ -19,6 +19,7 @@ namespace Gpupo\MercadolivreSdk\Console\Command;
 
 use Gpupo\MercadolivreSdk\Factory;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -40,16 +41,35 @@ abstract class AbstractCommand extends Command
 
     public function getProjectDataFilename()
     {
-        return sprintf('var/mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
+        return sprintf('var/markethub-mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
     }
 
     public function getFactory(): Factory
     {
         if (!$this->factory instanceof Factory) {
-            throw new \InvalidArgumentException("Factory must be defined!");
+            throw new \InvalidArgumentException('Factory must be defined!');
         }
 
         return $this->factory;
+    }
+
+    protected function addOptionsForList()
+    {
+        $this
+            ->addOption(
+                'offset',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Current offset of list',
+                0
+            )
+            ->addOption(
+                'max',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Max items quantity',
+                100
+            );
     }
 
     protected function getProjectData(): array
@@ -103,7 +123,7 @@ abstract class AbstractCommand extends Command
                     'Warning: <bg=red>Offline App</>',
                     '- If your App has the option offline_access selected, you will receive a refresh_token along with the access_token',
                     '- refresh_token is <bg=red>not present</>',
-                ]);
+            ]);
         }
 
         return $this->writeProjectData($data);

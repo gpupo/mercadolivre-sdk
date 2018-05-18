@@ -45,7 +45,6 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
     public function testValidateFail()
     {
         $this->expectException(\Exception::class);
-
         $decorator = $this->getDecorator();
         $decorator->validate();
     }
@@ -74,6 +73,7 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testValidate(Order $order)
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $decorator = $this->getDecorator($this->getExpectedArray())->setOrder($order);
         $decorator->validate();
         $this->assertInstanceOf(Order::class, $decorator->getOrder());
@@ -89,6 +89,7 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testToArray(Order $order)
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $decorator = $this->factoryDecorator($order, $this->getExpectedArray());
         $this->assertSame($this->getExpectedArray(), $decorator->toArray());
     }
@@ -103,6 +104,7 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testToJson(Order $order)
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $decorator = $this->factoryDecorator($order, $this->getExpectedArray());
         $this->assertSame($this->getExpectedJson(), $decorator->toJson());
     }
@@ -113,8 +115,8 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testFailMessage()
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $this->expectException(\InvalidArgumentException::class);
-
         $o = $this->proxy($this->getDecorator());
         $o->fail();
     }
@@ -125,9 +127,9 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testInvalidMessage()
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Attribute invalid: foo');
-
         $o = $this->proxy($this->getDecorator());
         $o->invalid('foo');
     }
@@ -138,9 +140,9 @@ abstract class AbstractDecoratorTestCase extends TestCaseAbstract
      */
     public function testBasicValidate()
     {
+        $this->output(sprintf('Target <fg=blue> %s </>', $this->target));
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Attribute invalid: Order');
-
         $o = $this->proxy($this->getDecorator());
         $o->set('order', '');
         $o->validate();

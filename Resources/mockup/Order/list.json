@@ -84,18 +84,51 @@
         }
       ],
       "shipping": {
-        "substatus": null,
-        "status": "to_be_agreed",
-        "id": null,
-        "service_id": null,
-        "currency_id": null,
-        "shipping_mode": null,
-        "shipment_type": null,
-        "sender_id": null,
-        "picking_type": null,
-        "date_created": null,
-        "cost": null,
-        "date_first_printed": null
+        "id": 20676482441,
+        "shipment_type": "shipping",
+        "status": "pending",
+        "shippingCode": "TR1234567891",
+        "date_created": "2013-05-27T10:03:28.000-04:00",
+        "receiver_address": {
+          "id": 12345678,
+          "street_number": "2055",
+          "street_name": "Rua Lauro Linhares",
+          "address_line": "Rua dos testes 123  ",
+          "zip_code": "01001000",
+          "city": {
+            "id": "BR-SP-44",
+            "name": "São Paulo"
+          },
+          "state": {
+            "id": "BR-SP",
+            "name": "São Paulo"
+          },
+          "country": {
+            "id": "BR",
+            "name": "Brasil"
+          },
+          "latitude": null,
+          "longitude": null,
+          "comment": null
+        },
+        "currency_id": "BRL",
+        "cost": 0,
+        "shipping_option": {
+          "id": 2000880360030001,
+          "shipping_method_id": 182,
+          "name": "Expresso",
+          "currency_id": "BRL",
+          "cost": 14.9,
+          "speed": {
+            "shipping": null,
+            "handling": null
+          },
+          "estimated_delivery": {
+            "date": null,
+            "time_from": null,
+            "time_to": null
+          }
+        }
       },
       "buyer": {
         "id": 207040551,

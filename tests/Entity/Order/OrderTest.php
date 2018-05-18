@@ -24,7 +24,6 @@ use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Order
- *
  */
 class OrderTest extends TestCaseAbstract
 {
@@ -73,7 +72,6 @@ class OrderTest extends TestCaseAbstract
         $this->assertSame('string', $order->getSchema()['status']);
         $this->assertSame('integer', $order->getSchema()['id']);
     }
-
 
     /**
      * @testdox Possui método ``getId()`` para acessar Id

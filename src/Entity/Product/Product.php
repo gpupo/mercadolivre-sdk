@@ -28,7 +28,7 @@ class Product extends EntityAbstract implements EntityInterface
     public function getSchema()
     {
         return [
-            'id'    => 'string',
+            'id' => 'string',
             'title' => 'string',
             'description' => 'string',
             'category_id' => 'string',

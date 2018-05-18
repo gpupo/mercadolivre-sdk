@@ -31,7 +31,7 @@ $output = new ConsoleOutput();
 
 $logger = new Logger('console');
 $config = $app->getConfig('mercadolivre');
-$localFilename = sprintf('var/mercadolivre-%d.yaml', $config['client_id']);
+$localFilename = sprintf('var/markethub-mercadolivre-%d.yaml', $config['client_id']);
 if (file_exists($localFilename)) {
     $data = Yaml::parseFile($localFilename);
     $config = array_merge($config, $data);
