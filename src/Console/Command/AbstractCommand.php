@@ -45,6 +45,10 @@ abstract class AbstractCommand extends Command
 
     public function getFactory(): Factory
     {
+        if (!$this->factory instanceof Factory::class) {
+            throw new \InvalidArgumentException("Factory must be defined!");
+        }
+
         return $this->factory;
     }
 
@@ -102,6 +106,6 @@ abstract class AbstractCommand extends Command
                 ]);
         }
 
-        $this->writeProjectData($data);
+        return $this->writeProjectData($data);
     }
 }
