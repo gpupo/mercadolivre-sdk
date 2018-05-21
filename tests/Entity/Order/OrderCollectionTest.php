@@ -42,9 +42,11 @@ class OrderCollectionTest extends TestCaseAbstract
      */
     public function testHasMetadata(OrderCollection $orderCollection)
     {
-        $this->assertGreaterThan(7, $orderCollection->getMetadata()->count());
-        $this->assertSame(166, $orderCollection->getMetadata()->get('paging')->get('total'));
-        $this->assertSame('date_asc', $orderCollection->getMetadata()->get('sort')->get('id'));
+        $this->assertGreaterThan(3, $orderCollection->getMetadata()->count());
+        $paging = $orderCollection->getMetadata()->get('paging');
+        $this->assertSame(166, $paging->get('total'), 'Paging Total');
+        $sort =  $orderCollection->getMetadata()->get('sort');
+        $this->assertSame('date_asc', $sort->get('id'), 'Sort');
     }
 
     protected function getData()
