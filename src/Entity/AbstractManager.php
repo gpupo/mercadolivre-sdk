@@ -20,6 +20,7 @@ namespace Gpupo\MercadolivreSdk\Entity;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Entity\ManagerAbstract;
 use Gpupo\CommonSdk\Entity\ManagerInterface;
+use Gpupo\Common\Entity\CollectionInterface;
 
 abstract class AbstractManager extends ManagerAbstract implements ManagerInterface
 {
@@ -38,7 +39,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     /**
      * @param mixed $itemId
      *
-     * @return false|Gpupo\Common\Entity\CollectionAbstract
+     * @return false|Gpupo\Common\Entity\CollectionInterface
      */
     public function findById($itemId)
     {

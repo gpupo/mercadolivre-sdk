@@ -33,13 +33,26 @@ final class Item extends EntityAbstract implements EntityInterface, CollectionIn
      */
     public function getSchema()
     {
-        return $this->loadArrayFromFile(__DIR__.'/map/schema.map.php');
-    }
+        return [
+            'id' => 'string',
+            'title' => 'string',
+            'category_id' => 'string',
+            'variation_id' => 'string',
+            'quantity' => 'integer',
+            'unit_price' => 'number',
+            'currency_id' => 'string',
+            'sale_fee' => 'number',
+            'condition' => 'string',
+            'warranty' => 'string',
+            'seller_custom_field' => 'string',
+            'variation_attributes' => 'array',
+            'differential_pricing_id' =>  'integer',
+            'listing_type_id' =>  'string',
+            'base_currency_id' => 'string',
+            'full_unit_price' => 'number',
+            'base_exchange_rate' => 'number',
+            'manufacturing_days' => 'integer',
 
-    public function check()
-    {
-        $this->setRequiredSchema(['id']);
-
-        return $this->isValid();
+        ];
     }
 }

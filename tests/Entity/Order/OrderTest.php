@@ -20,6 +20,8 @@ namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
 use Gpupo\Common\Entity\Collection;
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
+use Gpupo\MercadolivreSdk\Entity\Order\StatusDetail;
+use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
@@ -43,24 +45,19 @@ class OrderTest extends TestCaseAbstract
      */
     public function dataProviderOrder()
     {
-        $expected = [
-          'id' => 123456,
-          'status' => 'string',
-          'status_detail' => true,
-          'date_created' => 'string',
-          'date_closed' => 'string',
-          'order_items' => 'collection',
-          'total_amount' => 299.33,
-          'currency_id' => 'string',
-          'buyer' => 'collection',
-          'seller' => 'collection',
-          'payments' => 'collection',
-          'feedback' => 'collection',
-          'shipping' => 'collection',
-          'tags' => [],
-        ];
+        $list = [];
+        $data = $this->getResourceJson('mockup/Order/list-private.json');
 
-        return $this->dataProviderEntitySchema(self::QUALIFIED, $expected);
+        $results = $data['results'];
+        $collection = new OrderCollection($data);
+
+        foreach ($collection as $order) {
+            $expected = current($results);
+            $list[] = [$order, $expected];
+            next($results);
+        }
+
+        return $list;
     }
 
     /**
@@ -85,7 +82,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetId(Order $order, $expected = null)
     {
-        $this->assertSame($order['id'], (int) ($expected['id']));
+        $this->assertSame($order->getId(), (int) ($expected['id']));
     }
 
     /**
@@ -99,7 +96,8 @@ class OrderTest extends TestCaseAbstract
      */
     public function testSetId(Order $order, $expected = null)
     {
-        $this->assertSchemaSetter('id', 'string', $order);
+        $order->setId($expected['id']);
+        $this->assertSame($order->getId(), (int) $expected['id']);
     }
 
     /**
@@ -141,7 +139,8 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetStatusDetail(Order $order, $expected = null)
     {
-        $this->assertSchemaGetter('status_detail', 'boolean', $order, $expected);
+        $this->assertInstanceOf(StatusDetail::class, $order->getStatusDetail());
+
     }
 
     /**
@@ -253,7 +252,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetTotalAmount(Order $order, $expected = null)
     {
-        $this->assertSame($order['total_amount'], $expected['total_amount']);
+        $this->assertSame((float) $expected['total_amount'], $order->getTotalAmount(), 'Teste qualquer');
     }
 
     /**

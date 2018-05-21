@@ -43,18 +43,12 @@ class ItemTest extends TestCaseAbstract
     /**
      * @dataProvider dataProvider
      */
-    public function testIsACollection(Order $order)
-    {
-        $this->assertInstanceOf(Collection::class, $order->getOrderItems());
-    }
-
-    /**
-     * @dataProvider dataProvider
-     */
     public function testIsACollectionOfItems(Order $order)
     {
         foreach ($order->getOrderItems() as $item) {
-            $this->assertInstanceOf(Item::class, $item);
+            $this->assertStringStartsWith('MLB', $item->getId());
+            $this->assertSame('BRL', $item->getCurrencyId());
+            $this->assertStringStartsWith('gold', $item->get('listing_type_id'));
         }
     }
 }

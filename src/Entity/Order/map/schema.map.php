@@ -18,7 +18,7 @@ declare(strict_types=1);
 return [
     'id' => 'integer',
     'status' => 'string',
-    'status_detail' => 'boolean',
+    'status_detail' => 'object',
     'date_created' => 'string',
     'date_closed' => 'string',
     'order_items' => 'object',
