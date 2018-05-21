@@ -46,13 +46,12 @@ final class Item extends EntityAbstract implements EntityInterface, CollectionIn
             'warranty' => 'string',
             'seller_custom_field' => 'string',
             'variation_attributes' => 'array',
-            'differential_pricing_id' =>  'integer',
-            'listing_type_id' =>  'string',
+            'differential_pricing_id' => 'integer',
+            'listing_type_id' => 'string',
             'base_currency_id' => 'string',
             'full_unit_price' => 'number',
             'base_exchange_rate' => 'number',
             'manufacturing_days' => 'integer',
-
         ];
     }
 }

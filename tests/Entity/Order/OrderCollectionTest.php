@@ -45,7 +45,7 @@ class OrderCollectionTest extends TestCaseAbstract
         $this->assertGreaterThan(3, $orderCollection->getMetadata()->count());
         $paging = $orderCollection->getMetadata()->get('paging');
         $this->assertSame(166, $paging->get('total'), 'Paging Total');
-        $sort =  $orderCollection->getMetadata()->get('sort');
+        $sort = $orderCollection->getMetadata()->get('sort');
         $this->assertSame('date_asc', $sort->get('id'), 'Sort');
     }
 

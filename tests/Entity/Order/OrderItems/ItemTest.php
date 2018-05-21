@@ -19,8 +19,6 @@ namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\OrderItems;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
-use Gpupo\MercadolivreSdk\Entity\Order\OrderItems\Collection;
-use Gpupo\MercadolivreSdk\Entity\Order\OrderItems\Item;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
 /**

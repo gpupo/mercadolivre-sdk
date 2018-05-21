@@ -20,8 +20,8 @@ namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
 use Gpupo\Common\Entity\Collection;
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
-use Gpupo\MercadolivreSdk\Entity\Order\StatusDetail;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\StatusDetail;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
 
@@ -140,7 +140,6 @@ class OrderTest extends TestCaseAbstract
     public function testGetStatusDetail(Order $order, $expected = null)
     {
         $this->assertInstanceOf(StatusDetail::class, $order->getStatusDetail());
-
     }
 
     /**

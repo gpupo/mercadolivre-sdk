@@ -70,7 +70,7 @@ class TranslatorTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox ``translateTo()``
+     * @testdox Usa o método ``translateTo()`` para converter o pedido em schema comum em pedido Mercado Livre
      * @cover ::translateTo
      * @dataProvider dataProviderTranslator
      */
@@ -82,7 +82,7 @@ class TranslatorTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox ``translateFrom()``
+     * @testdox Usa o método ``translateFrom()`` para traduzir o pedido Mercado Livre em schema comum
      * @cover ::translateFrom
      * @dataProvider dataProviderTranslator
      */

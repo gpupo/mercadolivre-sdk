@@ -20,7 +20,6 @@ namespace Gpupo\MercadolivreSdk\Entity;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Entity\ManagerAbstract;
 use Gpupo\CommonSdk\Entity\ManagerInterface;
-use Gpupo\Common\Entity\CollectionInterface;
 
 abstract class AbstractManager extends ManagerAbstract implements ManagerInterface
 {
