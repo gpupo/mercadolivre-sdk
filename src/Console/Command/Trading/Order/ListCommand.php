@@ -52,7 +52,6 @@ class ListCommand extends AbstractCommand
             $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
             $response = $orderManager->rawFetch($offset, $this->limit);
 
-
             $paging = $response->get('paging');
             $total = $paging['total'];
             $output->writeln(sprintf('Total: <bg=green;fg=black> %d </>', $total));

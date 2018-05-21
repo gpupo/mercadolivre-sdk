@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity;
 
+use Gpupo\Common\Entity\ArrayCollection;
 use Gpupo\CommonSdk\Entity\Metadata\MetadataContainerAbstract;
 use Gpupo\CommonSdk\Traits\FinderTrait;
-use Gpupo\Common\Entity\ArrayCollection;
 
 abstract class AbstractMetadata extends MetadataContainerAbstract
 {
@@ -38,12 +38,11 @@ abstract class AbstractMetadata extends MetadataContainerAbstract
 
     protected function normalizeMetas($metas)
     {
-        foreach($metas as $key => $value) {
+        foreach ($metas as $key => $value) {
             if (is_array($value)) {
                 $metas[$key] = new ArrayCollection($value);
             }
         }
-
 
         return $metas;
     }

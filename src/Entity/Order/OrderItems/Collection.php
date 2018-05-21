@@ -15,19 +15,15 @@ declare(strict_types=1);
  *
  */
 
-return [
-    'id' => 'integer',
-    'status' => 'string',
-    'status_detail' => 'boolean',
-    'date_created' => 'string',
-    'date_closed' => 'string',
-    'order_items' => 'object',
-    'total_amount' => 'number',
-    'currency_id' => 'string',
-    'buyer' => 'collection',
-    'seller' => 'collection',
-    'payments' => 'collection',
-    'feedback' => 'collection',
-    'shipping' => 'collection',
-    'tags' => 'array',
-];
+namespace Gpupo\MercadolivreSdk\Entity\Order\OrderItems;
+
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\CollectionAbstract;
+
+final class Collection extends CollectionAbstract implements CollectionInterface
+{
+    public function factoryElement($data)
+    {
+        return new Item($data);
+    }
+}

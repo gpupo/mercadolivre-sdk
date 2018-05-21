@@ -48,11 +48,10 @@ class ViewCommand extends AbstractCommand
             $product = $productManager->findById($id);
 
             if (!$product) {
-                throw new \Exception("Product Not Found");
+                throw new \Exception('Product Not Found');
             }
 
             $this->writeInfo($output, $product->toArray());
-
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }

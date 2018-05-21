@@ -18,6 +18,7 @@ declare(strict_types=1);
 namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
 
 use Gpupo\Common\Entity\Collection;
+use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
@@ -224,7 +225,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetOrderItems(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['order_items']);
+        $this->assertInstanceOf(CollectionInterface::class, $order['order_items']);
     }
 
     /**

@@ -19,9 +19,10 @@ namespace Gpupo\MercadolivreSdk\Console;
 
 use Gpupo\CommonSdk\Console\AbstractApplication;
 use Gpupo\MercadolivreSdk\Factory;
+use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Psr\SimpleCache\CacheInterface;
+
 /**
  * @codeCoverageIgnore
  */

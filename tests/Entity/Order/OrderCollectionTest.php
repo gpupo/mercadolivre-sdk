@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
 
-use Gpupo\Common\Entity\Collection;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
 use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
@@ -27,11 +26,6 @@ use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
  */
 class OrderCollectionTest extends TestCaseAbstract
 {
-    protected function getData()
-    {
-        return $this->getResourceJson('mockup/Order/list-private.json');
-
-    }
     /**
      * @testdox Is a Container of multiples Orders
      */
@@ -53,4 +47,8 @@ class OrderCollectionTest extends TestCaseAbstract
         $this->assertSame('date_asc', $orderCollection->getMetadata()->get('sort')->get('id'));
     }
 
+    protected function getData()
+    {
+        return $this->getResourceJson('mockup/Order/list-private.json');
+    }
 }
