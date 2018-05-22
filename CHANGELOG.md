@@ -2,6 +2,25 @@
 VERSION 2  REQUIRE PHP 7.2 OR ABOVE
 ===================================
 
+   Version 2.3 - Add Order Entities
+      22/05/2018 18:58  2.3.0  initial release
+         315239b Add schema
+         d76e305 Schema Dump
+         ad6d519 Add Order Entities and tests
+         4316620 Add Status Detail object
+         8b0580f Improve Order schema
+         c146082 List public mockup
+         3f65726 Add OrdemItems Objects
+         440b871 Test product not found
+         a341463 Fix metadata
+         d8f03ce Add var directories
+         88ede81 Enable Cache
+         77b994b Fix order map
+         8e5daba Add Order List command
+         dfdc340 Update current Order mockup
+         03c9ee3 Rename fixture to mockup
+         29d517d Fix bugs/best practices
+
    Version 2.2 - Add command to view Product details
       17/05/2018 20:48  2.2.0  initial release
          2d71047 Tests Order OK
