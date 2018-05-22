@@ -15,19 +15,21 @@ declare(strict_types=1);
  *
  */
 
-return [
-    'id' => 'integer',
-    'status' => 'string',
-    'status_detail' => 'object',
-    'date_created' => 'string',
-    'date_closed' => 'string',
-    'order_items' => 'object',
-    'total_amount' => 'number',
-    'currency_id' => 'string',
-    'buyer' => 'object',
-    'seller' => 'object',
-    'payments' => 'object',
-    'feedback' => 'array',
-    'shipping' => 'object',
-    'tags' => 'array',
-];
+namespace Gpupo\MercadolivreSdk\Entity\Order\Payments;
+
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\EntityAbstract;
+use Gpupo\CommonSdk\Entity\EntityInterface;
+
+class Collector extends EntityAbstract implements EntityInterface, CollectionInterface
+{
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getSchema()
+    {
+        return [
+            'id' => 'integer',
+        ];
+    }
+}

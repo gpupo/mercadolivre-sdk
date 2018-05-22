@@ -15,19 +15,24 @@ declare(strict_types=1);
  *
  */
 
-return [
-    'id' => 'integer',
-    'status' => 'string',
-    'status_detail' => 'object',
-    'date_created' => 'string',
-    'date_closed' => 'string',
-    'order_items' => 'object',
-    'total_amount' => 'number',
-    'currency_id' => 'string',
-    'buyer' => 'object',
-    'seller' => 'object',
-    'payments' => 'object',
-    'feedback' => 'array',
-    'shipping' => 'object',
-    'tags' => 'array',
-];
+namespace Gpupo\MercadolivreSdk\Entity;
+
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\EntityAbstract;
+use Gpupo\CommonSdk\Entity\EntityInterface;
+
+abstract class AbstractPhone extends EntityAbstract implements EntityInterface, CollectionInterface
+{
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getSchema()
+    {
+        return [
+            'area_code' => 'integer',
+            'extension' => 'string',
+            'number' => 'string',
+            'verified' => 'bool',
+        ];
+    }
+}

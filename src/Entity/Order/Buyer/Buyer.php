@@ -15,20 +15,28 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status;
+namespace Gpupo\MercadolivreSdk\Entity\Order\Buyer;
 
-use Gpupo\MercadolivreSdk\Entity\Order\Decorator\AbstractDecorator;
-use Gpupo\MercadolivreSdk\Entity\Order\Decorator\DecoratorInterface;
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\EntityAbstract;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class Shipped extends AbstractDecorator implements DecoratorInterface
+class Buyer extends EntityAbstract implements EntityInterface, CollectionInterface
 {
-    protected $name = 'Shipped';
-
-    protected function factoryArray()
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getSchema()
     {
         return [
-            'tracking_number' => $this->getOrder()->getShipping()->getShippingCode(),
-            'service_id' => ('Expresso' === $this->getOriginalOrder()->getShipping()->getShippingOption()->getName()) ? 22 : 21,
+            'id' => 'integer',
+            'nickname' => 'string',
+            'email' => 'string',
+            'phone' => 'object',
+            'alternative_phone' => 'object',
+            'first_name' => 'string',
+            'last_name' => 'string',
+            'billing_info' => 'object',
         ];
     }
 }

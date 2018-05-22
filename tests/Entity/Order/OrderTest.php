@@ -307,7 +307,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetBuyer(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['buyer']);
+        $this->assertInstanceOf(CollectionInterface::class, $order['buyer']);
     }
 
     /**
@@ -335,7 +335,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetSeller(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['seller']);
+        $this->assertInstanceOf(CollectionInterface::class, $order['seller']);
     }
 
     /**
@@ -363,7 +363,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetPayments(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['payments']);
+        $this->assertInstanceOf(CollectionInterface::class, $order['payments']);
     }
 
     /**
@@ -391,7 +391,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetFeedback(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['feedback']);
+        $this->assertInternalType('array', $order->getFeedback());
     }
 
     /**
@@ -419,7 +419,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetShipping(Order $order, $expected = null)
     {
-        $this->assertInstanceOf(Collection::class, $order['shipping']);
+        $this->assertInstanceOf(CollectionInterface::class, $order['shipping']);
     }
 
     /**
