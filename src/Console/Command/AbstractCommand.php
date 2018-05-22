@@ -22,6 +22,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 
 /**
  * @codeCoverageIgnore
@@ -128,4 +129,18 @@ abstract class AbstractCommand extends Command
 
         return $this->writeProjectData($data);
     }
+
+    protected function getSchema(EntityInterface $object)
+    {
+        $schema = $object->getSchema();
+        foreach ($schema as $key => $value) {
+            $current = $object->get($key);
+            if ($current instanceof EntityInterface ) {
+                $schema[$key] = $this->getSchema($current);
+            }
+        }
+
+        return $schema;
+    }
+
 }

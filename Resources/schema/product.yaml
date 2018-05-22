@@ -1,0 +1,13 @@
+id: string
+title: string
+description: string
+category_id: string
+price: number
+currency_id: string
+buying_mode: string
+listing_type_id: string
+condition: string
+pictures: object
+available_quantity: number
+shipping: array
+official_store_id: number

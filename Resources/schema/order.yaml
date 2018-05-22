@@ -1,0 +1,94 @@
+id: integer
+status: string
+status_detail:
+    code: string
+    description: string
+date_created: string
+date_closed: string
+order_items: object
+total_amount: number
+currency_id: string
+buyer:
+    id: integer
+    nickname: string
+    email: string
+    phone:
+        area_code: integer
+        extension: string
+        number: string
+        verified: bool
+    alternative_phone:
+        area_code: integer
+        extension: string
+        number: string
+        verified: bool
+    first_name: string
+    last_name: string
+    billing_info:
+        doc_type: string
+        doc_number: string
+seller:
+    id: integer
+    nickname: string
+    email: string
+    phone:
+        area_code: integer
+        extension: string
+        number: string
+        verified: bool
+    alternative_phone:
+        area_code: integer
+        extension: string
+        number: string
+        verified: bool
+    first_name: string
+    last_name: string
+payments: object
+feedback: array
+shipping:
+    cost: integer
+    currency_id: string
+    date_created: string
+    date_first_printed: string
+    id: integer
+    picking_type: string
+    receiver_address:
+        address_line: string
+        city:
+            id: integer
+            name: string
+        comment: string
+        country:
+            id: integer
+            name: string
+        id: integer
+        latitude: string
+        longitude: string
+        state:
+            id: integer
+            name: string
+        street_name: string
+        street_number: string
+        zip_code: string
+    sender_id: integer
+    service_id: integer
+    shippingCode: string
+    shipment_type: string
+    shipping_items: object
+    shipping_mode: string
+    shipping_option:
+        cost: number
+        currency_id: string
+        estimated_delivery:
+            date: string
+            time_from: string
+            time_to: string
+        id: integer
+        name: string
+        shipping_method_id: integer
+        speed:
+            handling: string
+            shipping: string
+    status: string
+    substatus: string
+tags: array
