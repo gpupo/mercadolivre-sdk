@@ -7,7 +7,14 @@ currency_id: string
 buying_mode: string
 listing_type_id: string
 condition: string
-pictures: object
+pictures:
+    -
+        id: string
+        url: string
+        secure_url: string
+        size: string
+        max_size: string
+        quality: string
 available_quantity: number
 shipping: array
 official_store_id: number

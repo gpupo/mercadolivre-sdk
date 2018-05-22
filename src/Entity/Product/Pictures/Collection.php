@@ -19,8 +19,9 @@ namespace Gpupo\MercadolivreSdk\Entity\Product\Pictures;
 
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\CollectionAbstract;
+use Gpupo\CommonSdk\Entity\CollectionContainerInterface;
 
-final class PicturesCollection extends CollectionAbstract implements CollectionInterface
+final class Collection extends CollectionAbstract implements CollectionInterface, CollectionContainerInterface
 {
     public function factoryElement($data)
     {

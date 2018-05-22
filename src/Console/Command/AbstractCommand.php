@@ -23,6 +23,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 use Gpupo\CommonSdk\Entity\EntityInterface;
+use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\CollectionContainerInterface;
 
 /**
  * @codeCoverageIgnore
@@ -138,6 +140,17 @@ abstract class AbstractCommand extends Command
             if ($current instanceof EntityInterface ) {
                 $schema[$key] = $this->getSchema($current);
             }
+            if ($current instanceof CollectionContainerInterface) {
+
+                if (0 < $current->count()) {
+                    $subObject = $current->first();
+                } else {
+                    $subObject = $current->factoryElement([]);
+                }
+                
+                $schema[$key] = [$this->getSchema($subObject)];
+            }
+
         }
 
         return $schema;
