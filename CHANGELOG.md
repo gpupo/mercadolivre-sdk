@@ -1,4 +1,10 @@
 
+VERSION 4  MAJOR VERSION 4
+==========================
+
+   Version 4.0 - Major version 4
+      14/06/2018 12:21  4.0.0  initial release
+
 VERSION 2  REQUIRE PHP 7.2 OR ABOVE
 ===================================
 
