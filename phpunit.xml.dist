@@ -11,9 +11,7 @@
          stopOnWarning="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         syntaxCheck="false"
          bootstrap="vendor/autoload.php"
-         mapTestClassNameToCoveredClassName="true"
 >
     <testsuites>
         <testsuite name="Main Test Suite">
@@ -52,7 +50,6 @@
       <log type="testdox-html" target="build/logs/testdox.html"/>
       <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
       <log type="coverage-text" target=" Resources/doc/coverage.md" showUncoveredFiles="false"/>
-      <log type="coverage-html" target="build/logs/report" title="Coverage"
-        charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80" />
+      <log type="coverage-html" target="build/logs/report"  lowUpperBound="50" highLowerBound="80" />
     </logging>
 </phpunit>
