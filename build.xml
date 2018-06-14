@@ -23,7 +23,7 @@
    <arg value="install"/>
   </exec>
  </target>
- <target name="travis" description="Run tests" depends="composer-rebuild, phpunit,codeclimate"/>
+ <target name="travis" description="Run tests" depends="composer-rebuild, phpunit"/>
  <target name="test" description="Run tests" depends="phpunit"/>
  <target name="phpunit" description="Generate Reports">
   <mkdir dir="${basedir}/var/logs"/>
