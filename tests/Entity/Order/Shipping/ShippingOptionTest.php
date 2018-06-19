@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\Shipping;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Shipping;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Shipping\ShippingOption;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;

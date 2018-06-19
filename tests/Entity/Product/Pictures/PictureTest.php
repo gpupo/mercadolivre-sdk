@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Product\Pictures;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Product\Pictures;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Pictures\Picture;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;

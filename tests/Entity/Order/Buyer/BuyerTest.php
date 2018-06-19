@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\Buyer;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Buyer;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Buyer\Buyer;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;

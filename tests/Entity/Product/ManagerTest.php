@@ -15,12 +15,12 @@ declare(strict_types=1);
  *
  */
 
-namespace Entity\Product;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Product;
 
 use Gpupo\CommonSdk\Response as CommonResponse;
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Manager

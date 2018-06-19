@@ -15,11 +15,11 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Console;
+namespace  Gpupo\MercadolivreSdk\Tests\Console;
 
 use Gpupo\MercadolivreSdk\Console\Application;
 use Gpupo\MercadolivreSdk\Factory;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;

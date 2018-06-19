@@ -15,11 +15,11 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Order;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\OrderCollection

@@ -15,10 +15,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\Decorator\Status;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Decorator\Status;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Shipped;
-use Gpupo\Tests\MercadolivreSdk\Entity\Order\Decorator\AbstractDecoratorTestCase;
+use  Gpupo\MercadolivreSdk\Tests\Entity\Order\Decorator\AbstractDecoratorTestCase;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Decorator\Status\Shipped

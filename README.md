@@ -84,7 +84,8 @@ Adicione o pacote ``mercadolivre-sdk`` ao seu projeto utilizando [composer](http
 ## Links
 
 * [Mercadolivre-sdk Composer Package](https://packagist.org/packages/gpupo/mercadolivre-sdk) no packagist.org
-* [Documentação Oficial](http://developers.mercadolivre.com.br/api-portal/)
+* [Documentação Oficial](http://developers.mercadolivre.com.br/)
+* [Lista de apps em sua conta Mercado Livre](https://developers.mercadolivre.com.br/apps/home/)
 * [SDK Oficial](https://github.com/mercadolivre/marketplace-api-sdk-php)
 * [Marketplace-bundle Composer Package](https://opensource.gpupo.com/MarkethubBundle/) - Integração deste pacote com Symfony
 * [Outras SDKs para o Ecommerce do Brasil](https://opensource.gpupo.com/common-sdk/)

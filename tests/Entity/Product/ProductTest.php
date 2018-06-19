@@ -19,7 +19,7 @@ namespace Entity\Product;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Product

@@ -15,12 +15,12 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Product;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Product;
 
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\MercadolivreSdk\Entity\Product\Translator;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Translator

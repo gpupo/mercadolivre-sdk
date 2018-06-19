@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk;
+namespace  Gpupo\MercadolivreSdk\Tests;
 
 use Gpupo\MercadolivreSdk\Factory;
 use Gpupo\Tests\CommonSdk\TestCaseAbstract as CommonSdkTestCaseAbstract;

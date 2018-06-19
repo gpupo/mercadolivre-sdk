@@ -15,10 +15,10 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Client;
+namespace  Gpupo\MercadolivreSdk\Tests\Client;
 
 use Gpupo\CommonSdk\Client\ClientInterface;
-use Gpupo\Tests\MercadolivreSdk\TestCaseAbstract;
+use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
  * @coversNothing

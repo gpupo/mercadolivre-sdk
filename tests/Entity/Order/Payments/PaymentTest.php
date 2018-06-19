@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\Tests\MercadolivreSdk\Entity\Order\Payments;
+namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Payments;
 
 use Gpupo\MercadolivreSdk\Entity\Order\Payments\Payment;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
