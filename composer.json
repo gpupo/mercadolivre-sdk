@@ -13,8 +13,8 @@
     "require": {
         "php": ">=7.2",
         "ext-curl" : "*",
-        "gpupo/common-sdk": "^4.0",
-        "gpupo/common-schema": "^4.0",
+        "gpupo/common-sdk": "^4.0|dev-master",
+        "gpupo/common-schema": "^4.0|dev-master",
         "symfony/yaml": "^4.0",
         "monolog/monolog": "^1.11",
         "symfony/finder": "^4.1",
