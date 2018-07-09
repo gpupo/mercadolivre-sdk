@@ -19,11 +19,12 @@ namespace Gpupo\MercadolivreSdk;
 
 use Gpupo\CommonSdk\FactoryAbstract;
 use Gpupo\MercadolivreSdk\Client\Client;
+use Gpupo\CommonSdk\FactoryInterface;
 
 /**
  * Construtor principal, estendido pelo Factory de MarkethubBundle.
  */
-class Factory extends FactoryAbstract
+class Factory extends FactoryAbstract implements FactoryInterface
 {
     public function setClient(array $clientOptions = [])
     {
