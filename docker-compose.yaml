@@ -1,0 +1,17 @@
+version: '2'
+services:
+    php-dev:
+        container_name: php-dev
+        image: gpupo/container-orchestration:php-dev-v1.4.5
+        volumes:
+            - ./:/var/www/app
+    mariadb:
+        image: mariadb
+        restart: always
+        ports:
+          - 3306:3306
+        environment:
+          MYSQL_ROOT_PASSWORD: mas7er
+          MYSQL_USER: app_db_user
+          MYSQL_PASSWORD: app8as3
+          MYSQL_DATABASE: app

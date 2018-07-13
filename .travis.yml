@@ -1,20 +1,26 @@
 sudo: false
 language: php
-os:
+oos:
   - linux
+services:
+  - mysql
 php:
   - 7.2
   - nightly
-  - hhvm
 matrix:
+  fast_finish: true
   allow_failures:
     - php: nightly
     - php: hhvm
-branches:
-  except:
-    - /^psr.*$/
-    - /^dev.*$/
-    - /^topic.*$/
-script: ant travis
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS app;'
+  - mysql -u root -e "CREATE USER 'app_db_user'@'localhost' IDENTIFIED BY 'app8as3';"
+  - mysql -u root -e "GRANT ALL ON app.* TO 'app_db_user'@'localhost';"
+before_script:
+  - composer self-update
+  - composer install --prefer-dist
+  - vendor/bin/doctrine orm:schema-tool:update --force
+
+script: vendor/bin/phpunit
 notifications:
   email: false

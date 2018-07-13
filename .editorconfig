@@ -1,4 +1,5 @@
 # EditorConfig is awesome: http://EditorConfig.org
+# @see https://github.com/sindresorhus/atom-editorconfig#readme
 root = true
 
 [*]
