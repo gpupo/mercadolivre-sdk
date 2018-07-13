@@ -74,7 +74,7 @@ class TranslatorTest extends TestCaseAbstract
      * @cover ::loadMap
      *
      * @dataProvider dataProviderArrayExpected
-     *
+     * @group todo
      * @param mixed $expected
      */
     public function testLoadMap($expected)
@@ -100,6 +100,7 @@ class TranslatorTest extends TestCaseAbstract
     /**
      * @testdox ``translateTo()``
      * @cover ::translateTo
+     * @group todo
      * @dataProvider dataProviderTranslator
      */
     public function testTranslateTo(Translator $translator)
@@ -113,6 +114,7 @@ class TranslatorTest extends TestCaseAbstract
     /**
      * @testdox ``translateFrom()``
      * @cover ::translateFrom
+     * @group todo
      * @dataProvider dataProviderTranslator
      */
     public function testTranslateFrom(Translator $translator)

@@ -39,6 +39,7 @@
     <groups>
       <exclude>
        <group>large</group>
+       <group>todo</group>
       </exclude>
      </groups>
     <!-- Customize your parameters ! -->

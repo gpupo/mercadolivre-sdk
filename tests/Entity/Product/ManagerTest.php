@@ -49,6 +49,7 @@ class ManagerTest extends TestCaseAbstract
     /**
      * @testdox ``translatorInsertProduct()``
      * @cover ::translatorInsertProduct
+     * @group todo
      * @dataProvider dataProviderManager
      */
     public function testTranslatorInsertProduct(Manager $manager)

@@ -41,6 +41,7 @@ class ProductTest extends TestCaseAbstract
     /**
      * @testdox ``getSchema()``
      * @cover ::getSchema
+     * @group todo
      * @dataProvider dataProviderProduct
      */
     public function testGetSchema(Product $product)
