@@ -19,6 +19,7 @@ namespace Gpupo\MercadolivreSdk\Client;
 
 use Gpupo\CommonSdk\Client\ClientAbstract;
 use Gpupo\CommonSdk\Client\ClientInterface;
+use Gpupo\CommonSchema\ArrayCollection\Application\API\OAuth\Client\AccessToken;
 
 final class Client extends ClientAbstract implements ClientInterface
 {
@@ -29,17 +30,21 @@ final class Client extends ClientAbstract implements ClientInterface
      */
     public function getDefaultOptions()
     {
+        $domain = 'api.mercadolibre.com';
+
         return [
             'app_id' => false,
             'secret_key' => false,
             'access_token' => false,
             'refresh_token' => false,
-            'base_url' => 'https://api.mercadolibre.com',
+            'user_id' => false,
+            'users_url' => sprintf('https://%s/users', $domain),
+            'base_url' => sprintf('https://%s', $domain),
+            'oauth_url' => sprintf('https://%s/oauth', $domain),
             'verbose' => true,
-            'sslVersion' => 'SecureTransport',
             'cacheTTL' => 3600,
-            'sslVerifyPeer' => true,
-            'user_id' => 12345678,
+            'offset' => 0,
+            'limit' => 30,
         ];
     }
 
@@ -62,5 +67,25 @@ final class Client extends ClientAbstract implements ClientInterface
         $list = [];
 
         return $list;
+    }
+
+    public function requestToken()
+    {
+        $pars = [
+          'grant_type' => 'client_credentials',
+          'client_id' => $this->getOptions()->get('client_id'),
+          'client_secret' => $this->getOptions()->get('client_secret'),
+        ];
+
+        $this->setMode('form');
+        $request = $this->post($this->getOauthUrl('/token'), $pars);
+        $accessToken = $request->getData(AccessToken::class);
+
+        return $accessToken;
+    }
+
+    protected function getOauthUrl($path)
+    {
+        return $this->getOptions()->get('oauth_url').$path;
     }
 }
