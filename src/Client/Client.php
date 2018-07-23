@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Client;
 
+use Gpupo\CommonSchema\ArrayCollection\Application\API\OAuth\Client\AccessToken;
 use Gpupo\CommonSdk\Client\ClientAbstract;
 use Gpupo\CommonSdk\Client\ClientInterface;
-use Gpupo\CommonSchema\ArrayCollection\Application\API\OAuth\Client\AccessToken;
 
 final class Client extends ClientAbstract implements ClientInterface
 {
@@ -62,13 +62,6 @@ final class Client extends ClientAbstract implements ClientInterface
         return $this->ml;
     }
 
-    protected function renderAuthorization()
-    {
-        $list = [];
-
-        return $list;
-    }
-
     public function requestToken()
     {
         $pars = [
@@ -82,6 +75,13 @@ final class Client extends ClientAbstract implements ClientInterface
         $accessToken = $request->getData(AccessToken::class);
 
         return $accessToken;
+    }
+
+    protected function renderAuthorization()
+    {
+        $list = [];
+
+        return $list;
     }
 
     protected function getOauthUrl($path)

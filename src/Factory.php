@@ -18,8 +18,8 @@ declare(strict_types=1);
 namespace Gpupo\MercadolivreSdk;
 
 use Gpupo\CommonSdk\FactoryAbstract;
-use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\CommonSdk\FactoryInterface;
+use Gpupo\MercadolivreSdk\Client\Client;
 
 /**
  * Construtor principal, estendido pelo Factory de MarkethubBundle.

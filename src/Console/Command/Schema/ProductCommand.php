@@ -18,9 +18,9 @@ declare(strict_types=1);
 namespace Gpupo\MercadolivreSdk\Console\Command\Schema;
 
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
+use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Symfony\Component\Yaml\Yaml;
 
 /**

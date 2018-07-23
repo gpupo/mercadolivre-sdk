@@ -18,8 +18,8 @@ declare(strict_types=1);
 namespace Entity\Product;
 
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
-use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
-use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
+use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
+use  Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Product
