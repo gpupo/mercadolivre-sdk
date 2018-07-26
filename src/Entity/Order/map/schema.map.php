@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 return [
     'id' => 'integer',
+    'pack_id' => 'string',
     'status' => 'string',
     'status_detail' => 'object',
     'date_created' => 'string',
