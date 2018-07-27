@@ -26,6 +26,8 @@ use Gpupo\MercadolivreSdk\Client\Client;
  */
 class Factory extends FactoryAbstract implements FactoryInterface
 {
+    protected $name = 'mercadolivre-sdk';
+
     public function setClient(array $clientOptions = [])
     {
         $this->client = new Client($clientOptions, $this->getLogger(), $this->getSimpleCache());
