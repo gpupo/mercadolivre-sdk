@@ -2,7 +2,7 @@ version: '2'
 services:
     php-dev:
         container_name: php-dev
-        image: gpupo/container-orchestration:php-dev-v1.4.11
+        image: gpupo/container-orchestration:php-dev
         volumes:
             - ./:/var/www/app
     mariadb:
