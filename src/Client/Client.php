@@ -25,29 +25,8 @@ final class Client extends ClientAbstract implements ClientInterface
 {
     private $ml;
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getDefaultOptions()
-    {
-        $domain = 'api.mercadolibre.com';
-
-        return [
-            'app_id' => false,
-            'secret_key' => false,
-            'access_token' => false,
-            'refresh_token' => false,
-            'user_id' => false,
-            'users_url' => sprintf('https://%s/users', $domain),
-            'base_url' => sprintf('https://%s', $domain),
-            'oauth_url' => sprintf('https://%s/oauth', $domain),
-            'verbose' => true,
-            'cacheTTL' => 3600,
-            'offset' => 0,
-            'limit' => 30,
-        ];
-    }
-
+    protected $endpoint_domain = 'api.mercadolibre.com';
+    
     public function accessMl()
     {
         if (empty($this->ml)) {

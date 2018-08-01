@@ -30,6 +30,7 @@ class ShippingOption extends EntityAbstract implements EntityInterface, Collecti
     {
         return [
             'cost' => 'number',
+            'list_cost' => 'number',
             'currency_id' => 'string',
             'estimated_delivery' => 'object',
             'id' => 'integer',
