@@ -88,6 +88,8 @@ final class Manager extends AbstractManager
 
         $update = [];
         $update['price'] = $entity['price'];
+        $update['title'] = $entity['title'];
+        $update['pictures'] = $entity['pictures'];
 
         $stock = $entity['available_quantity'];
         if ($stock > 0) {

@@ -82,6 +82,7 @@ class ProductGeneratedTest extends CoreTestCase
             'available_quantity' => 'number',
             'shipping' => 'array',
             'official_store_id' => 'number',
+            'status' => 'string',
         ];
 
         return $this->dataProviderEntitySchema(self::QUALIFIED, $expected);
@@ -475,5 +476,35 @@ class ProductGeneratedTest extends CoreTestCase
     {
         $product->setOfficialStoreId($expected['official_store_id']);
         $this->assertSame($expected['official_store_id'], $product->getOfficialStoreId());
+    }
+
+    /**
+     * @testdox Have a getter ``getStatus()`` to get ``Status``
+     * @dataProvider dataProviderProduct
+     * @cover ::getStatus
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testGetStatus(Product $product, array $expected)
+    {
+        $product->setStatus($expected['status']);
+        $this->assertSame($expected['status'], $product->getStatus());
+    }
+
+    /**
+     * @testdox Have a setter ``setStatus()`` to set ``Status``
+     * @dataProvider dataProviderProduct
+     * @cover ::setStatus
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testSetStatus(Product $product, array $expected)
+    {
+        $product->setStatus($expected['status']);
+        $this->assertSame($expected['status'], $product->getStatus());
     }
 }
