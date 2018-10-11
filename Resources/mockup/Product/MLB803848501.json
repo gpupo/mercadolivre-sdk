@@ -32,7 +32,11 @@
     }
   ],
   "video_id": null,
-  "description": "Foo Bar",
+  "description": [
+    {
+      "id": "MLB803848501-1846315479"
+    }
+  ],
   "accepts_mercadopago": true,
   "non_mercado_pago_payment_methods": [],
   "shipping": {

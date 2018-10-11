@@ -1,6 +1,8 @@
 id: string
 title: string
-description: string
+description:
+    -
+        plain_text: string
 category_id: string
 price: number
 currency_id: string
