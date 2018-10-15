@@ -30,18 +30,18 @@ class Product extends EntityAbstract implements EntityInterface
         return [
             'id' => 'string',
             'title' => 'string',
-            'description' => 'string',
+            'description' => 'array',
             'category_id' => 'string',
             'price' => 'number',
             'currency_id' => 'string',
             'buying_mode' => 'string',
             'listing_type_id' => 'string',
             'condition' => 'string',
-            'description' => 'string',
             'pictures' => 'object',
             'available_quantity' => 'number',
             'shipping' => 'array',
             'official_store_id' => 'number',
+            'status' => 'string',
         ];
     }
 }

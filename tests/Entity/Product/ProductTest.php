@@ -256,7 +256,7 @@ class ProductTest extends TestCaseAbstract
      */
     public function testGetDescription(Product $product, $expected = null)
     {
-        $this->assertSchemaGetter('description', 'string', $product, $expected);
+        $this->assertSchemaGetter('description', 'array', $product, $expected);
     }
 
     /**
@@ -270,6 +270,6 @@ class ProductTest extends TestCaseAbstract
      */
     public function testSetDescription(Product $product, $expected = null)
     {
-        $this->assertSchemaSetter('description', 'string', $product);
+        $this->assertSchemaSetter('description', 'array', $product);
     }
 }
