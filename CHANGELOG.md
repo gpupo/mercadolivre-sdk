@@ -2,6 +2,30 @@
 VERSION 4  MAJOR VERSION 4
 ==========================
 
+   Version 4.1 - Improve Status field
+      15/10/2018 15:32  4.1.0  initial release
+         e31a602 Merge branch 'master' of github.com:gpupo/mercadolivre-sdk
+         3e0b9f0 Merge pull request #2 from devbrunocorrea/feature-add-description-plain-text
+         35bd0fa Merge pull request #1 from devbrunocorrea/feature-add-new-fields
+         42bb3ed Modified product description field for array
+         230573a Status field added on item return and title and picture fields added in update command
+         c99caec Fix test
+         b4b0542 php++
+         59083f0 Add config
+         a77ef26 Add list_cost
+         be0fe29 Add $name
+         c06fed9 Add pack_id
+         b8f026a Apply CS rules
+         3bba5a4 Add options
+         370fdab add tests to todo group
+         d487b82 Add docker config
+         6496b3c Remove CI config
+         ffec761 Add interface
+         894ea9a relax dependencies version
+         4cbb271 Refactory tests namespace
+         57ab384 Disable codeclimate
+         fd14083 Fix phpunit config
+
    Version 4.0 - Major version 4
       14/06/2018 12:21  4.0.0  initial release
 
