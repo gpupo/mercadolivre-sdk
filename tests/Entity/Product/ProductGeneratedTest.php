@@ -71,7 +71,7 @@ class ProductGeneratedTest extends CoreTestCase
         $expected = [
             'id' => 'string',
             'title' => 'string',
-            'description' => 'string',
+            'description' => 'array',
             'category_id' => 'string',
             'price' => 'number',
             'currency_id' => 'string',
