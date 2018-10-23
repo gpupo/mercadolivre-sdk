@@ -38,11 +38,28 @@ final class Manager extends AbstractManager
     protected $maps = [
         'save' => ['POST', '/items?access_token={access_token}'],
         'findById' => ['GET', '/items/{itemId}/'],
+        'getDescription' => ['GET', '/items/{itemId}/description?access_token={access_token}'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
         'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
+
+    public function findById($itemId)
+    {
+        $item = parent::findById($itemId);
+        $description = $this->getDescription($itemId);
+        $item->set('description', $description);
+
+        return $item;
+    }
+
+    public function getDescription($itemId)
+    {
+        $response = $this->perform($this->factoryMap('getDescription', ['itemId' => $itemId]));
+
+        return $this->processResponse($response);
+    }
 
     public function translatorInsert(TranslatorDataCollection $data, $mlCategory)
     {
