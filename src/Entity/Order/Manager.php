@@ -22,6 +22,9 @@ use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Translator as MessageTranslator;
 
 final class Manager extends AbstractManager
 {
@@ -95,5 +98,23 @@ final class Manager extends AbstractManager
     public function fetchQueue($offset = 0, $limit = 50, array $parameters = [])
     {
         return $this->translatorFetch($offset, $limit, $parameters);
+    }
+
+    public function findMessagesByOrderId($itemId)
+    {
+        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', ['itemId' => $itemId]));
+        $result = $this->processResponse($responseJson);
+
+        $messages = new MessageCollection();
+        if(!isset($result['results'])){
+            return $messages;
+        }
+
+        foreach($result['results'] as $raw){
+            $message = new Message($raw);
+            $messages->add($message);
+        }
+
+        return $messages;
     }
 }

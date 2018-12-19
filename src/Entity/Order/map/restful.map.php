@@ -35,6 +35,10 @@ return [
         'GET',
         '/orders/{itemId}?access_token={access_token}',
     ],
+    'findMessagesByOrderId' => [
+        'GET',
+        '/messages/orders/{itemId}?access_token={access_token}',
+    ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
     'toShipped' => $put(),
