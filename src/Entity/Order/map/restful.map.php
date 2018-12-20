@@ -37,7 +37,7 @@ return [
     ],
     'findMessagesByOrderId' => [
         'GET',
-        '/messages/orders/{itemId}?access_token={access_token}',
+        '/messages/orders/{itemId}?access_token={access_token}&offset={offset}&limit={limit}',
     ],
     'toTracked' => $put(),
     'toProcessing' => $put(),

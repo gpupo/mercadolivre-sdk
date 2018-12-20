@@ -102,19 +102,33 @@ final class Manager extends AbstractManager
 
     public function findMessagesByOrderId($itemId)
     {
-        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', ['itemId' => $itemId]));
-        $result = $this->processResponse($responseJson);
-
         $messages = new MessageCollection();
-        if(!isset($result['results'])){
-            return $messages;
-        }
+        $offset = 0;
 
-        foreach($result['results'] as $raw){
-            $message = new Message($raw);
-            $messages->add($message);
-        }
+        do {
+            $results = $this->fetchMessages($itemId, $offset);
+
+            foreach($results['results'] as $raw){
+                $message = new Message($raw);
+                $messages->add($message);
+            }
+
+            $offset = $messages->count();
+        } while ($messages->count() !== $results['paging']['total']);
 
         return $messages;
+    }
+
+    protected function fetchMessages($itemId, $offset = 0, $limit = 50)
+    {
+        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', [
+            'itemId' => $itemId,
+            'offset' => $offset,
+            'limit' => $limit,
+        ]));
+
+        $results = $this->processResponse($responseJson);
+
+        return $results;
     }
 }
