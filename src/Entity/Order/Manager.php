@@ -131,4 +131,25 @@ final class Manager extends AbstractManager
 
         return $results;
     }
+
+    public function findShipmentByOrderId($orderId)
+    {
+        $order = $this->findById($orderId);
+
+        if(!isset($order['shipping']['id']) || empty($order['shipping']['id'])){
+            return;
+        }
+
+        return $this->findShipmentById($order['shipping']['id']);
+    }
+
+    public function findShipmentById($shipmentId)
+    {
+        $responseJson = $this->perform($this->factoryMap('findShipmentById', [
+            'shipmentId' => $shipmentId,
+        ]));
+
+        return $this->processResponse($responseJson);
+    }
+
 }
