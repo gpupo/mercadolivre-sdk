@@ -22,9 +22,8 @@ use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
-use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
 use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
-use Gpupo\MercadolivreSdk\Entity\Order\Message\Translator as MessageTranslator;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
 
 final class Manager extends AbstractManager
 {
@@ -71,7 +70,7 @@ final class Manager extends AbstractManager
             return $factory204('Order status not changed!');
         }
 
-        if (in_array($status, ['processing', 'canceled', 'shipped'], true)) {
+        if (\in_array($status, ['processing', 'canceled', 'shipped'], true)) {
             $decorator = $this->factoryDecorator($entity, 'Status\\'.ucfirst($status));
             $decorator->setOriginalOrder($order);
 
@@ -108,7 +107,7 @@ final class Manager extends AbstractManager
         do {
             $results = $this->fetchMessages($itemId, $offset);
 
-            foreach($results['results'] as $raw){
+            foreach ($results['results'] as $raw) {
                 $message = new Message($raw);
                 $messages->add($message);
             }
@@ -119,24 +118,11 @@ final class Manager extends AbstractManager
         return $messages;
     }
 
-    protected function fetchMessages($itemId, $offset = 0, $limit = 50)
-    {
-        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', [
-            'itemId' => $itemId,
-            'offset' => $offset,
-            'limit' => $limit,
-        ]));
-
-        $results = $this->processResponse($responseJson);
-
-        return $results;
-    }
-
     public function findShipmentByOrderId($orderId)
     {
         $order = $this->findById($orderId);
 
-        if(!isset($order['shipping']['id']) || empty($order['shipping']['id'])){
+        if (!isset($order['shipping']['id']) || empty($order['shipping']['id'])) {
             return;
         }
 
@@ -152,4 +138,16 @@ final class Manager extends AbstractManager
         return $this->processResponse($responseJson);
     }
 
+    protected function fetchMessages($itemId, $offset = 0, $limit = 50)
+    {
+        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', [
+            'itemId' => $itemId,
+            'offset' => $offset,
+            'limit' => $limit,
+        ]));
+
+        $results = $this->processResponse($responseJson);
+
+        return $results;
+    }
 }

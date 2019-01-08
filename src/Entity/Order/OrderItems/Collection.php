@@ -25,7 +25,7 @@ final class Collection extends CollectionAbstract implements CollectionInterface
 {
     public function factoryElement($data)
     {
-        if (is_array($data)) {
+        if (\is_array($data)) {
             if (array_key_exists('item', $data)) {
                 $data = array_merge($data, $data['item']);
                 unset($data['item']);

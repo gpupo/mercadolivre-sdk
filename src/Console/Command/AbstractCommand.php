@@ -93,7 +93,7 @@ abstract class AbstractCommand extends Command
     {
         $tabs = $tabs."\t";
         foreach ($info as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $output->writeln(sprintf($tabs.'<bg=green;fg=black> %s </>', $key));
                 $this->writeInfo($output, $value, $tabs);
             } else {

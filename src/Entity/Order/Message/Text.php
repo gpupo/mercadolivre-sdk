@@ -23,7 +23,6 @@ use Gpupo\CommonSdk\Entity\EntityInterface;
 
 class Text extends EntityAbstract implements EntityInterface, CollectionInterface
 {
-
     /**
      * @codeCoverageIgnore
      */

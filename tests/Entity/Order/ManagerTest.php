@@ -20,15 +20,15 @@ namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order;
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Entity\Order\Manager;
-use Gpupo\MercadolivreSdk\Entity\Order\Order;
-use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
-use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
-use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
 use Gpupo\MercadolivreSdk\Entity\Order\Message\From;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Text;
 use Gpupo\MercadolivreSdk\Entity\Order\Message\To;
 use Gpupo\MercadolivreSdk\Entity\Order\Message\User;
 use Gpupo\MercadolivreSdk\Entity\Order\Message\UserCollection;
-use Gpupo\MercadolivreSdk\Entity\Order\Message\Text;
+use Gpupo\MercadolivreSdk\Entity\Order\Order;
+use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
 use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
@@ -187,21 +187,6 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
     }
 
-    protected function getManager($filename = 'item.json')
-    {
-        $manager = $this->getFactory()->factoryManager('order');
-        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Order/'.$filename));
-
-        return $manager;
-    }
-
-    protected function commonAsserts(Order $order)
-    {
-        $this->assertSame((int) '1068825849', (int) $order->getId());
-        $this->assertSame('pending', $order->getShipping()->getStatus());
-        $this->assertSame(20676482441, $order->getShipping()->getId());
-    }
-
     /**
      * @testdox Get messages based on order number
      * @covers ::findMessagesByOrderId
@@ -227,5 +212,20 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame('43b450d6bd3f47fb94394041b26c519f', $messages->first()->getMessageId());
         $this->assertSame((int) '76601286', (int) $messages->first()->getFrom()->getUserId());
         $this->assertSame((int) '106459677', (int) $messages->first()->getTo()->first()->getUserId());
+    }
+
+    protected function getManager($filename = 'item.json')
+    {
+        $manager = $this->getFactory()->factoryManager('order');
+        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Order/'.$filename));
+
+        return $manager;
+    }
+
+    protected function commonAsserts(Order $order)
+    {
+        $this->assertSame((int) '1068825849', (int) $order->getId());
+        $this->assertSame('pending', $order->getShipping()->getStatus());
+        $this->assertSame(20676482441, $order->getShipping()->getId());
     }
 }

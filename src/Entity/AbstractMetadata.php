@@ -27,7 +27,7 @@ abstract class AbstractMetadata extends MetadataContainerAbstract
 
     protected function cutMetadata($raw)
     {
-        if (empty($raw) || !is_array($raw)) {
+        if (empty($raw) || !\is_array($raw)) {
             return [[]];
         }
 
@@ -39,7 +39,7 @@ abstract class AbstractMetadata extends MetadataContainerAbstract
     protected function normalizeMetas($metas)
     {
         foreach ($metas as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $metas[$key] = new ArrayCollection($value);
             }
         }

@@ -22,19 +22,17 @@ use Gpupo\Common\Entity\CollectionInterface;
 
 class UserCollection extends CollectionAbstract implements CollectionInterface
 {
-
     public function __construct($data)
     {
-        foreach($data as $item)
-        {
-            if(!is_array($item)){
+        foreach ($data as $item) {
+            if (!\is_array($item)) {
                 break;
             }
 
             $this->add($this->factoryElement($item));
         }
     }
-    
+
     public function factoryElement($data)
     {
         return new User($data);
