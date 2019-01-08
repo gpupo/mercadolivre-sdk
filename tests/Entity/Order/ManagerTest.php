@@ -22,6 +22,13 @@ use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Entity\Order\Manager;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\From;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\To;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\User;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\UserCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Text;
 use  Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
@@ -193,5 +200,32 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame((int) '1068825849', (int) $order->getId());
         $this->assertSame('pending', $order->getShipping()->getStatus());
         $this->assertSame(20676482441, $order->getShipping()->getId());
+    }
+
+    /**
+     * @testdox Get messages based on order number
+     * @covers ::findMessagesByOrderId
+     * @covers ::execute
+     */
+    public function testFindMessagesByOrderId()
+    {
+        $manager = $this->getManager('Message/messages.json');
+        $messages = $manager->findMessagesByOrderId(1068825849);
+        $this->assertInstanceOf(MessageCollection::class, $messages);
+        $this->assertInstanceOf(Message::class, $messages->first());
+        $this->assertInstanceOf(From::class, $messages->first()->getFrom());
+        $this->assertInstanceOf(User::class, $messages->first()->getFrom());
+        $this->assertInstanceOf(To::class, $messages->first()->getTo());
+        $this->assertInstanceOf(UserCollection::class, $messages->first()->getTo());
+        $this->assertInstanceOf(User::class, $messages->first()->getTo()->first());
+        $this->assertInstanceOf(Text::class, $messages->first()->getText());
+        $this->commonAssertsMessage($messages);
+    }
+
+    public function commonAssertsMessage(MessageCollection $messages)
+    {
+        $this->assertSame('43b450d6bd3f47fb94394041b26c519f', $messages->first()->getMessageId());
+        $this->assertSame((int) '76601286', (int) $messages->first()->getFrom()->getUserId());
+        $this->assertSame((int) '106459677', (int) $messages->first()->getTo()->first()->getUserId());
     }
 }

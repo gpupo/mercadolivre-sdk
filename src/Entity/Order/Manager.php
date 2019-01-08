@@ -22,6 +22,9 @@ use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\MessageCollection;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Message;
+use Gpupo\MercadolivreSdk\Entity\Order\Message\Translator as MessageTranslator;
 
 final class Manager extends AbstractManager
 {
@@ -96,4 +99,57 @@ final class Manager extends AbstractManager
     {
         return $this->translatorFetch($offset, $limit, $parameters);
     }
+
+    public function findMessagesByOrderId($itemId)
+    {
+        $messages = new MessageCollection();
+        $offset = 0;
+
+        do {
+            $results = $this->fetchMessages($itemId, $offset);
+
+            foreach($results['results'] as $raw){
+                $message = new Message($raw);
+                $messages->add($message);
+            }
+
+            $offset = $messages->count();
+        } while ($messages->count() !== $results['paging']['total']);
+
+        return $messages;
+    }
+
+    protected function fetchMessages($itemId, $offset = 0, $limit = 50)
+    {
+        $responseJson = $this->perform($this->factoryMap('findMessagesByOrderId', [
+            'itemId' => $itemId,
+            'offset' => $offset,
+            'limit' => $limit,
+        ]));
+
+        $results = $this->processResponse($responseJson);
+
+        return $results;
+    }
+
+    public function findShipmentByOrderId($orderId)
+    {
+        $order = $this->findById($orderId);
+
+        if(!isset($order['shipping']['id']) || empty($order['shipping']['id'])){
+            return;
+        }
+
+        return $this->findShipmentById($order['shipping']['id']);
+    }
+
+    public function findShipmentById($shipmentId)
+    {
+        $responseJson = $this->perform($this->factoryMap('findShipmentById', [
+            'shipmentId' => $shipmentId,
+        ]));
+
+        return $this->processResponse($responseJson);
+    }
+
 }
