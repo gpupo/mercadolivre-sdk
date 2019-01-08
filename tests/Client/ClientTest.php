@@ -43,7 +43,7 @@ class ClientTest extends TestCaseAbstract
     public function testGerenciaUriDeRecurso(ClientInterface $client)
     {
         $this->assertSame(
-            '/items/MLB12343412/descriptions',
+            'https://api.mercadolibre.com/items/MLB12343412/descriptions',
             $client->getResourceUri('/items/MLB12343412/descriptions')
         );
     }
