@@ -1,15 +1,14 @@
-version: '2'
+version: '3.3'
 services:
-    php-dev:
-        container_name: php-dev
+    php-fpm:
         image: gpupo/container-orchestration:php-dev
         volumes:
-            - ./:/var/www/app
+            - $PWD/:/var/www/app
     mariadb:
         image: mariadb
         restart: always
-        ports:
-          - 3306:3306
+        expose:
+          - 3306
         environment:
           MYSQL_ROOT_PASSWORD: mas7er
           MYSQL_USER: app_db_user
