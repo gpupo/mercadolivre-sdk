@@ -43,9 +43,9 @@ final class Client extends ClientAbstract implements ClientInterface
     public function requestToken()
     {
         $pars = [
-          'grant_type' => 'client_credentials',
-          'client_id' => $this->getOptions()->get('client_id'),
-          'client_secret' => $this->getOptions()->get('client_secret'),
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->getOptions()->get('client_id'),
+            'client_secret' => $this->getOptions()->get('client_secret'),
         ];
 
         $this->setMode('form');

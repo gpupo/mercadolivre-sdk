@@ -122,9 +122,9 @@ abstract class AbstractCommand extends Command
 
         if (!array_key_exists('refresh_token', $data)) {
             $output->writeln([
-                    'Warning: <bg=red>Offline App</>',
-                    '- If your App has the option offline_access selected, you will receive a refresh_token along with the access_token',
-                    '- refresh_token is <bg=red>not present</>',
+                'Warning: <bg=red>Offline App</>',
+                '- If your App has the option offline_access selected, you will receive a refresh_token along with the access_token',
+                '- refresh_token is <bg=red>not present</>',
             ]);
         }
 

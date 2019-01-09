@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 $put = function () {
     return [
-         'PUT',
-         '/shipments/{shipmentId}?access_token={access_token}',
-     ];
+        'PUT',
+        '/shipments/{shipmentId}?access_token={access_token}',
+    ];
 };
 
 return [

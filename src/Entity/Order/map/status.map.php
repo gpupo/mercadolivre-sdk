@@ -16,10 +16,10 @@ declare(strict_types=1);
  */
 
 return [
-  'APPROVED' => 'PAID',
-  'PROCESSING' => 'HANDLING',
-  'INVOICED' => 'INVOICED',
-  'SHIPPED' => 'SHIPPED',
-  'DELIVERED' => 'DELIVERED',
-  'CANCELED' => 'CANCELED',
+    'APPROVED' => 'PAID',
+    'PROCESSING' => 'HANDLING',
+    'INVOICED' => 'INVOICED',
+    'SHIPPED' => 'SHIPPED',
+    'DELIVERED' => 'DELIVERED',
+    'CANCELED' => 'CANCELED',
 ];
