@@ -1,7 +1,6 @@
 _default:
     vcs: git
     prerequisites:
-     #- working-copy-check
      - display-last-changes
     version-generator: simple
     version-persister:
