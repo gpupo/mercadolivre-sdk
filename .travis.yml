@@ -6,12 +6,8 @@ services:
   - mysql
 php:
   - 7.2
-  - nightly
 matrix:
   fast_finish: true
-  allow_failures:
-    - php: nightly
-    - php: hhvm
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS app;'
   - mysql -u root -e "CREATE USER 'app_db_user'@'localhost' IDENTIFIED BY 'app8as3';"
