@@ -34,7 +34,7 @@ final class ProductCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'schema:product')
+            ->setName(self::NAME_PREFIX.'schema:product')
             ->setDescription('Dump Product Schema');
     }
 

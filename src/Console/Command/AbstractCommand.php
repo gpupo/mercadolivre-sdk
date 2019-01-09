@@ -30,7 +30,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 abstract class AbstractCommand extends Command
 {
-    const prefix = 'markethub:mercadolivre:';
+    const NAME_PREFIX = 'markethub:mercadolivre:';
 
     protected $factory;
 

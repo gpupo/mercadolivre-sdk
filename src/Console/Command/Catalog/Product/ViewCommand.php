@@ -30,7 +30,7 @@ class ViewCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'catalog:product:view')
+            ->setName(self::NAME_PREFIX.'catalog:product:view')
             ->setDescription('Get the description of product on Mercado Livre')
             ->addArgument('id', InputArgument::REQUIRED, 'Mercado Livre Product Id');
     }

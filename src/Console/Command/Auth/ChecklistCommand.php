@@ -32,7 +32,7 @@ final class ChecklistCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'auth:checklist')
+            ->setName(self::NAME_PREFIX.'auth:checklist')
             ->setDescription('Check Mercado Livre files');
     }
 

@@ -34,7 +34,7 @@ final class OrderCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'schema:order')
+            ->setName(self::NAME_PREFIX.'schema:order')
             ->setDescription('Dump Order Schema');
     }
 

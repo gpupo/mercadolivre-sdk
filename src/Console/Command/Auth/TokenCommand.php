@@ -36,7 +36,7 @@ final class TokenCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'auth:token')
+            ->setName(self::NAME_PREFIX.'auth:token')
             ->setDescription('Get Mercado Livre token');
     }
 

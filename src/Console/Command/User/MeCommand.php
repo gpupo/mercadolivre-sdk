@@ -34,7 +34,7 @@ final class MeCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName(self::prefix.'user:me')
+            ->setName(self::NAME_PREFIX.'user:me')
             ->setDescription('Mercado Livre user info');
     }
 

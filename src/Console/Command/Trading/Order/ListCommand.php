@@ -33,7 +33,7 @@ class ListCommand extends AbstractCommand
      */
     protected function configure()
     {
-        $this->setName(self::prefix.'trading:order:list')->setDescription('Get the Order list on Mercado Livre');
+        $this->setName(self::NAME_PREFIX.'trading:order:list')->setDescription('Get the Order list on Mercado Livre');
         $this->addOptionsForList();
     }
 
