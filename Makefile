@@ -31,7 +31,8 @@ setup:
 
 ## Composer Install
 install:
-	composer install --no-scripts -n
+    composer self-update
+    composer install --prefer-dist
 
 ## Composer Update and register packages
 update:
