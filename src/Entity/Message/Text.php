@@ -15,13 +15,13 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
+namespace Gpupo\MercadolivreSdk\Entity\Message;
 
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class User extends EntityAbstract implements EntityInterface, CollectionInterface
+class Text extends EntityAbstract implements EntityInterface, CollectionInterface
 {
     /**
      * @codeCoverageIgnore
@@ -29,9 +29,7 @@ class User extends EntityAbstract implements EntityInterface, CollectionInterfac
     public function getSchema()
     {
         return [
-            'user_id' => 'integer',
-            'email' => 'string',
-            'name' => 'string',
+            'plain' => 'string',
         ];
     }
 }

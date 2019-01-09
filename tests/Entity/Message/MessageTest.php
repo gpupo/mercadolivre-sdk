@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Tests\Entity\Message;
 
-use Gpupo\MercadolivreSdk\Entity\Message\Message;
 use Gpupo\MercadolivreSdk\Entity\Message\From;
+use Gpupo\MercadolivreSdk\Entity\Message\Message;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 

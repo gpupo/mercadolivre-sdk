@@ -40,10 +40,10 @@ if ($native) {
 }
 
 return [
-     'productId' => $native->getId(),
-     'productType' => $native->getProductType(),
-     'department' => $native->getCategoryId(),
-     'category' => '',
-     'brand' => $native->getBrand(),
-     'skus' => $skusList,
- ];
+    'productId' => $native->getId(),
+    'productType' => $native->getProductType(),
+    'department' => $native->getCategoryId(),
+    'category' => '',
+    'brand' => $native->getBrand(),
+    'skus' => $skusList,
+];

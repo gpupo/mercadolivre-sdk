@@ -15,8 +15,8 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
+namespace Gpupo\MercadolivreSdk\Entity\Message;
 
-class To extends UserCollection
+class From extends User
 {
 }

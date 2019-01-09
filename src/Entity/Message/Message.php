@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
+namespace Gpupo\MercadolivreSdk\Entity\Message;
 
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;

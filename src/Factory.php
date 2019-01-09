@@ -49,6 +49,10 @@ class Factory extends FactoryAbstract implements FactoryInterface
                 'class' => sprintf('%sOrder\Order', $namespace),
                 'manager' => sprintf('%sOrder\Manager', $namespace),
             ],
+            'message' => [
+                'class' => sprintf('%sMessage\Message', $namespace),
+                'manager' => sprintf('%sMessage\Manager', $namespace),
+            ],
             'generic' => [
                 'manager' => sprintf('%sGenericManager', $namespace),
             ],

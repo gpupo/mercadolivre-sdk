@@ -15,8 +15,15 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
+namespace Gpupo\MercadolivreSdk\Entity\Message;
 
-class From extends User
+use Gpupo\Common\Entity\CollectionAbstract;
+use Gpupo\Common\Entity\CollectionInterface;
+
+final class MessageCollection extends CollectionAbstract implements CollectionInterface
 {
+    public function factoryElement($data)
+    {
+        return new Message($data);
+    }
 }

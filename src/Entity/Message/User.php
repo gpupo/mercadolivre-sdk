@@ -15,26 +15,23 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
+namespace Gpupo\MercadolivreSdk\Entity\Message;
 
-use Gpupo\Common\Entity\CollectionAbstract;
 use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\EntityAbstract;
+use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class UserCollection extends CollectionAbstract implements CollectionInterface
+class User extends EntityAbstract implements EntityInterface, CollectionInterface
 {
-    public function __construct($data)
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getSchema()
     {
-        foreach ($data as $item) {
-            if (!\is_array($item)) {
-                break;
-            }
-
-            $this->add($this->factoryElement($item));
-        }
-    }
-
-    public function factoryElement($data)
-    {
-        return new User($data);
+        return [
+            'user_id' => 'integer',
+            'email' => 'string',
+            'name' => 'string',
+        ];
     }
 }

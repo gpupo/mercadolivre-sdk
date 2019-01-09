@@ -15,21 +15,9 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Entity\Order\Message;
-
-use Gpupo\Common\Entity\CollectionInterface;
-use Gpupo\CommonSdk\Entity\EntityAbstract;
-use Gpupo\CommonSdk\Entity\EntityInterface;
-
-class Text extends EntityAbstract implements EntityInterface, CollectionInterface
-{
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getSchema()
-    {
-        return [
-            'plain' => 'string',
-        ];
-    }
-}
+return [
+    'findByOrderId' => [
+        'GET',
+        '/messages/orders/{itemId}?access_token={access_token}&offset={offset}&limit={limit}',
+    ],
+];
