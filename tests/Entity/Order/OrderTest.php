@@ -15,14 +15,14 @@ declare(strict_types=1);
  *
  */
 
-namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order;
+namespace Gpupo\MercadolivreSdk\Tests\Entity\Order;
 
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
 use Gpupo\MercadolivreSdk\Entity\Order\StatusDetail;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
-use  Gpupo\Tests\CommonSdk\Traits\EntityTrait;
+use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Order

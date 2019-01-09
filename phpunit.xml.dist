@@ -23,6 +23,9 @@
         <testsuite name="Order">
             <directory>tests/Entity/Order</directory>
         </testsuite>
+        <testsuite name="Message">
+            <directory>tests/Entity/Message</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
