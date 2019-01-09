@@ -1,0 +1,43 @@
+{
+  "message_id": "0033b582a1474fa98c02d229abcec43c",
+  "date_received": "2016-09-01T05:15:25.821Z",
+  "date": "2016-09-01T05:15:25.821Z",
+  "date_available": "2016-09-01T05:15:25.821Z",
+  "date_notified": "2016-09-01T05:17:42.945Z",
+  "date_read": "2016-09-01T21:31:19.606Z",
+  "from": {
+    "user_id": "123456789",
+    "email": "userfrom.n4tx9d+2-ogeytenjqgi3tomjw@mail.mercadolibre.com",
+    "name": "User from"
+  },
+  "to": [
+    {
+      "user_id": "123456780",
+      "email": "userto.3fd70y+2-ogeytenjqgi3tombx@mail.mercadolibre.com"
+    }
+  ],
+  "subject": "Test Item subject",
+  "text": {
+    "plain": "Ejemplo de texto"
+  },
+  "attachments": [
+    {}
+  ],
+  "attachments_validations": {
+    "invalid_size": [
+    ],
+    "invalid_extension": [
+    ],
+    "forbidden": [
+    ],
+    "internal_error": [
+    ]
+  },
+  "site_id": "MLA",
+  "resource": "orders",
+  "resource_id": "1234567871",
+  "status": "available",
+  "moderation": {
+    "status": "non_moderated"
+  }
+}
