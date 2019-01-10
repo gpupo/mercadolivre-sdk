@@ -47,7 +47,7 @@ class MessageTest extends TestCaseAbstract
      */
     public function testToCreation(Message $message, $expected = null)
     {
-        $this->assertSame(['from', 'to', 'subject', 'text'], array_keys($message->toCreation()));
+        $this->assertSame(['from', 'to', 'subject', 'text', 'attachments'], array_keys($message->toCreation()));
     }
 
     /**

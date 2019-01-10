@@ -52,6 +52,7 @@ class Message extends EntityAbstract implements EntityInterface, CollectionInter
             'to',
             'subject',
             'text',
+            'attachments',
         ]);
     }
 }

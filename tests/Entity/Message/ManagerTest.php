@@ -54,8 +54,7 @@ class ManagerTest extends TestCaseAbstract
 
         $manager = $this->getManager('messageCreationResponse.json');
         $response = $manager->create($message);
-
-        $this->assertTrue($response);
+        $this->assertsame(200, $response->getHttpStatusCode());
     }
 
     /**
