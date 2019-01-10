@@ -49,6 +49,17 @@ class ManagerTest extends TestCaseAbstract
     {
         $sdk = $this->getFactory();
         $message = $sdk->createMessage([
+            'from' => [
+                'user_id' => '2'
+            ],
+            'to' => [
+                [
+                    'user_id' => '1',
+                    'site_id' => 'MLB',
+                    'resource' => 'foo',
+                    'resource_id' => 'xxx',
+                ]
+            ],
             'subject' => 'Foobar',
             'text'  => ['plain' => 'Hello World'],
         ]);

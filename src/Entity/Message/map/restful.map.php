@@ -21,7 +21,7 @@ return [
         '/messages/orders/{itemId}?access_token={access_token}&offset={offset}&limit={limit}',
     ],
     'create' => [
-        'GET',
-        '/messages/?access_token={access_token}&offset={offset}&limit={limit}',
+        'POST',
+        '/messages/?access_token={access_token}',
     ],
 ];
