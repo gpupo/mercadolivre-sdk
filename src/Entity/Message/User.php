@@ -23,6 +23,11 @@ use Gpupo\CommonSdk\Entity\EntityInterface;
 
 class User extends EntityAbstract implements EntityInterface, CollectionInterface
 {
+    protected function setUp()
+    {
+        $this->setOptionalSchema(['email', 'name', 'site_id', 'resource', 'resource_id']);
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -35,10 +40,5 @@ class User extends EntityAbstract implements EntityInterface, CollectionInterfac
             'resource_id' => 'string',
             'site_id' => 'string',
         ];
-    }
-
-    protected function setUp()
-    {
-        $this->setOptionalSchema(['email', 'name', 'site_id', 'resource', 'resource_id']);
     }
 }

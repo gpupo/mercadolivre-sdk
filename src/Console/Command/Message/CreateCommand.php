@@ -17,11 +17,10 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command\Message;
 
-use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Yaml\Yaml;
 
 class CreateCommand extends AbstractCommand
@@ -43,7 +42,6 @@ class CreateCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $filename = $input->getArgument('filename');
-
 
         try {
             $data = Yaml::parseFile($filename);

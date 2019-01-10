@@ -50,7 +50,7 @@ class ManagerTest extends TestCaseAbstract
         $sdk = $this->getFactory();
         $message = $sdk->createMessage([
             'from' => [
-                'user_id' => '2'
+                'user_id' => '2',
             ],
             'to' => [
                 [
@@ -58,10 +58,10 @@ class ManagerTest extends TestCaseAbstract
                     'site_id' => 'MLB',
                     'resource' => 'foo',
                     'resource_id' => 'xxx',
-                ]
+                ],
             ],
             'subject' => 'Foobar',
-            'text'  => ['plain' => 'Hello World'],
+            'text' => ['plain' => 'Hello World'],
         ]);
 
         $manager = $this->getManager('creationResponse.json');

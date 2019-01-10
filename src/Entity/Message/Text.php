@@ -23,6 +23,11 @@ use Gpupo\CommonSdk\Entity\EntityInterface;
 
 class Text extends EntityAbstract implements EntityInterface, CollectionInterface
 {
+    protected function setUp()
+    {
+        $this->setRequiredSchema(['plain']);
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -31,10 +36,5 @@ class Text extends EntityAbstract implements EntityInterface, CollectionInterfac
         return [
             'plain' => 'string',
         ];
-    }
-
-    protected function setUp()
-    {
-        $this->setRequiredSchema(['plain']);
     }
 }
