@@ -38,16 +38,20 @@ class MessageTest extends TestCaseAbstract
 
     /**
      * @testdox Possui método ``toCreation()`` para acessar o array usado na crianção de nova mensagem
-     * @dataProvider dataProviderMessage
-     * @cover ::get
-     * @cover ::getSchema
-     * @small
      *
      * @param null|mixed $expected
      */
-    public function testToCreation(Message $message, $expected = null)
+    public function testToCreation()
     {
-        $this->assertSame(['from', 'to', 'subject', 'text', 'attachments'], array_keys($message->toCreation()));
+        $input = $this->getResourceJson('mockup/Message/creationRequest.json');
+        $message = $this->getFactory()->createMessage($input);
+        $data = $message->toCreation();
+        $this->assertSame(['from', 'to', 'subject', 'text', 'attachments'], array_keys($data));
+        $this->assertInternalType('array', $data['from']);
+        $this->assertInternalType('array', $data['to']);
+        $this->assertCount(1, $data['to']);
+        $this->assertInternalType('array', $data['attachments']);
+        $this->assertCount(0, $data['attachments']);
     }
 
     /**

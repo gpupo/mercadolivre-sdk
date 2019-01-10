@@ -52,7 +52,7 @@ class ManagerTest extends TestCaseAbstract
             'subject' => 'Foobar',
         ]);
 
-        $manager = $this->getManager('messageCreationResponse.json');
+        $manager = $this->getManager('creationResponse.json');
         $response = $manager->create($message);
         $this->assertsame(200, $response->getHttpStatusCode());
     }

@@ -17,27 +17,11 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity\Message;
 
-use Gpupo\Common\Entity\CollectionAbstract;
 use Gpupo\Common\Entity\CollectionInterface;
+use Gpupo\CommonSdk\Entity\CollectionAbstract;
 
 class UserCollection extends CollectionAbstract implements CollectionInterface
 {
-    public function __construct(array $data)
-    {
-        foreach ((array) $data as $item) {
-            if (!\is_array($item)) {
-                break;
-            }
-
-            $this->add($this->factoryElement($item));
-        }
-    }
-
-    public function toArray()
-    {
-        return [];
-    }
-
     public function factoryElement($data)
     {
         return new User($data);
