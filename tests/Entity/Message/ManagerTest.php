@@ -26,9 +26,7 @@ use Gpupo\MercadolivreSdk\Entity\Message\Text;
 use Gpupo\MercadolivreSdk\Entity\Message\To;
 use Gpupo\MercadolivreSdk\Entity\Message\User;
 use Gpupo\MercadolivreSdk\Entity\Message\UserCollection;
-use Gpupo\MercadolivreSdk\Entity\Order\Manager;
-use Gpupo\MercadolivreSdk\Entity\Order\Order;
-use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
+use Gpupo\MercadolivreSdk\Entity\Message\Manager;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
@@ -69,13 +67,13 @@ class ManagerTest extends TestCaseAbstract
 
     /**
      * @testdox Get messages based on order number
-     * @covers ::findMessagesByOrderId
+     * @covers ::findByOrderId
      * @covers ::execute
      */
-    public function testFindMessagesByOrderId()
+    public function testFindByOrderId()
     {
         $manager = $this->getManager('list.json');
-        $messages = $manager->findMessagesByOrderId(1068825849);
+        $messages = $manager->findByOrderId(1068825849);
         $this->assertInstanceOf(MessageCollection::class, $messages);
         $this->assertInstanceOf(Message::class, $messages->first());
         $this->assertInstanceOf(From::class, $messages->first()->getFrom());
