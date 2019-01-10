@@ -43,4 +43,14 @@ class Message extends EntityAbstract implements EntityInterface, CollectionInter
             'client_id' => 'integer',
         ];
     }
+
+    public function toCreation(): array
+    {
+        return $this->partitionByArrayKey([
+            'from',
+            'to',
+            'subject',
+            'text'
+        ]);
+    }
 }

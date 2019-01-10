@@ -22,9 +22,14 @@ use Gpupo\Common\Entity\CollectionInterface;
 
 class UserCollection extends CollectionAbstract implements CollectionInterface
 {
-    public function __construct($data)
+    public function toArray()
     {
-        foreach ($data as $item) {
+        return [];
+    }
+
+    public function __construct(array $data)
+    {
+        foreach ((array) $data as $item) {
             if (!\is_array($item)) {
                 break;
             }

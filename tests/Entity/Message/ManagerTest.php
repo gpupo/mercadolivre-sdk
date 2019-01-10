@@ -56,10 +56,15 @@ class ManagerTest extends TestCaseAbstract
 
     public function testCreateMessage()
     {
-        $message = $sdk->createMessage();
-        $manager = $sdk->factoryManager('message');
+        $sdk = $this->getFactory();
+        $message = $sdk->createMessage([
+            'subject' => 'Foobar',
+        ]);
 
+        $manager = $this->getManager('messageCreationResponse.json');
         $response = $manager->create($message);
+
+        $this->assertTrue($response);
     }
 
     /**
@@ -83,14 +88,15 @@ class ManagerTest extends TestCaseAbstract
         $manager = $this->getManager('list.json');
         $order = $this->getFactory()->createOrder(['id'=> 1068825849]);
         $messages = $manager->findByOrderId($order);
+        $message = $messages->first();
         $this->assertInstanceOf(MessageCollection::class, $messages);
-        $this->assertInstanceOf(Message::class, $messages->first());
-        $this->assertInstanceOf(From::class, $messages->first()->getFrom());
-        $this->assertInstanceOf(User::class, $messages->first()->getFrom());
-        $this->assertInstanceOf(To::class, $messages->first()->getTo());
-        $this->assertInstanceOf(UserCollection::class, $messages->first()->getTo());
-        $this->assertInstanceOf(User::class, $messages->first()->getTo()->first());
-        $this->assertInstanceOf(Text::class, $messages->first()->getText());
+        $this->assertInstanceOf(Message::class, $message);
+        $this->assertInstanceOf(From::class, $message->getFrom());
+        $this->assertInstanceOf(User::class, $message->getFrom());
+        $this->assertInstanceOf(To::class, $message->getTo());
+        $this->assertInstanceOf(UserCollection::class, $message->getTo());
+        $this->assertInstanceOf(User::class, $message->getTo()->first());
+        $this->assertInstanceOf(Text::class, $message->getText());
         $this->commonAssertsMessage($messages);
     }
 

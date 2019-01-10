@@ -23,6 +23,7 @@ use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Message\Message;
+use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Message\MessageCollection;
 
 final class Manager extends AbstractManager
@@ -70,5 +71,13 @@ final class Manager extends AbstractManager
         $results = $this->processResponse($responseJson);
 
         return $results;
+    }
+
+    public function create(Message $message)
+    {
+
+        $data = $message->toCreation();
+
+        return $this->perform($this->factoryMap('create', $data));
     }
 }

@@ -37,6 +37,19 @@ class MessageTest extends TestCaseAbstract
     }
 
     /**
+     * @testdox Possui método ``toCreation()`` para acessar o array usado na crianção de nova mensagem
+     * @dataProvider dataProviderMessage
+     * @cover ::get
+     * @cover ::getSchema
+     * @small
+     *
+     * @param null|mixed $expected
+     */
+    public function testToCreation(Message $message, $expected = null)
+    {
+        $this->assertSame(['from', 'to', 'subject', 'text'], array_keys($message->toCreation()));
+    }
+    /**
      * @testdox Possui método ``getFrom()`` para acessar o objeto Remetente
      * @dataProvider dataProviderMessage
      * @cover ::get
