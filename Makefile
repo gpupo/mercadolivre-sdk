@@ -8,7 +8,7 @@ COLOR_INFO  = \033[32m
 COLOR_COMMENT = \033[33m
 SHELL := /bin/bash
 
-export BASH_ENV=/root/.profile
+export BASH_ENV=bin/.profile
 
 ## List Targets and Descriptions
 help:
