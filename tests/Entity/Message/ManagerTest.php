@@ -54,6 +54,14 @@ class ManagerTest extends TestCaseAbstract
         return $manager;
     }
 
+    public function testCreateMessage()
+    {
+        $message = $sdk->createMessage();
+        $manager = $sdk->factoryManager('message');
+
+        $response = $manager->create($message);
+    }
+
     /**
      * @depends testManager
      * @covers ::getClient
@@ -73,7 +81,8 @@ class ManagerTest extends TestCaseAbstract
     public function testFindByOrderId()
     {
         $manager = $this->getManager('list.json');
-        $messages = $manager->findByOrderId(1068825849);
+        $order = $this->getFactory()->createOrder(['id'=> 1068825849]);
+        $messages = $manager->findByOrderId($order);
         $this->assertInstanceOf(MessageCollection::class, $messages);
         $this->assertInstanceOf(Message::class, $messages->first());
         $this->assertInstanceOf(From::class, $messages->first()->getFrom());
