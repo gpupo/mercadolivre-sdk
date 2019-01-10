@@ -63,4 +63,5 @@ phpmd:
 ## Clean temporary files
 clean:
 	printf "${COLOR_COMMENT}Remove temporary files${COLOR_RESET}\n"
-	rm -rf vendor/* var/*
+	rm -rfv ./vendor/* ./var/* ./*.lock ./*.cache
+	git checkout ./var/cache/.gitignore ./var/data/.gitignore
