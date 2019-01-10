@@ -1,13 +1,13 @@
 {
   "from": {
-    "user_id": "123456789",
-    "email": "userfrom.n4tx9d+2-ogeytenjqgi3tomjw@mail.mercadolibre.com",
-    "name": "User from"
+    "user_id": "123456789"
   },
   "to": [
     {
       "user_id": "123456780",
-      "email": "userto.3fd70y+2-ogeytenjqgi3tombx@mail.mercadolibre.com"
+      "site_id": "MLB",
+      "resource": "orders",
+      "resource_id": "1234567871"
     }
   ],
   "subject": "Test Item subject",
@@ -15,12 +15,5 @@
     "plain": "Ejemplo de texto"
   },
   "attachments": [
-  ],
-  "site_id": "MLA",
-  "resource": "orders",
-  "resource_id": "1234567871",
-  "status": "available",
-  "moderation": {
-    "status": "non_moderated"
-  }
+  ]
 }

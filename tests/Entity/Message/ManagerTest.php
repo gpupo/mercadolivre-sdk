@@ -50,6 +50,7 @@ class ManagerTest extends TestCaseAbstract
         $sdk = $this->getFactory();
         $message = $sdk->createMessage([
             'subject' => 'Foobar',
+            'text'  => ['plain' => 'Hello World'],
         ]);
 
         $manager = $this->getManager('creationResponse.json');

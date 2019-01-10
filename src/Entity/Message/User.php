@@ -31,7 +31,14 @@ class User extends EntityAbstract implements EntityInterface, CollectionInterfac
         return [
             'user_id' => 'integer',
             'email' => 'string',
-            'name' => 'string',
+            'resource' => 'string',
+            'resource_id' => 'string',
+            'site_id' => 'string',
         ];
+    }
+
+    protected function setUp()
+    {
+        $this->setOptionalSchema(['email', 'name', 'site_id', 'resource', 'resource_id']);
     }
 }

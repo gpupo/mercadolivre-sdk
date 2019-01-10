@@ -32,4 +32,9 @@ class Text extends EntityAbstract implements EntityInterface, CollectionInterfac
             'plain' => 'string',
         ];
     }
+
+    protected function setUp()
+    {
+        $this->setRequiredSchema(['plain']);
+    }
 }
