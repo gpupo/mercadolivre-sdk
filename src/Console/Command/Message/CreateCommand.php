@@ -15,28 +15,26 @@ declare(strict_types=1);
  *
  */
 
-namespace Gpupo\MercadolivreSdk\Console\Command\Trading\Order;
+namespace Gpupo\MercadolivreSdk\Console\Command\Message;
 
 use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Yaml\Yaml;
 
-class ListCommand extends AbstractCommand
+class CreateCommand extends AbstractCommand
 {
-    use TableTrait;
-
-    private $limit = 50;
-
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName(self::NAME_PREFIX.'trading:order:list')
-            ->setDescription('Get the Order list on Mercado Livre')
-            ->addOptionsForList();
+            ->setName(self::NAME_PREFIX.'message:create')
+            ->setDescription('Create a message on Mercado Livre')
+            ->addArgument('filename', InputArgument::REQUIRED, 'YAML filename for Message compose');
     }
 
     /**
@@ -44,20 +42,15 @@ class ListCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $orderManager = $this->getFactory()->factoryManager('order');
-        $offset = $input->getOption('offset');
-        $max = $input->getOption('max');
-        $output->writeln(sprintf('Max items from this fetch is <fg=blue> %d </>', $max));
-        $items = [];
+        $filename = $input->getArgument('filename');
+
 
         try {
-            $output->writeln(sprintf('Fetching from %d to %d', $offset, ($offset + $this->limit)));
-            $response = $orderManager->rawFetch($offset, $this->limit);
-
-            $paging = $response->get('paging');
-            $total = $paging['total'];
-            $output->writeln(sprintf('Total: <bg=green;fg=black> %d </>', $total));
-            $this->displayTableResults($output, $response->get('results'));
+            $data = Yaml::parseFile($filename);
+            $message = $this->getFactory()->createMessage($data);
+            $messageManager = $this->getFactory()->factoryManager('message');
+            $response = $messageManager->create($message);
+            dump($response);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
