@@ -41,6 +41,7 @@ class Message extends EntityAbstract implements EntityInterface, CollectionInter
             'subject' => 'string',
             'text' => 'object',
             'client_id' => 'integer',
+            'attachments' => 'array',
         ];
     }
 

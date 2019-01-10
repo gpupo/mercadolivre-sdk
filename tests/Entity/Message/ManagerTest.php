@@ -30,7 +30,7 @@ use Gpupo\MercadolivreSdk\Entity\Message\Manager;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
- * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Manager
+ * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Message\Manager
  */
 class ManagerTest extends TestCaseAbstract
 {
@@ -43,7 +43,7 @@ class ManagerTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox Administra operações de SKUs
+     * @testdox Administra operações
      */
     public function testManager()
     {
