@@ -60,7 +60,7 @@ final class Manager extends AbstractManager
     {
         $data = $message->toCreation();
 
-        return $this->perform($this->factoryMap('create', $data));
+        return $this->execute($this->factoryMap('create'), json_encode($data));
     }
 
     protected function fetchMessages($itemId, $offset = 0, $limit = 50)
