@@ -22,8 +22,6 @@ use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
-use Gpupo\MercadolivreSdk\Entity\Message\Message;
-use Gpupo\MercadolivreSdk\Entity\Message\MessageCollection;
 
 final class Manager extends AbstractManager
 {

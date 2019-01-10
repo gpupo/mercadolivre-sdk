@@ -17,16 +17,15 @@ declare(strict_types=1);
 
 namespace  Gpupo\MercadolivreSdk\Tests\Entity\Message;
 
-use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Entity\Message\From;
+use Gpupo\MercadolivreSdk\Entity\Message\Manager;
 use Gpupo\MercadolivreSdk\Entity\Message\Message;
 use Gpupo\MercadolivreSdk\Entity\Message\MessageCollection;
 use Gpupo\MercadolivreSdk\Entity\Message\Text;
 use Gpupo\MercadolivreSdk\Entity\Message\To;
 use Gpupo\MercadolivreSdk\Entity\Message\User;
 use Gpupo\MercadolivreSdk\Entity\Message\UserCollection;
-use Gpupo\MercadolivreSdk\Entity\Message\Manager;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
 
 /**
@@ -34,14 +33,6 @@ use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
  */
 class ManagerTest extends TestCaseAbstract
 {
-    protected function getManager($filename = 'item.json')
-    {
-        $manager = $this->getFactory()->factoryManager('message');
-        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Message/'.$filename));
-
-        return $manager;
-    }
-
     /**
      * @testdox Administra operações
      */
@@ -86,7 +77,7 @@ class ManagerTest extends TestCaseAbstract
     public function testFindByOrderId()
     {
         $manager = $this->getManager('list.json');
-        $order = $this->getFactory()->createOrder(['id'=> 1068825849]);
+        $order = $this->getFactory()->createOrder(['id' => 1068825849]);
         $messages = $manager->findByOrderId($order);
         $message = $messages->first();
         $this->assertInstanceOf(MessageCollection::class, $messages);
@@ -107,4 +98,11 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame((int) '106459677', (int) $messages->first()->getTo()->first()->getUserId());
     }
 
+    protected function getManager($filename = 'item.json')
+    {
+        $manager = $this->getFactory()->factoryManager('message');
+        $manager->setDryRun($this->factoryResponseFromFixture('mockup/Message/'.$filename));
+
+        return $manager;
+    }
 }

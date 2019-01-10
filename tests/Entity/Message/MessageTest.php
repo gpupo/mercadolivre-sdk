@@ -49,6 +49,7 @@ class MessageTest extends TestCaseAbstract
     {
         $this->assertSame(['from', 'to', 'subject', 'text'], array_keys($message->toCreation()));
     }
+
     /**
      * @testdox Possui método ``getFrom()`` para acessar o objeto Remetente
      * @dataProvider dataProviderMessage

@@ -22,11 +22,6 @@ use Gpupo\Common\Entity\CollectionInterface;
 
 class UserCollection extends CollectionAbstract implements CollectionInterface
 {
-    public function toArray()
-    {
-        return [];
-    }
-
     public function __construct(array $data)
     {
         foreach ((array) $data as $item) {
@@ -36,6 +31,11 @@ class UserCollection extends CollectionAbstract implements CollectionInterface
 
             $this->add($this->factoryElement($item));
         }
+    }
+
+    public function toArray()
+    {
+        return [];
     }
 
     public function factoryElement($data)

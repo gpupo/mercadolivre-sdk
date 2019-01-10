@@ -19,13 +19,7 @@ namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order;
 
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\MercadolivreSdk\Client\Client;
-use Gpupo\MercadolivreSdk\Entity\Message\From;
-use Gpupo\MercadolivreSdk\Entity\Message\Message;
-use Gpupo\MercadolivreSdk\Entity\Message\MessageCollection;
-use Gpupo\MercadolivreSdk\Entity\Message\Text;
 use Gpupo\MercadolivreSdk\Entity\Message\To;
-use Gpupo\MercadolivreSdk\Entity\Message\User;
-use Gpupo\MercadolivreSdk\Entity\Message\UserCollection;
 use Gpupo\MercadolivreSdk\Entity\Order\Manager;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
