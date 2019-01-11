@@ -66,7 +66,9 @@ class ManagerTest extends TestCaseAbstract
 
         $manager = $this->getManager('creationResponse.json');
         $response = $manager->create($message);
-        $this->assertsame(200, $response->getHttpStatusCode());
+        $this->assertSame(200, $response->getHttpStatusCode());
+        $this->assertSame('2016-09-01T05:15:25.821Z', $response->getData()->getDateReceived());
+        $this->assertNull($response->getData()->getDateRead());
     }
 
     /**
