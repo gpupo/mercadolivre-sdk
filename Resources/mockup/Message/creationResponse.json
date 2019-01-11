@@ -1,34 +1,36 @@
-{
-  "message_id": "0033b582a1474fa98c02d229abcec43c",
-  "date_received": "2016-09-01T05:15:25.821Z",
-  "date": "2016-09-01T05:15:25.821Z",
-  "date_available": "2016-09-01T05:15:25.821Z",
-  "date_notified": null,
-  "date_read": null,
-  "from": {
-    "user_id": "123456789",
-    "email": null,
-    "name": null
-  },
-  "to": [
-    {
-      "user_id": "123456780",
-      "email": null
+[
+  {
+    "message_id": "0033b582a1474fa98c02d229abcec43c",
+    "date_received": "2016-09-01T05:15:25.821Z",
+    "date": "2016-09-01T05:15:25.821Z",
+    "date_available": "2016-09-01T05:15:25.821Z",
+    "date_notified": null,
+    "date_read": null,
+    "from": {
+      "user_id": "123456789",
+      "email": null,
+      "name": null
+    },
+    "to": [
+      {
+        "user_id": "123456780",
+        "email": null
+      }
+    ],
+    "subject": "Test Item subject",
+    "text": {
+      "plain": "Ejemplo de texto"
+    },
+    "attachments": [
+    ],
+    "attachments_validations": {
+    },
+    "site_id": "MLA",
+    "resource": "orders",
+    "resource_id": "1234567871",
+    "status": "available",
+    "moderation": {
+      "status": "non_moderated"
     }
-  ],
-  "subject": "Test Item subject",
-  "text": {
-    "plain": "Ejemplo de texto"
-  },
-  "attachments": [
-  ],
-  "attachments_validations": {
-  },
-  "site_id": "MLA",
-  "resource": "orders",
-  "resource_id": "1234567871",
-  "status": "available",
-  "moderation": {
-    "status": "non_moderated"
   }
-}
+]

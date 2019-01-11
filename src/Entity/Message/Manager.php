@@ -56,11 +56,17 @@ final class Manager extends AbstractManager
         return $messages;
     }
 
-    public function create(Message $message)
+    public function create(Message $message):? Message
     {
         $data = $message->toCreation();
 
-        return $this->execute($this->factoryMap('create'), json_encode($data));
+        $response = $this->execute($this->factoryMap('create'), json_encode($data));
+
+        if (200 === (int) $response->getHttpStatusCode()) {
+            return new Message($response->getData()->first());
+        }
+
+        throw new \Exception(sprintf("Error #%d on creation", $response->getHttpStatusCode()));
     }
 
     protected function fetchMessages($itemId, $offset = 0, $limit = 50)

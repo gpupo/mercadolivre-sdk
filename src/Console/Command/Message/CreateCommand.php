@@ -47,11 +47,9 @@ class CreateCommand extends AbstractCommand
             $data = Yaml::parseFile($filename);
             $message = $this->getFactory()->createMessage($data);
             $messageManager = $this->getFactory()->factoryManager('message');
-            $response = $messageManager->create($message);
+            $returnedMessage = $messageManager->create($message);
+            $output->writeln(sprintf('Message received by ML at <info>%s</> ', $returnedMessage->getDateReceived()));
 
-            $data = $response->getData();
-            $this->getFactory()->getLogger()->addInfo('Creation Response', $data);
-            $output->writeln(sprintf('Message received by ML at %s ', $response->getData()->getDateReceived()));
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
