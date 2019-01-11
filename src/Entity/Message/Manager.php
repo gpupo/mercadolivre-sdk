@@ -37,7 +37,7 @@ final class Manager extends AbstractManager
         $this->maps = $this->loadArrayFromFile(__DIR__.'/map/restful.map.php');
     }
 
-    public function findByOrderId(Order $order)
+    public function findByOrderId(Order $order): MessageCollection
     {
         $messages = new MessageCollection();
         $offset = 0;
@@ -56,7 +56,7 @@ final class Manager extends AbstractManager
         return $messages;
     }
 
-    public function create(Message $message):? Message
+    public function create(Message $message): ?Message
     {
         $data = $message->toCreation();
 
@@ -66,7 +66,7 @@ final class Manager extends AbstractManager
             return new Message($response->getData()->first());
         }
 
-        throw new \Exception(sprintf("Error #%d on creation", $response->getHttpStatusCode()));
+        throw new \Exception(sprintf('Error #%d on creation', $response->getHttpStatusCode()));
     }
 
     protected function fetchMessages($itemId, $offset = 0, $limit = 50)

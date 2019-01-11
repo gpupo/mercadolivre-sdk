@@ -17,23 +17,25 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Console\Command\Message;
 
+use Gpupo\Common\Traits\TableTrait;
 use Gpupo\MercadolivreSdk\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
-class CreateCommand extends AbstractCommand
+class ListCommand extends AbstractCommand
 {
+    use TableTrait;
+
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName(self::NAME_PREFIX.'message:create')
-            ->setDescription('Create a message on Mercado Livre')
-            ->addArgument('filename', InputArgument::REQUIRED, 'YAML filename for Message compose');
+            ->setName(self::NAME_PREFIX.'message:list')
+            ->setDescription('List a messages on Mercado Livre')
+            ->addArgument('id', InputArgument::REQUIRED, 'Order ID');
     }
 
     /**
@@ -41,14 +43,15 @@ class CreateCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filename = $input->getArgument('filename');
+        $id = $input->getArgument('id');
 
         try {
-            $data = Yaml::parseFile($filename);
-            $message = $this->getFactory()->createMessage($data);
+            $order = $this->getFactory()->createOrder(['id' => $id]);
             $messageManager = $this->getFactory()->factoryManager('message');
-            $returnedMessage = $messageManager->create($message);
-            $output->writeln(sprintf('Message received by ML at <info>%s</> ', $returnedMessage->getDateReceived()));
+            $messageCollection = $messageManager->findByOrderId($order);
+
+            $output->writeln(sprintf('Total: <bg=green;fg=black> %d </>', $messageCollection->count()));
+            $this->displayTableResults($output, $messageCollection);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Error: <bg=red>%s</>', $exception->getmessage()));
         }
