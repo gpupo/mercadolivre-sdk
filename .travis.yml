@@ -13,7 +13,8 @@ before_install:
   - mysql -u root -e "CREATE USER 'app_db_user'@'localhost' IDENTIFIED BY 'app8as3';"
   - mysql -u root -e "GRANT ALL ON app.* TO 'app_db_user'@'localhost';"
 before_script:
-  - make install
+  - composer self-update
+  - composer install --prefer-dist
   - rm -f .env.local
   - vendor/bin/doctrine orm:schema-tool:update --force
 
