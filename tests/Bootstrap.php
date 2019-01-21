@@ -64,7 +64,7 @@ class Bootstrap
             'dbname' => 'app',
             'user' => 'app_db_user',
             'password' => 'app8as3',
-            'host' => '127.0.0.1',
+            'host' => getenv('dbhost'),
             'driver' => 'pdo_mysql',
         ];
         $entityManager = EntityManager::create($connectionParams, $config, $evm);

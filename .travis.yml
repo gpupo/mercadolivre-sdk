@@ -1,6 +1,6 @@
 sudo: false
 language: php
-oos:
+os:
   - linux
 services:
   - mysql
@@ -14,6 +14,7 @@ before_install:
   - mysql -u root -e "GRANT ALL ON app.* TO 'app_db_user'@'localhost';"
 before_script:
   - make install
+  - rm -f .env.local
   - vendor/bin/doctrine orm:schema-tool:update --force
 
 script: vendor/bin/phpunit

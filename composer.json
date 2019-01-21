@@ -14,15 +14,16 @@
         "php": ">=7.3",
         "ext-curl" : "*",
         "gpupo/common-sdk": "^4.6",
-        "gpupo/common-schema": "^4.6",
+        "gpupo/common-schema": "^4.5.2",
         "symfony/yaml": "^4.2.2",
         "monolog/monolog": "^1.24",
         "symfony/finder": "^4.2.2",
         "symfony/cache": "^4.2.2"
     },
     "require-dev": {
-      "phpunit/phpunit": "^7.5.2",
-      "symfony/var-dumper": "^4.2.2"
+      "phpunit/phpunit": "^7.5",
+      "symfony/var-dumper": "^4.2.2",
+      "phan/phan": "^1.0"
     },
     "autoload": {
         "psr-4": {
