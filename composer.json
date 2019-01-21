@@ -13,6 +13,7 @@
     "require": {
         "php": ">=7.3",
         "ext-curl" : "*",
+        "gpupo/common": "^4.6.1",
         "gpupo/common-sdk": "^4.6",
         "gpupo/common-schema": "^4.5.2",
         "symfony/yaml": "^4.2.2",
