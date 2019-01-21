@@ -8,10 +8,10 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         stopOnWarning="true"
-         stopOnIncomplete="true"
-         stopOnSkipped="true"
-         bootstrap="vendor/autoload.php"
+         stopOnWarning="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         bootstrap="config/bootstrap.php"
 >
     <testsuites>
         <testsuite name="Main Test Suite">
