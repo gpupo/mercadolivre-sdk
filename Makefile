@@ -65,3 +65,6 @@ clean:
 	printf "${COLOR_COMMENT}Remove temporary files${COLOR_RESET}\n"
 	rm -rfv ./vendor/* ./var/* ./*.lock ./*.cache
 	git checkout ./var/cache/.gitignore ./var/data/.gitignore
+
+phan:
+	phan --config-file config/phan.php

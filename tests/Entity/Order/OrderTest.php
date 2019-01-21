@@ -22,7 +22,7 @@ use Gpupo\MercadolivreSdk\Entity\Order\Order;
 use Gpupo\MercadolivreSdk\Entity\Order\OrderCollection;
 use Gpupo\MercadolivreSdk\Entity\Order\StatusDetail;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
-use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
+use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Order\Order

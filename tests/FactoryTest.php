@@ -20,7 +20,7 @@ namespace  Gpupo\MercadolivreSdk\Tests;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Client\Ml;
 use Gpupo\MercadolivreSdk\Factory;
-use Gpupo\Tests\CommonSdk\FactoryTestAbstract;
+use Gpupo\CommonSdk\Tests\FactoryTestAbstract;
 
 /**
  * @coversNothing

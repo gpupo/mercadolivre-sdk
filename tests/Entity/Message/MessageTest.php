@@ -20,7 +20,7 @@ namespace Gpupo\MercadolivreSdk\Tests\Entity\Message;
 use Gpupo\MercadolivreSdk\Entity\Message\From;
 use Gpupo\MercadolivreSdk\Entity\Message\Message;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
-use Gpupo\Tests\CommonSdk\Traits\EntityTrait;
+use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Message\Message
