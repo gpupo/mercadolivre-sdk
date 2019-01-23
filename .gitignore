@@ -1,7 +1,7 @@
 /build/
 /vendor/
 /var/
-app.json
+/.env.local
 Resources/logs/*
 Resources/qualityAssurance/*
 *.phar
