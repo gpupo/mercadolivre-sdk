@@ -21,7 +21,7 @@ use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class Text extends EntityAbstract implements EntityInterface, CollectionInterface
+class Text extends EntityAbstract implements EntityInterface
 {
     protected function setUp()
     {
@@ -31,7 +31,7 @@ class Text extends EntityAbstract implements EntityInterface, CollectionInterfac
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    public function getSchema(): array
     {
         return [
             'plain' => 'string',

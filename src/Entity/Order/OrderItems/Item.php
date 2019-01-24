@@ -22,7 +22,7 @@ use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 
-final class Item extends EntityAbstract implements EntityInterface, CollectionInterface
+final class Item extends EntityAbstract implements EntityInterface
 {
     use LoadTrait;
 
@@ -31,7 +31,7 @@ final class Item extends EntityAbstract implements EntityInterface, CollectionIn
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    public function getSchema(): array
     {
         return [
             'id' => 'string',

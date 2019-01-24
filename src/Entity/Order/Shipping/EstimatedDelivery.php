@@ -21,12 +21,12 @@ use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class EstimatedDelivery extends EntityAbstract implements EntityInterface, CollectionInterface
+class EstimatedDelivery extends EntityAbstract implements EntityInterface
 {
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    public function getSchema(): array
     {
         return [
             'date' => 'string',

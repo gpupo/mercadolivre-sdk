@@ -22,16 +22,13 @@ use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 
-final class Order extends EntityAbstract implements EntityInterface, CollectionInterface
+final class Order extends EntityAbstract implements EntityInterface
 {
     use LoadTrait;
 
     protected $primaryKey = 'id';
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getSchema()
+    public function getSchema(): array
     {
         return $this->loadArrayFromFile(__DIR__.'/map/schema.map.php');
     }

@@ -21,12 +21,12 @@ use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-abstract class AbstractPhone extends EntityAbstract implements EntityInterface, CollectionInterface
+abstract class AbstractPhone extends EntityAbstract implements EntityInterface
 {
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    public function getSchema(): array
     {
         return [
             'area_code' => 'integer',

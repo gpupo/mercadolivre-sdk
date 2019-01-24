@@ -21,12 +21,12 @@ use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 
-class Message extends EntityAbstract implements EntityInterface, CollectionInterface
+class Message extends EntityAbstract implements EntityInterface
 {
     /**
      * @codeCoverageIgnore
      */
-    public function getSchema()
+    public function getSchema(): array
     {
         return [
             '_id' => 'string',

@@ -38,23 +38,23 @@ class Factory extends FactoryAbstract implements FactoryInterface
         return  '\\'.__NAMESPACE__.'\Entity\\';
     }
 
-    protected function getSchema($namespace = null)
+    protected function getSchema(): array
     {
         return [
             'product' => [
-                'class' => sprintf('%sProduct\Product', $namespace),
-                'manager' => sprintf('%sProduct\Manager', $namespace),
+                'class' => Entity\Product\Product::class,
+                'manager' => Entity\Product\Manager::class,
             ],
             'order' => [
-                'class' => sprintf('%sOrder\Order', $namespace),
-                'manager' => sprintf('%sOrder\Manager', $namespace),
+                'class' => Entity\Order\Order::class,
+                'manager' => Entity\Order\Manager::class,
             ],
             'message' => [
-                'class' => sprintf('%sMessage\Message', $namespace),
-                'manager' => sprintf('%sMessage\Manager', $namespace),
+                'class' => Entity\Message\Message::class,
+                'manager' => Entity\Message\Manager::class,
             ],
             'generic' => [
-                'manager' => sprintf('%sGenericManager', $namespace),
+                'manager' => Entity\GenericManager::class,
             ],
         ];
     }
