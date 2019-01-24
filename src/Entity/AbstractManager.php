@@ -20,6 +20,7 @@ namespace Gpupo\MercadolivreSdk\Entity;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Entity\ManagerAbstract;
 use Gpupo\CommonSdk\Entity\ManagerInterface;
+use Gpupo\Common\Entity\CollectionInterface;
 
 abstract class AbstractManager extends ManagerAbstract implements ManagerInterface
 {
@@ -72,20 +73,17 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     }
 
     /**
-     * @codeCoverageIgnore
-     *
      * @param mixed $data
-     *
-     * @return null|false|Gpupo\Common\Entity\CollectionAbstract
      */
-    protected function fetchPrepare($data)
+    protected function fetchPrepare($data): ?CollectionInterface
     {
         if (empty($data)) {
-            return false;
+            return null;
         }
 
         return $this->factoryEntityCollection($data);
     }
+
 
     protected function factoryEntityCollection($data)
     {

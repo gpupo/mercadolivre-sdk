@@ -55,11 +55,9 @@ final class Client extends ClientAbstract implements ClientInterface
         return $accessToken;
     }
 
-    protected function renderAuthorization()
+    protected function renderAuthorization(): array
     {
-        $list = [];
-
-        return $list;
+        return [];
     }
 
     protected function getOauthUrl($path)
