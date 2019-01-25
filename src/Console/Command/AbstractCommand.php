@@ -32,7 +32,7 @@ abstract class AbstractCommand extends Core
 {
     const NAME_PREFIX = 'markethub:mercadolivre:';
 
-    public function getProjectDataFilename()
+    public function getProjectDataFilename(): string
     {
         return sprintf('var/data/markethub-mercadolivre-%d.yaml', $this->getFactory()->getOptions()->get('client_id'));
     }

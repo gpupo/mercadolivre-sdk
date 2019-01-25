@@ -73,7 +73,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     }
 
     /**
-     * @param mixed $data
+     * {@inheritdoc}
      */
     protected function fetchPrepare($data): ?CollectionInterface
     {
