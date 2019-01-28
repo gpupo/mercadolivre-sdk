@@ -3,7 +3,7 @@
 .PHONY: help
 DC=docker-compose
 RUN=$(DC) run --rm php-fpm
-
+COMPOSER_BIN=~/.composer/vendor/bin
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
@@ -46,23 +46,24 @@ update:
 
 ## Measure project size using PHPLOC and print human readable output
 loc:
+	mkdir -p Resources/statistics;
 	printf "${COLOR_COMMENT}Running PHP Lines of code statistics on library folder${COLOR_RESET}\n"
-	phploc --count-tests src/ tests/ | tee Resources/statistics/lines-of-codes.txt
+	${COMPOSER_BIN}/phploc --count-tests src/ tests/ | grep -v Warning | tee Resources/statistics/lines-of-codes.txt
 
 ## PHP Static Analysis Tool
 stan:
 	printf "${COLOR_COMMENT}Running PHP Static Analysis Tool${COLOR_RESET}\n"
-	phpstan analyse src | tee Resources/statistics/stan-src.txt;
-	phpstan analyse tests | tee Resources/statistics/stan-tests.txt;
+	${COMPOSER_BIN}/phpstan analyse src | tee Resources/statistics/stan-src.txt;
+	${COMPOSER_BIN}/phpstan analyse tests | tee Resources/statistics/stan-tests.txt;
 
 ## Apply Php CS fixer and PHPCBF fix rules
-cs-fixer:
-	 php-cs-fixer fix --verbose
-	 phpcbf
+cs:
+	 ${COMPOSER_BIN}/php-cs-fixer fix --verbose
+	 ${COMPOSER_BIN}/phpcbf
 
 ## Run PHP Mess Detector on the test code
 phpmd:
-	phpmd src text codesize,unusedcode,naming,design --exclude vendor,tests,Resources
+	${COMPOSER_BIN}/phpmd src text codesize,unusedcode,naming,design --exclude vendor,tests,Resources
 
 ## Clean temporary files
 clean:
@@ -72,7 +73,7 @@ clean:
 
 ## Run Phan checkup
 phan:
-	phan --config-file config/phan.php
+	${COMPOSER_BIN}/phan --config-file config/phan.php
 
 ## Update make file in projects
 selfupdate:
