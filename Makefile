@@ -1,14 +1,14 @@
 #!/usr/bin/make
 .SILENT:
 .PHONY: help
+DC=docker-compose
+RUN=$(DC) run --rm php-fpm
 
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
 COLOR_COMMENT = \033[33m
 SHELL := /bin/bash
-
-export BASH_ENV=bin/.profile
 
 ## List Targets and Descriptions
 help:
@@ -24,6 +24,10 @@ help:
 	} \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
+
+#Go to the bash container of the application
+bash:
+	@$(RUN) bash
 
 ## Setup environment
 setup:

@@ -85,7 +85,7 @@ class ManagerTest extends TestCaseAbstract
     public function testFetchNotFound()
     {
         $manager = $this->getManager('notfound.json');
-        $this->assertFalse($manager->findById(1001));
+        $this->assertNull($manager->findById(1001));
     }
 
     /**

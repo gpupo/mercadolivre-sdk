@@ -65,7 +65,7 @@ abstract class AbstractDecorator extends Collection
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         try {
             $this->validate();
