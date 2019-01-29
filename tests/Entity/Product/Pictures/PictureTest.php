@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 namespace  Gpupo\MercadolivreSdk\Tests\Entity\Product\Pictures;
 
-use Gpupo\MercadolivreSdk\Entity\Product\Pictures\Picture;
 use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
+use Gpupo\MercadolivreSdk\Entity\Product\Pictures\Picture;
 use PHPUnit\Framework\TestCase as CoreTestCase;
 
 /**

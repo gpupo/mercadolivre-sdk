@@ -17,11 +17,11 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity\Product;
 
+use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
-use Gpupo\Common\Entity\CollectionInterface;
 
 final class Manager extends AbstractManager
 {
@@ -46,7 +46,7 @@ final class Manager extends AbstractManager
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
 
-    public function findById($itemId):? CollectionInterface
+    public function findById($itemId): ?CollectionInterface
     {
         $item = parent::findById($itemId);
         $description = $this->getDescription($itemId);

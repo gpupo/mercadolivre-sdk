@@ -18,12 +18,10 @@ declare(strict_types=1);
 namespace Gpupo\MercadolivreSdk\Console;
 
 use Gpupo\CommonSdk\Console\AbstractApplication;
-use Gpupo\MercadolivreSdk\Factory;
-use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Gpupo\CommonSdk\FactoryInterface;
+use Gpupo\MercadolivreSdk\Factory;
 use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 
 final class Application extends AbstractApplication
 {

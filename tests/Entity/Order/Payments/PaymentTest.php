@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Payments;
 
-use Gpupo\MercadolivreSdk\Entity\Order\Payments\Payment;
 use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
+use Gpupo\MercadolivreSdk\Entity\Order\Payments\Payment;
 use PHPUnit\Framework\TestCase as CoreTestCase;
 
 /**

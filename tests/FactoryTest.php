@@ -17,10 +17,10 @@ declare(strict_types=1);
 
 namespace  Gpupo\MercadolivreSdk\Tests;
 
+use Gpupo\CommonSdk\Tests\FactoryTestAbstract;
 use Gpupo\MercadolivreSdk\Client\Client;
 use Gpupo\MercadolivreSdk\Client\Ml;
 use Gpupo\MercadolivreSdk\Factory;
-use Gpupo\CommonSdk\Tests\FactoryTestAbstract;
 
 /**
  * @coversNothing

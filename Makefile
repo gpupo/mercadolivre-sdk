@@ -54,7 +54,11 @@ loc:
 ## PHP Static Analysis Tool
 stan:
 	printf "${COLOR_COMMENT}Running PHP Static Analysis Tool${COLOR_RESET}\n"
-	${COMPOSER_BIN}/phpstan analyse src | tee Resources/statistics/stan-src.txt;
+	${COMPOSER_BIN}/phpstan analyse src | tee Resources/statistics/php_static_analysis.txt;
+
+## Apply CS fixers and QA watchers
+qa: cs
+qa: stan
 
 ## Apply Php CS fixer and PHPCBF fix rules
 cs: php-cs-fixer

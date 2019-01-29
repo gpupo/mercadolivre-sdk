@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity\Order;
 
-use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityAbstract;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\LoadTrait;

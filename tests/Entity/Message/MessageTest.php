@@ -17,10 +17,10 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Tests\Entity\Message;
 
+use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
 use Gpupo\MercadolivreSdk\Entity\Message\From;
 use Gpupo\MercadolivreSdk\Entity\Message\Message;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
-use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
 
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Message\Message

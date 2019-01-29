@@ -17,10 +17,10 @@ declare(strict_types=1);
 
 namespace Gpupo\MercadolivreSdk\Entity;
 
+use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Entity\ManagerAbstract;
 use Gpupo\CommonSdk\Entity\ManagerInterface;
-use Gpupo\Common\Entity\CollectionInterface;
 
 abstract class AbstractManager extends ManagerAbstract implements ManagerInterface
 {
@@ -36,7 +36,7 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
         return $this->execute($this->factoryMap($route), $entity->toJson($route));
     }
 
-    public function findById($itemId):? CollectionInterface
+    public function findById($itemId): ?CollectionInterface
     {
         $data = parent::findById($itemId);
 
@@ -49,7 +49,6 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
 
     /**
      * {@inheritdoc}
-     *
      */
     public function update(EntityInterface $entity, EntityInterface $existent = null)
     {
@@ -77,7 +76,6 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
 
         return $this->factoryEntityCollection($data);
     }
-
 
     protected function factoryEntityCollection($data): CollectionInterface
     {

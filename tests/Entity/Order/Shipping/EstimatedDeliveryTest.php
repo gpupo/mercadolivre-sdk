@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 namespace  Gpupo\MercadolivreSdk\Tests\Entity\Order\Shipping;
 
-use Gpupo\MercadolivreSdk\Entity\Order\Shipping\EstimatedDelivery;
 use Gpupo\CommonSdk\Tests\Traits\EntityTrait;
+use Gpupo\MercadolivreSdk\Entity\Order\Shipping\EstimatedDelivery;
 use PHPUnit\Framework\TestCase as CoreTestCase;
 
 /**
