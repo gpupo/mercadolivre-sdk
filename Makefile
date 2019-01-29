@@ -4,6 +4,7 @@
 DC=docker-compose
 RUN=$(DC) run --rm php-fpm
 COMPOSER_BIN=~/.composer/vendor/bin
+VENDOR_BIN=./vendor/bin
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
@@ -54,12 +55,19 @@ loc:
 stan:
 	printf "${COLOR_COMMENT}Running PHP Static Analysis Tool${COLOR_RESET}\n"
 	${COMPOSER_BIN}/phpstan analyse src | tee Resources/statistics/stan-src.txt;
-	${COMPOSER_BIN}/phpstan analyse tests | tee Resources/statistics/stan-tests.txt;
 
 ## Apply Php CS fixer and PHPCBF fix rules
-cs:
+cs: php-cs-fixer
+cs: phpcbf
+
+## Apply Php CS fixer rules
+php-cs-fixer:
 	 ${COMPOSER_BIN}/php-cs-fixer fix --verbose
-	 ${COMPOSER_BIN}/phpcbf
+
+## Apply PHPCBF fix rules
+phpcbf:
+	 ${COMPOSER_BIN}/phpcbf -i;
+	 ${COMPOSER_BIN}/phpcbf -v
 
 ## Run PHP Mess Detector on the test code
 phpmd:
@@ -74,6 +82,10 @@ clean:
 ## Run Phan checkup
 phan:
 	${COMPOSER_BIN}/phan --config-file config/phan.php
+
+## Run phpunit testcases
+phpunit:
+	${VENDOR_BIN}/phpunit --testdox
 
 ## Update make file in projects
 selfupdate:

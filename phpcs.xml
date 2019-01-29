@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset name="Coding Standards">
+    <!-- see https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xml.dist -->
+	<description>CS sniffs</description>
+
+	<config name="testVersion" value="1.0.0" />
+	<rule ref="Symfony" />
+
+    <rule ref="Symfony.Commenting.FunctionComment.Missing">
+        <severity>1</severity>
+    </rule>
+    <rule ref="Symfony.Commenting.Annotations.Invalid">
+        <severity>1</severity>
+    </rule>
+    <rule ref="Symfony.Commenting.ClassComment.Missing">
+        <severity>1</severity>
+    </rule>
+
+    <file>src</file>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+    <arg name="basepath" value="."/>
+    <arg name="parallel" value="8" />
+    <arg value="ps"/>
+    <!--arg name="report-full" value="Resources/qualityAssurance/phpcs.report-full.txt" /-->
+</ruleset>
