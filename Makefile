@@ -29,6 +29,7 @@ help:
 #Go to the bash container of the application
 bash:
 	@$(RUN) bash
+	printf "${COLOR_COMMENT}Container removed:${COLOR_RESET}\n"
 
 ## Setup environment
 setup:
@@ -52,13 +53,13 @@ loc:
 	${COMPOSER_BIN}/phploc --count-tests src/ tests/ | grep -v Warning | tee Resources/statistics/lines-of-codes.txt
 
 ## PHP Static Analysis Tool
-stan:
+phpstan:
 	printf "${COLOR_COMMENT}Running PHP Static Analysis Tool${COLOR_RESET}\n"
 	${COMPOSER_BIN}/phpstan analyse -c config/phpstan.neon -l 4 src
 
 ## Apply CS fixers and QA watchers
 qa: cs
-qa: stan
+qa: phpstan
 qa: phan
 
 ## Apply Php CS fixer and PHPCBF fix rules
