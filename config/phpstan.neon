@@ -1,0 +1,4 @@
+parameters:
+	fileExtensions:
+		- php
+	bootstrap: %currentWorkingDirectory%/config/bootstrap.php
