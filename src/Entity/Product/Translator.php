@@ -30,7 +30,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    public function translateTo()
+    public function export()
     {
         if (!$this->getNative() instanceof Product) {
             throw new TranslatorException('Product missed!');
@@ -42,7 +42,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    public function translateFrom()
+    public function import()
     {
         if (!$this->getForeign() instanceof TranslatorDataCollection) {
             throw new TranslatorException('Foreign missed!');

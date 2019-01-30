@@ -81,14 +81,14 @@ final class Manager extends AbstractManager
             ],
         ]);
 
-        $native = $this->factoryTranslatorByForeign($data)->translateFrom();
+        $native = $this->factoryTranslatorByForeign($data)->import();
 
         return $this->save($native);
     }
 
     public function translatorUpdate(TranslatorDataCollection $data, $idExterno)
     {
-        $native = $this->factoryTranslatorByForeign($data)->translateFrom();
+        $native = $this->factoryTranslatorByForeign($data)->import();
 
         return $this->update($native, null, ['itemId' => $idExterno]);
     }

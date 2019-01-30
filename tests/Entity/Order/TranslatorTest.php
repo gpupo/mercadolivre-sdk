@@ -53,7 +53,7 @@ class TranslatorTest extends TestCaseAbstract
         $this->expectExceptionMessage('Foreign object missed!');
 
         $t = new Translator();
-        $t->translateFrom();
+        $t->import();
     }
 
     /**
@@ -66,32 +66,32 @@ class TranslatorTest extends TestCaseAbstract
         $this->expectExceptionMessage('Order missed!');
 
         $t = new Translator();
-        $t->translateTo();
+        $t->export();
     }
 
     /**
-     * @testdox Usa o método ``translateTo()`` para converter o pedido em schema comum em pedido Mercado Livre
+     * @testdox Usa o método ``export()`` para converter o pedido em schema comum em pedido Mercado Livre
      * @cover ::translateTo
      * @dataProvider dataProviderTranslator
      */
     public function testTranslateTo(Translator $translator)
     {
-        $translated = $translator->translateTo();
+        $translated = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $translated);
         $this->assertInternalType('array', $translated->toArray(), 'internal type');
     }
 
     /**
-     * @testdox Usa o método ``translateFrom()`` para traduzir o pedido Mercado Livre em schema comum
+     * @testdox Usa o método ``import()`` para traduzir o pedido Mercado Livre em schema comum
      * @cover ::translateFrom
      * @dataProvider dataProviderTranslator
      */
     public function testTranslateFrom(Translator $translator)
     {
-        $foreign = $translator->translateTo();
+        $foreign = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $foreign);
         $translator->setForeign($foreign);
-        $translated = $translator->translateFrom();
+        $translated = $translator->import();
         $this->assertInstanceOf(Order::class, $translated);
         $this->assertInternalType('array', $translated->toArray(), 'internal type');
     }

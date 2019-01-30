@@ -53,7 +53,7 @@ class TranslatorTest extends TestCaseAbstract
         $this->expectExceptionMessage('Foreign object missed!');
 
         $t = new Translator();
-        $t->translateFrom();
+        $t->import();
     }
 
     /**
@@ -66,7 +66,7 @@ class TranslatorTest extends TestCaseAbstract
         $this->expectExceptionMessage('Product missed!');
 
         $t = new Translator();
-        $t->translateTo();
+        $t->export();
     }
 
     /**
@@ -99,7 +99,7 @@ class TranslatorTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox ``translateTo()``
+     * @testdox ``export()``
      * @cover ::translateTo
      * @group todo
      * @dataProvider dataProviderTranslator
@@ -107,13 +107,13 @@ class TranslatorTest extends TestCaseAbstract
     public function testTranslateTo(Translator $translator)
     {
         return $this->markTestIncomplete('Translator incomplete!');
-        $translated = $translator->translateTo();
+        $translated = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $translated);
         $this->assertInternalType('array', $translated->toArray(), 'internal type');
     }
 
     /**
-     * @testdox ``translateFrom()``
+     * @testdox ``import()``
      * @cover ::translateFrom
      * @group todo
      * @dataProvider dataProviderTranslator
@@ -121,10 +121,10 @@ class TranslatorTest extends TestCaseAbstract
     public function testTranslateFrom(Translator $translator)
     {
         return $this->markTestIncomplete('Translator incomplete!');
-        $foreign = $translator->translateTo();
+        $foreign = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $foreign);
         $translator->setForeign($foreign);
-        $translated = $translator->translateFrom();
+        $translated = $translator->import();
         $this->assertInstanceOf(Product::class, $translated);
         $this->assertInternalType('array', $translated->toArray(), 'internal type');
     }
