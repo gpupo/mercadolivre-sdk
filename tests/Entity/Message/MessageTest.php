@@ -47,10 +47,10 @@ class MessageTest extends TestCaseAbstract
         $message = $this->getFactory()->createMessage($input);
         $data = $message->toCreation();
         $this->assertSame(['from', 'to', 'subject', 'text', 'attachments'], array_keys($data));
-        $this->assertInternalType('array', $data['from']);
-        $this->assertInternalType('array', $data['to']);
+        $this->assertIsArray($data['from']);
+        $this->assertIsArray($data['to']);
         $this->assertCount(1, $data['to']);
-        $this->assertInternalType('array', $data['attachments']);
+        $this->assertIsArray($data['attachments']);
         $this->assertCount(0, $data['attachments']);
     }
 

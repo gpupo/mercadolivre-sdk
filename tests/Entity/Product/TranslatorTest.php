@@ -109,7 +109,7 @@ class TranslatorTest extends TestCaseAbstract
         return $this->markTestIncomplete('Translator incomplete!');
         $translated = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $translated);
-        $this->assertInternalType('array', $translated->toArray(), 'internal type');
+        $this->assertIsArray($translated->toArray(), 'internal type');
     }
 
     /**
@@ -126,7 +126,7 @@ class TranslatorTest extends TestCaseAbstract
         $translator->setForeign($foreign);
         $translated = $translator->import();
         $this->assertInstanceOf(Product::class, $translated);
-        $this->assertInternalType('array', $translated->toArray(), 'internal type');
+        $this->assertIsArray($translated->toArray(), 'internal type');
     }
 
     public function dataProviderArrayExpected()

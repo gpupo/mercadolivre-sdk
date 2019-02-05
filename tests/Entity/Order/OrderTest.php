@@ -391,7 +391,7 @@ class OrderTest extends TestCaseAbstract
      */
     public function testGetFeedback(Order $order, $expected = null)
     {
-        $this->assertInternalType('array', $order->getFeedback());
+        $this->assertIsArray($order->getFeedback());
     }
 
     /**

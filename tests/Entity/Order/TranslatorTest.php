@@ -78,7 +78,7 @@ class TranslatorTest extends TestCaseAbstract
     {
         $translated = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $translated);
-        $this->assertInternalType('array', $translated->toArray(), 'internal type');
+        $this->assertIsArray($translated->toArray(), 'internal type');
     }
 
     /**
@@ -93,6 +93,6 @@ class TranslatorTest extends TestCaseAbstract
         $translator->setForeign($foreign);
         $translated = $translator->import();
         $this->assertInstanceOf(Order::class, $translated);
-        $this->assertInternalType('array', $translated->toArray(), 'internal type');
+        $this->assertIsArray($translated->toArray(), 'internal type');
     }
 }
