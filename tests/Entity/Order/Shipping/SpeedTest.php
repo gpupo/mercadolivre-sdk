@@ -35,10 +35,10 @@ class SpeedTest extends CoreTestCase
 
     const QUALIFIED = Speed::class;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass();
+        parent::setUpBeforeClass(): void;
     }
 
     /**

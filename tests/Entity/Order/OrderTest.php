@@ -33,10 +33,10 @@ class OrderTest extends TestCaseAbstract
 
     const QUALIFIED = 'Gpupo\MercadolivreSdk\Entity\Order\Order';
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass();
+        parent::setUpBeforeClass(): void;
     }
 
     /**

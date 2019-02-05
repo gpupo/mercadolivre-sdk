@@ -35,10 +35,10 @@ class AtmTransferReferenceTest extends CoreTestCase
 
     const QUALIFIED = AtmTransferReference::class;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass();
+        parent::setUpBeforeClass(): void;
     }
 
     /**

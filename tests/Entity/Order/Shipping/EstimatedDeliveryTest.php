@@ -37,10 +37,10 @@ class EstimatedDeliveryTest extends CoreTestCase
 
     const QUALIFIED = EstimatedDelivery::class;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass();
+        parent::setUpBeforeClass(): void;
     }
 
     /**

@@ -95,10 +95,10 @@ class PaymentTest extends CoreTestCase
 
     const QUALIFIED = Payment::class;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass();
+        parent::setUpBeforeClass(): void;
     }
 
     /**
