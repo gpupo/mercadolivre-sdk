@@ -98,7 +98,8 @@ class PaymentTest extends CoreTestCase
     public static function setUpBeforeClass(): void
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
-        parent::setUpBeforeClass(): void;
+        parent::setUpBeforeClass();
+
     }
 
     /**
