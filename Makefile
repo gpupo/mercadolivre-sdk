@@ -1,14 +1,15 @@
 #!/usr/bin/make
 .SILENT:
 .PHONY: help
-
+DC=docker-compose
+RUN=$(DC) run --rm php-fpm
+COMPOSER_BIN=~/.composer/vendor/bin
+VENDOR_BIN=./vendor/bin
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
 COLOR_COMMENT = \033[33m
 SHELL := /bin/bash
-
-export BASH_ENV=bin/.profile
 
 ## List Targets and Descriptions
 help:
@@ -24,6 +25,11 @@ help:
 	} \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
+
+#Go to the bash container of the application
+bash:
+	@$(RUN) bash
+	printf "${COLOR_COMMENT}Container removed.${COLOR_RESET}\n"
 
 ## Setup environment
 setup:
@@ -41,27 +47,66 @@ update:
 	composer info > Resources/statistics/composer-packages.txt
 
 ## Measure project size using PHPLOC and print human readable output
-loc:
+phploc:
+	mkdir -p Resources/statistics;
 	printf "${COLOR_COMMENT}Running PHP Lines of code statistics on library folder${COLOR_RESET}\n"
-	phploc --count-tests src/ tests/ | tee Resources/statistics/lines-of-codes.txt
+	${COMPOSER_BIN}/phploc --count-tests src/ tests/ | grep -v Warning | tee Resources/statistics/lines-of-codes.txt
 
 ## PHP Static Analysis Tool
-stan:
+phpstan:
 	printf "${COLOR_COMMENT}Running PHP Static Analysis Tool${COLOR_RESET}\n"
-	phpstan analyse src | tee Resources/statistics/stan-src.txt;
-	phpstan analyse tests | tee Resources/statistics/stan-tests.txt;
+	${COMPOSER_BIN}/phpstan analyse -c config/phpstan.neon -l 4 src
+
+## Apply CS fixers and QA watchers
+qa: cs phploc phpstan phpmd phan
 
 ## Apply Php CS fixer and PHPCBF fix rules
-cs-fixer:
-	 php-cs-fixer fix --verbose
-	 phpcbf
+cs: php-cs-fixer phpcbf
+
+## Apply Php CS fixer rules
+php-cs-fixer:
+	 ${COMPOSER_BIN}/php-cs-fixer fix --verbose
+
+## Apply PHPCBF fix rules
+phpcbf:
+	 ${COMPOSER_BIN}/phpcbf -i;
+	 ${COMPOSER_BIN}/phpcbf -v
 
 ## Run PHP Mess Detector on the test code
 phpmd:
-	phpmd src text codesize,unusedcode,naming,design --exclude vendor,tests,Resources
+	${COMPOSER_BIN}/phpmd src text codesize,unusedcode,naming,design --exclude vendor,tests,Resources
 
 ## Clean temporary files
 clean:
 	printf "${COLOR_COMMENT}Remove temporary files${COLOR_RESET}\n"
 	rm -rfv ./vendor/* ./var/* ./*.lock ./*.cache
 	git checkout ./var/cache/.gitignore ./var/data/.gitignore
+
+## Run Phan checkup
+phan:
+	${COMPOSER_BIN}/phan --config-file config/phan.php
+
+## Run phpunit testcases
+phpunit:
+	${VENDOR_BIN}/phpunit --testdox
+
+## Update make file
+selfupdate:
+	cp -f vendor/gpupo/common/Makefile Makefile
+
+## Build and publish a github gh-pages branch
+gh-page:
+	mkdir -p var/cache;
+	echo "---" > var/cache/index.md;
+	echo "layout: default" >> var/cache/index.md;
+	echo "---" >> var/cache/index.md;
+	cat README.md  >> var/cache/index.md;
+	git checkout gh-pages || (git checkout --orphan gh-pages && git ls-files -z | xargs -0 git rm --cached);
+	mkdir -p _layouts;
+	cp -f vendor/gpupo/common/Resources/gh-pages-template/default.html _layouts/
+	cp -f vendor/gpupo/common/Resources/gh-pages-template/_config.yml .;
+	cp var/cache/index.md  .;
+	git add -f index.md _config.yml _layouts/default.html;
+	git commit -m "Website recreated by gpupo/common";
+	git push -f origin gh-pages:gh-pages;
+	git checkout -f master;

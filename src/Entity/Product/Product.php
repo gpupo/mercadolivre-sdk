@@ -42,6 +42,9 @@ class Product extends EntityAbstract implements EntityInterface
             'shipping' => 'array',
             'official_store_id' => 'number',
             'status' => 'string',
+            'seller_id' => 'string',
+            'permalink' => 'string',
+            'attributes' => 'array',
         ];
     }
 }
