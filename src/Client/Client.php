@@ -23,7 +23,7 @@ use Gpupo\CommonSdk\Client\ClientInterface;
 
 final class Client extends ClientAbstract implements ClientInterface
 {
-    protected $endpoint_domain = 'api.mercadolibre.com';
+    const ENDPOINT = 'api.mercadolibre.com';
     private $ml;
 
     public function accessMl()

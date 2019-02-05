@@ -29,7 +29,7 @@ help:
 #Go to the bash container of the application
 bash:
 	@$(RUN) bash
-	printf "${COLOR_COMMENT}Container removed:${COLOR_RESET}\n"
+	printf "${COLOR_COMMENT}Container removed.${COLOR_RESET}\n"
 
 ## Setup environment
 setup:
@@ -47,7 +47,7 @@ update:
 	composer info > Resources/statistics/composer-packages.txt
 
 ## Measure project size using PHPLOC and print human readable output
-loc:
+phploc:
 	mkdir -p Resources/statistics;
 	printf "${COLOR_COMMENT}Running PHP Lines of code statistics on library folder${COLOR_RESET}\n"
 	${COMPOSER_BIN}/phploc --count-tests src/ tests/ | grep -v Warning | tee Resources/statistics/lines-of-codes.txt
@@ -58,13 +58,10 @@ phpstan:
 	${COMPOSER_BIN}/phpstan analyse -c config/phpstan.neon -l 4 src
 
 ## Apply CS fixers and QA watchers
-qa: cs
-qa: phpstan
-qa: phan
+qa: cs phploc phpstan phpmd phan
 
 ## Apply Php CS fixer and PHPCBF fix rules
-cs: php-cs-fixer
-cs: phpcbf
+cs: php-cs-fixer phpcbf
 
 ## Apply Php CS fixer rules
 php-cs-fixer:
@@ -93,12 +90,12 @@ phan:
 phpunit:
 	${VENDOR_BIN}/phpunit --testdox
 
-## Update make file in projects
+## Update make file
 selfupdate:
 	cp -f vendor/gpupo/common/Makefile Makefile
 
-## Build and publish a github branch
-gh-pages-build:
+## Build and publish a github gh-pages branch
+gh-page:
 	mkdir -p var/cache;
 	echo "---" > var/cache/index.md;
 	echo "layout: default" >> var/cache/index.md;
