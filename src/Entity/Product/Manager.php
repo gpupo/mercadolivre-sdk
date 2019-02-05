@@ -42,6 +42,7 @@ final class Manager extends AbstractManager
         'getDescription' => ['GET', '/items/{itemId}/description?access_token={access_token}'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
+        'updateDescription' => ['PUT', '/items/{itemId}/description?access_token={access_token}'],
         'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
     ];
@@ -106,8 +107,22 @@ final class Manager extends AbstractManager
 
         $update = [];
         $update['price'] = $entity['price'];
-        $update['title'] = $entity['title'];
-        $update['pictures'] = $entity['pictures'];
+
+        if(isset($entity['description'])){
+            $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
+        }
+
+        if(isset($entity['title'])){
+            $update['title'] = $entity['title'];
+        }
+
+        if(isset($entity['pictures'])){
+            $update['pictures'] = $entity['pictures'];
+        }
+
+        if(isset($entity['attributes'])){
+            $update['attributes'] = $entity['attributes'];
+        }
 
         $stock = $entity['available_quantity'];
         if ($stock > 0) {
