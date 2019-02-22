@@ -11,8 +11,7 @@
     "keywords": ["mercadolivre", "marketplace", "sdk", "api"],
     "license": "MIT",
     "require": {
-        "php": ">=7.3",
-        "gpupo/common-sdk": "^4.9.2|dev-master"
+        "gpupo/common-sdk": "^4.10|dev-master"
     },
     "require-dev": {
       "phpunit/phpunit": "^8.0",
