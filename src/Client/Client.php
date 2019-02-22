@@ -24,6 +24,9 @@ use Gpupo\CommonSdk\Client\ClientInterface;
 final class Client extends ClientAbstract implements ClientInterface
 {
     const ENDPOINT = 'api.mercadolibre.com';
+
+    const ACCEPT_DEFAULT = 'application/json';
+
     private $ml;
 
     public function accessMl()
