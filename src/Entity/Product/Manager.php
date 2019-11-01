@@ -106,6 +106,11 @@ final class Manager extends AbstractManager
         $item = $this->findById($params['itemId']);
 
         $update = [];
+
+        if (isset($entity['shipping'])) {
+            $update['shipping'] = $entity['shipping'];
+        }
+
         $update['price'] = $entity['price'];
 
         if(isset($entity['description'])){
