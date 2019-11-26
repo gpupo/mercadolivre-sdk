@@ -48,6 +48,7 @@ final class Manager extends AbstractManager
         'updateDescription' => ['PUT', '/items/{itemId}/description?access_token={access_token}'],
         'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
+        'getCategoryAttributes' => ['GET', '/categories/{categoryId}/attributes'],
     ];
 
     public function findById($itemId): ?CollectionInterface
@@ -111,14 +112,18 @@ final class Manager extends AbstractManager
         $update = [];
         $update['price'] = $entity['price'];
 
-        if(isset($entity['description'])){
-            $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
-        }
-
         foreach(['shipping','title','pictures','attributes'] as $field) {
             if (isset($entity[$field])) {
                 $update[$field] = $entity[$field];
+
+                if ('attributes' === $field) {
+                    $update[$field] = $this->updateFilterAttributes($entity[$field], $item['category_id']);
+                }
             }
+        }
+
+        if (isset($entity['description'])){
+            $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
         }
 
         $stock = $entity['available_quantity'];
@@ -146,6 +151,26 @@ final class Manager extends AbstractManager
             throw $e;
         }
 
+    }
+
+    protected function updateFilterAttributes($updateAttributes, $categoryId)
+    {
+        $categoryAttributes = $this->getCategoryAttributes($categoryId);
+
+        $readOnlyAttributesIds = [];
+        foreach($categoryAttributes as $categoryAttribute) {
+            if (isset($categoryAttribute['tags']['read_only'])) {
+                $readOnlyAttributesIds[] = $categoryAttribute['id'];
+            }
+        }
+
+        foreach($updateAttributes as $key => $attribute) {
+            if (in_array($attribute['id'], $readOnlyAttributesIds)) {
+                unset($updateAttributes[$key]);
+            }
+        }
+
+        return $updateAttributes;
     }
 
     public function updateVariation(EntityInterface $entity, EntityInterface $existent = null, $params = null)
@@ -193,5 +218,12 @@ final class Manager extends AbstractManager
         } catch (\Exception | \Error $e) {
             return false;
         }
+    }
+
+    protected function getCategoryAttributes($categoryId)
+    {
+        $response = $this->perform($this->factoryMap('getCategoryAttributes', ['categoryId' => $categoryId]));
+
+        return $this->processResponse($response);
     }
 }
