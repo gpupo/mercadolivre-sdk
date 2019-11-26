@@ -22,6 +22,7 @@ use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
 
 final class Manager extends AbstractManager
 {
@@ -40,8 +41,10 @@ final class Manager extends AbstractManager
         'save' => ['POST', '/items?access_token={access_token}'],
         'findById' => ['GET', '/items/{itemId}/'],
         'getDescription' => ['GET', '/items/{itemId}/description?access_token={access_token}'],
+        'getVariations' => ['GET', '/items/{itemId}?attributes=variations'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
+        'updateVariation' => ['PUT', 'items/{itemId}/variations/{variationId}?access_token={access_token}'],
         'updateDescription' => ['PUT', '/items/{itemId}/description?access_token={access_token}'],
         'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
@@ -101,32 +104,21 @@ final class Manager extends AbstractManager
         return $translator;
     }
 
-    public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null)
+    public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $isVariation = false)
     {
         $item = $this->findById($params['itemId']);
 
         $update = [];
-
-        if (isset($entity['shipping'])) {
-            $update['shipping'] = $entity['shipping'];
-        }
-
         $update['price'] = $entity['price'];
 
         if(isset($entity['description'])){
             $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
         }
 
-        if(isset($entity['title'])){
-            $update['title'] = $entity['title'];
-        }
-
-        if(isset($entity['pictures'])){
-            $update['pictures'] = $entity['pictures'];
-        }
-
-        if(isset($entity['attributes'])){
-            $update['attributes'] = $entity['attributes'];
+        foreach(['shipping','title','pictures','attributes'] as $field) {
+            if (isset($entity[$field])) {
+                $update[$field] = $entity[$field];
+            }
         }
 
         $stock = $entity['available_quantity'];
@@ -139,6 +131,67 @@ final class Manager extends AbstractManager
             $update['status'] = 'paused';
         }
 
-        return $this->execute($this->factoryMap('update', $params), json_encode($update));
+        if ($isVariation) {
+            unset($update['price']);
+            unset($update['available_quantity']);
+        }
+
+        try {
+            return $this->execute($this->factoryMap('update', $params), json_encode($update));
+        } catch (\Exception $e) {
+            if ($this->hasVariation($params['itemId'])) {
+                throw new AdHasVariationException(sprintf('Ad %s has variation', $params['itemId']));
+            }
+
+            throw $e;
+        }
+
+    }
+
+    public function updateVariation(EntityInterface $entity, EntityInterface $existent = null, $params = null)
+    {
+        try {
+            $commonUpdate = $this->update($entity, $existent, $params, true);
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to update product with variation (general data)');
+        }
+
+        $response = $this->getAdVariations($params['itemId']);
+        $variations = $response->get('variations');
+
+        if (empty($variations)) {
+            throw new \Exception('The ad has no variations');
+        } elseif (\count($variations) > 1) {
+            throw new \Exception('Multiple variations not supported');
+        }
+
+        $variation = [];
+        $variation['price'] = $entity['price'];
+
+        if ($entity['available_quantity'] > 0) {
+            $variation['available_quantity'] = $entity['available_quantity'];
+        }
+
+        $params['variationId'] = current($variations)['id'];
+
+        return $this->execute($this->factoryMap('updateVariation', $params), json_encode($variation));
+    }
+
+    protected function getAdVariations($itemId)
+    {
+        $response = $this->perform($this->factoryMap('getVariations', ['itemId' => $itemId]));
+
+        return $this->processResponse($response);
+    }
+
+    public function hasVariation($itemId) : bool
+    {
+        try {
+            $response = $this->getAdVariations($itemId);
+
+            return !empty($response->get('variations'));
+        } catch (\Exception | \Error $e) {
+            return false;
+        }
     }
 }
