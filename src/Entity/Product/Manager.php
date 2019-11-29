@@ -139,11 +139,17 @@ final class Manager extends AbstractManager
         if ($isVariation) {
             unset($update['price']);
             unset($update['available_quantity']);
+            unset($update['pictures']);
+            unset($update['attributes']);
         }
 
         try {
             return $this->execute($this->factoryMap('update', $params), json_encode($update));
         } catch (\Exception $e) {
+            if ($isVariation) {
+                throw $e;
+            }
+
             if ($this->hasVariation($params['itemId'])) {
                 throw new AdHasVariationException(sprintf('Ad %s has variation', $params['itemId']));
             }
@@ -157,32 +163,28 @@ final class Manager extends AbstractManager
     {
         $categoryAttributes = $this->getCategoryAttributes($categoryId);
 
-        $readOnlyAttributesIds = [];
+        $ignoreAttributes = ['BRAND','ORIGIN'];
         foreach($categoryAttributes as $categoryAttribute) {
             if (isset($categoryAttribute['tags']['read_only'])) {
-                $readOnlyAttributesIds[] = $categoryAttribute['id'];
+                $ignoreAttributes[] = $categoryAttribute['id'];
             }
         }
 
         foreach($updateAttributes as $key => $attribute) {
-            if (in_array($attribute['id'], $readOnlyAttributesIds)) {
+            if (in_array($attribute['id'], $ignoreAttributes))) {
                 unset($updateAttributes[$key]);
             }
         }
+
+        sort($updateAttributes);
 
         return $updateAttributes;
     }
 
     public function updateVariation(EntityInterface $entity, EntityInterface $existent = null, $params = null)
     {
-        try {
-            $commonUpdate = $this->update($entity, $existent, $params, true);
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to update product with variation (general data)');
-        }
-
-        $response = $this->getAdVariations($params['itemId']);
-        $variations = $response->get('variations');
+        $variations = $this->getAdVariations($params['itemId']);
+        $variations = $variations->get('variations');
 
         if (empty($variations)) {
             throw new \Exception('The ad has no variations');
@@ -192,6 +194,9 @@ final class Manager extends AbstractManager
 
         $variation = [];
         $variation['price'] = $entity['price'];
+        if (isset(current($variations)['pictures_ids'])) {
+            $variation['pictures'] = current($variations)['pictures_ids'];
+        }
 
         if ($entity['available_quantity'] > 0) {
             $variation['available_quantity'] = $entity['available_quantity'];
@@ -199,7 +204,9 @@ final class Manager extends AbstractManager
 
         $params['variationId'] = current($variations)['id'];
 
-        return $this->execute($this->factoryMap('updateVariation', $params), json_encode($variation));
+        $this->execute($this->factoryMap('updateVariation', $params), json_encode($variation));
+
+        return $this->update($entity, $existent, $params, true);
     }
 
     protected function getAdVariations($itemId)
