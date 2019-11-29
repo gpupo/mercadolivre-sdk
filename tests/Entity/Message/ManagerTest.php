@@ -110,6 +110,20 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame((int) '106459677', (int) $messages->first()->getTo()->first()->getUserId());
     }
 
+    /**
+     * @depends testManager
+     *
+     * @param mixed $manager
+     */
+    public function testIsHttpStatusCodeOK($manager)
+    {
+        $this->assertTrue($manager->isHttpStatusCodeOK(200));
+        $this->assertTrue($manager->isHttpStatusCodeOK(299));
+        $this->assertFalse($manager->isHttpStatusCodeOK(199));
+        $this->assertFalse($manager->isHttpStatusCodeOK(300));
+        $this->assertFalse($manager->isHttpStatusCodeOK(502));
+    }
+
     protected function getManager($filename = 'item.json')
     {
         $manager = $this->getFactory()->factoryManager('message');
