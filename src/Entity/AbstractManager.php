@@ -81,4 +81,15 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     {
         return $this->factoryNeighborObject($this->getEntityName().'Collection', $data);
     }
+
+    protected function isHttpStatusCodeOK($statusCode): bool
+    {
+        $intCode = (int) $statusCode;
+
+        if (200 <= $statusCode && 300 > $statusCode) {
+            return true;
+        }
+
+        return false;
+    }
 }

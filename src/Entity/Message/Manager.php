@@ -59,10 +59,9 @@ final class Manager extends AbstractManager
     public function create(Message $message): ?Message
     {
         $data = $message->toCreation();
-
         $response = $this->execute($this->factoryMap('create'), json_encode($data));
 
-        if (200 === (int) $response->getHttpStatusCode()) {
+        if ($this->isHttpStatusCodeOK($response->getHttpStatusCode())) {
             return new Message($response->getData()->first());
         }
 
