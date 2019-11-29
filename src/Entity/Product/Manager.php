@@ -171,7 +171,7 @@ final class Manager extends AbstractManager
         }
 
         foreach($updateAttributes as $key => $attribute) {
-            if (in_array($attribute['id'], $ignoreAttributes))) {
+            if (in_array($attribute['id'], $ignoreAttributes)) {
                 unset($updateAttributes[$key]);
             }
         }
