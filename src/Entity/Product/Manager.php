@@ -23,6 +23,7 @@ use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutVariationException;
 
 final class Manager extends AbstractManager
 {
@@ -187,7 +188,7 @@ final class Manager extends AbstractManager
         $variations = $variations->get('variations');
 
         if (empty($variations)) {
-            throw new \Exception('The ad has no variations');
+            throw new AdWithoutVariationException('The ad has no variations');
         } elseif (\count($variations) > 1) {
             throw new \Exception('Multiple variations not supported');
         }
