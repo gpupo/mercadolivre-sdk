@@ -5,7 +5,7 @@ os:
 services:
   - mysql
 php:
-  - 7.3
+  - 7.4
 matrix:
   fast_finish: true
 before_install:
