@@ -19,15 +19,18 @@ $quantity = 0;
 $items = $native['order_items'];
 $acceptedOffer = [];
 foreach ($items as $item) {
-    $quantity += $item['quantity'];
-    $acceptedOffer[] = [
-        'itemOffered' => [
-            'sku' => $item['item']['id'],
-        ],
-        'quantity' => $item['quantity'],
-        'price' => $item['unit_price'],
-    ];
+    if (is_array($item)) {
+        $quantity += $item['quantity'];
+        $acceptedOffer[] = [
+            'itemOffered' => [
+                'sku' => $item['item']['id'],
+            ],
+            'quantity' => $item['quantity'],
+            'price' => $item['unit_price'],
+        ];
+    }
 }
+
 $dateTime = new DateTime($native['date_created']);
 
 $translateStatus = function ($status) {
