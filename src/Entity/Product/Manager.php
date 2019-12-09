@@ -108,7 +108,13 @@ final class Manager extends AbstractManager
 
     public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $isVariation = false)
     {
-        $item = $this->findById($params['itemId']);
+        $toFind = null;
+
+        if (is_array($params)) {
+            $toFind = $params['itemId'];
+        }
+
+        $item = $this->findById($toFind);
 
         $update = [];
         $update['price'] = $entity['price'];
