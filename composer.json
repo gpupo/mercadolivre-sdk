@@ -11,12 +11,13 @@
     "keywords": ["mercadolivre", "marketplace", "sdk", "api"],
     "license": "MIT",
     "require": {
+        "php": ">=7.4",
         "gpupo/common-sdk": "^4.10|dev-master"
     },
     "require-dev": {
       "phpunit/phpunit": "^8.0",
       "phan/phan": "^1.0",
-        "vimeo/psalm": "^3.5"
+      "vimeo/psalm": "^3.5"
     },
     "autoload": {
         "psr-4": {
