@@ -49,5 +49,7 @@ final class OrderCommand extends AbstractCommand
         $content = Yaml::dump($schema, 8);
 
         file_put_contents('Resources/schema/order.yaml', $content);
+
+        return 0;
     }
 }

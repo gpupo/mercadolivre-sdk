@@ -48,5 +48,7 @@ final class ChecklistCommand extends AbstractCommand
         }
 
         $output->writeln('token:'.$data['access_token']);
+
+        return 0;
     }
 }

@@ -49,5 +49,7 @@ final class ProductCommand extends AbstractCommand
         $content = Yaml::dump($schema, 8);
 
         file_put_contents('Resources/schema/product.yaml', $content);
+
+        return 0;
     }
 }

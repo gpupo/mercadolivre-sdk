@@ -57,5 +57,7 @@ final class MeCommand extends AbstractCommand
 
         $output->writeln('---- <bg=blue> User INFO </> -------');
         $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData));
+
+        return 0;
     }
 }
