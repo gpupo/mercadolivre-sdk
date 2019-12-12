@@ -4,7 +4,7 @@ behat/transliterator                  v1.2.0  String transliterator
 composer/semver                       1.5.0   Semver library that offers utilities, version constraint parsing ...
 composer/xdebug-handler               1.4.0   Restarts a process without Xdebug.
 doctrine/annotations                  v1.8.0  Docblock Annotations Parser
-doctrine/cache                        1.9.1   PHP Doctrine Cache library is a popular cache implementation that...
+doctrine/cache                        1.10.0  PHP Doctrine Cache library is a popular cache implementation that...
 doctrine/collections                  1.6.4   PHP Doctrine Collections library that adds additional functionali...
 doctrine/common                       v2.11.0 PHP Doctrine Common project is a library that provides additional...
 doctrine/dbal                         v2.10.0 Powerful PHP database abstraction layer (DBAL) with many features...
@@ -18,17 +18,18 @@ doctrine/reflection                   v1.0.0  Doctrine Reflection component
 felixfbecker/advanced-json-rpc        v3.0.4  A more advanced JSONRPC implementation
 felixfbecker/language-server-protocol v1.4.0  PHP classes for the Language Server Protocol
 gedmo/doctrine-extensions             v2.4.38 Doctrine2 behavioral extensions
-gpupo/common                          4.12.0  Common Objects
-gpupo/common-schema                   4.7.4   Common schema
-gpupo/common-sdk                      4.15.1  Componente de uso comum entre SDKs para integração a partir de ...
-microsoft/tolerant-php-parser         v0.0.17 Tolerant PHP-to-AST parser designed for IDE usage scenarios
-monolog/monolog                       1.25.2  Sends your logs to files, sockets, inboxes, databases and various...
+gpupo/common                          5.0.0   Common Objects
+gpupo/common-dev                      5.0.1   Common PHP tool for require-dev env
+gpupo/common-schema                   5.0.0   Common schema
+gpupo/common-sdk                      5.0.2   Componente de uso comum entre SDKs para integração a partir de ...
+microsoft/tolerant-php-parser         v0.0.18 Tolerant PHP-to-AST parser designed for IDE usage scenarios
+monolog/monolog                       2.0.1   Sends your logs to files, sockets, inboxes, databases and various...
 myclabs/deep-copy                     1.9.3   Create deep copies (clones) of your objects
 netresearch/jsonmapper                v1.6.0  Map nested JSON structures onto PHP classes
 nikic/php-parser                      v4.3.0  A PHP parser written in PHP
 ocramius/package-versions             1.5.1   Composer plugin that provides efficient querying for installed pa...
 openlss/lib-array2xml                 1.0.0   Array2XML conversion library credit to lalit.org
-phan/phan                             1.3.5   A static analyzer for PHP
+phan/phan                             2.4.5   A static analyzer for PHP
 phar-io/manifest                      1.0.3   Component for reading phar.io manifest information from a PHP Arc...
 phar-io/version                       2.0.1   Library for handling version information and constraints
 phpdocumentor/reflection-common       2.0.0   Common reflection classes used by phpdocumentor to reflect the co...
@@ -40,7 +41,7 @@ phpunit/php-file-iterator             2.0.2   FilterIterator implementation that
 phpunit/php-text-template             1.2.1   Simple template engine.
 phpunit/php-timer                     2.1.2   Utility class for timing
 phpunit/php-token-stream              3.1.1   Wrapper around PHP's tokenizer extension.
-phpunit/phpunit                       8.4.3   The PHP Unit Testing framework.
+phpunit/phpunit                       8.5.0   The PHP Unit Testing framework.
 psr/cache                             1.0.1   Common interface for caching libraries
 psr/container                         1.0.0   Common Container Interface (PHP FIG PSR-11)
 psr/http-client                       1.0.0   Common interface for HTTP clients
@@ -61,24 +62,23 @@ sebastian/recursion-context           3.0.0   Provides functionality to recursiv
 sebastian/resource-operations         2.0.1   Provides a list of PHP built-in functions that operate on resources
 sebastian/type                        1.1.3   Collection of value objects that represent the types of the PHP t...
 sebastian/version                     2.0.1   Library that helps with managing the version number of Git-hosted...
-symfony/cache                         v4.4.0  Symfony Cache component with PSR-6, PSR-16, and tags
-symfony/cache-contracts               v2.0.0  Generic abstractions related to caching
-symfony/console                       v4.4.0  Symfony Console Component
-symfony/dotenv                        v4.4.0  Registers environment variables from a .env file
-symfony/filesystem                    v4.4.0  Symfony Filesystem Component
-symfony/finder                        v4.4.0  Symfony Finder Component
-symfony/lock                          v4.4.0  Symfony Lock Component
-symfony/polyfill-ctype                v1.13.0 Symfony polyfill for ctype functions
-symfony/polyfill-mbstring             v1.13.0 Symfony polyfill for the Mbstring extension
-symfony/polyfill-php72                v1.13.0 Symfony polyfill backporting some PHP 7.2+ features to lower PHP ...
-symfony/polyfill-php73                v1.13.0 Symfony polyfill backporting some PHP 7.3+ features to lower PHP ...
-symfony/service-contracts             v2.0.0  Generic abstractions related to writing services
-symfony/var-dumper                    v4.4.0  Symfony mechanism for exploring and dumping PHP variables
-symfony/var-exporter                  v5.0.0  A blend of var_export() + serialize() to turn any serializable da...
-symfony/yaml                          v4.4.0  Symfony Yaml Component
+symfony/cache                         v5.0.1  Symfony Cache component with PSR-6, PSR-16, and tags
+symfony/cache-contracts               v2.0.1  Generic abstractions related to caching
+symfony/console                       v5.0.1  Symfony Console Component
+symfony/dotenv                        v5.0.1  Registers environment variables from a .env file
+symfony/filesystem                    v5.0.1  Symfony Filesystem Component
+symfony/finder                        v5.0.1  Symfony Finder Component
+symfony/lock                          v5.0.1  Symfony Lock Component
+symfony/polyfill-ctype                v1.13.1 Symfony polyfill for ctype functions
+symfony/polyfill-mbstring             v1.13.1 Symfony polyfill for the Mbstring extension
+symfony/polyfill-php73                v1.13.1 Symfony polyfill backporting some PHP 7.3+ features to lower PHP ...
+symfony/service-contracts             v2.0.1  Generic abstractions related to writing services
+symfony/var-dumper                    v5.0.1  Symfony mechanism for exploring and dumping PHP variables
+symfony/var-exporter                  v5.0.1  A blend of var_export() + serialize() to turn any serializable da...
+symfony/yaml                          v5.0.1  Symfony Yaml Component
 theseer/tokenizer                     1.1.3   A small library for converting tokenized PHP source code into XML...
-twig/twig                             v2.12.2 Twig, the flexible, fast, and secure template language for PHP
-vimeo/psalm                           3.7.0   A static analysis tool for finding errors in PHP applications
+twig/twig                             v3.0.0  Twig, the flexible, fast, and secure template language for PHP
+vimeo/psalm                           3.7.2   A static analysis tool for finding errors in PHP applications
 webmozart/assert                      1.6.0   Assertions to validate method input/output with nice error messages.
 webmozart/glob                        4.1.0   A PHP implementation of Ant's glob.
 webmozart/path-util                   2.3.0   A robust cross-platform utility for normalizing, comparing and mo...
