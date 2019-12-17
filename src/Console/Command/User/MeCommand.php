@@ -49,7 +49,7 @@ final class MeCommand extends AbstractCommand
             throw new \Exception('User Id required!');
         }
 
-        $this->getFactory()->getLogger()->addInfo('Project Data', $projectData);
+        $this->getFactory()->getLogger()->info('Project Data', $projectData);
         $manager = $this->getFactory()->factoryManager('generic');
 
         $output->writeln('---- <bg=blue> APP INFO </> -------');
