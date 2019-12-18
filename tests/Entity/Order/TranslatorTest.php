@@ -82,7 +82,7 @@ class TranslatorTest extends TestCaseAbstract
     }
 
     /**
-     * @testdox Usa o método ``import()`` para traduzir o pedido Mercado Livre em schema comum
+     * @testdox Usa o método ``import()`` para traduzir o pedido schema comum em Mercado Livre
      * @cover ::translateFrom
      * @dataProvider dataProviderTranslator
      */

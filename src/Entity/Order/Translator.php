@@ -30,7 +30,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    public function export()
+    function export(): TranslatorDataCollection
     {
         if (!$this->getNative() instanceof Order) {
             throw new TranslatorException('Order missed!');
@@ -42,7 +42,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    public function import()
+    public function import(): Order
     {
         if (!$this->getForeign() instanceof TranslatorDataCollection) {
             throw new TranslatorException('Foreign missed!');
@@ -51,7 +51,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
         return new Order($this->loadMap('foreign'));
     }
 
-    private function loadMap($name)
+    private function loadMap($name): array
     {
         $file = __DIR__.'/map/translate.'.$name.'.map.php';
         $method = 'get'.ucfirst($name);

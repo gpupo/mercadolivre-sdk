@@ -80,7 +80,6 @@ class TranslatorTest extends TestCaseAbstract
      */
     public function testLoadMap($expected)
     {
-        return $this->markTestIncomplete('Translator incomplete!');
         $product = new Product($expected);
 
         $t = $this->proxy(new Translator());
@@ -106,7 +105,6 @@ class TranslatorTest extends TestCaseAbstract
      */
     public function testTranslateTo(Translator $translator)
     {
-        return $this->markTestIncomplete('Translator incomplete!');
         $translated = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $translated);
         $this->assertIsArray($translated->toArray(), 'internal type');
@@ -120,7 +118,6 @@ class TranslatorTest extends TestCaseAbstract
      */
     public function testTranslateFrom(Translator $translator)
     {
-        return $this->markTestIncomplete('Translator incomplete!');
         $foreign = $translator->export();
         $this->assertInstanceOf(TranslatorDataCollection::class, $foreign);
         $translator->setForeign($foreign);
