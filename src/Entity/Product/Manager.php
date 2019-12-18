@@ -110,7 +110,7 @@ final class Manager extends AbstractManager
     {
         $toFind = null;
 
-        if (is_array($params)) {
+        if (\is_array($params)) {
             $toFind = $params['itemId'];
         }
 
@@ -119,7 +119,7 @@ final class Manager extends AbstractManager
         $update = [];
         $update['price'] = $entity['price'];
 
-        foreach(['shipping','title','pictures','attributes'] as $field) {
+        foreach (['shipping', 'title', 'pictures', 'attributes'] as $field) {
             if (isset($entity[$field])) {
                 $update[$field] = $entity[$field];
 
@@ -129,7 +129,7 @@ final class Manager extends AbstractManager
             }
         }
 
-        if (isset($entity['description'])){
+        if (isset($entity['description'])) {
             $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
         }
 
@@ -144,10 +144,7 @@ final class Manager extends AbstractManager
         }
 
         if ($isVariation) {
-            unset($update['price']);
-            unset($update['available_quantity']);
-            unset($update['pictures']);
-            unset($update['attributes']);
+            unset($update['price'], $update['available_quantity'], $update['pictures'], $update['attributes']);
         }
 
         try {
@@ -163,29 +160,6 @@ final class Manager extends AbstractManager
 
             throw $e;
         }
-
-    }
-
-    protected function updateFilterAttributes($updateAttributes, $categoryId)
-    {
-        $categoryAttributes = $this->getCategoryAttributes($categoryId);
-
-        $ignoreAttributes = ['BRAND','ORIGIN'];
-        foreach($categoryAttributes as $categoryAttribute) {
-            if (isset($categoryAttribute['tags']['read_only'])) {
-                $ignoreAttributes[] = $categoryAttribute['id'];
-            }
-        }
-
-        foreach($updateAttributes as $key => $attribute) {
-            if (in_array($attribute['id'], $ignoreAttributes)) {
-                unset($updateAttributes[$key]);
-            }
-        }
-
-        sort($updateAttributes);
-
-        return $updateAttributes;
     }
 
     public function updateVariation(EntityInterface $entity, EntityInterface $existent = null, $params = null)
@@ -195,7 +169,8 @@ final class Manager extends AbstractManager
 
         if (empty($variations)) {
             throw new AdWithoutVariationException('The ad has no variations');
-        } elseif (\count($variations) > 1) {
+        }
+        if (\count($variations) > 1) {
             throw new \Exception('Multiple variations not supported');
         }
 
@@ -216,14 +191,7 @@ final class Manager extends AbstractManager
         return $this->update($entity, $existent, $params, true);
     }
 
-    protected function getAdVariations($itemId)
-    {
-        $response = $this->perform($this->factoryMap('getVariations', ['itemId' => $itemId]));
-
-        return $this->processResponse($response);
-    }
-
-    public function hasVariation($itemId) : bool
+    public function hasVariation($itemId): bool
     {
         try {
             $response = $this->getAdVariations($itemId);
@@ -232,6 +200,35 @@ final class Manager extends AbstractManager
         } catch (\Exception | \Error $e) {
             return false;
         }
+    }
+
+    protected function updateFilterAttributes($updateAttributes, $categoryId)
+    {
+        $categoryAttributes = $this->getCategoryAttributes($categoryId);
+
+        $ignoreAttributes = ['BRAND', 'ORIGIN'];
+        foreach ($categoryAttributes as $categoryAttribute) {
+            if (isset($categoryAttribute['tags']['read_only'])) {
+                $ignoreAttributes[] = $categoryAttribute['id'];
+            }
+        }
+
+        foreach ($updateAttributes as $key => $attribute) {
+            if (\in_array($attribute['id'], $ignoreAttributes, true)) {
+                unset($updateAttributes[$key]);
+            }
+        }
+
+        sort($updateAttributes);
+
+        return $updateAttributes;
+    }
+
+    protected function getAdVariations($itemId)
+    {
+        $response = $this->perform($this->factoryMap('getVariations', ['itemId' => $itemId]));
+
+        return $this->processResponse($response);
     }
 
     protected function getCategoryAttributes($categoryId)

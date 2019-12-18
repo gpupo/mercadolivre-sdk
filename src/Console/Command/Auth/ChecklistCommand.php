@@ -43,7 +43,7 @@ final class ChecklistCommand extends AbstractCommand
     {
         $data = $this->getProjectData();
 
-        if (!array_key_exists('access_token', $data)) {
+        if (!\array_key_exists('access_token', $data)) {
             throw new \Exception('Access Token required!');
         }
 

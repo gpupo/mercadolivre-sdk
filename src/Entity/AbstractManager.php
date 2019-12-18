@@ -60,6 +60,17 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
         ]);
     }
 
+    public function isHttpStatusCodeOK($statusCode): bool
+    {
+        $intCode = (int) $statusCode;
+
+        if (200 <= $statusCode && 300 > $statusCode) {
+            return true;
+        }
+
+        return false;
+    }
+
     protected function fetchDefaultParameters(): array
     {
         return (array) $this->getClient()->getOptions()->toArray();
@@ -80,16 +91,5 @@ abstract class AbstractManager extends ManagerAbstract implements ManagerInterfa
     protected function factoryEntityCollection($data): CollectionInterface
     {
         return $this->factoryNeighborObject($this->getEntityName().'Collection', $data);
-    }
-
-    public function isHttpStatusCodeOK($statusCode): bool
-    {
-        $intCode = (int) $statusCode;
-
-        if (200 <= $statusCode && 300 > $statusCode) {
-            return true;
-        }
-
-        return false;
     }
 }

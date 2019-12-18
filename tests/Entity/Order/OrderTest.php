@@ -37,7 +37,6 @@ class OrderTest extends TestCaseAbstract
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
         parent::setUpBeforeClass();
-
     }
 
     /**

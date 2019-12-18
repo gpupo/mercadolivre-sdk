@@ -39,7 +39,6 @@ class AtmTransferReferenceTest extends CoreTestCase
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
         parent::setUpBeforeClass();
-
     }
 
     /**

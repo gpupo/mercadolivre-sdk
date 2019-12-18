@@ -44,7 +44,7 @@ final class RefreshCommand extends AbstractCommand
     {
         $data = $this->getProjectData();
 
-        if (!array_key_exists('refresh_token', $data)) {
+        if (!\array_key_exists('refresh_token', $data)) {
             throw new \Exception('Refresh Token required!');
         }
 

@@ -57,7 +57,6 @@ class ReceiverAddressTest extends CoreTestCase
     {
         static::setFullyQualifiedObject(self::QUALIFIED);
         parent::setUpBeforeClass();
-
     }
 
     /**

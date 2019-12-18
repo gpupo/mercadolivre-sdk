@@ -45,7 +45,7 @@ final class MeCommand extends AbstractCommand
     {
         $projectData = $this->getProjectData();
 
-        if (!array_key_exists('user_id', $projectData)) {
+        if (!\array_key_exists('user_id', $projectData)) {
             throw new \Exception('User Id required!');
         }
 
