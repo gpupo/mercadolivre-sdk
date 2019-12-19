@@ -34,7 +34,7 @@ foreach ($items as $item) {
 $dateTime = new DateTime($native['date_created']);
 
 $translateStatus = function ($status) {
-    $string = strtoupper($status);
+    $string = mb_strtoupper($status);
     $list = include __DIR__.'/status.map.php';
     $find = array_search($string, $list, true);
 

@@ -18,9 +18,9 @@ declare(strict_types=1);
 namespace  Gpupo\MercadolivreSdk\Tests;
 
 use Gpupo\CommonSdk\Tests\TestCaseAbstract as CommonSdkTestCaseAbstract;
-use Gpupo\MercadolivreSdk\Factory;
-use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\MercadolivreSdk\Entity\Order\Order;
+use Gpupo\MercadolivreSdk\Entity\Product\Product;
+use Gpupo\MercadolivreSdk\Factory;
 
 abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
 {
@@ -49,8 +49,8 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
         $list = [];
 
         foreach ($this->providerProducts() as $product) {
-            if(!is_a($product, Product::class)) {
-                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', get_class($product)));
+            if (!is_a($product, Product::class)) {
+                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', \get_class($product)));
             }
             $list[] = [$product];
         }
@@ -71,8 +71,8 @@ abstract class TestCaseAbstract extends CommonSdkTestCaseAbstract
         $list = [];
 
         foreach ($this->providerOrders() as $order) {
-            if(!is_a($order, Order::class)) {
-                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', get_class($order)));
+            if (!is_a($order, Order::class)) {
+                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', \get_class($order)));
             }
             $list[] = [$order];
         }

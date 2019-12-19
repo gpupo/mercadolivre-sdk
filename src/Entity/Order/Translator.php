@@ -30,7 +30,7 @@ final class Translator extends AbstractTranslator implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    function export(): TranslatorDataCollection
+    public function export(): TranslatorDataCollection
     {
         if (!$this->getNative() instanceof Order) {
             throw new TranslatorException('Order missed!');

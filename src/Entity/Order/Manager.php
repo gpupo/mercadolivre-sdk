@@ -62,7 +62,7 @@ final class Manager extends AbstractManager
         };
 
         $order = $this->findById($entity->getId());
-        $status = strtolower($entity->getOrderStatus());
+        $status = mb_strtolower($entity->getOrderStatus());
 
         if ('handling' === $order['shipping']['status'] && 'processing' === $status) {
             return $factory204('Order status not changed!');

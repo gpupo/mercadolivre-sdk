@@ -35,8 +35,8 @@ class TranslatorTest extends TestCaseAbstract
         $list = [];
 
         foreach ($this->providerProducts() as $product) {
-            if(!is_a($product, Product::class)) {
-                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', get_class($product)));
+            if (!is_a($product, Product::class)) {
+                throw new \InvalidArgumentException(sprintf('$product must be a mercadolivre-sdk entity! [%s] received', \get_class($product)));
             }
             $translator = new Translator(['native' => $product]);
 
