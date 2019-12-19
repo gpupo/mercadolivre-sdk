@@ -2,16 +2,13 @@
 # Targets must exist in the bin/make-file/targets/ directory.
 
 .SILENT:
-
+CURRENT_DIR := $(shell pwd)
 
 #CommonSdk
 include vendor/gpupo/common-sdk/bin/make-file/variables.mk
 include vendor/gpupo/common-sdk/bin/make-file/define.mk
-include vendor/gpupo/common-sdk/bin/make-file/help.mk
-
-include vendor/gpupo/common-sdk/bin/make-file/functions/internal.mk
-include vendor/gpupo/common-sdk/bin/make-file/functions/tools.mk
-include vendor/gpupo/common-sdk/bin/make-file/targets/qa.mk
+include vendor/gpupo/common-sdk/bin/make-file/functions/*
+include vendor/gpupo/common-sdk/bin/make-file/targets/*
 
 ## Include custom Targets:
 # include bin/make-file/variables.mk
