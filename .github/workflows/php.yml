@@ -1,0 +1,40 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - verbose
+    paths-ignore:
+      - '**.md'
+      - 'examples/**'
+  push:
+    branches:
+      - master
+      - develop
+      - verbose
+    paths-ignore:
+      - '**.md'
+      - 'examples/**'
+jobs:
+  run:
+    name: Run
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.4']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --no-scripts --ignore-platform-reqs
+
+      - name: Run test suite
+        run: composer run-script test
