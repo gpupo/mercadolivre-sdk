@@ -1,0 +1,8 @@
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+plugins:
+  - jemoji

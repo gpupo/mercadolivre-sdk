@@ -18,6 +18,6 @@ before_script:
   - rm -f .env.local
   - vendor/bin/doctrine orm:schema-tool:update --force
 
-script: vendor/bin/phpunit
+script: composer run-script test
 notifications:
   email: false
