@@ -140,7 +140,7 @@ final class Manager extends AbstractManager
                 $update['status'] = 'active';
             }
         } else {
-            $update['status'] = 'paused';
+            $update = ['status' => 'paused'];
         }
 
         if ($isVariation) {
