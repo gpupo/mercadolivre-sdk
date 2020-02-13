@@ -24,6 +24,7 @@ use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutVariationException;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
 
 final class Manager extends AbstractManager
 {
@@ -156,6 +157,15 @@ final class Manager extends AbstractManager
 
             if ($this->hasVariation($params['itemId'])) {
                 throw new AdHasVariationException(sprintf('Ad %s has variation', $params['itemId']));
+            }
+
+            $previousException = $e->getPrevious();
+            while (null !== $previousException) {
+                if (false !== strpos($previousException->getMessage(), 'item.price.freezed_by_deal')) {
+                    throw new AdFreezedByDealException($previousException->getMessage());
+                }
+
+                $previousException = $previousException->getPrevious();
             }
 
             throw $e;
