@@ -162,6 +162,12 @@ final class Manager extends AbstractManager
             $previousException = $e->getPrevious();
             while (null !== $previousException) {
                 if (false !== strpos($previousException->getMessage(), 'item.price.freezed_by_deal')) {
+                    unset($update['price']);
+                    try {
+                        $this->execute($this->factoryMap('update', $params), json_encode($update));
+                    } catch (\Throwable $e) {
+                    }
+
                     throw new AdFreezedByDealException($previousException->getMessage());
                 }
 
