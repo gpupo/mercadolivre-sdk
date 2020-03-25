@@ -22,9 +22,9 @@ use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Entity\EntityInterface;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutVariationException;
-use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
 
 final class Manager extends AbstractManager
 {
@@ -60,7 +60,7 @@ final class Manager extends AbstractManager
         $item->set('description', $description);
 
         return $item;
-    }
+
 
     public function getDescription($itemId)
     {
@@ -125,8 +125,7 @@ final class Manager extends AbstractManager
                 $update[$field] = $entity[$field];
 
                 if ('attributes' === $field) {
-                    $update[$field] = $this->updateFilterAttributes($entity[$field], $item['category_id']);
-                }
+
             }
         }
 
@@ -162,6 +161,7 @@ final class Manager extends AbstractManager
             while (null !== $previousException) {
                 if (false !== strpos($previousException->getMessage(), 'item.price.freezed_by_deal')) {
                     unset($update['price']);
+
                     try {
                         $this->execute($this->factoryMap('update', $params), json_encode($update));
                     } catch (\Throwable $e) {
