@@ -60,6 +60,7 @@ final class Manager extends AbstractManager
         $item->set('description', $description);
 
         return $item;
+    }
 
 
     public function getDescription($itemId)
@@ -125,6 +126,8 @@ final class Manager extends AbstractManager
                 $update[$field] = $entity[$field];
 
                 if ('attributes' === $field) {
+                    $update[$field] = $this->updateFilterAttributes($entity[$field], $item['category_id']);
+                }
 
             }
         }
