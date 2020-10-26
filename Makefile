@@ -5,12 +5,13 @@
 CURRENT_DIR := $(shell pwd)
 
 #CommonSdk
+ifneq ($(wildcard vendor/gpupo/common-sdk/bin/make-file/targets/*),)
 include vendor/gpupo/common-sdk/bin/make-file/variables.mk
 include vendor/gpupo/common-sdk/bin/make-file/define.mk
 include vendor/gpupo/common-sdk/bin/make-file/help.mk
-
 include vendor/gpupo/common-sdk/bin/make-file/functions/*
 include vendor/gpupo/common-sdk/bin/make-file/targets/*
+endif
 #CommonDev
 ifneq ($(wildcard vendor/gpupo/common-dev/bin/make-file/targets/*),)
 	include vendor/gpupo/common-dev/bin/make-file/targets/*
@@ -21,3 +22,6 @@ endif
 #
 # include bin/make-file/functions/*.mk
 # include bin/make-file/targets/*.mk
+
+install:
+	COMPOSER_MEMORY_LIMIT=9G composer install --prefer-dist --no-scripts
