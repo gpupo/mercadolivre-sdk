@@ -18,6 +18,6 @@ declare(strict_types=1);
 return [
     'me' => [
         'GET',
-        '/users/me?',
+        '/users/me',
     ],
 ];
