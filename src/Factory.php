@@ -56,6 +56,9 @@ class Factory extends FactoryAbstract implements FactoryInterface
             'generic' => [
                 'manager' => Entity\GenericManager::class,
             ],
+            'user' => [
+                'manager' => Entity\User\Manager::class,
+            ],
         ];
     }
 }
