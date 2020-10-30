@@ -45,11 +45,20 @@ final class Client extends ClientAbstract implements ClientInterface
 
     public function requestToken()
     {
-        $pars = [
-            'grant_type' => 'client_credentials',
-            'client_id' => $this->getOptions()->get('client_id'),
-            'client_secret' => $this->getOptions()->get('client_secret'),
-        ];
+        if ($this->getOptions()->get('client_refresh_token')) {
+            $pars = [
+                'grant_type' => 'refresh_token',
+                'client_id' => $this->getOptions()->get('client_id'),
+                'client_secret' => $this->getOptions()->get('client_secret'),
+                'refresh_token' => $this->getOptions()->get('client_refresh_token'),
+            ];
+        } else {
+            $pars = [
+                'grant_type' => 'client_credentials',
+                'client_id' => $this->getOptions()->get('client_id'),
+                'client_secret' => $this->getOptions()->get('client_secret'),
+            ];
+        }
 
         $this->setMode('form');
         $request = $this->post($this->getOauthUrl('/token'), $pars);
