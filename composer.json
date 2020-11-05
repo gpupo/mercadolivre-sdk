@@ -12,10 +12,10 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4 || ^8.0",
-        "gpupo/common-sdk": "^5.1|dev-master"
+        "gpupo/common-sdk": "^5.2 || ^6.0 || dev-master"
     },
     "require-dev": {
-        "gpupo/common-dev": "^5.1|dev-master"
+        "gpupo/common-dev": "*"
     },
     "autoload": {
         "psr-4": {
