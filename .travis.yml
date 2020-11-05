@@ -7,6 +7,9 @@ services:
 php:
   - 7.4
   - nightly
+jobs:
+  allow_failures:
+  - php: nightly
 matrix:
   fast_finish: true
 before_install:
