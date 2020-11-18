@@ -116,4 +116,13 @@ final class Manager extends AbstractManager
 
         return $this->processResponse($responseJson);
     }
+
+    public function findCteByShipmentId($shipmentId)
+    {
+        $response = $this->perform($this->factoryMap('findCteByShipmentId', [
+            'shipmentId' => $shipmentId,
+        ]));
+
+        return $response;
+    }
 }
