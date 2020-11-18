@@ -39,6 +39,10 @@ return [
         'GET',
         '/shipments/{shipmentId}?access_token={access_token}',
     ],
+    'findCteByShipmentId' => [
+        'GET',
+        '/shipments/{shipmentId}/cte?doctype=xml&access_token={access_token}',
+    ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
     'toShipped' => $put(),
