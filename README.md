@@ -9,7 +9,7 @@ SDK Não Oficial para integração a partir de aplicações PHP com as APIs Merc
 
 ## Requisitos para uso
 
-* PHP *>=7.4*
+* PHP *>=8.0*
 * [curl extension](http://php.net/manual/en/intro.curl.php)
 * [Composer Dependency Manager](http://getcomposer.org)
 
