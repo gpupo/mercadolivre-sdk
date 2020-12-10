@@ -63,7 +63,7 @@ return [
         'addressReference' => '',
         'addressNumber' => $native->getShipping()['receiver_address']['street_number'],
         'addressLocality' => $native->getShipping()['receiver_address']['city']['name'],
-        'addressRegion' => str_replace('BR-', '', $native->getShipping()['receiver_address']['state']['id']),
+        'addressRegion' => str_replace('BR-', '', (string) $native->getShipping()['receiver_address']['state']['id']),
         'addressNeighborhood' => '',
         'postalCode' => $native->getShipping()['receiver_address']['zip_code'],
     ],
