@@ -12,7 +12,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "gpupo/common-sdk": "^6.3.1 || dev-main"
+        "gpupo/common-schema": "^6.3 || dev-main",
+        "gpupo/common-sdk": "^6.4 || dev-main"
     },
     "require-dev": {
         "gpupo/common-dev": "dev-main"
