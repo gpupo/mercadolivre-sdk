@@ -33,7 +33,7 @@ class Bootstrap
         $annotationReader = new \Doctrine\Common\Annotations\AnnotationReader();
         $cachedAnnotationReader = new \Doctrine\Common\Annotations\CachedReader($annotationReader, $cache);
         $driverChain = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        \Gedmo\DoctrineExtensions::registerAbstractMappingIntoDriverChainORM($driverChain, $cachedAnnotationReader);
+        // \Gedmo\DoctrineExtensions::registerAbstractMappingIntoDriverChainORM($driverChain, $cachedAnnotationReader);
         $annotationDriver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($cachedAnnotationReader, [$commonSchemaPath]);
         $driverChain->addDriver($annotationDriver, 'Entity');
         // general ORM configuration
@@ -47,18 +47,18 @@ class Bootstrap
         $config->setMetadataCacheImpl($cache);
         $config->setQueryCacheImpl($cache);
         // loggable, not used in example
-        $loggableListener = new \Gedmo\Loggable\LoggableListener();
-        $loggableListener->setAnnotationReader($cachedAnnotationReader);
-        $evm->addEventSubscriber($loggableListener);
+        // $loggableListener = new \Gedmo\Loggable\LoggableListener();
+        // $loggableListener->setAnnotationReader($cachedAnnotationReader);
+        // $evm->addEventSubscriber($loggableListener);
 
         //SQL log
         // $logger = new \Doctrine\DBAL\Logging\EchoSQLLogger();
         // $config->setSQLLogger($logger);
 
         // timestampable
-        $timestampableListener = new \Gedmo\Timestampable\TimestampableListener();
-        $timestampableListener->setAnnotationReader($cachedAnnotationReader);
-        $evm->addEventSubscriber($timestampableListener);
+        // $timestampableListener = new \Gedmo\Timestampable\TimestampableListener();
+        // $timestampableListener->setAnnotationReader($cachedAnnotationReader);
+        // $evm->addEventSubscriber($timestampableListener);
         $config = Setup::createAnnotationMetadataConfiguration([$commonSchemaPath], true, null, null, false);
         $connectionParams = [
             'dbname' => 'app',
