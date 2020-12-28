@@ -1,4 +1,3 @@
-sudo: false
 language: php
 os:
   - linux
