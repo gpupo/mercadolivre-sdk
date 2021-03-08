@@ -15,37 +15,9 @@ declare(strict_types=1);
  *
  */
 
-$put = function () {
-    return [
-        'PUT',
-        '/shipments/{shipmentId}?',
-    ];
-};
-
 return [
-    'save' => [
-        'POST',
-        '/orders',
-    ],
-    'fetch' => [
+    'me' => [
         'GET',
-        '/orders/search/recent?seller={user_id}&',
+        '/users/me?',
     ],
-    'findById' => [
-        'GET',
-        '/orders/{itemId}?',
-    ],
-    'findShipmentById' => [
-        'GET',
-        '/shipments/{shipmentId}?',
-    ],
-    'findCteByShipmentId' => [
-        'GET',
-        '/shipments/{shipmentId}/cte?doctype=xml&',
-    ],
-    'toTracked' => $put(),
-    'toProcessing' => $put(),
-    'toShipped' => $put(),
-    'toDelivered' => $put(),
-    'toCanceled' => $put(),
 ];
