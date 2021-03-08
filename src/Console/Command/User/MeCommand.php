@@ -53,10 +53,10 @@ final class MeCommand extends AbstractCommand
         $manager = $this->getFactory()->factoryManager('generic');
 
         $output->writeln('---- <bg=blue> APP INFO </> -------');
-        $this->writeInfo($output, $manager->getFromRoute(['GET', '/applications/{client_id}?access_token={access_token}'], $projectData));
+        $this->writeInfo($output, $manager->getFromRoute(['GET', '/applications/{client_id}?'], $projectData));
 
         $output->writeln('---- <bg=blue> User INFO </> -------');
-        $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/{user_id}?access_token={access_token}'], $projectData));
+        $this->writeInfo($output, $manager->getFromRoute(['GET', '/users/{user_id}?'], $projectData));
 
         return 0;
     }

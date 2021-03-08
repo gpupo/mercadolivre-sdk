@@ -69,7 +69,9 @@ final class Client extends ClientAbstract implements ClientInterface
 
     protected function renderAuthorization(): array
     {
-        return [];
+        return [
+            'Authorization' => sprintf('Bearer %s', $this->getOptions()->get('access_token')),
+        ];
     }
 
     protected function getOauthUrl($path)

@@ -2,6 +2,7 @@
 
 /**
  * @see https://github.com/P3PO/mercadolibre-php-sdk.git
+ * @see https://github.com/P3PO/mercadolibre-php-sdk/blob/deprecated/Meli/meli.php
  */
 class Meli {
 
