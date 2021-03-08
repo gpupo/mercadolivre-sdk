@@ -11,6 +11,6 @@ declare(strict_types=1);
 return [
     'me' => [
         'GET',
-        '/users/me?access_token={access_token}',
+        '/users/me?',
     ],
 ];

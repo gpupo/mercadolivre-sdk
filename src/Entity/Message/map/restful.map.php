@@ -11,10 +11,10 @@ declare(strict_types=1);
 return [
     'findByOrderId' => [
         'GET',
-        '/messages/orders/{itemId}?access_token={access_token}&offset={offset}&limit={limit}',
+        '/messages/orders/{itemId}?&offset={offset}&limit={limit}',
     ],
     'create' => [
         'POST',
-        '/messages/?access_token={access_token}',
+        '/messages/?',
     ],
 ];

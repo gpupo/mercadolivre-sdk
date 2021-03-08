@@ -36,7 +36,9 @@ class ManagerTest extends TestCaseAbstract
     {
         $manager = $this->getFactory()->factoryManager('product');
         $route = $manager->factoryMap('save');
-        $this->assertSame('/items?access_token=fooToken', $route->getResource());
+        $this->assertSame('/items?', $route->getResource());
+        $headerList = $manager->getClient()->factoryRequest('/items')->getHeader();
+        $this->assertSame('Bearer fooToken', $headerList['Authorization']);
     }
 
     /**

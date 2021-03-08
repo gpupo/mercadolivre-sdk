@@ -33,15 +33,15 @@ final class Manager extends AbstractManager
      * @codeCoverageIgnore
      */
     protected $maps = [
-        'save' => ['POST', '/items?access_token={access_token}'],
+        'save' => ['POST', '/items?'],
         'findById' => ['GET', '/items/{itemId}/'],
-        'getDescription' => ['GET', '/items/{itemId}/description?access_token={access_token}'],
+        'getDescription' => ['GET', '/items/{itemId}/description?'],
         'getVariations' => ['GET', '/items/{itemId}?attributes=variations'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
-        'update' => ['PUT', '/items/{itemId}?access_token={access_token}'],
-        'updateVariation' => ['PUT', 'items/{itemId}/variations/{variationId}?access_token={access_token}'],
-        'updateDescription' => ['PUT', '/items/{itemId}/description?access_token={access_token}'],
-        'fetch' => ['GET', '/users/{user_id}/items/search?access_token={access_token}&offset={offset}&limit={limit}'],
+        'update' => ['PUT', '/items/{itemId}?'],
+        'updateVariation' => ['PUT', 'items/{itemId}/variations/{variationId}?'],
+        'updateDescription' => ['PUT', '/items/{itemId}/description?'],
+        'fetch' => ['GET', '/users/{user_id}/items/search?&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
         'getCategoryAttributes' => ['GET', '/categories/{categoryId}/attributes'],
     ];

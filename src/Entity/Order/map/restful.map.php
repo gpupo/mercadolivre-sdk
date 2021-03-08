@@ -11,7 +11,7 @@ declare(strict_types=1);
 $put = function () {
     return [
         'PUT',
-        '/shipments/{shipmentId}?access_token={access_token}',
+        '/shipments/{shipmentId}?',
     ];
 };
 
@@ -22,19 +22,19 @@ return [
     ],
     'fetch' => [
         'GET',
-        '/orders/search/recent?seller={user_id}&access_token={access_token}',
+        '/orders/search/recent?seller={user_id}&',
     ],
     'findById' => [
         'GET',
-        '/orders/{itemId}?access_token={access_token}',
+        '/orders/{itemId}?',
     ],
     'findShipmentById' => [
         'GET',
-        '/shipments/{shipmentId}?access_token={access_token}',
+        '/shipments/{shipmentId}?',
     ],
     'findCteByShipmentId' => [
         'GET',
-        '/shipments/{shipmentId}/cte?doctype=xml&access_token={access_token}',
+        '/shipments/{shipmentId}/cte?doctype=xml&',
     ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
