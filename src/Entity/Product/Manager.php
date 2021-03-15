@@ -255,4 +255,11 @@ final class Manager extends AbstractManager
 
         return $this->processResponse($response);
     }
+
+    public function close(string $itemId)
+    {
+        $body = json_encode(['status' => 'closed']);
+
+        return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
+    }
 }
