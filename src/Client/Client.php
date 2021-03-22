@@ -38,26 +38,31 @@ final class Client extends ClientAbstract implements ClientInterface
         return $this->ml;
     }
 
-    public function requestToken()
+    protected function factoryTokenBodyParameters(): array
     {
-        if ($this->getOptions()->get('client_refresh_token') && !empty($this->getOptions()->get('client_refresh_token'))) {
-            $pars = [
+        //Client Support
+        $clientAccessToken = $this->getOptions()->get('client_refresh_token');
+        if (!empty($clientAccessToken)) {
+            return [
                 'grant_type' => 'refresh_token',
                 'client_id' => $this->getOptions()->get('client_id'),
                 'client_secret' => $this->getOptions()->get('client_secret'),
-                'refresh_token' => $this->getOptions()->get('client_refresh_token'),
-            ];
-        } else {
-            $pars = [
-                'grant_type' => 'client_credentials',
-                'client_id' => $this->getOptions()->get('client_id'),
-                'client_secret' => $this->getOptions()->get('client_secret'),
+                'refresh_token' => $clientAccessToken,
             ];
         }
 
+        return [
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->getOptions()->get('client_id'),
+            'client_secret' => $this->getOptions()->get('client_secret'),
+        ];
+    }
+
+    public function requestToken()
+    {
         $this->setMode('form');
         $this->header_access_token = false;
-        $request = $this->post($this->getOauthUrl('/token'), $pars);
+        $request = $this->post($this->getOauthUrl('/token'), $this->factoryTokenBodyParameters());
         $this->header_access_token = true;
         $accessToken = $request->getData(AccessToken::class);
 
