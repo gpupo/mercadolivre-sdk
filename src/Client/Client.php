@@ -22,6 +22,8 @@ final class Client extends ClientAbstract implements ClientInterface
 
     private $ml;
 
+    protected $header_access_token = true;
+
     public function accessMl()
     {
         if (empty($this->ml)) {
@@ -54,7 +56,9 @@ final class Client extends ClientAbstract implements ClientInterface
         }
 
         $this->setMode('form');
+        $this->header_access_token = false;
         $request = $this->post($this->getOauthUrl('/token'), $pars);
+        $this->header_access_token = true;
         $accessToken = $request->getData(AccessToken::class);
 
         return $accessToken;
@@ -62,6 +66,10 @@ final class Client extends ClientAbstract implements ClientInterface
 
     protected function renderAuthorization(): array
     {
+        if(false === $this->header_access_token) {
+            return [];
+        }
+        
         return [
             'Authorization' => sprintf('Bearer %s', $this->getOptions()->get('access_token')),
         ];
