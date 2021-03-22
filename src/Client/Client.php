@@ -41,13 +41,13 @@ final class Client extends ClientAbstract implements ClientInterface
     protected function factoryTokenBodyParameters(): array
     {
         //Client Support
-        $clientAccessToken = $this->getOptions()->get('client_refresh_token');
-        if (!empty($clientAccessToken)) {
+        $clientRefreshToken = $this->getOptions()->get('client_refresh_token');
+        if (!empty($clientRefreshToken)) {
             return [
                 'grant_type' => 'refresh_token',
                 'client_id' => $this->getOptions()->get('client_id'),
                 'client_secret' => $this->getOptions()->get('client_secret'),
-                'refresh_token' => $clientAccessToken,
+                'refresh_token' => $clientRefreshToken,
             ];
         }
 
