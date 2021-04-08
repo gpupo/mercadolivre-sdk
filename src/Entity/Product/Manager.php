@@ -129,7 +129,8 @@ final class Manager extends AbstractManager
             }
         }
 
-        if ($entity['available_quantity'] > 0 && isset($entity['description'])) {
+        $canUpdateDescription = ['not_yet_active', 'active', 'paused', 'payment_required'];
+        if ($entity['available_quantity'] > 0 && isset($entity['description']) && in_array(strtolower($item['status']), $canUpdateDescription)) {
             $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
         }
 
