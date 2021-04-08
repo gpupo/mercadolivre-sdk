@@ -79,6 +79,26 @@ class ManagerTest extends TestCaseAbstract
         $this->assertInstanceOf(CommonResponse::class, $product);
     }
 
+    public function testSave()
+    {
+        $data = $this->getResourceJson('mockup/Product/item.json');
+        $entity = new Product($data);
+
+        $manager = $this->getManager();
+        $product = $manager->save($entity);
+        $this->assertInstanceOf(CommonResponse::class, $product);
+    }
+
+    public function testSetDescription()
+    {
+        $id = "MLB803848501";
+        $text = "Descripción con Texto Plano  \n";
+
+        $manager = $this->getManager();
+        $product = $manager->setDescription($id, $text);
+        $this->assertInstanceOf(CommonResponse::class, $product);
+    }
+
     protected function getManager($filename = null, $code = 200)
     {
         if (empty($filename)) {

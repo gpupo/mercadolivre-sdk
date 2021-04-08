@@ -36,6 +36,7 @@ final class Manager extends AbstractManager
         'save' => ['POST', '/items?'],
         'findById' => ['GET', '/items/{itemId}/'],
         'getDescription' => ['GET', '/items/{itemId}/description?'],
+        'setDescription' => ['POST', '/items/{itemId}/description?'],
         'getVariations' => ['GET', '/items/{itemId}?attributes=variations'],
         //'patch'      => ['PATCH', '/products/{itemId}'],
         'update' => ['PUT', '/items/{itemId}?'],
@@ -98,6 +99,11 @@ final class Manager extends AbstractManager
         $translator = new Translator($data);
 
         return $translator;
+    }
+
+    public function setDescription(string $itemId, string $text)
+    {
+        return $this->execute($this->factoryMap('setDescription', ['itemId' => $itemId]), json_encode(['plain_text' => $text]));
     }
 
     public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $isVariation = false)
