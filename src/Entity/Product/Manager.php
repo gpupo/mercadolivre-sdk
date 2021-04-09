@@ -260,4 +260,11 @@ final class Manager extends AbstractManager
 
         return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
     }
+
+    public function pause(string $itemId)
+    {
+        $body = json_encode(['status' => 'paused']);
+
+        return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
+    }
 }
