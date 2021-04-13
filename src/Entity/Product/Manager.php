@@ -45,6 +45,8 @@ final class Manager extends AbstractManager
         'fetch' => ['GET', '/users/{user_id}/items/search?&offset={offset}&limit={limit}'],
         //'statusById' => ['GET', '/skus/{itemId}/bus/{buId}/status'],
         'getCategoryAttributes' => ['GET', '/categories/{categoryId}/attributes'],
+        'getInfractions' => ['GET', '/moderations/infractions/{user_id}?&offset={offset}&limit={limit}'],
+        'getItemInfractions' => ['GET', '/moderations/infractions/{user_id}?&element_id={itemId}'],
     ];
 
     public function findById($itemId): ?CollectionInterface
@@ -266,5 +268,30 @@ final class Manager extends AbstractManager
         $body = json_encode(['status' => 'paused']);
 
         return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
+    }
+
+    public function getInfractions($offset = 0, $limit = 20)
+    {
+        $user_id = $this->getClient()->getOptions()->get('user_id');
+
+        $response = $this->execute($this->factoryMap('getInfractions', [
+            'user_id' => $user_id,
+            'offset' => $offset,
+            'limit' => $limit,
+        ]));
+
+        return $this->processResponse($response);
+    }
+
+    public function getItemInfractions(string $itemId)
+    {
+        $user_id = $this->getClient()->getOptions()->get('user_id');
+        
+        $response = $this->execute($this->factoryMap('getItemInfractions', [
+            'user_id' => $user_id,
+            'itemId' => $itemId, 
+        ]));
+
+        return $this->processResponse($response);
     }
 }
