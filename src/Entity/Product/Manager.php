@@ -47,6 +47,7 @@ final class Manager extends AbstractManager
         'getCategoryAttributes' => ['GET', '/categories/{categoryId}/attributes'],
         'getInfractions' => ['GET', '/moderations/infractions/{user_id}?&offset={offset}&limit={limit}'],
         'getItemInfractions' => ['GET', '/moderations/infractions/{user_id}?&element_id={itemId}'],
+        'getVisits' => ['GET', '/items/visits/time_window?ids={ids}last={windowSize}&unit=day&ending={ending}'],
     ];
 
     public function findById($itemId): ?CollectionInterface
@@ -290,6 +291,20 @@ final class Manager extends AbstractManager
         $response = $this->execute($this->factoryMap('getItemInfractions', [
             'user_id' => $user_id,
             'itemId' => $itemId, 
+        ]));
+
+        return $this->processResponse($response);
+    }
+
+    public function getVisits(array $mlIds, int $windowSize, \DateTime $ending)
+    {        
+        $ids = implode(',', $mlIds);
+        $date = $ending->format('Y-m-d');
+
+        $response = $this->execute($this->factoryMap('getVisits', [
+            'ids' => $ids,
+            'last' => $windowSize,
+            'ending' => $date, 
         ]));
 
         return $this->processResponse($response);

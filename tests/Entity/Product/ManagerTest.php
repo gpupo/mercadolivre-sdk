@@ -14,7 +14,7 @@ use Gpupo\CommonSdk\Response as CommonResponse;
 use Gpupo\MercadolivreSdk\Entity\Product\Manager;
 use Gpupo\MercadolivreSdk\Entity\Product\Product;
 use Gpupo\MercadolivreSdk\Tests\TestCaseAbstract;
-
+use Gpupo\Common\Entity\CollectionInterface;
 /**
  * @coversDefaultClass \Gpupo\MercadolivreSdk\Entity\Product\Manager
  */
@@ -97,6 +97,18 @@ class ManagerTest extends TestCaseAbstract
         $manager = $this->getManager();
         $product = $manager->setDescription($id, $text);
         $this->assertInstanceOf(CommonResponse::class, $product);
+    }
+
+    public function testGetVisits()
+    {
+        $ids = [ "MLB803848501" ];
+        $windowSize = 3;
+        $ending = new \DateTime('now');
+
+        $manager = $this->getManager('day_visits.json');
+        $visits = $manager->getVisits($ids, $windowSize, $ending);
+        
+        $this->assertInstanceOf(CollectionInterface::class, $visits);
     }
 
     protected function getManager($filename = null, $code = 200)
