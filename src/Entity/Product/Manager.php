@@ -109,6 +109,14 @@ final class Manager extends AbstractManager
         return $this->execute($this->factoryMap('setDescription', ['itemId' => $itemId]), json_encode(['plain_text' => $text]));
     }
 
+    public function save(EntityInterface $entity, $route = 'save')
+    {
+        $clone = clone $entity;
+        unset($clone['description']);
+
+        return parent::save($clone, $route);
+    }
+
     public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $isVariation = false)
     {
         $toFind = null;
