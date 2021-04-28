@@ -47,7 +47,7 @@ final class Manager extends AbstractManager
         'getCategoryAttributes' => ['GET', '/categories/{categoryId}/attributes'],
         'getInfractions' => ['GET', '/moderations/infractions/{user_id}?&offset={offset}&limit={limit}'],
         'getItemInfractions' => ['GET', '/moderations/infractions/{user_id}?&element_id={itemId}'],
-        'getVisits' => ['GET', '/items/visits/time_window?ids={ids}last={windowSize}&unit=day&ending={ending}'],
+        'getVisits' => ['GET', '/items/visits/time_window?ids={ids}last={last}&unit=day&ending={ending}'],
     ];
 
     public function findById($itemId): ?CollectionInterface
