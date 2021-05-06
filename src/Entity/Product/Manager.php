@@ -53,6 +53,11 @@ final class Manager extends AbstractManager
     public function findById($itemId): ?CollectionInterface
     {
         $item = parent::findById($itemId);
+
+        if (empty($data) || 404 === $data->get('status')) {
+            return null;
+        }
+        
         $description = $this->getDescription($itemId);
         $item->set('description', $description);
 
