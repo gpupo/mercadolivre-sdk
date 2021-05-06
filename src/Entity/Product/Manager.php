@@ -57,7 +57,7 @@ final class Manager extends AbstractManager
         if (empty($data) || 404 === $data->get('status')) {
             return null;
         }
-        
+
         $description = $this->getDescription($itemId);
         $item->set('description', $description);
 
@@ -273,6 +273,13 @@ final class Manager extends AbstractManager
     public function close(string $itemId)
     {
         $body = json_encode(['status' => 'closed']);
+
+        return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
+    }
+
+    public function delete(string $itemId)
+    {
+        $body = json_encode(['deleted' => 'true']);
 
         return $this->execute($this->factoryMap('update', ['itemId' => $itemId]), $body);
     }
