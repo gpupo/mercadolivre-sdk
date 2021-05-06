@@ -54,7 +54,7 @@ final class Manager extends AbstractManager
     {
         $item = parent::findById($itemId);
 
-        if (empty($data) || 404 === $data->get('status')) {
+        if (empty($item) || 404 === $item->get('status')) {
             return null;
         }
 
