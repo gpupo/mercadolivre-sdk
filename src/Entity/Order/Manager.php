@@ -118,4 +118,13 @@ final class Manager extends AbstractManager
 
         return $response;
     }
+
+    public function billingInfo($itemId)
+    {
+        $response = $this->perform($this->factoryMap('billingInfo', [
+            'itemId' => $itemId,
+        ]));
+
+        return $response;
+    }
 }

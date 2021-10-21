@@ -36,6 +36,10 @@ return [
         'GET',
         '/shipments/{shipmentId}/cte?doctype=xml&',
     ],
+    'billingInfo' => [
+        'GET',
+        '/orders/{itemId}/billing_info?',
+    ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
     'toShipped' => $put(),
