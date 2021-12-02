@@ -62,7 +62,14 @@ final class Client extends ClientAbstract implements ClientInterface
     {
         $this->setMode('form');
         $this->header_access_token = false;
-        $request = $this->post($this->getOauthUrl('/token'), $this->factoryTokenBodyParameters());
+        
+        try {
+            $request = $this->post($this->getOauthUrl('/token'), $this->factoryTokenBodyParameters());
+        } catch (\Exception $exception) {
+            $this->header_access_token = true;
+            throw $exception;
+        }
+        
         $this->header_access_token = true;
         $accessToken = $request->getData(AccessToken::class);
 
