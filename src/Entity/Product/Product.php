@@ -38,6 +38,7 @@ class Product extends EntityAbstract implements EntityInterface
             'seller_id' => 'string',
             'permalink' => 'string',
             'attributes' => 'array',
+            'sold_quantity' => 'integer',
         ];
     }
 }

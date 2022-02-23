@@ -76,6 +76,7 @@ class ProductGeneratedTest extends CoreTestCase
             'shipping' => 'array',
             'official_store_id' => 'number',
             'status' => 'string',
+            'sold_quantity' => 'integer',
         ];
 
         return $this->dataProviderEntitySchema(self::QUALIFIED, $expected);
@@ -499,5 +500,35 @@ class ProductGeneratedTest extends CoreTestCase
     {
         $product->setStatus($expected['status']);
         $this->assertSame($expected['status'], $product->getStatus());
+    }
+
+    /**
+     * @testdox Have a getter ``getSoldQuantity()`` to get ``SoldQuantity``
+     * @dataProvider dataProviderProduct
+     * @cover ::getSoldQuantity
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testGetSoldQuantity(Product $product, array $expected)
+    {
+        $product->setStatus($expected['sold_quantity']);
+        $this->assertSame($expected['sold_quantity'], $product->getStatus());
+    }
+
+    /**
+     * @testdox Have a setter ``setSoldQuantity()`` to set ``SoldQuantity``
+     * @dataProvider dataProviderProduct
+     * @cover ::setSoldQuantity
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testSetSoldQuantity(Product $product, array $expected)
+    {
+        $product->setSoldQuantity($expected['sold_quantity']);
+        $this->assertSame($expected['sold_quantity'], $product->getSoldQuantity());
     }
 }
