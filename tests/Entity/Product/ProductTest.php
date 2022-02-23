@@ -265,4 +265,32 @@ class ProductTest extends TestCaseAbstract
     {
         $this->assertSchemaSetter('description', 'array', $product);
     }
+
+    /**
+     * @testdox Possui método ``getSoldQuantity()`` para acessar SoldQuantity
+     * @dataProvider dataProviderProduct
+     * @cover ::get
+     * @cover ::getSchema
+     * @small
+     *
+     * @param null|mixed $expected
+     */
+    public function testGetSoldQuantity(Product $product, $expected = null)
+    {
+        $this->assertSchemaGetter('sold_quantity', 'integer', $product, $expected);
+    }
+
+    /**
+     * @testdox Possui método ``setSoldQuantity()`` que define SoldQuantity
+     * @dataProvider dataProviderProduct
+     * @cover ::set
+     * @cover ::getSchema
+     * @small
+     *
+     * @param null|mixed $expected
+     */
+    public function testSetSoldQuantity(Product $product, $expected = null)
+    {
+        $this->assertSchemaSetter('sold_quantity', 'integer', $product);
+    }
 }
