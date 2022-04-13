@@ -122,7 +122,7 @@ final class Manager extends AbstractManager
         return parent::save($clone, $route);
     }
 
-    public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $isVariation = false)
+    public function update(EntityInterface $entity, EntityInterface $existent = null, $params = null, $hasVariation = false)
     {
         $toFind = null;
 
@@ -159,14 +159,20 @@ final class Manager extends AbstractManager
             $update = ['status' => 'paused'];
         }
 
-        if ($isVariation) {
-            unset($update['price'], $update['available_quantity'], $update['pictures'], $update['attributes']);
+        if ($hasVariation) {
+            unset($update['price'], $update['available_quantity'], $update['attributes']);
+            $update['variations'] = [
+                [
+                    'id' => $params['variationId'],
+                    'picture_ids' => array_map(fn($img) => $img['source'], $entity['pictures']),
+                ],
+            ];
         }
 
         try {
             return $this->execute($this->factoryMap('update', $params), json_encode($update));
         } catch (\Exception $e) {
-            if ($isVariation) {
+            if ($hasVariation) {
                 throw $e;
             }
 
@@ -202,16 +208,14 @@ final class Manager extends AbstractManager
         if (empty($variations)) {
             throw new AdWithoutVariationException('The ad has no variations');
         }
+
         if (\count($variations) > 1) {
             throw new \Exception('Multiple variations not supported');
         }
 
         $variation = [];
         $variation['price'] = $entity['price'];
-        if (isset(current($variations)['pictures_ids'])) {
-            $variation['pictures'] = current($variations)['pictures_ids'];
-        }
-
+   
         if ($entity['available_quantity'] > 0) {
             $variation['available_quantity'] = $entity['available_quantity'];
         }
