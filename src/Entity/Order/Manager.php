@@ -119,6 +119,66 @@ final class Manager extends AbstractManager
         return $response;
     }
 
+    public function findInvoiceByOrderId($orderId)
+    {
+        $order = $this->findById($orderId);
+
+        if (!isset($order['shipping']['id']) || empty($order['shipping']['id'])) {
+            return;
+        }
+
+        return $this->findInvoiceByShipmentId($order['shipping']['id']);
+    }
+
+    public function findInvoiceByShipmentId($shipmentId)
+    {
+        $responseXml = $this->perform($this->factoryMap('findInvoiceByShipmentId', [
+            'shipmentId' => $shipmentId,
+        ]));
+
+        return $this->processResponse($responseXml);
+    }
+
+    public function sendInvoiceToOrder($orderId, string $invoiceXmlContent)
+    {
+        $order = $this->findById($orderId);
+
+        if (!isset($order['shipping']['id']) || empty($order['shipping']['id'])) {
+            return;
+        }
+
+        return $this->sendInvoiceToShipment($order['shipping']['id'], $invoiceXmlContent);
+    }
+
+    public function sendInvoiceToShipment($shipmentId, string $invoiceXmlContent)
+    {
+        $response = $this->perform($this->factoryMap('sendInvoiceToShipment', [
+            'shipmentId' => $shipmentId,
+        ]), $invoiceXmlContent);
+
+        return $this->processResponse($response);
+    }
+
+    public function updateInvoiceToOrder($orderId, string $invoiceXmlContent)
+    {
+        $order = $this->findById($orderId);
+
+        if (!isset($order['shipping']['id']) || empty($order['shipping']['id'])) {
+            return;
+        }
+
+        return $this->updateInvoiceToShipment($order['shipping']['id'], $invoiceXmlContent);
+    }
+
+    public function updateInvoiceToShipment($shipmentId, string $invoiceXmlContent)
+    {
+        $response = $this->perform($this->factoryMap('updateInvoiceToShipment', [
+            'shipmentId' => $shipmentId,
+        ]), $invoiceXmlContent);
+
+        return $this->processResponse($response);
+    }
+
     public function billingInfo($itemId)
     {
         $response = $this->perform($this->factoryMap('billingInfo', [
