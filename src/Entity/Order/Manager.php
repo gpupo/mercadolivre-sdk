@@ -136,7 +136,7 @@ final class Manager extends AbstractManager
             'shipmentId' => $shipmentId,
         ]));
 
-        return $this->processResponse($responseXml);
+        return $responseXml;
     }
 
     public function sendInvoiceToOrder($orderId, string $invoiceXmlContent)
