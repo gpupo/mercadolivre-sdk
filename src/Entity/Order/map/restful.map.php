@@ -36,6 +36,18 @@ return [
         'GET',
         '/shipments/{shipmentId}/cte?doctype=xml&',
     ],
+    'findInvoiceByShipmentId' => [
+        'GET',
+        '/shipments/{shipmentId}/invoice_data?siteId=MLB'
+    ],
+    'sendInvoiceToShipment' => [
+        'POST',
+        '/shipments/{shipmentId}/invoice_data?siteId=MLB'
+    ],
+    'updateInvoiceToShipment' => [
+        'PUT',
+        '/shipments/{shipmentId}/invoice_data?siteId=MLB'
+    ],
     'billingInfo' => [
         'GET',
         '/orders/{itemId}/billing_info?',

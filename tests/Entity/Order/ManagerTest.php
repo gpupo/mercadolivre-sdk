@@ -174,6 +174,39 @@ class ManagerTest extends TestCaseAbstract
         $this->assertSame(200, $manager->update($order)->getHttpStatusCode());
     }
 
+    /**
+     * @testdox Fetch invoice xml from shipment
+     * 
+     * @covers ::factoryMap
+     * @covers ::perform
+     * @covers ::processResponse
+     * @covers ::findInvoiceByShipmentId
+     */
+    public function testFindInvoiceByShipmentId()
+    {
+        $manager = $this->getManager('invoice.xml');
+        $result = $manager->findInvoiceByShipmentId(1);
+        $this->assertNotNull($result);
+        $this->assertIsObject($result);
+        $this->assertStringContainsString('<?xml version="1.0" encoding="UTF-8"?>', $result->getResponseRaw());
+    }
+
+    /**
+     * @testdox Fetch invoice xml from shipment fail
+     * 
+     * @covers ::factoryMap
+     * @covers ::perform
+     * @covers ::processResponse
+     * @covers ::findInvoiceByShipmentId
+     */
+    public function testFindInvoiceByShipmentIdFail()
+    {
+        $manager = $this->getManager('notfound.json');
+        $result = $manager->findInvoiceByShipmentId(1);
+        $this->assertNotNull($result);
+        $this->assertIsObject($result);
+    }
+
     protected function getManager($filename = 'item.json')
     {
         $manager = $this->getFactory()->factoryManager('order');
