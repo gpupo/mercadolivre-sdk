@@ -215,6 +215,19 @@ class ManagerTest extends TestCaseAbstract
         return $manager;
     }
 
+    /**
+     * @textdox Download ticket from specific shipment
+     * 
+     * @covers ::factoryMap
+     * @covers ::factoryRequestByMap
+     * @covers ::downloadFileByRequest
+     */
+    public function testDownloadTicket()
+    {
+        $pdfPath = $this->getManager()->downloadTicketByShipmentId(12);
+        $this->assertSame('/tmp/mercadolivre_sdk_ticket-12.pdf', $pdfPath);
+    }
+
     protected function commonAsserts(Order $order)
     {
         $this->assertSame((int) '1068825849', (int) $order->getId());

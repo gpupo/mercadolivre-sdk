@@ -187,4 +187,28 @@ final class Manager extends AbstractManager
 
         return $response;
     }
+
+    public function downloadTicket($orderId, string $tmpDirectory = '/tmp')
+    {
+        $order = $this->findById($orderId);
+
+        if (!isset($order['shipping']['id']) || empty($order['shipping']['id'])) {
+            return;
+        }
+
+        return $this->downloadTicketByShipmentId($order['shipping']['id'], $tmpDirectory);
+    }
+
+    public function downloadTicketByShipmentId($shipmentId, string $tmpDirectory = '/tmp')
+    {
+        $filename = sprintf('%s/mercadolivre_sdk_ticket-%s.pdf', $tmpDirectory, $shipmentId);
+        $request = $this->factoryRequestByMap($this->factoryMap('downloadTicket', [
+            'shipmentId' => $shipmentId
+        ]));
+        $headers = $request->getHeaders();
+        $headers['Accept'] = 'application/pdf';
+        $request->set('header', $headers);
+
+        return $this->downloadFileByRequest($request, $filename);
+    }
 }
