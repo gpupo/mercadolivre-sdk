@@ -54,7 +54,7 @@ return [
     ],
     'downloadTicket' => [
         'GET',
-        '/shipment_labels?shipment_ids={shipmentId}&savePdf=Y',
+        '/shipment_labels?shipment_ids={shipmentId}&response_type=pdf',
     ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
