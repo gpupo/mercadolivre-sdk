@@ -147,6 +147,13 @@ final class Manager extends AbstractManager
             return;
         }
 
+        if (empty($shipment = $this->findShipmentById($order['shipping']['id']))
+            || "ready_to_ship" !== $shipment->getStatus()
+            || "invoice_pending" !== $shipment->getSubstatus()
+        ) {
+            return;
+        }
+
         return $this->sendInvoiceToShipment($order['shipping']['id'], $invoiceXmlContent);
     }
 
