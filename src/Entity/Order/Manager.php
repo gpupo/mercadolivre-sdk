@@ -203,6 +203,11 @@ final class Manager extends AbstractManager
             return;
         }
 
+        $filename = sprintf('%s/mercadolivre_sdk_ticket-%s.pdf', $tmpDirectory, $order['shipping']['id']);
+        if (file_exists($filename)) {
+            return $filename;
+        }
+
         if (empty($shipment = $this->findShipmentById($order['shipping']['id']))
             || "ready_to_ship" !== $shipment->getStatus()
             || "ready_to_print" !== $shipment->getSubstatus()
@@ -216,6 +221,10 @@ final class Manager extends AbstractManager
     public function downloadTicketByShipmentId($shipmentId, string $tmpDirectory = '/tmp')
     {
         $filename = sprintf('%s/mercadolivre_sdk_ticket-%s.pdf', $tmpDirectory, $shipmentId);
+        if (file_exists($filename)) {
+            return $filename;
+        }
+
         $request = $this->factoryRequestByMap($this->factoryMap('downloadTicket', [
             'shipmentId' => $shipmentId
         ]));
