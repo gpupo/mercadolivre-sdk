@@ -52,6 +52,10 @@ return [
         'GET',
         '/orders/{itemId}/billing_info?',
     ],
+    'downloadTicket' => [
+        'GET',
+        '/shipment_labels?shipment_ids={shipmentId}&response_type=pdf',
+    ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
     'toShipped' => $put(),
