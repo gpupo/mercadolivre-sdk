@@ -159,9 +159,16 @@ final class Manager extends AbstractManager
 
     public function sendInvoiceToShipment($shipmentId, string $invoiceXmlContent)
     {
-        $response = $this->perform($this->factoryMap('sendInvoiceToShipment', [
+        $request = $this->factoryRequestByMap($this->factoryMap('sendInvoiceToShipment', [
             'shipmentId' => $shipmentId,
-        ]), $invoiceXmlContent);
+        ]));
+
+        $headers = $request->getHeaders();
+        $headers['Content-Type'] = 'application/xml;charset=UTF-8';
+        $request->set('header', $headers);
+        $request->setBody($invoiceXmlContent);
+        $request->setMethod('POST');
+        $response = $this->getClient()->sendRequest($request);
 
         return $this->processResponse($response);
     }
