@@ -195,9 +195,7 @@ final class Manager extends AbstractManager
                 }
 
                 $prevExcMessage = $previousException->getMessage();
-                if (false !== mb_strpos($prevExcMessage, 'code:field_not_updatable') 
-                    && false !== mb_strpos($prevExcMessage, 'references:[item.title]')
-                ) {
+                if (false !== mb_strpos($prevExcMessage, 'message:Cannot update title when item has bids')) {
                     throw new AdInvalidFieldUpdateException('title', 400, $previousException);
                 }
 
