@@ -195,18 +195,10 @@ final class Manager extends AbstractManager
                 }
 
                 $prevExcMessage = $previousException->getMessage();
-                if (false !== mb_strpos($prevExcMessage, 'code:field_not_updatable')) {
-                    $field = preg_replace('/.*references\:\[item\.([a-zA-Z_-]+)[,.;|].*\].*/', '${1}', $prevExcMessage);
-                    if (isset($update[$field])) {
-                        unset($update[$field]);
-
-                        try {
-                            $this->execute($this->factoryMap('update', $params), json_encode($update));
-                        } catch (\Throwable $e) {
-                        }
-                    }
-
-                    throw new AdInvalidFieldUpdateException($field, 400, $previousException);
+                if (false !== mb_strpos($prevExcMessage, 'code:field_not_updatable') 
+                    && false !== mb_strpos($prevExcMessage, 'references:[item.title]')
+                ) {
+                    throw new AdInvalidFieldUpdateException('title', 400, $previousException);
                 }
 
                 $previousException = $previousException->getPrevious();
