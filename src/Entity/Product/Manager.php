@@ -196,7 +196,7 @@ final class Manager extends AbstractManager
 
                 $prevExcMessage = $previousException->getMessage();
                 if (false !== mb_strpos($prevExcMessage, 'code:field_not_updatable')) {
-                    $field = preg_replace('/.*references\:\[item\.([a-zA-Z_-]).*/', '${1}', $prevExcMessage);
+                    $field = preg_replace('/.*references\:\[item\.([a-zA-Z_-]+)[,.;|].*\].*/', '${1}', $prevExcMessage);
                     if (isset($update[$field])) {
                         unset($update[$field]);
 
