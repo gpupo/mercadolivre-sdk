@@ -17,6 +17,7 @@ use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdInvalidFieldUpdateException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutVariationException;
 
 final class Manager extends AbstractManager
@@ -191,6 +192,21 @@ final class Manager extends AbstractManager
                     }
 
                     throw new AdFreezedByDealException($previousException->getMessage());
+                }
+
+                $prevExcMessage = $previousException->getMessage();
+                if (false !== mb_strpos($prevExcMessage, 'code:field_not_updatable')) {
+                    $field = preg_replace('/.*references\:\[item\.([a-zA-Z_-]).*/', '${1}', $prevExcMessage);
+                    if (isset($update[$field])) {
+                        unset($update[$field]);
+
+                        try {
+                            $this->execute($this->factoryMap('update', $params), json_encode($update));
+                        } catch (\Throwable $e) {
+                        }
+                    }
+
+                    throw new AdInvalidFieldUpdateException($field, 400, $previousException);
                 }
 
                 $previousException = $previousException->getPrevious();
