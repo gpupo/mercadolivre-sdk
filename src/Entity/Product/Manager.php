@@ -161,12 +161,13 @@ final class Manager extends AbstractManager
 
         if ($hasVariation) {
             unset($update['price'], $update['available_quantity'], $update['attributes']);
-            $update['variations'] = [
-                [
-                    'id' => $params['variationId'],
-                    'picture_ids' => array_map(fn($img) => $img['source'], $entity['pictures']),
-                ],
-            ];
+            $variation = [ 'id' => $params['variationId'] ];
+
+            if (isset($entity['pictures'])) {
+                $variation['picture_ids'] = array_map(fn($img) => $img['source'], $entity['pictures']);
+            }
+
+            $update['variations'] = [$variation];
         }
 
         try {
