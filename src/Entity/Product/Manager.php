@@ -67,7 +67,7 @@ final class Manager extends AbstractManager
         
     }
     
-    public function getItemWithNoDesc($itemId): ?CollectionInterface
+    public function getItem($itemId): ?CollectionInterface
     {
         $item = parent::findById($itemId);
 
