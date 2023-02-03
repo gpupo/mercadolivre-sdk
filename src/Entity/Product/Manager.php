@@ -36,7 +36,7 @@ final class Manager extends AbstractManager
     protected $maps = [
         'save' => ['POST', '/items?'],
         'findById' => ['GET', '/items/{itemId}/'],
-        'getItemWithNoDesc' => ['GET', '/items/{itemId}/'],
+        'getItem' => ['GET', '/items/{itemId}/'],
         'getDescription' => ['GET', '/items/{itemId}/description?'],
         'setDescription' => ['POST', '/items/{itemId}/description?'],
         'getVariations' => ['GET', '/items/{itemId}?attributes=variations'],
