@@ -18,6 +18,7 @@ use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdHasVariationException;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutVariationException;
+use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdWithoutDescription;
 
 final class Manager extends AbstractManager
 {
@@ -35,6 +36,7 @@ final class Manager extends AbstractManager
     protected $maps = [
         'save' => ['POST', '/items?'],
         'findById' => ['GET', '/items/{itemId}/'],
+        'getItem' => ['GET', '/items/{itemId}/'],
         'getDescription' => ['GET', '/items/{itemId}/description?'],
         'setDescription' => ['POST', '/items/{itemId}/description?'],
         'getVariations' => ['GET', '/items/{itemId}?attributes=variations'],
@@ -62,13 +64,29 @@ final class Manager extends AbstractManager
         $item->set('description', $description);
 
         return $item;
+        
     }
+    
+    public function getItem($itemId): ?CollectionInterface
+    {
+        $item = parent::findById($itemId);
 
+        if (empty($item) || 404 === $item->get('status')) {
+            return null;
+        }
+
+        return $item;
+    }
+    
     public function getDescription($itemId)
     {
-        $response = $this->perform($this->factoryMap('getDescription', ['itemId' => $itemId]));
-
-        return $this->processResponse($response);
+        try{
+            $response = $this->perform($this->factoryMap('getDescription', ['itemId' => $itemId]));
+    
+            return $this->processResponse($response);
+        }catch(\Exception $e){
+            throw new AdWithoutDescription($e->getMessage());
+        }
     }
 
     public function translatorInsert(TranslatorDataCollection $data, $mlCategory)
