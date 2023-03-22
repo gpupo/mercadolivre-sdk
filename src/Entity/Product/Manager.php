@@ -148,7 +148,7 @@ final class Manager extends AbstractManager
             $toFind = $params['itemId'];
         }
 
-        $item = $this->findById($toFind);
+        $item = $this->getItem($toFind);
 
         $update = [];
         $update['price'] = $entity['price'];
