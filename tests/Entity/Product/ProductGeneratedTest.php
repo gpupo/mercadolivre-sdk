@@ -43,6 +43,12 @@ use PHPUnit\Framework\TestCase as CoreTestCase;
  * @method                                                                  setShipping(array $shipping)                                                            A $shipping setter
  * @method float                                                            getOfficialStoreId()                                                                    A $official_store_id acessor.
  * @method                                                                  setOfficialStoreId(float $official_store_id)                                            A $official_store_id setter
+ * @method string                                                           getStatus()                                                                             A $status acessor.
+ * @method                                                                  setStatus(string $status)                                                               A $status setter
+ * @method int                                                              getSoldQuantity()                                                                       A $sold_quantity acessor.
+ * @method                                                                  setSoldQuantity(int $sold_quantity)                                                     A $sold_quantity setter
+ * @method string                                                           getVideoId()                                                                            A $video_id acessor.
+ * @method                                                                  setVideoId(string $video_id)                                                            A $video_id setter
  */
 class ProductGeneratedTest extends CoreTestCase
 {
@@ -77,6 +83,7 @@ class ProductGeneratedTest extends CoreTestCase
             'official_store_id' => 'number',
             'status' => 'string',
             'sold_quantity' => 'integer',
+            'video_id' => 'string',
         ];
 
         return $this->dataProviderEntitySchema(self::QUALIFIED, $expected);
@@ -513,8 +520,8 @@ class ProductGeneratedTest extends CoreTestCase
      */
     public function testGetSoldQuantity(Product $product, array $expected)
     {
-        $product->setStatus($expected['sold_quantity']);
-        $this->assertSame($expected['sold_quantity'], $product->getStatus());
+        $product->setSoldQuantity($expected['sold_quantity']);
+        $this->assertSame($expected['sold_quantity'], $product->getSoldQuantity());
     }
 
     /**
@@ -530,5 +537,35 @@ class ProductGeneratedTest extends CoreTestCase
     {
         $product->setSoldQuantity($expected['sold_quantity']);
         $this->assertSame($expected['sold_quantity'], $product->getSoldQuantity());
+    }
+
+    /**
+     * @testdox Have a getter ``getVideoId()`` to get ``VideoId``
+     * @dataProvider dataProviderProduct
+     * @cover ::getVideoId
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testGetVideoId(Product $product, array $expected)
+    {
+        $product->setVideoId($expected['video_id']);
+        $this->assertSame($expected['video_id'], $product->getVideoId());
+    }
+
+    /**
+     * @testdox Have a setter ``setVideoId()`` to set ``VideoId``
+     * @dataProvider dataProviderProduct
+     * @cover ::setVideoId
+     * @small
+     *
+     * @param Product $product  Main Object
+     * @param array   $expected Fixture data
+     */
+    public function testSetVideoId(Product $product, array $expected)
+    {
+        $product->setVideoId($expected['video_id']);
+        $this->assertSame($expected['video_id'], $product->getVideoId());
     }
 }

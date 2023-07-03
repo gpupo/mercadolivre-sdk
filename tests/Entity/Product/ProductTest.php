@@ -293,4 +293,32 @@ class ProductTest extends TestCaseAbstract
     {
         $this->assertSchemaSetter('sold_quantity', 'integer', $product);
     }
+
+    /**
+     * @testdox Possui método ``getVideoId()`` para acessar VideoId
+     * @dataProvider dataProviderProduct
+     * @cover ::get
+     * @cover ::getSchema
+     * @small
+     *
+     * @param null|mixed $expected
+     */
+    public function testGetVideoId(Product $product, $expected = null)
+    {
+        $this->assertSchemaGetter('video_id', 'string', $product, $expected);
+    }
+
+    /**
+     * @testdox Possui método ``setVideoId()`` que define VideoId
+     * @dataProvider dataProviderProduct
+     * @cover ::set
+     * @cover ::getSchema
+     * @small
+     *
+     * @param null|mixed $expected
+     */
+    public function testSetVideoId(Product $product, $expected = null)
+    {
+        $this->assertSchemaSetter('video_id', 'string', $product);
+    }
 }
