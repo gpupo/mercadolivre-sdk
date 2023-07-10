@@ -153,7 +153,7 @@ final class Manager extends AbstractManager
         $update = [];
         $update['price'] = $entity['price'];
 
-        foreach (['shipping', 'title', 'pictures', 'attributes'] as $field) {
+        foreach (['shipping', 'title', 'pictures', 'attributes', 'video_id'] as $field) {
             if (isset($entity[$field])) {
                 $update[$field] = $entity[$field];
 
@@ -178,7 +178,7 @@ final class Manager extends AbstractManager
         }
 
         if ($hasVariation) {
-            unset($update['price'], $update['available_quantity'], $update['attributes']);
+            unset($update['price'], $update['available_quantity'], $update['attributes'], $update['video_id']);
             $variation = [ 'id' => $params['variationId'] ];
 
             if (isset($entity['pictures'])) {
