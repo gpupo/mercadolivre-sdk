@@ -208,12 +208,13 @@ final class Manager extends AbstractManager
             return $filename;
         }
 
+        /* Removido para que possa ser baixado mesmo que o status do shipment tenha sido alterado
         if (empty($shipment = $this->findShipmentById($order['shipping']['id']))
             || "ready_to_ship" !== $shipment->getStatus()
             || "ready_to_print" !== $shipment->getSubstatus()
         ) {
             return;
-        }
+        }*/
 
         return $this->downloadTicketByShipmentId($order['shipping']['id'], $tmpDirectory);
     }
