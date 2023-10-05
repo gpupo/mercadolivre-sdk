@@ -124,4 +124,52 @@ class ManagerTest extends TestCaseAbstract
 
         return $manager;
     }
+
+    /**
+     * @testdox Testa construção do array de update a enviar no corpo da requisição pro MELI
+     * @covers ::factoryUpdateArray
+     */
+    public function testFactoryUpdateArray()
+    {
+        $data = $this->getResourceJson('mockup/Product/item.json');
+        $item = new Product($data);
+
+        $id = 'MLB803848501';
+        $manager = $this->getManager($id.'.json');
+        $externalItem = $manager->findById($id);
+        
+        // muda apenas price e available_quantity
+        $item['price'] += 10;
+        $item['available_quantity'] -= 1;
+
+        $array = $manager->factoryUpdateArray($item, $externalItem);
+
+        $this->assertNotEmpty($array);
+        $this->assertSame($array, ['price' => 379.55, 'available_quantity' => 180.0]);
+    }
+
+    /**
+     * @testdox Testa facade de attributes
+     * @covers ::updateFilterAttributes
+     */
+    public function testUpdateFilterAttributes()
+    {
+        $data = $this->getResourceJson('mockup/Product/item.json');
+        $item = new Product($data);
+
+        $manager = $this->getManager();
+        $array = $manager->updateFilterAttributes($item['attributes'], 'MLB5399');
+
+        $this->assertNotEmpty($array);
+        $this->assertSame($array, [
+            [
+                'id' => 'GENDER',
+                'name' => 'Gênero',
+                'value_id' => '111070',
+                'value_name' => 'Masculino',
+                'attribute_group_id' => 'DFLT',
+                'attribute_group_name' => 'Outros',
+            ]
+        ]);
+    }
 }

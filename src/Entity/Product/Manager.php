@@ -150,31 +150,11 @@ final class Manager extends AbstractManager
 
         $item = $this->getItem($toFind);
 
-        $update = [];
-        $update['price'] = $entity['price'];
-
-        foreach (['shipping', 'title', 'pictures', 'attributes', 'video_id'] as $field) {
-            if (isset($entity[$field])) {
-                $update[$field] = $entity[$field];
-
-                if ('attributes' === $field) {
-                    $update[$field] = $this->updateFilterAttributes($entity[$field], $item['category_id']);
-                }
-            }
-        }
+        $update = $this->factoryUpdateArray($entity, $item);
 
         $canUpdateDescription = ['not_yet_active', 'active', 'paused', 'payment_required'];
         if ($entity['available_quantity'] > 0 && isset($entity['description']) && in_array(strtolower($item['status']), $canUpdateDescription)) {
             $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
-        }
-
-        if ($entity['available_quantity'] > 0) {
-            $update['available_quantity'] = $entity['available_quantity'];
-            if ('paused' === $item['status']) {
-                $update['status'] = 'active';
-            }
-        } else {
-            $update = ['status' => 'paused'];
         }
 
         if ($hasVariation) {
@@ -219,6 +199,22 @@ final class Manager extends AbstractManager
         }
     }
 
+    public function factoryUpdateArray(EntityInterface $item, CollectionInterface $externalItem)
+    {
+        $update = [];
+        foreach (['shipping', 'title', 'pictures', 'attributes', 'video_id', 'price', 'available_quantity'] as $field) {
+            if (isset($item[$field]) && $item[$field] != $externalItem[$field]) {
+                if ('attributes' === $field) {
+                    $update[$field] = $this->updateFilterAttributes($item[$field], $externalItem['category_id']);
+                } else {
+                    $update[$field] = $item[$field];
+                }
+            }
+        }
+
+        return $update;
+    }
+
     public function updateVariation(EntityInterface $entity, EntityInterface $existent = null, $params = null)
     {
         $variations = $this->getAdVariations($params['itemId']);
@@ -257,7 +253,7 @@ final class Manager extends AbstractManager
         }
     }
 
-    protected function updateFilterAttributes($updateAttributes, $categoryId)
+    public function updateFilterAttributes($updateAttributes, $categoryId)
     {
         $categoryAttributes = $this->getCategoryAttributes($categoryId);
 
