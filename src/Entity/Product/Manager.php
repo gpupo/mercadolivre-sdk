@@ -203,13 +203,14 @@ final class Manager extends AbstractManager
     {
         $update = [];
         foreach (['shipping', 'title', 'pictures', 'attributes', 'video_id', 'price', 'available_quantity'] as $field) {
-            if (isset($item[$field]) && $item[$field] != $externalItem[$field]) {
-                if ('attributes' === $field) {
-                    $update[$field] = $this->updateFilterAttributes($item[$field], $externalItem['category_id']);
-                } else {
-                    $update[$field] = $item[$field];
-                }
+            if (!isset($item[$field]) || $item[$field] == $externalItem[$field]) {
+                continue;
             }
+            if ('attributes' === $field) {
+                $update[$field] = $this->updateFilterAttributes($item[$field], $externalItem['category_id']);
+                continue;
+            }
+            $update[$field] = $item[$field];
         }
 
         return $update;
