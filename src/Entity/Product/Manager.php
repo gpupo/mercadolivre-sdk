@@ -157,6 +157,15 @@ final class Manager extends AbstractManager
             $this->execute($this->factoryMap('updateDescription', $params), json_encode($entity['description']));
         }
 
+        if ($entity['available_quantity'] > 0) {
+            $update['available_quantity'] = $entity['available_quantity'];
+            if ('paused' === $item['status']) {
+                $update['status'] = 'active';
+            }
+        } else {
+            $update = ['status' => 'paused'];
+        }
+
         if ($hasVariation) {
             unset($update['price'], $update['available_quantity'], $update['attributes'], $update['video_id']);
             $variation = [ 'id' => $params['variationId'] ];
