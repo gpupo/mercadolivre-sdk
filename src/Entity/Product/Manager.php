@@ -212,13 +212,39 @@ final class Manager extends AbstractManager
     {
         $update = [];
         foreach (['shipping', 'title', 'pictures', 'attributes', 'video_id', 'price', 'available_quantity'] as $field) {
-            if (!isset($item[$field]) || $item[$field] == $externalItem[$field]) {
+            if (!isset($item[$field])) {
                 continue;
             }
-            if ('attributes' === $field) {
+
+            if ('price' === $field && (float)$item['price'] === (float)$externalItem['price']) {
+                continue;
+            }
+
+            if ('available_quantity' === $field && (int)$item['available_quantity'] === (int)$externalItem['available_quantity']) {
+                continue;
+            }
+
+            if ('title' === $field && strtolower($item['title']) === strtolower($externalItem['title'])) {
+                continue;
+            }
+
+            if ('shipping' === $field 
+                    && $item['shipping']['mode'] == $externalItem['shipping']['mode']
+                    && $item['shipping']['free_shipping'] == $externalItem['shipping']['free_shipping']
+                    && $item['shipping']['local_pick_up'] == $externalItem['shipping']['local_pick_up']) {
+                continue;
+            }
+
+            if ('attributes' === $field && $item[$field] !== $externalItem[$field]) {
                 $update[$field] = $this->updateFilterAttributes($item[$field], $externalItem['category_id']);
                 continue;
             }
+
+            // mantem a comparação fraca pois a tipagem pode variar
+            if ($item[$field] == $externalItem[$field]) {
+                continue;
+            }
+
             $update[$field] = $item[$field];
         }
 

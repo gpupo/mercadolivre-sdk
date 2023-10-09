@@ -146,6 +146,22 @@ class ManagerTest extends TestCaseAbstract
 
         $this->assertNotEmpty($array);
         $this->assertSame($array, ['price' => 379.55, 'available_quantity' => 180.0]);
+
+        // ignora case sensitive no titulo
+        $item['title'] = "Perfume AZZARO Pour Homme EDT Masculino";
+        $array = $manager->factoryUpdateArray($item, $externalItem);
+        $this->assertArrayNotHasKey('title', $array);
+
+        // agora considera mudança no titulo
+        $item['title'] = "Perfume AZZARO Pour Homme EDT Masculino Ultimas Unidades";
+        $array = $manager->factoryUpdateArray($item, $externalItem);
+        $this->assertArrayHasKey('title', $array);
+
+        $shipping = $item->getShipping();
+        $shipping['mode'] = 'me2';
+        $item->setShipping($shipping);
+        $array = $manager->factoryUpdateArray($item, $externalItem);
+        $this->assertArrayHasKey('shipping', $array);
     }
 
     /**
