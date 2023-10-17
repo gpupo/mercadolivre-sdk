@@ -56,6 +56,10 @@ return [
         'GET',
         '/shipment_labels?shipment_ids={shipmentId}&response_type=pdf',
     ],
+    'getOrdersRecent' => [
+        'GET',
+        '/orders/search?seller={user_id}&order.date_created.from={beginDate}T00:00:00.000-04:00&order.date_created.to={endDate}T00:00:00.000-04:00&offset={offset}&limit={limit}',
+    ],
     'toTracked' => $put(),
     'toProcessing' => $put(),
     'toShipped' => $put(),
