@@ -85,6 +85,39 @@ final class Manager extends AbstractManager
         return $translator;
     }
 
+    public function getOrderList($seller_id, $days_ago = 7, $offset = 0, $limit = 50) {
+        $begin_date = date('Y-m-d', strtotime('-'.$days_ago.' days'));
+        $end_date = date('Y-m-d');
+
+        $responseJson = $this->perform($this->factoryMap('getOrdersRecent', [
+            'user_id' => $seller_id,
+            'offset' => $offset,
+            'begin_date' => $begin_date,
+            'end_date' => $end_date,
+            'limit' => $limit,
+        ]));
+        $collection = new MetadataContainer();
+
+        $list_orders = $this->processResponse($responseJson);
+        if (!$list_orders) {
+            $collection->clear();
+
+            return $collection;
+        }
+
+        foreach ($list_orders['results'] as $order) {
+            $collection->add($this->factoryEntity($order));
+        }
+
+        if ($list_orders['paging']['total'] > ($list_orders['paging']['offset'] + $list_orders['paging']['limit'])) {
+            foreach ($this->getOrderList($seller_id, $days_ago, $offset + $limit, $limit) as $order) {
+                $collection->add($order);
+            }
+        }
+
+        return $collection;
+    }
+
     public function fetchQueue($offset = 0, $limit = 50, array $parameters = [])
     {
         return $this->translatorFetch($offset, $limit, $parameters);
