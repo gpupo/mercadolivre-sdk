@@ -58,7 +58,7 @@ return [
     ],
     'getOrdersRecent' => [
         'GET',
-        '/orders/search/recent?seller={user_id}&order.date_created.from={begin_date}T00:00:00.000-04:00&order.date_created.to={end_date}T00:00:00.000-04:00&offset={offset}&limit={limit}',
+        '/orders/search?seller={user_id}&order.date_created.from={beginDate}T00:00:00.000-04:00&order.date_created.to={endDate}T00:00:00.000-04:00&offset={offset}&limit={limit}',
     ],
     'toTracked' => $put(),
     'toProcessing' => $put(),

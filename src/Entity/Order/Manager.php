@@ -85,32 +85,32 @@ final class Manager extends AbstractManager
         return $translator;
     }
 
-    public function getOrderList($seller_id, $days_ago = 7, $offset = 0, $limit = 50) {
-        $begin_date = date('Y-m-d', strtotime('-'.$days_ago.' days'));
-        $end_date = date('Y-m-d');
+    public function getOrderList($userId, $daysAgo = 7, $offset = 0, $limit = 50) {
+        $beginDate = date('Y-m-d', strtotime('-'.$daysAgo.' days'));
+        $endDate = date('Y-m-d');
 
         $responseJson = $this->perform($this->factoryMap('getOrdersRecent', [
-            'user_id' => $seller_id,
+            'user_id' => $userId,
             'offset' => $offset,
-            'begin_date' => $begin_date,
-            'end_date' => $end_date,
+            'beginDate' => $beginDate,
+            'endDate' => $endDate,
             'limit' => $limit,
         ]));
         $collection = new MetadataContainer();
 
-        $list_orders = $this->processResponse($responseJson);
-        if (!$list_orders) {
+        $listOrders = $this->processResponse($responseJson);
+        if (!$listOrders) {
             $collection->clear();
 
             return $collection;
         }
 
-        foreach ($list_orders['results'] as $order) {
+        foreach ($listOrders['results'] as $order) {
             $collection->add($this->factoryEntity($order));
         }
 
-        if ($list_orders['paging']['total'] > ($list_orders['paging']['offset'] + $list_orders['paging']['limit'])) {
-            foreach ($this->getOrderList($seller_id, $days_ago, $offset + $limit, $limit) as $order) {
+        if ($listOrders['paging']['total'] > ($listOrders['paging']['offset'] + $listOrders['paging']['limit'])) {
+            foreach ($this->getOrderList($userId, $daysAgo, $offset + $limit, $limit) as $order) {
                 $collection->add($order);
             }
         }
