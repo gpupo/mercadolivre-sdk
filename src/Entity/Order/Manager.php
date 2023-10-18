@@ -15,6 +15,7 @@ use Gpupo\CommonSdk\Response;
 use Gpupo\CommonSdk\Traits\LoadTrait;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
+use Gpupo\CommonSdk\Entity\Metadata\MetadataContainer;
 
 final class Manager extends AbstractManager
 {
