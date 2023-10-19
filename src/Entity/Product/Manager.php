@@ -13,6 +13,7 @@ namespace Gpupo\MercadolivreSdk\Entity\Product;
 use Gpupo\Common\Entity\CollectionInterface;
 use Gpupo\CommonSchema\TranslatorDataCollection;
 use Gpupo\CommonSdk\Entity\EntityInterface;
+use Gpupo\CommonSdk\Exception\ManagerException;
 use Gpupo\CommonSdk\Traits\TranslatorManagerTrait;
 use Gpupo\MercadolivreSdk\Entity\AbstractManager;
 use Gpupo\MercadolivreSdk\Entity\Product\Exceptions\AdFreezedByDealException;
@@ -65,6 +66,17 @@ final class Manager extends AbstractManager
 
         return $item;
         
+    }
+
+    public function findItemById($itemId): ?CollectionInterface
+    {
+        try {
+            $map = $this->factoryMap('findById', ['itemId' => $itemId]);
+
+            return $this->processResponse($this->perform($map));
+        } catch (ManagerException $exception) {
+            throw $exception;
+        }
     }
     
     public function getItem($itemId): ?CollectionInterface
