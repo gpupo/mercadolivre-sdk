@@ -163,7 +163,7 @@ final class Manager extends AbstractManager
                 $update['status'] = 'active';
             }
         } else {
-            $update = ['status' => 'paused'];
+            $update = ['status' => 'paused', 'available_quantity' => 0];
         }
 
         if ($hasVariation) {
