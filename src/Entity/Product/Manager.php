@@ -160,7 +160,7 @@ final class Manager extends AbstractManager
             $toFind = $params['itemId'];
         }
 
-        $item = $this->getItem($toFind);
+        $item = $this->findItemById($toFind);
 
         $update = $this->factoryUpdateArray($entity, $item);
 
@@ -247,7 +247,7 @@ final class Manager extends AbstractManager
                 continue;
             }
 
-            if ('attributes' === $field && $item[$field] !== $externalItem[$field]) {
+            if ('attributes' === $field && ($item[$field] !== $externalItem[$field] || $item['category_id'] !== $externalItem['category_id'])) {
                 $update[$field] = $this->updateFilterAttributes($item[$field], $externalItem['category_id']);
                 continue;
             }
