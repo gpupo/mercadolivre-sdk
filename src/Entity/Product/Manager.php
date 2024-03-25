@@ -186,8 +186,8 @@ final class Manager extends AbstractManager
                 $variation['picture_ids'] = array_map(fn($img) => $img['source'], $entity['pictures']);
             }
 
-            if ($entity['available_quantity'] <= 0) {
-                $variation['available_quantity'] = 0;
+            if ((int) $entity['available_quantity'] !== (int) $item['available_quantity']) {
+                $variation['available_quantity'] = $entity['available_quantity'];
             }
 
             $update['variations'] = [$variation];
