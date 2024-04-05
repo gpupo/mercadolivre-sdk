@@ -186,6 +186,10 @@ final class Manager extends AbstractManager
                 $variation['picture_ids'] = array_map(fn($img) => $img['source'], $entity['pictures']);
             }
 
+            if ((int) $entity['available_quantity'] !== (int) $item['available_quantity']) {
+                $variation['available_quantity'] = $entity['available_quantity'];
+            }
+
             $update['variations'] = [$variation];
         }
 
@@ -268,6 +272,8 @@ final class Manager extends AbstractManager
         $variations = $this->getAdVariations($params['itemId']);
         $variations = $variations->get('variations');
 
+        $item = $this->findItemById($params['itemId']);
+
         if (empty($variations)) {
             throw new AdWithoutVariationException('The ad has no variations');
         }
@@ -279,7 +285,7 @@ final class Manager extends AbstractManager
         $variation = [];
         $variation['price'] = $entity['price'];
    
-        if ($entity['available_quantity'] > 0) {
+        if ((int) $item['available_quantity'] !== (int) $entity['available_quantity']) {
             $variation['available_quantity'] = $entity['available_quantity'];
         }
 
