@@ -291,7 +291,7 @@ final class Manager extends AbstractManager
         $updateVariations = [];
         foreach ($variations as $variation) {
             $updateVariation = [];
-            $updateVariation['id'] = $variation['id']
+            $updateVariation['id'] = $variation['id'];
             $updateVariation['price'] = $entity['price'];
 
             if ((int) $item['available_quantity'] !== (int) $entity['available_quantity']) {
