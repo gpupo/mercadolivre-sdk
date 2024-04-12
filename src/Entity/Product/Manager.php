@@ -180,23 +180,17 @@ final class Manager extends AbstractManager
 
         if ($hasVariation) {
             unset($update['price'], $update['available_quantity'], $update['attributes'], $update['video_id']);
+            $variation = [ 'id' => $params['variationId'] ];
 
-            $variations = [];
-            foreach ($params['variationId'] as $variationId) {
-                $variation = [ 'id' => $variationId ];
-
-                if (isset($entity['pictures'])) {
-                    $variation['picture_ids'] = array_map(fn($img) => $img['source'], $entity['pictures']);
-                }
-
-                if ((int) $entity['available_quantity'] !== (int) $item['available_quantity']) {
-                    $variation['available_quantity'] = $entity['available_quantity'];
-                }
-
-                $variations[] = $variation;
+            if (isset($entity['pictures'])) {
+                $variation['picture_ids'] = array_map(fn($img) => $img['source'], $entity['pictures']);
             }
 
-            $update['variations'] = [$variations];
+            if ((int) $entity['available_quantity'] !== (int) $item['available_quantity']) {
+                $variation['available_quantity'] = $entity['available_quantity'];
+            }
+
+            $update['variations'] = [$variation];
         }
 
         try {
@@ -288,23 +282,16 @@ final class Manager extends AbstractManager
             throw new \Exception('Multiple variations not supported');
         }
 
-        $updateVariations = [];
-        foreach ($variations as $variation) {
-            $updateVariation = [];
-            $updateVariation['id'] = $variation['id'];
-            $updateVariation['price'] = $entity['price'];
-
-            if ((int) $item['available_quantity'] !== (int) $entity['available_quantity']) {
-                $updateVariation['available_quantity'] = $entity['available_quantity'];
-            }
-
-            $updateVariations[] = $updateVariation;
+        $variation = [];
+        $variation['price'] = $entity['price'];
+   
+        if ((int) $item['available_quantity'] !== (int) $entity['available_quantity']) {
+            $variation['available_quantity'] = $entity['available_quantity'];
         }
 
-        $update = ['variations' => $updateVariations];
-        $params['variationId'] = array_map(fn($variation) => $variation['id'], $updateVariations);
+        $params['variationId'] = current($variations)['id'];
 
-        $this->execute($this->factoryMap('update', $params), json_encode($update));
+        $this->execute($this->factoryMap('updateVariation', $params), json_encode($variation));
 
         return $this->update($entity, $existent, $params, true);
     }
